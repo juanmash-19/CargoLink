@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,4 +20,18 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@font-face {
+  font-family: 'Kufam';
+  src: url('/fonts/kufam/Kufam-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; /* Rango de pesos soportados */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kufam';
+  src: url('/fonts/kufam/Kufam-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900; /* Rango de pesos soportados */
+  font-style: italic;
 }
