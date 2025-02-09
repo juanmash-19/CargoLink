@@ -1,63 +1,95 @@
+'use client'
+
+import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { standarTextLink } from '@/utils/Tokens';
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <header className="w-full shadow-lg">
-        <nav className="max-w-screen-xl mx-auto bg-white">
-          <div className="md:flex items-center justify-between py-2 px-8 md:px-12">
-            <div className="flex justify-between items-center">
-              <div className="text-2xl font-bold text-gray-800 md:text-3xl">
-                <Link href="/">CargoLink</Link>
-              </div>
-              <div className="md:hidden">
-                <button
-                  type="button"
-                  className="block text-gray-800 hover:text-gray-700 focus:text-gray-700 focus:outline-none"
-                >
-                  <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                    <path
-                      className="hidden"
-                      d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z"
-                    />
-                    <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <div className="flex flex-col md:flex-row hidden md:block -mx-2">
+    <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <Link href="/#" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+          <span className="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
+        </Link>
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className="mr-3 text-white bg-secondary hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-xl text-sm px-8 py-2 text-center"
+            
+          >
+            Registrase
+          </button>
+          <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} rel="noopener noreferrer" href="/login">Iniciar Sesión</Link>
+          <button
+            onClick={toggleMenu}
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-sticky"
+            aria-expanded={isMenuOpen}
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          className={`items-center justify-between w-full md:flex md:w-auto md:order-1${
+            isMenuOpen ? "block" : "hidden"
+          }`}
+          id="navbar-sticky"
+        >
+          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-primary-100 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-primary-100">
+            <li>
               <Link
-                href="/login"
-                className="text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
+                href="/"
+                className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-secondary-200 md:p-0"
+                aria-current="page"
               >
-                Login
+                Home
               </Link>
+            </li>
+            <li>
               <Link
-                href="/register"
-                className="text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
+                href="#"
+                className="block py-2 px-3 text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary-200 md:p-0"
               >
-                Register
+                Ejemplo
               </Link>
+            </li>
+            <li>
               <Link
-                href="/marketplace"
-                className="text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
+                href="#"
+                className="block py-2 px-3 text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary-200 md:p-0"
               >
-                Marketplace
+                Services
               </Link>
+            </li>
+            <li>
               <Link
-                href="/transporter"
-                className="text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
+                href="#"
+                className="block py-2 px-3 text-white rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary-200 md:p-0"
               >
-                Transporter
+                Contact
               </Link>
-              <Link
-                href="/client"
-                className="text-gray-800 rounded hover:bg-gray-900 hover:text-gray-100 hover:font-medium py-2 px-2 md:mx-2"
-              >
-                Client
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </header>
-  )
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
 }
