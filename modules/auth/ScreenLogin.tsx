@@ -3,12 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { loginSchema } from '@/schemes/LoginSchemas';
 
 import CustomButton from '@/components/atoms/CustomButton';
 
 import { standarInput, standarTextLink } from '@/utils/Tokens';
 
-type Inputs = {
+type FormLoginInputs = {
   email: string,
   password: string,
 };
@@ -18,32 +21,36 @@ export default function ScreenLogin() {
   const { 
     register, 
     handleSubmit, 
-    watch, formState: { errors } 
-  } = useForm<Inputs>();
+    watch,
+    formState: { errors } 
+  } = useForm<FormLoginInputs>({
+    resolver: zodResolver(loginSchema)
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormLoginInputs> = data => console.log(data);
+
 
   return (
-    <section className="max-w-screen-sm mx-auto w-1/2">
+    <section className="max-w-screen-sm mx-auto w-1/2 h-full">
         <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-white text-secondary-100 shadow-lg">
             <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-1 text-sm">
                     <label htmlFor="email" className="block">Correo Electronico</label>
-                    <input {...register("email")} type="email" name="email" id="email" placeholder="@" className={`${standarInput}`} />
+                    <input {...register("email")} type="email" name="email" id="email" placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
                 </div>
                 <div className="space-y-1 text-sm">
                     <label htmlFor="password" className="block">Contraseña</label>
-                    <input {...register("password")} type="password" name="password" id="password" placeholder="****" className={`${standarInput}`} />
+                    <input {...register("password")} type="password" name="password" id="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
                     <div className="flex justify-end text-xs ">
-                        <Link className={`${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
+                        <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
                     </div>
                 </div>
                 <CustomButton 
                     text='Continuar'
-                    color='secondary-200'
-                    onClickButton={() => {}}
-                    typeButton='submit'
+                    variant='secondary'
+                    type='submit'
+                    onClick={() => {}}
                     />
             </form>
             <div className="flex items-center pt-4 space-x-1">
@@ -69,7 +76,7 @@ export default function ScreenLogin() {
                 </button>
             </div>
             <p className="text-xs text-center sm:px-6 ">¿No tienes una cuenta?
-                <Link rel="noopener noreferrer" href="#" className={`${standarTextLink}`}>Crea una</Link>
+                <Link rel="noopener noreferrer" href="#" className={`underline ${standarTextLink}`}>Crea una</Link>
             </p>
         </div>
 
