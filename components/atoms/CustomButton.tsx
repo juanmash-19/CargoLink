@@ -1,44 +1,37 @@
 interface CustomButtonProps {
   text: string;
-  color: 'primary' | 'secondary-200' | 'danger';
-  typeButton?: 'button' | 'submit';
-  onClickButton: () => void;
+  variant: 'primary' | 'secondary' | 'danger' | 'ghost';
+  type?: 'button' | 'submit';
+  onClick: () => void;
+  disabled?: boolean;
 }
 
-const colorClasses = {
-  primary: {
-    bg: 'bg-primary', // Clase para el fondo
-    border: 'border-primary', // Clase para el borde
-    text: 'text-primary', // Clase para el texto
-  },
-  'secondary-200': {
-    bg: 'bg-secondary-200',
-    border: 'border-secondary-200',
-    text: 'text-secondary-200',
-  },
-  danger: {
-    bg: 'bg-danger',
-    border: 'border-danger',
-    text: 'text-danger',
-  },
-};
-
-export default function CustomButton({ text, color, onClickButton, typeButton }: CustomButtonProps) {
-  const { bg, border, text: textColor } = colorClasses[color];
+export default function CustomButton({
+  text,
+  variant,
+  type = 'button',
+  onClick,
+  disabled = false
+}: CustomButtonProps) {
+  const variantStyles = {
+    primary: 'bg-primary-400 border-primary-400 text-white hover:bg-transparent hover:text-primary-400',
+    secondary: 'bg-secondary-200 border-secondary-200 text-white hover:bg-transparent hover:text-secondary-200',
+    danger: 'bg-red-500 border-red-500 text-white hover:bg-transparent hover:text-red-500',
+    ghost: 'bg-transparent border-white text-white hover:bg-white/10'
+  };
 
   return (
     <button
       className={`
-        ${bg}
-        border
-        block w-full p-3 text-center rounded-lg text-white 
-        hover:bg-white 
-        hover:${border} 
-        hover:${textColor}
-        transition-colors duration-500
+        ${variantStyles[variant]}
+        block w-full p-3 text-center rounded-lg
+        border transition-colors duration-300
+        disabled:opacity-50 disabled:cursor-not-allowed
       `}
-      type={typeButton || 'button'}
-      onClick={onClickButton}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={text}
     >
       {text}
     </button>
