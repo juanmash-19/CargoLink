@@ -3,12 +3,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form";
+// import {z} from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import {loginSchemes} from '@/Schemes/LoginSchemes';
 
 import CustomButton from '@/components/atoms/CustomButton';
 
 import { standarInput, standarTextLink } from '@/utils/Tokens';
 
-type Inputs = {
+type FormLoginInputs = {
   email: string,
   password: string,
 };
@@ -19,9 +23,13 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<Inputs>();
+  } = useForm<FormLoginInputs>({
+    resolver: zodResolver(loginSchemes)
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormLoginInputs> = (data) => {
+    console.log(data);
+}
 
   return (
     <section className="max-w-screen-sm mx-auto w-1/2">

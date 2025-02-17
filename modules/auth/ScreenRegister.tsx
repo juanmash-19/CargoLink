@@ -7,10 +7,16 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import CustomButton from '@/components/atoms/CustomButton';
 
 import { standarInput, standarTextLink } from '@/utils/Tokens';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchemes } from '@/Schemes/RegisterSchemes';
 
-type Inputs = {
+type FormRegisterInputs = {
   email: string,
   password: string,
+  name: string;
+  surname: string;
+  passord: string;
+  confirmPassword: string;
 };
 
 export default function ScreenLogin() {
@@ -19,9 +25,11 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<Inputs>();
+  } = useForm<FormRegisterInputs>({
+    resolver: zodResolver(registerSchemes)
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<FormRegisterInputs> = data => console.log(data);
 
   return (
 
