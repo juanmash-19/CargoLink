@@ -8,15 +8,16 @@ import CustomButton from '@/components/atoms/CustomButton';
 
 import { standarInput, standarTextLink } from '@/utils/Tokens';
 import { zodResolver } from '@hookform/resolvers/zod';
+// import { useMemo } from 'react';
 import { registerSchemes } from '@/Schemes/RegisterSchemes';
+import { act } from 'react';
 
-type FormRegisterInputs = {
-  email: string,
-  password: string,
-  name: string;
-  surname: string;
-  passord: string;
-  confirmPassword: string;
+type FormData = {
+    name: string,
+    surname: string,
+    email: string,
+    confirmPassword: string,
+    password: string,
 };
 
 export default function ScreenLogin() {
@@ -25,11 +26,29 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<FormRegisterInputs>({
-    resolver: zodResolver(registerSchemes)
+  } = useForm<FormData>({
+    resolver: zodResolver(registerSchemes),
+    // mode:"onBlur",  
+    defaultValues: {
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    }
   });
 
-  const onSubmit: SubmitHandler<FormRegisterInputs> = data => console.log(data);
+//   const password = watch("password");
+//   const confirmPassword = watch("confirmPassword");
+//   const passwordMatch = confirmPassword === password;
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log(data);
+
+    }
+
+
+console.log(errors);
 
   return (
 
@@ -38,7 +57,7 @@ export default function ScreenLogin() {
             <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
             <img
                 alt=""
-                src="https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                src="register.jpg"
                 className="absolute inset-0 h-full w-full object-cover"
             />
             </aside>
@@ -63,73 +82,81 @@ export default function ScreenLogin() {
                     </Link>
 
                     <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                    Welcome to Squid 🦑
+                    ¡Únete a CargoLink y simplifica tus envíos! 🚚
                     </h1>
 
                     <p className="mt-4 leading-relaxed text-gray-500">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam,
-                    quibusdam aperiam voluptatum.
+                    Únete a CargoLink y simplifica el transporte de mercancías. Ya seas cliente buscando el vehículo ideal o transportador con espacio disponible, en CargoLink encuentras la solución perfecta. ¡Regístrate gratis y empieza a conectar hoy mismo!
                     </p>
 
-                    <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
-                            First Name
+                            Nombre
                             </label>
 
                             <input
+                            {...register("name")}
                             type="text"
-                            id="FirstName"
-                            name="first_name"
-                            className={`${standarInput}`}
+                            // id="FirstName"
+                            // name="first_name"
+                            className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.name && <p className='text-gray-900 text-sm'>{errors.name.message}</p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
-                            Last Name
+                            Apellido
                             </label>
 
                             <input
+                            {...register("surname")}
                             type="text"
-                            id="LastName"
-                            name="last_name"
-                            className={`${standarInput}`}
+                            // id="LastName"
+                            // name="last_name"
+                            className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.surname && <p className='text-gray-900 text-sm'>{errors.surname.message}</p>}
                         </div>
 
                         <div className="col-span-6">
-                            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+                            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Correo </label>
 
                             <input
+                            {...register("email")}
                             type="email"
-                            id="Email"
-                            name="email"
-                            className={`${standarInput}`}
+                            // id="Email"
+                            // name="email"
+                            className={`${standarInput} focus:outline-primary-400`}
                             />
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
+                            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Contraseña </label>
 
                             <input
+                            {...register("password")}
                             type="password"
-                            id="Password"
-                            name="password"
-                            className={`${standarInput}`}
+                            placeholder='******'
+                            // id="Password"
+                            // name="password"
+                            className={`${standarInput} focus:outline-primary-400`}
                             />
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="PasswordConfirmation" className="block text-sm font-medium text-gray-700">
-                            Password Confirmation
+                            Confirmar contraseña
                             </label>
 
                             <input
+                            {...register("confirmPassword")}
                             type="password"
-                            id="PasswordConfirmation"
-                            name="password_confirmation"
-                            className={`${standarInput}`}
+                            // id="PasswordConfirmation"
+                            placeholder='******'
+                            // name="password_confirmation"
+                            className={`${standarInput} focus:outline-primary-400`}
                             />
                         </div>
 
@@ -143,30 +170,30 @@ export default function ScreenLogin() {
                             />
 
                             <span className="text-sm text-gray-700">
-                                I want to receive emails about events, product updates and company announcements.
+                            Quiero recibir correos electrónicos sobre eventos, actualizaciones y anuncios de CargoLink.
                             </span>
                             </label>
                         </div>
 
                         <div className="col-span-6">
                             <p className="text-sm text-gray-500">
-                            By creating an account, you agree to our
-                            <Link href="#" className="text-gray-700 underline"> terms and conditions </Link>
-                            and
-                            <Link href="#" className="text-gray-700 underline">privacy policy</Link>.
+                            Al crear una cuenta, aceptas nuestros
+                             <Link href="#" className={`underline ${standarTextLink}`}> términos y condiciones</Link>
+                            .
                             </p>
                         </div>
 
                         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                            <button
-                            className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:ring-3 focus:outline-hidden"
-                            >
-                            Create an account
-                            </button>
+                            <CustomButton
+                                text='Crear cuenta'
+                                variant='primary'
+                                type='submit'
+                                onClick={() => {}}
+                                />
 
                             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                            Already have an account?
-                            <Link href="#" className="text-gray-700 underline">Log in</Link>.
+                            ¿Ya tienes una cuenta?
+                            <Link href="#" className={`underline ${standarTextLink}`}>Ingresa</Link>.
                             </p>
                         </div>
                     </form>

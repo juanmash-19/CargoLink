@@ -1,25 +1,27 @@
 import {z} from "zod"
 
 export const registerSchemes = z.object({
+
     name: z.string()
-            .min(2, {message: "introduzca un nombre valido"})
-            .regex(/^[a_z A_Z]*$/), 
+        .min(2, { message: "Introduzca un nombre válido" })
+        .regex(/^[a-zA-Z\s]+$/, { message: "El nombre solo puede contener letras" }), 
+
     surname: z.string()
-            .min(2, {message: "introduzca un apellido valido"})
-            .regex(/^[a_z A_Z]*$/),
+        .min(2, { message: "Introduzca un apellido válido" })
+        .regex(/^[a-zA-Z\s]+$/, { message: "El apellido solo puede contener letras" }),
+
     email: z.string().email({
-        message : "Correo Invalido, se requiere minimo una @"
+        message: "Correo invalido"
     }),
-    password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&][0_9]{5,}$/, 
-        {message: "Minimo 5 caracteres, una mayuscula, una minuscula, un numero y un caracter especial"}),
 
-    confirPassword: z.string()
-            
+    password: z.string().regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]).{5,}$/, 
+        { message: "Mínimo 5 caracteres, una mayúscula, una minúscula, un número y un carácter especial" }
+    ),
+
+    confirmPassword: z.string()
 })
-
-
-//validamos si lo que se esta ingresando en el campo confirmPassword es exactamente igual a password
-.refine(data => data.password === data.confirPassword, {
-    message: "La contrasena no es igual,  verifica nuemvamente",
-    path: ["confirmPassword"] //Indico en que campo esta sucediendo este error
-})
+.refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"]
+});
