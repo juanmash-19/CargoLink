@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import CustomButton from '@/components/atoms/CustomButton';
 
-import { standarInput, standarTextLink } from '@/utils/Tokens';
+import { standarInput, standarTextLink, standarContainer } from '@/utils/Tokens';
 import { zodResolver } from '@hookform/resolvers/zod';
 // import { useMemo } from 'react';
 import { registerSchemes } from '@/Schemes/RegisterSchemes';
@@ -102,7 +102,7 @@ console.log(errors);
                             // name="first_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.name && <p className='text-gray-900 text-sm'>{errors.name.message}</p>}
+                            {errors.name && <p className='text-gray-900 text-sm m-3'>{errors.name.message}</p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -117,7 +117,7 @@ console.log(errors);
                             // name="last_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.surname && <p className='text-gray-900 text-sm'>{errors.surname.message}</p>}
+                            {errors.surname && <p className='text-gray-900 text-sm m-3'>{errors.surname.message}</p>}
                         </div>
 
                         <div className="col-span-6">
@@ -125,11 +125,12 @@ console.log(errors);
 
                             <input
                             {...register("email")}
-                            type="email"
+                            // type="email"
                             // id="Email"
                             // name="email"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.email && <p className='text-gray-900 text-sm m-3'>{errors.email.message}</p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -143,6 +144,7 @@ console.log(errors);
                             // name="password"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.password && <p className='text-gray-900 text-sm m-3'>{errors.password.message}</p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -158,6 +160,7 @@ console.log(errors);
                             // name="password_confirmation"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.confirmPassword && <p className='text-gray-900 text-sm m-3'>{errors.confirmPassword.message}</p>}
                         </div>
 
                         <div className="col-span-6">
