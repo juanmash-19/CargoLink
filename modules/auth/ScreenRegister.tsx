@@ -102,7 +102,10 @@ console.log(errors);
                             // name="first_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.name && <p className='text-gray-900 text-sm m-3'>{errors.name.message}</p>}
+                            {errors.name &&
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.name.message}
+                                </p>
+                            }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -117,7 +120,9 @@ console.log(errors);
                             // name="last_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.surname && <p className='text-gray-900 text-sm m-3'>{errors.surname.message}</p>}
+                            {errors.surname && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300 '>{errors.surname.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6">
@@ -130,7 +135,9 @@ console.log(errors);
                             // name="email"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.email && <p className='text-gray-900 text-sm m-3'>{errors.email.message}</p>}
+                            {errors.email && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.email.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -144,7 +151,9 @@ console.log(errors);
                             // name="password"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.password && <p className='text-gray-900 text-sm m-3'>{errors.password.message}</p>}
+                            {errors.password && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.password.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
@@ -160,7 +169,7 @@ console.log(errors);
                             // name="password_confirmation"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.confirmPassword && <p className='text-gray-900 text-sm m-3'>{errors.confirmPassword.message}</p>}
+                            {errors.confirmPassword && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.confirmPassword.message}</p>}
                         </div>
 
                         <div className="col-span-6">
