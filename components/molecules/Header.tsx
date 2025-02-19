@@ -17,7 +17,10 @@ export default function Header() {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
+          <span className="self-center text-2xl font-semibold whitespace-nowrap bg-[#D9D9D9] p-1 rounded-[10px]">
+            <span className="text-orange-600">Cargo</span>
+            <span className="text-blue-600">Link</span>
+          </span>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button

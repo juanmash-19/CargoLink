@@ -26,6 +26,7 @@ export default function ScreenLogin() {
     watch, formState: { errors } 
   } = useForm<FormLoginInputs>({
     resolver: zodResolver(loginSchemes),
+    // mode : "onBlur",     
     defaultValues: {
         email: "",
         password: "",
@@ -45,12 +46,12 @@ export default function ScreenLogin() {
                 <div className="space-y-1 text-sm">
                     <label htmlFor="email" className="block">Correo Electronico</label>
                     <input {...register("email")} placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
-                    {errors.email && <p className='text-gray-900 text-sm m-3'>{errors.email.message}</p>}
+                    {errors.email && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.email.message}</p>}
                 </div>
                 <div className="space-y-1 text-sm">
                     <label htmlFor="password" className="block">Contraseña</label>
                     <input {...register("password")} type="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
-                    {errors.password && <p className='text-gray-900 text-sm m-3'>{errors.password.message}</p>}
+                    {errors.password && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.password.message}</p>}
                     <div className="flex justify-end text-xs ">
                         <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
                     </div>
