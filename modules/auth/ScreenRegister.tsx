@@ -12,13 +12,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchemes } from '@/Schemes/RegisterSchemes';
 import { act } from 'react';
 
-type FormData = {
-    name: string,
-    surname: string,
-    email: string,
-    confirmPassword: string,
-    password: string,
-};
+import { RegisterDTO } from '@/Interfaces/RegisterInterface';
+
+// type FormData = {
+//     name: string,
+//     surname: string,
+//     email: string,
+//     confirmPassword: string,
+//     password: string,
+// };
 
 export default function ScreenLogin() {
 
@@ -26,23 +28,23 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<FormData>({
+  } = useForm<RegisterDTO>({
     resolver: zodResolver(registerSchemes),
     // mode:"onBlur",  
-    defaultValues: {
-        name: "",
-        surname: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    }
+    // defaultValues: {
+    //     name: "",
+    //     surname: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: "",
+    // }
   });
 
 //   const password = watch("password");
 //   const confirmPassword = watch("confirmPassword");
 //   const passwordMatch = confirmPassword === password;
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<RegisterDTO> = (data) => {
     console.log(data);
 
     }
