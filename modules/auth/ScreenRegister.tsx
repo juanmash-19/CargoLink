@@ -6,12 +6,21 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import CustomButton from '@/components/atoms/CustomButton';
 
-import { standarInput, standarTextLink } from '@/utils/Tokens';
+import { standarInput, standarTextLink, standarContainer } from '@/utils/Tokens';
+import { zodResolver } from '@hookform/resolvers/zod';
+// import { useMemo } from 'react';
+import { registerSchemes } from '@/Schemes/RegisterSchemes';
+import { act } from 'react';
 
-type Inputs = {
-  email: string,
-  password: string,
-};
+import { RegisterDTO } from '@/Interfaces/RegisterInterface';
+
+// type FormData = {
+//     name: string,
+//     surname: string,
+//     email: string,
+//     confirmPassword: string,
+//     password: string,
+// };
 
 export default function ScreenLogin() {
 
@@ -19,9 +28,29 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<Inputs>();
+  } = useForm<RegisterDTO>({
+    resolver: zodResolver(registerSchemes),
+    // mode:"onBlur",  
+    // defaultValues: {
+    //     name: "",
+    //     surname: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: "",
+    // }
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+//   const password = watch("password");
+//   const confirmPassword = watch("confirmPassword");
+//   const passwordMatch = confirmPassword === password;
+
+  const onSubmit: SubmitHandler<RegisterDTO> = (data) => {
+    console.log(data);
+
+    }
+
+
+console.log(errors);
 
   return (
 
@@ -62,66 +91,87 @@ export default function ScreenLogin() {
                     Únete a CargoLink y simplifica el transporte de mercancías. Ya seas cliente buscando el vehículo ideal o transportador con espacio disponible, en CargoLink encuentras la solución perfecta. ¡Regístrate gratis y empieza a conectar hoy mismo!
                     </p>
 
-                    <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
-                            First Name
+                            Nombre
                             </label>
 
                             <input
+                            {...register("name")}
                             type="text"
-                            id="FirstName"
-                            name="first_name"
+                            // id="FirstName"
+                            // name="first_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.name &&
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.name.message}
+                                </p>
+                            }
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
-                            Last Name
+                            Apellido
                             </label>
 
                             <input
+                            {...register("surname")}
                             type="text"
-                            id="LastName"
-                            name="last_name"
+                            // id="LastName"
+                            // name="last_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.surname && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300 '>{errors.surname.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6">
-                            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+                            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Correo </label>
 
                             <input
-                            type="email"
-                            id="Email"
-                            name="email"
+                            {...register("email")}
+                            // type="email"
+                            // id="Email"
+                            // name="email"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.email && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.email.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
+                            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Contraseña </label>
 
                             <input
+                            {...register("password")}
                             type="password"
-                            id="Password"
-                            name="password"
+                            placeholder='******'
+                            // id="Password"
+                            // name="password"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.password && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.password.message}
+                                </p>}
                         </div>
 
                         <div className="col-span-6 sm:col-span-3">
                             <label htmlFor="PasswordConfirmation" className="block text-sm font-medium text-gray-700">
-                            Password Confirmation
+                            Confirmar contraseña
                             </label>
 
                             <input
+                            {...register("confirmPassword")}
                             type="password"
-                            id="PasswordConfirmation"
-                            name="password_confirmation"
+                            // id="PasswordConfirmation"
+                            placeholder='******'
+                            // name="password_confirmation"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
+                            {errors.confirmPassword && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.confirmPassword.message}</p>}
                         </div>
 
                         <div className="col-span-6">

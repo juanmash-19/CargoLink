@@ -3,32 +3,42 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form";
+// import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { loginSchema } from '@/schemes/LoginSchemas';
+import {loginSchemes} from '@/Schemes/LoginSchemes';
 
 import CustomButton from '@/components/atoms/CustomButton';
 
 import { standarInput, standarTextLink } from '@/utils/Tokens';
+import { string } from 'zod';
 
-type FormLoginInputs = {
-  email: string,
-  password: string,
-};
+import { LoginDTO } from '@/Interfaces/LoginInterface';
+
+// type FormLoginInputs = {
+//   email: string,
+//   password: string,
+// };
 
 export default function ScreenLogin() {
 
   const { 
     register, 
     handleSubmit, 
-    watch,
-    formState: { errors } 
-  } = useForm<FormLoginInputs>({
-    resolver: zodResolver(loginSchema)
+    watch, formState: { errors } 
+  } = useForm<LoginDTO>({
+    resolver: zodResolver(loginSchemes),
+    // mode : "onBlur",     
+    // defaultValues: {
+    //     email: "",
+    //     password: "",
+
+    // }
   });
 
-  const onSubmit: SubmitHandler<FormLoginInputs> = data => console.log(data);
-
+  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
+    console.log(data);
+}
 
   return (
     <section className="max-w-screen-sm mx-auto w-1/2 h-full">
@@ -37,11 +47,13 @@ export default function ScreenLogin() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-1 text-sm">
                     <label htmlFor="email" className="block">Correo Electronico</label>
-                    <input {...register("email")} type="email" name="email" id="email" placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
+                    <input {...register("email")} placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
+                    {errors.email && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.email.message}</p>}
                 </div>
                 <div className="space-y-1 text-sm">
                     <label htmlFor="password" className="block">Contraseña</label>
-                    <input {...register("password")} type="password" name="password" id="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
+                    <input {...register("password")} type="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
+                    {errors.password && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.password.message}</p>}
                     <div className="flex justify-end text-xs ">
                         <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
                     </div>
