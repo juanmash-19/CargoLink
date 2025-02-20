@@ -13,10 +13,12 @@ import CustomButton from '@/components/atoms/CustomButton';
 import { standarInput, standarTextLink } from '@/utils/Tokens';
 import { string } from 'zod';
 
-type FormLoginInputs = {
-  email: string,
-  password: string,
-};
+import { LoginDTO } from '@/Interfaces/LoginInterface';
+
+// type FormLoginInputs = {
+//   email: string,
+//   password: string,
+// };
 
 export default function ScreenLogin() {
 
@@ -24,17 +26,17 @@ export default function ScreenLogin() {
     register, 
     handleSubmit, 
     watch, formState: { errors } 
-  } = useForm<FormLoginInputs>({
+  } = useForm<LoginDTO>({
     resolver: zodResolver(loginSchemes),
     // mode : "onBlur",     
-    defaultValues: {
-        email: "",
-        password: "",
+    // defaultValues: {
+    //     email: "",
+    //     password: "",
 
-    }
+    // }
   });
 
-  const onSubmit: SubmitHandler<FormLoginInputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
     console.log(data);
 }
 
