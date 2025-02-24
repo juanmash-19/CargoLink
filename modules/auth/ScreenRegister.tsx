@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from 'next/router';
 
 import CustomButton from '@/components/atoms/CustomButton';
 
@@ -23,6 +24,8 @@ import { RegisterDTO } from '@/Interfaces/RegisterInterface';
 // };
 
 export default function ScreenLogin() {
+
+    const router  = useRouter();
 
   const { 
     register, 
@@ -46,6 +49,7 @@ export default function ScreenLogin() {
 
   const onSubmit: SubmitHandler<RegisterDTO> = (data) => {
     console.log(data);
+    l
 
     }
 
