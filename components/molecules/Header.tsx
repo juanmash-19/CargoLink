@@ -30,6 +30,7 @@ export default function Header() {
           >
             Registrase
           </button>
+          
           <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} rel="noopener noreferrer" href="/login">Iniciar Sesión</Link>
           <button
             onClick={toggleMenu}

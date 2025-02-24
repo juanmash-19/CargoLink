@@ -14,7 +14,7 @@ export default function CustomButton({
   disabled = false
 }: CustomButtonProps) {
   const variantStyles = {
-    primary: 'bg-primary-400 border-primary-400 text-white hover:bg-transparent hover:text-primary-400',
+    primary: 'bg-primary-100 border-primary-400 text-white hover:bg-transparent hover:text-primary-400',
     secondary: 'bg-secondary-200 border-secondary-200 text-white hover:bg-transparent hover:text-secondary-200',
     danger: 'bg-red-500 border-red-500 text-white hover:bg-transparent hover:text-red-500',
     ghost: 'bg-transparent border-white text-white hover:bg-white/10'
