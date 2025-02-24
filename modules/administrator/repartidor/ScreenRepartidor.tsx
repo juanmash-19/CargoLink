@@ -1,0 +1,119 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+const Sidebar = () => {
+  return (
+    <div className="bg-blue-600 text-white w-64 min-h-screen p-4">
+      <h2 className="text-2xl font-bold mb-6">Panel de Repartidores</h2>
+      <ul>
+        <li className="mb-4">
+          <Link href="/pedidos-entregados" className="hover:text-orange-400">
+            Pedidos Entregados
+          </Link>
+        </li>
+        <li className="mb-4">
+          <Link href="/pedidos-disponibles" className="hover:text-orange-400">
+            Pedidos Disponibles
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+const PedidoCard = ({ pedido, tipo }) => {
+  return (
+    <div className="max-w-2xl bg-white rounded-lg shadow-md p-4 mb-4 flex">
+      <div className="w-20 h-20 bg-gray-200 flex items-center justify-center rounded-lg mr-4">
+        <img src={pedido.imagen} alt={pedido.titulo} className="w-full h-full object-cover rounded-lg" />
+      </div>
+      <div className="flex-1">
+        <h3 className="text-lg font-bold text-blue-700">{pedido.titulo}</h3>
+        <p className="text-gray-700 text-sm">Distancia: {pedido.distancia} | Costo: {pedido.costo}</p>
+        <p className="text-gray-700 text-sm">Recorrido total: {pedido.recorrido} | Ganancia: {pedido.ganancia}</p>
+        <p className="text-gray-700 text-sm">Dimensiones: {pedido.dimensiones}</p>
+        {tipo === 'disponible' && (
+          <p className="text-red-600 font-bold text-sm">Tiempo restante: {pedido.tiempoRestante}</p>
+        )}
+        <div className="flex mt-2 space-x-2">
+          <Link href="/mapa" className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm">
+            Abrir en mapa
+          </Link>
+          <Link href="/detalles" className="bg-orange-400 text-white px-3 py-1 rounded-md text-sm">
+            Ver detalles
+          </Link>
+          {tipo === 'disponible' && (
+            <Link href="/aceptar-pedido" className="bg-blue-900 text-white px-3 py-1 rounded-md text-sm">
+              Aceptar flete
+            </Link>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AdminLayout = ({ children }) => {
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  return (
+    <div className="flex">
+      {isSidebarOpen && <Sidebar />}
+      <div className="flex-1 bg-gray-100 p-6">
+        <button
+          className="mb-4 p-2 bg-blue-600 text-white rounded"
+          onClick={() => setSidebarOpen(!isSidebarOpen)}
+        >
+          {isSidebarOpen ? 'Ocultar Barra Lateral' : 'Mostrar Barra Lateral'}
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default function RepartidoresPage() {
+  const pedidosEntregados = [
+    {
+      titulo: 'Electrodomésticos',
+      distancia: '5Km',
+      recorrido: '12Km',
+      costo: '25000',
+      ganancia: '25000',
+      dimensiones: '50cm | 40cm | 30cm | 20kg',
+      imagen: '/images/electrodomesticos.jpg',
+    },
+  ];
+
+  const pedidosDisponibles = [
+    {
+      titulo: 'Bolsas de mercado',
+      distancia: '2.3Km',
+      recorrido: '8.6Km',
+      costo: '15000',
+      ganancia: '15000',
+      dimensiones: '20cm | 30cm | 50cm | 10kg',
+      imagen: '/images/bolsamercado.jpg',
+      tiempoRestante: '2:23 s',
+    },
+  ];
+
+  return (
+    <AdminLayout>
+      <h1 className="text-3xl font-bold text-gray-900">Panel de Repartidores</h1>
+      <p className="mt-4 text-gray-700">Aquí puedes gestionar los pedidos entregados y los disponibles.</p>
+
+      <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Entregados</h2>
+      {pedidosEntregados.map((pedido, index) => (
+        <PedidoCard key={index} pedido={pedido} tipo="entregado" />
+      ))}
+
+      <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Disponibles</h2>
+      {pedidosDisponibles.map((pedido, index) => (
+        <PedidoCard key={index} pedido={pedido} tipo="disponible" />
+      ))}
+    </AdminLayout>
+  );
+}

@@ -66,22 +66,22 @@ export default function AdminPage() {
     {
       title: 'Estadísticas',
       description: 'Visualiza las estadísticas ',
-      imageUrl: '/img/estadisticas.jpg',
+      imageUrl: '/images/estadisticas.png',
     },
     {
       title: 'Reportes',
       description: 'Genera y consulta reportes detallados.',
-      imageUrl: '/img/reportes.jpg',
+      imageUrl: '/images/reportes.png',
     },
     {
       title: 'Ventas',
       description: 'Gestiona y analiza las ventas realizadas.',
-      imageUrl: '/img/ventas.jpg',
+      imageUrl: '/images/ventas.jpg',
     },
     {
       title: 'Rutas',
       description: 'Planifica y supervisa las rutas de entrega.',
-      imageUrl: '/img/rutas.jpg',
+      imageUrl: '/images/rutas.jpg',
     },
   ];
 
