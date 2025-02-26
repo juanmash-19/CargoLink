@@ -26,12 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  font-sans h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased  font-sans h-full bg-slate-100 `}
       >
-        <header>
+        <header className="h-[12vh]">
           <Header />
         </header>
-        <main>
+        <main className="h-[88vh]">
           {children}
         </main>
       </body>
