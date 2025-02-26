@@ -2,7 +2,7 @@ interface CustomButtonProps {
   text: string;
   variant: 'primary' | 'secondary' | 'danger' | 'ghost';
   type?: 'button' | 'submit';
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 }
 

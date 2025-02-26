@@ -8,7 +8,7 @@ export const registerSchemes = z.object({
         .min(2, { message: "*No hay suficientes caracteres" })
         .regex(/^[a-zA-Z ]+$/, { message: "El nombre no puede contener numeros o caracteres especiales" }),
 
-    surname: z.string()
+    lastname: z.string()
         .nonempty({message : "*Este campo es obligatorio"})
         .max(30, {message: "*Maximo de caracteres permitidos"})
         .min(2, { message: "*No hay suficientes caracteres" })
