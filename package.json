@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^4.0.0",
+    "@react-google-maps/api": "^2.20.6",
     "js-cookie": "^3.0.5",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -21,6 +22,7 @@
     "@eslint/eslintrc": "^3",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
+    "@types/googlemaps": "^3.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
