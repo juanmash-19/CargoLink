@@ -4,6 +4,7 @@ interface CustomButtonProps {
   type?: 'button' | 'submit';
   onClick: () => void;
   disabled?: boolean;
+  // typeButton: boolean;
 }
 
 export default function CustomButton({
@@ -21,6 +22,8 @@ export default function CustomButton({
   };
 
   return (
+
+    // typeButton?
     <button
       className={`
         ${variantStyles[variant]}
