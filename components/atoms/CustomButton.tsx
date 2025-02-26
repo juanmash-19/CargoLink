@@ -7,8 +7,8 @@ interface CustomButtonProps {
   type?: 'button' | 'submit';
   onClick?: () => void;
   disabled?: boolean;
-  href?: string;
-  typeButton?: Boolean;
+  // href?: string;
+  // typeButton?: Boolean;
 }
 
 export default function CustomButton({
@@ -17,8 +17,8 @@ export default function CustomButton({
   type = 'button',
   onClick,
   disabled = false,
-  href = '',
-  typeButton = false,
+  // href = '',
+  // typeButton = false,
 }: CustomButtonProps) {
   const variantStyles = {
     primary: 'bg-primary-100 border-primary-400 text-white hover:bg-transparent hover:text-primary-400',
@@ -27,24 +27,24 @@ export default function CustomButton({
     ghost: 'bg-transparent border-white text-white hover:bg-white/10'
   };
 
-  const buttonType = typeButton ? 'submit' : 'button';
+  // const buttonType = typeButton ? 'submit' : 'button';
 
-  if (href) {
-    return (
-      <Link href={href}>
-        <a
-          className={`
-            ${variantStyles[variant]}
-            block w-full p-3 text-center rounded-lg
-            border transition-colors duration-300
-            disabled:opacity-50 disabled:cursor-not-allowed
-          `}
-        >
-          {text}
-        </a>
-      </Link>
-    );
-  }
+  // if (href) {
+  //   return (
+  //     <Link href={href}>
+  //       <a
+  //         className={`
+  //           ${variantStyles[variant]}
+  //           block w-full p-3 text-center rounded-lg
+  //           border transition-colors duration-300
+  //           disabled:opacity-50 disabled:cursor-not-allowed
+  //         `}
+  //       >
+  //         {text}
+  //       </a>
+  //     </Link>
+  //   );
+  // }
 
   return (
 

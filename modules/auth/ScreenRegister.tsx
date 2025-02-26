@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchemes } from '@/Schemes/RegisterSchemes';
 import { act } from 'react';
 
-import { RegisterDTO } from '@/Interfaces/RegisterInterface';
+import { RegisterDTO } from '@/Interfaces/auth/RegisterInterface';
 
 // type FormData = {
 //     name: string,
@@ -49,7 +49,6 @@ export default function ScreenLogin() {
 
   const onSubmit: SubmitHandler<RegisterDTO> = (data) => {
     console.log(data);
-    l
 
     }
 
@@ -120,14 +119,14 @@ console.log(errors);
                             </label>
 
                             <input
-                            {...register("surname")}
+                            {...register("lastname")}
                             type="text"
                             // id="LastName"
                             // name="last_name"
                             className={`${standarInput} focus:outline-primary-400`}
                             />
-                            {errors.surname && 
-                                <p className='text-gray-900 text-sm m-3 text-red-300 '>{errors.surname.message}
+                            {errors.lastname && 
+                                <p className='text-gray-900 text-sm m-3 text-red-300 '>{errors.lastname.message}
                                 </p>}
                         </div>
 

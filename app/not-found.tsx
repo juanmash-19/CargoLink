@@ -17,8 +17,7 @@ export default function NotFound(){
                             <CustomButton 
                                 text='Volver al menu'
                                 variant='primary'
-                                type='button'
-                                href='/' 
+                                type='button' 
                                 onClick={() => {}}
                             />
                     </div>   
