@@ -1,20 +1,7 @@
-'use client'
-
-import Image from 'next/image';
-import Link from 'next/link';
-import { useForm, SubmitHandler } from "react-hook-form";
-// import {z} from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import {loginSchemes} from '@/Schemes/LoginSchemes';
-
-import CustomButton from '@/components/atoms/CustomButton';
-
+import FormLogin from "./FormLogin"
 import { standarInput, standarTextLink } from '@/utils/Tokens';
-import { string } from 'zod';
 
-import { LoginDTO } from '@/Interfaces/LoginInterface';
-
+import Link from 'next/link';
 // type FormLoginInputs = {
 //   email: string,
 //   password: string,
@@ -22,49 +9,13 @@ import { LoginDTO } from '@/Interfaces/LoginInterface';
 
 export default function ScreenLogin() {
 
-  const { 
-    register, 
-    handleSubmit, 
-    watch, formState: { errors } 
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginSchemes),
-    // mode : "onBlur",     
-    // defaultValues: {
-    //     email: "",
-    //     password: "",
 
-    // }
-  });
-
-  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    console.log(data);
-}
 
   return (
-    <section className="max-w-screen-sm mx-auto w-1/2 h-full">
+    <section className="max-w-screen-sm mx-auto w-1/2 h-1/2">
         <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-white text-secondary-100 shadow-lg">
             <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="space-y-1 text-sm">
-                    <label htmlFor="email" className="block">Correo Electronico</label>
-                    <input {...register("email")} placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
-                    {errors.email && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.email.message}</p>}
-                </div>
-                <div className="space-y-1 text-sm">
-                    <label htmlFor="password" className="block">Contraseña</label>
-                    <input {...register("password")} type="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
-                    {errors.password && <p className='text-gray-900 text-sm m-3 text-red-300'>{errors.password.message}</p>}
-                    <div className="flex justify-end text-xs ">
-                        <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
-                    </div>
-                </div>
-                <CustomButton 
-                    text='Continuar'
-                    variant='secondary'
-                    type='submit'
-                    onClick={() => {}}
-                    />
-            </form>
+            <FormLogin />
             <div className="flex items-center pt-4 space-x-1">
                 <div className="flex-1 h-px sm:w-16 bg-secondary-200"></div>
                 <p className="px-3 text-sm ">o</p>
