@@ -34,8 +34,8 @@ export default function RootLayout({
         </header>
         <main className="h-[88vh]">
           {children}
-        </main>
           <Footer/>
+        </main>
       </body>
     </html>
   );

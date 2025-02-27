@@ -20,6 +20,7 @@ export default function Header() {
     router.push('/register')
   };
 
+
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -33,12 +34,19 @@ export default function Header() {
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <div className="mx-10 text-xs">
             <CustomButton 
-                        text='Registrarse'
-                        variant='secondary'
-                        type='button'
-                        onClick={registerClick}
-                        />
+              text='Registrarse'
+              variant='secondary'
+              type='button'
+              onClick={registerClick}
+            />
           </div>
+          {/* <div>
+            <CustomeButton
+              text
+                                  
+            />
+
+          </div> */}
           <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} rel="noopener noreferrer" href="/login">Iniciar Sesión</Link>
           <button
             onClick={toggleMenu}

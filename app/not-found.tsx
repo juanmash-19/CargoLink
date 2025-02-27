@@ -3,8 +3,19 @@
 import Link from 'next/link'
 
 import CustomButton from '@/components/atoms/CustomButton'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation';
 
 export default function NotFound(){
+
+    // const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+    const router = useRouter();
+
+    const menuClick = () =>{
+        router.push('/')
+    };
+
     return (
         <div>
             <section className="bg-white dark:bg-gray-900">
@@ -18,7 +29,7 @@ export default function NotFound(){
                                 text='Volver al menu'
                                 variant='primary'
                                 type='button' 
-                                onClick={() => {}}
+                                onClick={menuClick}
                             />
                     </div>   
                 </div>
