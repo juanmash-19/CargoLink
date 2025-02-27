@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 
 import {GoogleMap,
@@ -7,7 +9,7 @@ import {GoogleMap,
 
 const containerStyle = {
     width : "100%",
-    height :"650%"
+    height :"100%"
 }
 
 const center = {
