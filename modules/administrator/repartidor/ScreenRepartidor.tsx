@@ -26,7 +26,7 @@ const Sidebar = () => {
 
 const PedidoCard = ({ pedido, tipo }) => {
   return (
-    <div className="max-w-2xl bg-white rounded-lg shadow-md p-4 mb-4 flex">
+    <div className="max-w-2xl bg-white rounded-lg shadow-md p-4 mb-4 flex w-full">
       <div className="w-20 h-20 bg-gray-200 flex items-center justify-center rounded-lg mr-4">
         <img src={pedido.imagen} alt={pedido.titulo} className="w-full h-full object-cover rounded-lg" />
       </div>
@@ -61,7 +61,6 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="flex">
-      {/* Botón flotante de flecha */}
       <div className="absolute top-5 left-3 z-50">
         <button
           className="p-2 bg-white text-orange-600 border border-orange-400 rounded-full shadow-lg hover:scale-110 transition-transform"
@@ -71,11 +70,11 @@ const AdminLayout = ({ children }) => {
         </button>
       </div>
 
-      {/* Barra lateral */}
       {isSidebarOpen && <Sidebar />}
 
-      {/* Contenido principal */}
-      <div className="flex-1 bg-gray-100 p-6">{children}</div>
+      <div className="flex-1 bg-gray-100 p-6 flex flex-col items-center">
+        {children}
+      </div>
     </div>
   );
 };
@@ -111,15 +110,17 @@ export default function RepartidoresPage() {
       <h1 className="text-3xl font-bold text-gray-900">Panel de Repartidores</h1>
       <p className="mt-4 text-gray-700">Aquí puedes gestionar los pedidos entregados y los disponibles.</p>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Entregados</h2>
-      {pedidosEntregados.map((pedido, index) => (
-        <PedidoCard key={index} pedido={pedido} tipo="entregado" />
-      ))}
+      <div className="flex flex-col items-center w-full">
+        <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Entregados</h2>
+        {pedidosEntregados.map((pedido, index) => (
+          <PedidoCard key={index} pedido={pedido} tipo="entregado" />
+        ))}
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Disponibles</h2>
-      {pedidosDisponibles.map((pedido, index) => (
-        <PedidoCard key={index} pedido={pedido} tipo="disponible" />
-      ))}
+        <h2 className="text-2xl font-bold text-gray-900 mt-6">Pedidos Disponibles</h2>
+        {pedidosDisponibles.map((pedido, index) => (
+          <PedidoCard key={index} pedido={pedido} tipo="disponible" />
+        ))}
+      </div>
     </AdminLayout>
   );
 }
