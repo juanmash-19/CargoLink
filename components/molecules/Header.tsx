@@ -78,24 +78,24 @@ export default function Header() {
                 </div>
                 <ul className="py-2" aria-labelledby="user-menu-button">
                   <li>
-                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      Dashboard
+                    <Link href="/user/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      Perfil
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      Settings
+                      Ajuster
                     </Link>
                   </li>
                   <li>
                     <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      Earnings
+                      Información
                     </Link>
                   </li>
                   <li>
                     <CustomButton 
                             text='Sign out'
-                            variant='secondary'
+                            variant='danger'
                             type='button'
                             onClick={logOutClick}
                             />
