@@ -20,9 +20,13 @@ import { loginUser } from '@/libs/auth/ServiceLogin/api-services';
 
 import Cookies from 'js-cookie';
 
+import { useAuth } from '@/utils/AuthContext';
+
 export default function FormLogin() {
 
     const router = useRouter();
+
+    const { refreshUserRole, login } = useAuth();
 
     const { 
         register, 
@@ -44,7 +48,7 @@ export default function FormLogin() {
           console.log('Login successful:', response);
 
           if(response.token){
-            Cookies.set('token', response.token, { maxAge: "3600", secure: true });
+            login(response.token);
           }
 
           console.log(Cookies.get('token'));

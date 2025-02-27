@@ -3,14 +3,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from 'next/navigation';
 import { standarTextLink, standarNavLink, standarNavLinkSelect } from '@/utils/Tokens';
 import CustomButton from '@/components/atoms/CustomButton';
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/utils/AuthContext";
 
 export default function Header() {
+  const { userRole, logout } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const router = useRouter();
+
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,6 +24,20 @@ export default function Header() {
 
   const registerClick = () => {
     router.push('/register')
+  };
+  
+  const isLinkActive = (href: string) => {
+    return pathname === href;
+  };
+
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const toggleUserMenu = () => {
+    setIsUserMenuOpen(!isUserMenuOpen);
+  };
+
+  const logOutClick = () => {
+    logout();
   };
 
 
@@ -32,22 +52,71 @@ export default function Header() {
           </span>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <div className="mx-10 text-xs">
-            <CustomButton 
-              text='Registrarse'
-              variant='secondary'
-              type='button'
-              onClick={registerClick}
-            />
-          </div>
-          {/* <div>
-            <CustomeButton
-              text
-                                  
-            />
+          {userRole ? (
+            <div className="relative">
+              <button
+                type="button"
+                className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                id="user-menu-button"
+                aria-expanded={isUserMenuOpen}
+                onClick={toggleUserMenu}
+              >
+                <span className="sr-only">Open user menu</span>
+                <img className="w-8 h-8 rounded-full" src="profile.png" alt="user photo" />
+              </button>
 
-          </div> */}
-          <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} rel="noopener noreferrer" href="/login">Iniciar Sesión</Link>
+              <div
+                className={`z-50 ${
+                  isUserMenuOpen ? 'block' : 'hidden'
+                } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600 absolute right-0`}
+                id="user-dropdown"
+              >
+                <div className="px-4 py-3">
+                  <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                  <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                </div>
+                <ul className="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      Earnings
+                    </Link>
+                  </li>
+                  <li>
+                    <CustomButton 
+                            text='Sign out'
+                            variant='secondary'
+                            type='button'
+                            onClick={logOutClick}
+                            />
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-row">
+              <div className="mx-0 text-xs">
+                <CustomButton 
+                            text='Registrarse'
+                            variant='secondary'
+                            type='button'
+                            onClick={registerClick}
+                            />
+              </div>
+              <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} rel="noopener noreferrer" href="/login">
+              Iniciar Sesión
+              </Link>
+            </div>
+          )}
           <button
             onClick={toggleMenu}
             type="button"
@@ -77,7 +146,7 @@ export default function Header() {
             <li>
               <Link
                 href="/"
-                className={`${standarNavLinkSelect}`}
+                className={`${isLinkActive('/') ? standarNavLinkSelect : standarNavLink}`}
                 aria-current="page"
               >
                 Home
@@ -85,16 +154,16 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="#"
-                className={`${standarNavLink}`}
+                href="/administrator"
+                className={`${isLinkActive('/administrator') ? standarNavLinkSelect : standarNavLink}`}
               >
-                Ejemplo
+                Admin
               </Link>
             </li>
             <li>
               <Link
                 href="#"
-                className={`${standarNavLink}`}
+                className={`${isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}`}
               >
                 Services
               </Link>
@@ -102,7 +171,7 @@ export default function Header() {
             <li>
               <Link
                 href="#"
-                className={`${standarNavLink}`}
+                className={`${isLinkActive('/contact') ? standarNavLinkSelect : standarNavLink}`}
               >
                 Contact
               </Link>
