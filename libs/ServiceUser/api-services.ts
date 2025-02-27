@@ -6,7 +6,7 @@ export const getRoleUser = async (): Promise<UserDAO> => {
     const token = Cookies.get('token');
     if(token){   
         try{
-            const response = await fetch(`http://localhost:3336/api/auth/users/role`,{
+            const response = await fetch(`http://localhost:3336/api/users/role`,{
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -17,7 +17,6 @@ export const getRoleUser = async (): Promise<UserDAO> => {
             if(!response.ok) {
                 const errorData = await response.json();
                 console.error("Este es el error:", errorData);
-                throw new Error(errorData.message || "Error al obtener el rol");
             }
 
             return await response.json() as UserDAO;
