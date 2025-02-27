@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const Sidebar = () => {
   return (
@@ -60,16 +61,21 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="flex">
-      {isSidebarOpen && <Sidebar />}
-      <div className="flex-1 bg-gray-100 p-6">
+      {/* Botón flotante de flecha */}
+      <div className="absolute top-5 left-3 z-50">
         <button
-          className="mb-4 p-2 bg-blue-600 text-white rounded"
+          className="p-2 bg-white text-orange-600 border border-orange-400 rounded-full shadow-lg hover:scale-110 transition-transform"
           onClick={() => setSidebarOpen(!isSidebarOpen)}
         >
-          {isSidebarOpen ? 'Ocultar Barra Lateral' : 'Mostrar Barra Lateral'}
+          {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
         </button>
-        {children}
       </div>
+
+      {/* Barra lateral */}
+      {isSidebarOpen && <Sidebar />}
+
+      {/* Contenido principal */}
+      <div className="flex-1 bg-gray-100 p-6">{children}</div>
     </div>
   );
 };
