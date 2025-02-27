@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 
 import {GoogleMap,
@@ -6,8 +8,8 @@ import {GoogleMap,
 
 
 const containerStyle = {
-    width : "1050px",
-    height :"650"
+    width : "100%",
+    height :"100%"
 }
 
 const center = {
@@ -18,7 +20,7 @@ const center = {
 function ScreenMapa() {
   return (
     <div>
-        <LoadScript googleMapsApiKey=''>
+        <LoadScript googleMapsApiKey='AIzaSyDq8s5fVZ3cLQuPbJQaPoefl5spCCsS-Bc'>
             <GoogleMap mapContainerStyle={containerStyle}/>
         </LoadScript>
       
