@@ -12,13 +12,13 @@ export const loginSchemes = z
       .nonempty({message : "*Porfavor introduzca su correo"})
       .email({ message: "*El correo es incorrecto" })
       .regex(safeStringRegex, {
-        message: "*El correo no puede contener caracteres especiales peligrosos",
+        message: "*El correo no puede contener caracteres especiales",
       }),
     password: z
       .string()
       .nonempty({message : "*Porfavor introduzca su contraseña"})
       .regex(safeStringRegex, {
-        message: "*El correo no puede contener caracteres especiales peligrosos",
+        message: "*La contraseña no puede contener caracteres especiales",
       }),
 })
 //   .refine((data) => data.email === testEmail, {

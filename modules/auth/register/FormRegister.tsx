@@ -84,8 +84,10 @@ export default function FormRegister() {
             className={`${standarInput} focus:outline-primary-400`}
             />
             {errors.name &&
-                <p className={`${standarErrorInput}`}>{errors.name.message}
-                </p>
+                <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                    <strong className="font-bold text-sm mr-4">{errors.name.message}</strong>
+                {/* <span class="block text-sm sm:inline max-sm:mt-2">This is a error message that requires your attention.</span> */}
+                </div>
             }
         </div>
 
@@ -102,8 +104,11 @@ export default function FormRegister() {
             className={`${standarInput} focus:outline-primary-400`}
             />
             {errors.lastname && 
-                <p className={`${standarErrorInput}`}>{errors.lastname.message}
-                </p>}
+                <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                    <strong className="font-bold text-sm mr-4">{errors.lastname.message}</strong>
+            {/* <span class="block text-sm sm:inline max-sm:mt-2">This is a error message that requires your attention.</span> */}
+                </div>
+                }
         </div>
 
         <div className="col-span-6">
@@ -118,8 +123,10 @@ export default function FormRegister() {
             // name="email"
             className={`${standarInput} focus:outline-primary-400`} />
             {errors.email && 
-                <p className={`${standarErrorInput}`}>{errors.email.message}
-                </p>}
+                <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                    <strong className="font-bold text-sm mr-4">{errors.email.message}</strong>
+                </div>
+                }
         </div>
 
         <div className="col-span-6 sm:col-span-3">
@@ -136,8 +143,10 @@ export default function FormRegister() {
             className={`${standarInput} focus:outline-primary-400`}
             />
             {errors.password && 
-                <p className={`${standarErrorInput}`}>{errors.password.message}
-                </p>}
+                <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                    <strong className="font-bold text-sm mr-4">{errors.password.message}</strong>
+                </div>
+            }
         </div>
 
         <div className="col-span-6 sm:col-span-3">
@@ -153,7 +162,11 @@ export default function FormRegister() {
             // name="password_confirmation"
             className={`${standarInput} focus:outline-primary-400`}
             />
-            {errors.confirmPassword && <p className={`${standarErrorInput}`}>{errors.confirmPassword.message}</p>}
+            {errors.confirmPassword && 
+                <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                    <strong className="font-bold text-sm mr-4">{errors.confirmPassword.message}</strong>
+                </div> 
+            }
         </div>
 
         <div className="col-span-6">

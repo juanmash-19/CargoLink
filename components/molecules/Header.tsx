@@ -8,6 +8,7 @@ import { standarTextLink, standarNavLink, standarNavLinkSelect } from '@/utils/T
 import CustomButton from '@/components/atoms/CustomButton';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/utils/AuthContext";
+import logo from "../atoms/logo";
 
 export default function Header() {
   const { userRole, logout } = useAuth();

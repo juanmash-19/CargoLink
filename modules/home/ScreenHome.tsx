@@ -3,6 +3,7 @@ import Link from 'next/link';
 import StartPage from './homeComponets/StartPage';
 import FeaturesHomePage from './homeComponets/Features';
 import InfoCargo from './homeComponets/cargoLinkInfo';
+import AboutUs from './homeComponets/aboutUs';
 
 const ScreemHomePage = () => {
   return (
@@ -11,6 +12,7 @@ const ScreemHomePage = () => {
           <StartPage />
           <FeaturesHomePage />
           <InfoCargo />
+          <AboutUs/>
       </main>
     </div>
   );
