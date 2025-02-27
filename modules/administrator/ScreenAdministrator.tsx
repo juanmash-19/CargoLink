@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 const Sidebar = () => {
   return (
@@ -34,9 +35,7 @@ const Card = ({ title, description, imageUrl }) => {
       <img className="w-full h-48 object-cover" src={imageUrl} alt={title} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
-        <p className="text-gray-700 text-base">
-          {description}
-        </p>
+        <p className="text-gray-700 text-base">{description}</p>
       </div>
     </div>
   );
@@ -47,16 +46,21 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className="flex">
-      {isSidebarOpen && <Sidebar />}
-      <div className="flex-1 bg-gray-100 p-6">
+      {/* Botón de flecha para manejar la barra lateral */}
+      <div className="absolute top-5 left-3 z-50">
         <button
-          className="mb-4 p-2 bg-blue-600 text-white rounded"
+          className="p-2 bg-white text-orange-600 border border-orange-400 rounded-full shadow-lg hover:scale-110 transition-transform"
           onClick={() => setSidebarOpen(!isSidebarOpen)}
         >
-          {isSidebarOpen ? 'Ocultar Barra Lateral' : 'Mostrar Barra Lateral'}
+          {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
         </button>
-        {children}
       </div>
+
+      {/* Barra lateral */}
+      {isSidebarOpen && <Sidebar />}
+
+      {/* Contenido principal */}
+      <div className="flex-1 bg-gray-100 p-6">{children}</div>
     </div>
   );
 };
@@ -65,7 +69,7 @@ export default function AdminPage() {
   const cardsData = [
     {
       title: 'Estadísticas',
-      description: 'Visualiza las estadísticas ',
+      description: 'Visualiza las estadísticas',
       imageUrl: '/images/estadisticas.png',
     },
     {
@@ -93,12 +97,7 @@ export default function AdminPage() {
       </p>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         {cardsData.map((card) => (
-          <Card
-            key={card.title}
-            title={card.title}
-            description={card.description}
-            imageUrl={card.imageUrl}
-          />
+          <Card key={card.title} title={card.title} description={card.description} imageUrl={card.imageUrl} />
         ))}
       </div>
     </AdminLayout>

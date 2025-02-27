@@ -40,6 +40,7 @@ export default function Header() {
     logout();
   };
 
+
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -51,10 +52,6 @@ export default function Header() {
           </span>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-
-         
-          
-          
           {userRole ? (
             <div className="relative">
               <button
@@ -120,9 +117,6 @@ export default function Header() {
               </Link>
             </div>
           )}
-
-          
-
           <button
             onClick={toggleMenu}
             type="button"

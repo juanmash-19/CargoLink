@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/molecules/Header";
+import Footer from "@/components/molecules/footer";
 
 import { AuthProvider } from "@/utils/AuthContext";
 
@@ -36,6 +37,7 @@ export default function RootLayout({
           </header>
           <main className="h-[88vh]">
             {children}
+            <Footer/>
           </main>
         </AuthProvider>
       </body>
