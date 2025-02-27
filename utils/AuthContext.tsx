@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = (token: string) => {
-    Cookies.set('token', token, { maxAge: 3600, secure: true });
+    Cookies.set('token', token, { maxAge: "3600", secure: true });
     fetchUserRole(); // Actualiza el rol después de iniciar sesión
   };
 

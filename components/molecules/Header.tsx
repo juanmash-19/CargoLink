@@ -36,6 +36,10 @@ export default function Header() {
     setIsUserMenuOpen(!isUserMenuOpen);
   };
 
+  const logOutClick = () => {
+    logout();
+  };
+
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -91,9 +95,12 @@ export default function Header() {
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                      Sign out
-                    </Link>
+                    <CustomButton 
+                            text='Sign out'
+                            variant='secondary'
+                            type='button'
+                            onClick={logOutClick}
+                            />
                   </li>
                 </ul>
               </div>
