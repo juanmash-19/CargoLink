@@ -2,11 +2,13 @@ import { UserDTO, UserDAO } from "@/Interfaces/user/UserInterface"
 
 import Cookies from 'js-cookie';
 
+import { envVariables } from "@/utils/config";
+
 export const getRoleUser = async (): Promise<UserDAO> => {
     const token = Cookies.get('token');
     if(token){   
         try{
-            const response = await fetch(`http://localhost:3336/api/users/role`,{
+            const response = await fetch(`${envVariables.API_URL}/users/role`,{
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${token}`,
