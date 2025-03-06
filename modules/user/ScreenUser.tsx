@@ -41,7 +41,7 @@ export default function UserPage(){
                                 <label htmlFor="login-password">
                                     <span className="text-sm text-gray-500">Nueva contraseña</span>
                                     <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                                        <input type="password" id="login-password" className={`${standarInput} focus:outline-primary-300`} placeholder="***********" />
+                                        <input type="password" id="login-new-password" className={`${standarInput} focus:outline-primary-300`} placeholder="***********" />
                                     </div>
                                 </label>
                             </div>

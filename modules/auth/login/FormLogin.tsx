@@ -22,11 +22,15 @@ import Cookies from 'js-cookie';
 
 import { useAuth } from '@/utils/AuthContext';
 
+import { useLoadingStore } from '@/store/LoadingSpinner';
+
 export default function FormLogin() {
+    
+    const { startLoading, stopLoading } = useLoadingStore();
 
     const router = useRouter();
 
-    const { refreshUserRole, login } = useAuth();
+    const { login } = useAuth();
 
     const { 
         register, 
@@ -43,22 +47,22 @@ export default function FormLogin() {
       });
     
     const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-        try {
-          const response = await loginUser(data);
-          console.log('Login successful:', response);
-
-          if(response.token){
-            login(response.token);
-          }
-
-          console.log(Cookies.get('token'));
-
-          router.replace('/'); // Redirige al usuario
-        } catch (error) {
-          console.error('Login failed:', error);
-          alert('Error en el inicio de sesión. Por favor, verifica tus credenciales.');
+      
+      try {
+        startLoading();
+        const response = await loginUser(data);
+        
+        if (response.token) {
+          login(response.token); // AuthContext ya maneja el rol
+          router.replace('/');
         }
-      };
+      } catch (error) {
+        console.error('Login failed:', error);
+        alert('Error en el inicio de sesión');
+      } finally {
+        stopLoading();
+      }
+    };
     
     return(
 
