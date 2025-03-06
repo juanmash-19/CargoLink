@@ -1,7 +1,11 @@
 import { LoginDTO, LoginDAO } from "@/Interfaces/auth/LoginInterface"
+// import { useLoadingStore } from "@/store/LoadingSpinner";
 
 export const loginUser = async (body: LoginDTO): Promise<LoginDAO> => {
+    // const { startLoading, stopLoading } = useLoadingStore();
+
     try{
+        // startLoading();
         const response = await fetch(`http://localhost:3336/api/auth/login`,{
             method: 'POST',
             headers: {
@@ -19,5 +23,7 @@ export const loginUser = async (body: LoginDTO): Promise<LoginDAO> => {
     }catch(error){
         console.error("Error en autenticación:", error);
         throw new Error("No se pudo completar la autenticación. Por favor, inténtalo de nuevo.");
+    }finally{
+        // stopLoading();
     }
 }

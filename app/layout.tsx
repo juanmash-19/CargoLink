@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/molecules/Header";
 import Footer from "@/components/molecules/footer";
+import Spinner from "@/components/atoms/Spinner";
+
 
 import { AuthProvider } from "@/utils/AuthContext";
 
@@ -39,6 +41,7 @@ export default function RootLayout({
             {children}
             <Footer/>
           </main>
+          <Spinner />
         </AuthProvider>
       </body>
     </html>
