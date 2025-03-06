@@ -1,15 +1,13 @@
-// AuthContext.tsx
 'use client';
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getRoleUser } from '@/libs/ServiceUser/api-services';
+import { jwtDecode } from 'jwt-decode'; // Añadir esta librería
 import Cookies from 'js-cookie';
 
 interface AuthContextType {
   userRole: string | null;
   login: (token: string) => void;
   logout: () => void;
-  refreshUserRole: () => Promise<void>; // Nueva función
+  // Eliminar refreshUserRole (no es necesario)
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -17,31 +15,42 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
 
-  const fetchUserRole = async () => {
-    const token = Cookies.get('token');
-    console.log('Token en fetchUserRole:', token); // Imprime el token
-    if (token) {
-      try {
-        const user = await getRoleUser();
-        console.log('Rol obtenido:', user.role); // Imprime el rol obtenido
-        setUserRole(user.role ?? null);
-      } catch (error) {
-        console.error('Error al obtener el rol:', error);
-        setUserRole(null);
+  // Función para decodificar el token y obtener el rol
+  const getRoleFromToken = (token: string): string | null => {
+    try {
+      const decoded: { role?: string; exp?: number } = jwtDecode(token);
+      
+      // Verificar expiración
+      if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+        logout();
+        return null;
       }
-    } else {
-      console.log('No hay token, userRole se establece en null'); // Imprime si no hay token
-      setUserRole(null);
+      
+      return decoded.role || null;
+    } catch (error) {
+      console.error('Error decodificando token:', error);
+      return null;
     }
   };
 
   useEffect(() => {
-    fetchUserRole();
+    const token = Cookies.get('token');
+    if (token) {
+      const role = getRoleFromToken(token);
+      setUserRole(role);
+    } else {
+      setUserRole(null);
+    }
   }, []);
 
   const login = (token: string) => {
-    Cookies.set('token', token, { maxAge: "3600", secure: true });
-    fetchUserRole(); // Actualiza el rol después de iniciar sesión
+    Cookies.set('token', token, { 
+      maxAge: '3600', 
+      secure: true, 
+      sameSite: 'Strict' // Mejorar seguridad
+    });
+    const role = getRoleFromToken(token);
+    setUserRole(role);
   };
 
   const logout = () => {
@@ -49,13 +58,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserRole(null);
   };
 
-  // Nueva función para forzar la recarga del rol
-  const refreshUserRole = async () => {
-    await fetchUserRole();
-  };
-
   return (
-    <AuthContext.Provider value={{ userRole, login, logout, refreshUserRole }}>
+    <AuthContext.Provider value={{ userRole, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
