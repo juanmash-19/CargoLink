@@ -1,8 +1,10 @@
 import { RegisterDTO, RegisterDAO } from "@/Interfaces/auth/RegisterInterface"
 
+import { envVariables } from "@/utils/config";
+
 export const registerUser = async (body: RegisterDTO): Promise<RegisterDAO> => {
     try{
-        const response = await fetch(`http://localhost:3336/api/auth/register`,{
+        const response = await fetch(`${envVariables.API_URL}/auth/register`,{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
