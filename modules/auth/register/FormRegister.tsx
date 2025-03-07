@@ -20,11 +20,15 @@ import { registerUser } from '@/libs/auth/ServiceRegister/api-services';
 
 import { useAuth } from '@/utils/AuthContext';
 
+import { useLoadingStore } from '@/store/LoadingSpinner';
+
 export default function FormRegister() {
 
     const router = useRouter();
 
     const { login } = useAuth();
+    
+    const { startLoading, stopLoading } = useLoadingStore();
 
     const { 
         register, 
@@ -48,20 +52,21 @@ export default function FormRegister() {
     
     const onSubmit: SubmitHandler<RegisterDTO> = async (data) => {
         try {
+            startLoading();
             data.role = 'user';
             const response = await registerUser(data);
             console.log('Register successful:', response);
 
             if(response.token){
                 login(response.token);
+                router.replace('/'); // Redirige al usuario
             }
 
-        
-
-            router.replace('/'); // Redirige al usuario
         } catch (error) {
             console.error('Register failed:', error);
             alert('Error al crear la cuenta. Por favor, verifica tus credenciales.');
+        } finally {
+            stopLoading();
         }
     }
     

@@ -22,45 +22,49 @@ import Cookies from 'js-cookie';
 
 import { useAuth } from '@/utils/AuthContext';
 
+import { useLoadingStore } from '@/store/LoadingSpinner';
+
 export default function FormLogin() {
+    
+    const { startLoading, stopLoading } = useLoadingStore();
 
-  const router = useRouter();
+    const router = useRouter();
 
-  const { login } = useAuth();
+    const { login } = useAuth();
 
-  const {
-    register,
-    handleSubmit,
-    watch, formState: { errors }
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginSchemes),
-    // mode : "onBlur",     
-    // defaultValues: {
-    //     email: "",
-    //     password: "",
-
-    // }
-  });
-
-  const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-    try {
-      const response = await loginUser(data);
-      console.log('Login successful:', response);
-
-      if (response.token) {
-        login(response.token);
+    const { 
+        register, 
+        handleSubmit, 
+        watch, formState: { errors } 
+      } = useForm<LoginDTO>({
+        resolver: zodResolver(loginSchemes),
+        // mode : "onBlur",     
+        // defaultValues: {
+        //     email: "",
+        //     password: "",
+    
+        // }
+      });
+    
+    const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
+      
+      try {
+        startLoading();
+        const response = await loginUser(data);
+        
+        if (response.token) {
+          login(response.token); // AuthContext ya maneja el rol
+          router.replace('/');
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
+        alert('Error en el inicio de sesión');
+      } finally {
+        stopLoading();
       }
-
-      console.log(Cookies.get('token'));
-
-      router.replace('/'); // Redirige al usuario
-    } catch (error) {
-      console.error('Login failed:', error);
-      alert('Error en el inicio de sesión. Por favor, verifica tus credenciales.');
-    }
-  };
-
-  return (
+    };
+    
+    return(
 
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-1 text-sm">
