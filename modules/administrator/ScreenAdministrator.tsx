@@ -5,27 +5,28 @@ import Link from 'next/link';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import Sidebar from '@/components/molecules/Sidebar';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
-const Sidebar = () => {
-  return (
-    <div className="bg-blue-900 text-white w-64 min-h-screen p-4">
-      <h2 className="text-2xl font-bold mb-6">Panel de Administrador</h2>
-      <ul>
-        <li className="mb-4">
-          <Link href="/repartidor" className="hover:text-orange-400">Repartidores</Link>
-        </li>
-        <li className="mb-4">
-          <Link href="/clientes" className="hover:text-orange-400">Clientes</Link>
-        </li>
-        <li className="mb-4">
-          <Link href="/coordinadores" className="hover:text-orange-400">Coordinadores</Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
+// const Sidebar = () => {
+//   return (
+//     <div className="bg-blue-900 text-white w-64 min-h-screen p-4">
+//       <h2 className="text-2xl font-bold mb-6">Panel de Administrador</h2>
+//       <ul>
+//         <li className="mb-4">
+//           <Link href="/repartidor" className="hover:text-orange-400">Repartidores</Link>
+//         </li>
+//         <li className="mb-4">
+//           <Link href="/clientes" className="hover:text-orange-400">Clientes</Link>
+//         </li>
+//         <li className="mb-4">
+//           <Link href="/coordinadores" className="hover:text-orange-400">Coordinadores</Link>
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// };
 
 const Card = ({ title, value, color, icon, onClick }) => {
   return (
