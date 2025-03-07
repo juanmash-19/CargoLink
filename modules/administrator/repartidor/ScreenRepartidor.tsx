@@ -24,7 +24,7 @@ const Sidebar = () => {
   );
 };
 
-const PedidoCard = ({ pedido, tipo }) => {
+const PedidoCard = ({ pedido, tipo }: any) => {
   return (
     <div className="max-w-2xl bg-white rounded-lg shadow-md p-4 mb-4 flex w-full">
       <div className="w-20 h-20 bg-gray-200 flex items-center justify-center rounded-lg mr-4">
@@ -124,3 +124,4 @@ export default function RepartidoresPage() {
     </AdminLayout>
   );
 }
+

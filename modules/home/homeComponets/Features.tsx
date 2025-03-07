@@ -36,7 +36,7 @@ const FeaturesHomePage = () => {
                             <div className='work-img-bg rounded-full flex justify-center absolute -top-[50%] sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%]'>
                                 {/* <Image src={items.imgSrc} alt={items.imgSrc} width={510} height={10} /> */}
                             </div>
-                            <h3 className='text-2xl text-black dark:text-white font-semibold text-center mt-16'>Transportista</h3>
+                            <h3 className='text-2xl text-black dark:text-white font-semibold text-center mt-16'>Transportador</h3>
                             <p className='text-lg font-normal text-black/50 dark:text-white/50 text-center mt-3'>Lorem ipsum dolor es est quam! Natus inventore dignissimos rerucorporis laborum dolorum quisquam expedita fugiat!</p>
                             <div className='flex items-center justify-center'>
                             

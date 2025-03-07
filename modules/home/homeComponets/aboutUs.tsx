@@ -46,7 +46,7 @@ const AboutUs = () => {
         },
         {
             name: "Juan Martin",
-            description: "Desarrolladora frontend",
+            description: "Desarrollador frontend",
             imgSrc: "/images/Expert/maria.jpg"
         },
         {
