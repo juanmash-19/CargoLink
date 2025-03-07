@@ -26,7 +26,7 @@ export default function FormLogin() {
 
   const router = useRouter();
 
-  const { refreshUserRole, login } = useAuth();
+  const { login } = useAuth();
 
   const {
     register,
