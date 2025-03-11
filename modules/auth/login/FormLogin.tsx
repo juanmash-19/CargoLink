@@ -16,7 +16,7 @@ import { LoginDTO } from '@/Interfaces/auth/LoginInterface';
 
 import { useRouter } from "next/navigation";
 
-import { loginUser } from '@/libs/auth/ServiceLogin/api-services';
+import { loginUser } from '@/libs/auth/api-login';
 
 import Cookies from 'js-cookie';
 
