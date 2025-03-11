@@ -61,7 +61,7 @@ const AboutUs = () => {
             <div className='container mx-auto lg:max-w-screen-xl md:max-w-screen-md'>
                 <div className="text-center">
                     <p className='text-primary text-lg font-normal mb-2 tracking-widest uppercase'>DESARROLLADORES</p>
-                    <h2 className="text-3xl lg:text-5xl font-semibold text-black dark:text-white">
+                    <h2 className="text-3xl lg:text-5xl font-semibold text-black">
                         Ingenieros
                     </h2>
                 </div>

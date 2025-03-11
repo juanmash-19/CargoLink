@@ -5,44 +5,37 @@ import Link from 'next/link';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import Sidebar from '@/components/atoms/Sidebar';
+import SimpleCard from '@/components/atoms/SimpleCard';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
-const Sidebar = () => {
-  return (
-    <div className="bg-blue-900 text-white w-64 min-h-screen p-4">
-      <h2 className="text-2xl font-bold mb-6">Panel de Administrador</h2>
-      <ul>
-        <li className="mb-4">
-          <Link href="/repartidor" className="hover:text-orange-400">Repartidores</Link>
-        </li>
-        <li className="mb-4">
-          <Link href="/clientes" className="hover:text-orange-400">Clientes</Link>
-        </li>
-        <li className="mb-4">
-          <Link href="/coordinadores" className="hover:text-orange-400">Coordinadores</Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
+// const Sidebar = () => {
+//   return (
+//     <div className="bg-blue-900 text-white w-64 min-h-screen p-4">
+//       <h2 className="text-2xl font-bold mb-6">Panel de Administrador</h2>
+//       <ul>
+//         <li className="mb-4">
+//           <Link href="/repartidor" className="hover:text-orange-400">Repartidores</Link>
+//         </li>
+//         <li className="mb-4">
+//           <Link href="/clientes" className="hover:text-orange-400">Clientes</Link>
+//         </li>
+//         <li className="mb-4">
+//           <Link href="/coordinadores" className="hover:text-orange-400">Coordinadores</Link>
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// };
 
-const Card = ({ title, value, color, icon, onClick }) => {
-  return (
-    <div
-      className={`p-4 rounded-lg shadow-md text-white flex items-center justify-between cursor-pointer ${color}`}
-      onClick={onClick}
-    >
-      <div>
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="text-2xl font-bold">{value}</p>
-      </div>
-      <div className="text-3xl">{icon}</div>
-    </div>
-  );
-};
+const sidebarItems = [
+  { name: "Administrador", href: "/administrator" },
+  { name: "Trasnportador", href: "/repartidor" },
+  { name: "Perfil", href: "/user" }
+];
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = ({ children } : {children : React.ReactNode}) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -55,7 +48,7 @@ const AdminLayout = ({ children }) => {
           {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
         </button>
       </div>
-      {isSidebarOpen && <Sidebar />}
+      {isSidebarOpen && <Sidebar items={sidebarItems} variant="ghost" />}
       <div className="flex-1 bg-gray-100 p-6">{children}</div>
     </div>
   );
@@ -98,18 +91,25 @@ export default function AdminPage() {
   };
 
   const cardsData = [
-    { title: 'Ventas Totales', value: '$3,249', color: 'bg-green-500', icon: '🛒' },
-    { title: 'Usuarios Totales', value: '249', color: 'bg-pink-500', icon: '👥' },
-    { title: 'Tiempo del Servidor', value: '152 días', color: 'bg-blue-500', icon: '🖥' },
-    { title: 'Tareas Pendientes', value: '7 tareas', color: 'bg-purple-500', icon: '📋' },
+    { title: 'Ventas Totales', value: '$3,249', variant: 'primary', icon: '🛒' },
+    { title: 'Usuarios Totales', value: '249', variant: 'secondary', icon: '👥' },
+    { title: 'Tiempo del Servidor', value: '152 días', variant: 'ghost', icon: '🖥' },
+    { title: 'Tareas Pendientes', value: '7 tareas', variant: 'danger', icon: '📋' },
   ];
 
   return (
     <AdminLayout>
-      <h1 className="text-3xl font-bold text-gray-900">Administrador </h1>
+      <h1 className="text-3xl font-bold text-gray-900">Administrador</h1>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cardsData.map((card, index) => (
-          <Card key={index} {...card} onClick={() => setSelectedCard(card)} />
+          <SimpleCard
+            key={index}
+            title={card.title}
+            value={card.value}
+            variant={'primary'}
+            icon={card.icon}
+            onClick={() => setSelectedCard(card)}
+          />
         ))}
       </div>
       {selectedCard && (
