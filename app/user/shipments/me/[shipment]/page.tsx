@@ -36,6 +36,8 @@ export async function generateMetadata({ params }: ShipmentPageProps): Promise<M
   }
 }
 
+console.log('Hello world');
+
 const getShipmentData = async (id: string): Promise<ShipmentDAO> => {
   try {
     const response = await getShipment(id)
