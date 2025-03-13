@@ -1,9 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 
 import CustomButton from '@/components/atoms/CustomButton'
-import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 
 export default function NotFound(){
