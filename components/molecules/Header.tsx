@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image"; // ✅ Importación corregida
+import Image from "next/image"; 
 import { usePathname, useRouter } from 'next/navigation';
 import { standarTextLink, standarNavLink, standarNavLinkSelect } from '@/utils/Tokens';
 import CustomButton from '@/components/atoms/CustomButton';
