@@ -1,30 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import Link from 'next/link';
+import Sidebar from '@/components/atoms/Sidebar';
 
-const Sidebar = () => {
-  return (
-    <div className="bg-blue-600 text-white w-64 min-h-screen p-4">
-      <h2 className="text-2xl font-bold mb-6">Panel de Repartidores</h2>
-      <ul>
-        <li className="mb-4">
-          <Link href="/pedidos-entregados" className="hover:text-orange-400">
-            Pedidos Entregados
-          </Link>
-        </li>
-        <li className="mb-4">
-          <Link href="/pedidos-disponibles" className="hover:text-orange-400">
-            Pedidos Disponibles
-          </Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
+const sidebarItems = [
+  { name: "Pedidos Entregados", href: "/pedidos-entregados" },
+  { name: "Pedidos Disponibles", href: "/pedidos-disponibles" },
+  { name: "Estado Actual", href: "/estado-actual" }
+];
 
-const PedidoCard = ({ pedido, tipo }) => {
+const PedidoCard = ({ pedido, tipo }: any) => {
   return (
     <div className="max-w-2xl bg-white rounded-lg shadow-md p-4 mb-4 flex w-full">
       <div className="w-20 h-20 bg-gray-200 flex items-center justify-center rounded-lg mr-4">
@@ -56,7 +43,7 @@ const PedidoCard = ({ pedido, tipo }) => {
   );
 };
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = ({ children } : {children : React.ReactNode}) => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   return (
@@ -69,12 +56,8 @@ const AdminLayout = ({ children }) => {
           {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
         </button>
       </div>
-
-      {isSidebarOpen && <Sidebar />}
-
-      <div className="flex-1 bg-gray-100 p-6 flex flex-col items-center">
-        {children}
-      </div>
+      {isSidebarOpen && <Sidebar items={sidebarItems} variant="ghost" />}
+      <div className="flex-1 bg-gray-100 p-6">{children}</div>
     </div>
   );
 };
@@ -124,3 +107,4 @@ export default function RepartidoresPage() {
     </AdminLayout>
   );
 }
+

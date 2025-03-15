@@ -16,7 +16,7 @@ import { RegisterDTO } from '@/Interfaces/auth/RegisterInterface';
 
 import { useRouter } from "next/navigation";
 
-import { registerUser } from '@/libs/auth/ServiceRegister/api-services';
+import { registerUser } from '@/libs/auth/api-register';
 
 import { useAuth } from '@/utils/AuthContext';
 

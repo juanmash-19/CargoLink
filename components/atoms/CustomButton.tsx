@@ -1,9 +1,9 @@
 // import { link } from "fs";
-import Link from "next/link";
+// import Link from "next/link";
 
 interface CustomButtonProps {
   text: string;
-  variant: 'primary' | 'secondary' | 'danger' | 'ghost';
+  variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'green';
   type?: 'button' | 'submit';
   onClick?: () => void;
   disabled?: boolean;
@@ -21,10 +21,11 @@ export default function CustomButton({
   // typeButton = false,
 }: CustomButtonProps) {
   const variantStyles = {
-    primary: 'bg-primary-100 border-primary-400 text-white hover:bg-transparent hover:text-primary-400',
+    primary: 'bg-primary-200 border-primary-200 text-white hover:bg-transparent hover:text-primary-200',
     secondary: 'bg-secondary-200 border-secondary-200 text-white hover:bg-transparent hover:text-secondary-200',
     danger: 'bg-red-500 border-red-500 text-white hover:bg-transparent hover:text-red-500',
-    ghost: 'bg-transparent border-white text-white hover:bg-white/10'
+    ghost: 'bg-transparent border-white text-white hover:bg-white/10',
+    green: 'bg-green-800 border-green-800 text-white hover:bg-transparent hover:text-green-800'
   };
 
   // const buttonType = typeButton ? 'submit' : 'button';

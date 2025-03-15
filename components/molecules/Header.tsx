@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { usePathname } from 'next/navigation';
 import { standarTextLink, standarNavLink, standarNavLinkSelect } from '@/utils/Tokens';
 import CustomButton from '@/components/atoms/CustomButton';
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/utils/AuthContext";
-import logo from "../atoms/logo";
+import CargoLinkLogo from "@/components/atoms/Logo";
 
 export default function Header() {
   const { userRole, logout } = useAuth();
@@ -47,11 +47,7 @@ export default function Header() {
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/#" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap bg-[#D9D9D9] p-1 rounded-[10px]">
-            <span className="text-orange-600">Cargo</span>
-            <span className="text-blue-600">Link</span>
-          </span>
+          <CargoLinkLogo/>
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {userRole ? (
