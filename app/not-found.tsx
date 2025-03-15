@@ -2,16 +2,46 @@
 
 
 import CustomButton from '@/components/atoms/CustomButton'
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
+const NotFoundData = {
+    'user': {
+        redirectPath: '/',
+        message: 'Cannot access profile, path not found'
+    },
+    'estado-actual': {
+        redirectPath: '/repartidor',
+        message: 'Cannot access estado actual, path not found'
+    }
+}
+
+const getMessage = (obj, current: any[]) => {
+    if (current.length == 1) {
+        if (!obj[current[0]]) return [undefined, "/"]
+        const d = [obj[current[0]]['message'], obj[current[0]]['redirectPath']]
+        return d
+    }
+    const aux = current.shift()
+    if (!obj[aux]) return [undefined, "/"]
+    return getMessage(obj[aux], current)
+}
 export default function NotFound(){
 
-    // const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     const router = useRouter();
+    const currentPath = usePathname().split('/').filter((v) => {
+        if (v) return true;
+        return false    
+    })
 
+    let data: any[]
+    if (currentPath){
+        data = getMessage(NotFoundData, currentPath)
+    }
+    
+    
     const menuClick = () =>{
-        router.push('/')
+        router.push(data[1])
     };
 
     return (
@@ -21,8 +51,7 @@ export default function NotFound(){
                     <div className="mx-auto max-w-screen-sm text-center">
                         <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600">404</h1>
                         <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">Something's missing.</p>
-                        <p className="mb-4 text-lg font-light text-gray-500 ">Sorry, we can't find that page. You'll find lots to explore on the home page. </p>
-                        {/* <a href="#" className="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 bg-primary-100 text-center my-4">Back to Homepage</a> */}
+                        <p className="mb-4 text-lg font-light text-gray-500 ">{data[0] || "Path not found"}</p>
                             <CustomButton 
                                 text='Volver al menu'
                                 variant='primary'
