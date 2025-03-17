@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode'; // Añadir esta librería
 import Cookies from 'js-cookie';
+import { createTokenCookie } from './CreateCookieServer';
 
 interface AuthContextType {
   userRole: string | null;
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       secure: true, 
       sameSite: 'Strict' // Mejorar seguridad
     });
+    createTokenCookie(token);
     const role = getRoleFromToken(token);
     setUserRole(role);
   };

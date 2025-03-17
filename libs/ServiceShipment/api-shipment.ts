@@ -32,8 +32,14 @@ export const createShipment = async (body: ShipmentDTO): Promise<ShipmentDAO> =>
     }
 }
 
-export const getShipment = async (id: string): Promise<ShipmentDAO> => {
-    const token = Cookies.get('token');
+export const getShipment = async (id: string, serverToken?: string): Promise<ShipmentDAO> => {
+
+    var token = serverToken;
+
+    if(!token) {
+        token = Cookies.get('token');
+    }
+    
     if(token){
         try {
             const response = await fetch(`${envVariables.API_URL}/shipments/${id}`,{
