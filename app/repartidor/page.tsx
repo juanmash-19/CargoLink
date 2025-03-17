@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import ScreenRepartidor from "@/modules/administrator/repartidor/ScreenRepartidor"
+import ScreenRepartidor from "@/modules/admin/repartidor/ScreenRepartidor"
 
 export const metadata: Metadata = {
     title: "Repartidor",
