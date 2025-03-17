@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: ShipmentPageProps): Promise<M
 
     return {
       title: `Envío #${shipment._id}`,
-      description: `Detalles del envío con origen: ${shipment._id} y destino: ${shipment.deliveryAddress}`,
+      description: `Detalles del envío con origen: ${shipment.pickupAddress} y destino: ${shipment.deliveryAddress}`,
       alternates: {
         canonical: `https://mydomain.com/user/shipments/me/${idShipment}`
       } 
