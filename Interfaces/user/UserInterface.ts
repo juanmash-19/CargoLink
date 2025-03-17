@@ -1,4 +1,5 @@
 export interface UserDTO{
+    userId?: string,
     name? : string,
     lastname? : string,
     email?: string,
@@ -8,6 +9,7 @@ export interface UserDTO{
 }
 
 export interface UserDAO{
+    _id? : string,
     name? : string,
     lastname? : string,
     email?: string,
