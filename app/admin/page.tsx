@@ -1,8 +1,8 @@
 import { Metadata } from "next"
-import Screenadmin from "@/modules/admin/Screenadmin"
+import Screenadmin from "@/modules/admin/ScreenAdmin"
 
 export const metadata: Metadata = {
-    title: "Administrador",
+    title: "Admin",
     description: "Panel de administración para gestionar el sitio",
     alternates: {
         canonical: 'https://mydomain.com/admin'
