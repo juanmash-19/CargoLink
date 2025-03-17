@@ -1,17 +1,16 @@
 import { Metadata } from "next"
 import ScreenShipmentMe from "@/modules/user/shipments/create/ScreenMeShipment"
-import { getShipment } from '@/libs/ServiceShipment/api-shipment' // Asegúrate de importar correctamente
-import { ShipmentDAO } from '@/Interfaces/shipment/ShipmentInterface' // Asegúrate de tener esta interfaz
+import { getShipment } from '@/libs/ServiceShipment/api-shipment' 
+import { ShipmentDAO } from '@/Interfaces/shipment/ShipmentInterface' 
 import  notFound  from '@/app/not-found'
 
 interface ShipmentPageProps {
   params: Promise<{ shipment: string }>
 }
 
-// Si necesitas generar rutas estáticas
+
 export async function generateStaticParams() {
-  // Aquí podrías generar IDs estáticos si los necesitas
-  // Por ahora lo dejamos vacío ya que los shipments son dinámicos
+
   return []
 }
 
@@ -53,7 +52,7 @@ const getShipmentData = async (id: string): Promise<ShipmentDAO> => {
 
 export default async function ShipmentPage({ params }: ShipmentPageProps) {
   const idShipment = (await params).shipment
-  await getShipmentData(idShipment) // Verificamos que el envío existe
+  await getShipmentData(idShipment) 
 
   return <ScreenShipmentMe />
 }
