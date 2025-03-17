@@ -30,7 +30,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointEleme
 // };
 
 const sidebarItems = [
-  { name: "Administrador", href: "/administrator" },
+  { name: "Administrador", href: "/admin" },
   { name: "Trasnportador", href: "/repartidor" },
   { name: "Perfil", href: "/user" }
 ];

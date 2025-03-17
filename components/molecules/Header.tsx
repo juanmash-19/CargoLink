@@ -152,8 +152,8 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="/administrator"
-                className={`${isLinkActive('/administrator') ? standarNavLinkSelect : standarNavLink}`}
+                href="/admin"
+                className={`${isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink}`}
               >
                 Admin
               </Link>
