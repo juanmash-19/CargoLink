@@ -22,9 +22,9 @@ interface CardType {
 }
 
 const sidebarItems = [
-  { name: 'Administrador', href: '/administrator' },
-  { name: 'Transportador', href: '/repartidor' },
-  { name: 'Perfil', href: '/user' },
+  { name: "Administrador", href: "/admin" },
+  { name: "Trasnportador", href: "/repartidor" },
+  { name: "Perfil", href: "/user" }
 ];
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
