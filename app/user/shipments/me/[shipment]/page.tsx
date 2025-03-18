@@ -11,7 +11,7 @@ interface ShipmentPageProps {
 
 export async function generateStaticParams() {
   
-  const staticShipments = Array.from({ length: 30 }).map((_, i) => SHIP${i + 1})
+  const staticShipments = Array.from({ length: 30 }).map((_, i) => `SHIP${i + 1}`)
 
   return staticShipments.map(id => ({
     shipment: id 
@@ -26,10 +26,10 @@ export async function generateMetadata({ params }: ShipmentPageProps): Promise<M
     const shipment = response.shipment
 
     return {
-      title: Envío #${shipment._id},
-      description: Detalles del envío con origen: ${shipment._id} y destino: ${shipment.deliveryAddress},
+      title: `Envío #${shipment._id}`,
+      description: `Detalles del envío con origen: ${shipment.pickupAddress} y destino: ${shipment.deliveryAddress}`,
       alternates: {
-        canonical: https://mydomain.com/user/shipments/me/${idShipment}
+        canonical: `https://mydomain.com/user/shipments/me/${idShipment}`
       } 
     }
   } catch (err) {
