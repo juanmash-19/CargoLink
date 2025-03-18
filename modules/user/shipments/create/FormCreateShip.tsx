@@ -69,9 +69,9 @@ export default function FormCreateShip() {
             startLoading();
             const response = await createShipment(data);
 
-            if (response.shipment?._id) {
+            if (response._id) {
                 alert(response.message);
-                router.replace(`/user/shipments/me/${response.shipment?._id}`);
+                router.replace(`/user/shipments/me/${response._id}`);
             }
         } catch (error) {
             console.error('Error al crear el flete:', error);
