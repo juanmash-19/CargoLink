@@ -9,11 +9,17 @@ export interface UserDTO{
 }
 
 export interface UserDAO{
-    _id? : string,
-    name? : string,
-    lastname? : string,
-    email?: string,
-    role?: string,
+    message?: string,
+    _id : string,
+    name : string,
+    lastname : string,
+    email: string,
+    role: string,
     phone?: string,
     password?: string,
+}
+
+export interface UsersDAO{
+    message?: string,
+    users: UserDAO[],
 }
