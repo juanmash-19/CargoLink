@@ -97,7 +97,7 @@ export default function Header() {
         <div className={`md:flex md:w-auto md:order-1 ${isMenuOpen ? "block" : "hidden"}`} id="navbar-sticky">
           <ul className="flex flex-col md:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-primary-100 md:space-x-8 md:mt-0 md:border-0 md:bg-primary-100">
             <li><Link href="/" className={isLinkActive('/') ? standarNavLinkSelect : standarNavLink}>Home</Link></li>
-            <li><Link href="/administrator" className={isLinkActive('/administrator') ? standarNavLinkSelect : standarNavLink}>Admin</Link></li>
+            <li><Link href="/administrator" className={isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink}>Admin</Link></li>
             <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Services</Link></li>
             <li><Link href="/contact" className={isLinkActive('/contact') ? standarNavLinkSelect : standarNavLink}>Contact</Link></li>
           </ul>
