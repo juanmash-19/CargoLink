@@ -3,13 +3,6 @@
 import { useState } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Link from 'next/link';
-import Sidebar from '@/components/atoms/Sidebar';
-
-const sidebarItems = [
-  { name: "Pedidos Entregados", href: "/pedidos-entregados" },
-  { name: "Pedidos Disponibles", href: "/pedidos-disponibles" },
-  { name: "Estado Actual", href: "/estado-actual" }
-];
 
 const PedidoCard = ({ pedido, tipo }: any) => {
   return (
@@ -56,7 +49,6 @@ const AdminLayout = ({ children } : {children : React.ReactNode}) => {
           {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
         </button>
       </div>
-      {isSidebarOpen && <Sidebar items={sidebarItems} variant="ghost" />}
       <div className="flex-1 bg-gray-100 p-6">{children}</div>
     </div>
   );

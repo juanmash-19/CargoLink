@@ -23,11 +23,10 @@ export async function generateMetadata({ params }: ShipmentPageProps): Promise<M
     const token = (await cookies()).get('token')?.value;
     const idShipment = (await params).shipment
     const response = await getShipment(idShipment, token)
-    const shipment = response.shipment
 
     return {
-      title: `Envío #${shipment._id}`,
-      description: `Detalles del envío con origen: ${shipment.pickupAddress} y destino: ${shipment.deliveryAddress}`,
+      title: `Envío #${response._id}`,
+      description: `Detalles del envío con origen: ${response.pickupAddress} y destino: ${response.deliveryAddress}`,
       alternates: {
         canonical: `https://mydomain.com/user/shipments/me/${idShipment}`
       } 
@@ -45,7 +44,7 @@ export async function generateMetadata({ params }: ShipmentPageProps): Promise<M
 const getShipmentData = async (id: string): Promise<ShipmentDAO> => {
   try {
     const response = await getShipment(id)
-    if (!response.shipment) {
+    if (!response._id) {
       notFound()
     }
     return response

@@ -1,11 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import Sidebar from '@/components/atoms/Sidebar';
 import SimpleCard from '@/components/atoms/SimpleCard';
 
 // Registrar componentes de Chart.js
@@ -20,31 +17,6 @@ interface CardType {
   variant: VariantType;
   icon: string;
 }
-
-const sidebarItems = [
-  { name: "Administrador", href: "/admin" },
-  { name: "Trasnportador", href: "/repartidor" },
-  { name: "Perfil", href: "/user" }
-];
-
-const AdminLayout = ({ children }: { children: React.ReactNode }) => {
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
-
-  return (
-    <div className="flex">
-      <div className="absolute top-5 left-3 z-50">
-        <button
-          className="p-2 bg-white text-orange-600 border border-orange-400 rounded-full shadow-lg hover:scale-110 transition-transform"
-          onClick={() => setSidebarOpen(!isSidebarOpen)}
-        >
-          {isSidebarOpen ? <FiChevronLeft size={24} /> : <FiChevronRight size={24} />}
-        </button>
-      </div>
-      {isSidebarOpen && <Sidebar items={sidebarItems} variant="ghost" />}
-      <div className="flex-1 bg-gray-100 p-6">{children}</div>
-    </div>
-  );
-};
 
 export default function AdminPage() {
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
@@ -72,7 +44,7 @@ export default function AdminPage() {
   ];
 
   return (
-    <AdminLayout>
+    <div className="flex-1 bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-gray-900">Administrador</h1>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cardsData.map((card, index) => (
@@ -97,6 +69,6 @@ export default function AdminPage() {
         <h2 className="text-xl font-bold">Gráfico de Problemas</h2>
         <Bar data={chartData.problemas} />
       </div>
-    </AdminLayout>
+    </div>
   );
 }
