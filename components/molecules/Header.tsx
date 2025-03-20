@@ -25,6 +25,8 @@ export default function Header() {
   const registerClick = () => router.push('/register');
   const isLinkActive = (href: string) => pathname?.startsWith(href);
 
+  console.log("User Role:", userRole); // Verificar el rol en consola
+
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -36,7 +38,6 @@ export default function Header() {
 
         {/* Contenedor derecho: Menú y usuario */}
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          
           {userRole ? (
             <div className="relative">
               {/* Botón del usuario */}
@@ -79,7 +80,6 @@ export default function Header() {
             </div>
           )}
 
-          {/* Botón del menú hamburguesa en móviles */}
           <button 
             onClick={toggleMenu} 
             type="button" 
@@ -93,16 +93,36 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Menú de navegación principal */}
+        {/* Menú de navegación principal basado en el rol */}
         <div className={`md:flex md:w-auto md:order-1 ${isMenuOpen ? "block" : "hidden"}`} id="navbar-sticky">
           <ul className="flex flex-col md:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-primary-100 md:space-x-8 md:mt-0 md:border-0 md:bg-primary-100">
             <li><Link href="/" className={isLinkActive('/') ? standarNavLinkSelect : standarNavLink}>Home</Link></li>
-            <li><Link href="/administrator" className={isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink}>Admin</Link></li>
-            <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Services</Link></li>
-            <li><Link href="/contact" className={isLinkActive('/contact') ? standarNavLinkSelect : standarNavLink}>Contact</Link></li>
+            
+            {userRole === 'admin' && (
+              <>
+                <li><Link href="/repartidor" className={isLinkActive('/repartidor') ? standarNavLinkSelect : standarNavLink}>Repartidores</Link></li>
+                <li><Link href="/users" className={isLinkActive('/users') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
+                <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
+              </>
+            )}
+
+            {userRole === 'repartidor' && (
+              <>
+                <li><Link href="/repartidor/jobs" className={isLinkActive('/repartidor/jobs') ? standarNavLinkSelect : standarNavLink}>Trabajos</Link></li>
+                <li><Link href="/repartidor/entregados" className={isLinkActive('/repartidor/entregados') ? standarNavLinkSelect : standarNavLink}>Pedidos Entregados</Link></li>
+                <li><Link href="/repartidor/disponibles" className={isLinkActive('/repartidor/disponibles') ? standarNavLinkSelect : standarNavLink}>Pedidos Disponibles</Link></li>
+                <li><Link href="/repartidor/estado" className={isLinkActive('/repartidor/estado') ? standarNavLinkSelect : standarNavLink}>Estado Actual</Link></li>
+              </>
+            )}
+
+            {userRole === 'user' && (
+              <>
+                <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
+                <li><Link href="/orders" className={isLinkActive('/orders') ? standarNavLinkSelect : standarNavLink}>Mis órdenes</Link></li>
+              </>
+            )}
           </ul>
         </div>
-
       </div>
     </nav>
   );
