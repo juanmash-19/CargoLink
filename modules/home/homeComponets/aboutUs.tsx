@@ -57,7 +57,7 @@ const AboutUs = () => {
     ];
 
     return (
-        <section className="bg-primary/15">
+        <section className="bg-primary/15" id="about-us">
             <div className='container mx-auto lg:max-w-screen-xl md:max-w-screen-md'>
                 <div className="text-center">
                     <p className='text-primary text-lg font-normal mb-2 tracking-widest uppercase'>DESARROLLADORES</p>

@@ -8,22 +8,31 @@ import { standarTextLink, standarNavLink, standarNavLinkSelect } from '@/utils/T
 import CustomButton from '@/components/atoms/CustomButton';
 import { useAuth } from "@/utils/AuthContext";
 import CargoLinkLogo from "@/components/atoms/Logo";
+import { ArrowDown } from "../atoms/ReactIcons";
 
 export default function Header() {
   const { userRole, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isShipmentMenuOpen, setIsShipmentMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
+  const toggleShipmentMenu = () => setIsShipmentMenuOpen(!isShipmentMenuOpen);
   const logOutClick = () => {
     logout();
     setIsUserMenuOpen(false);
   };
   const registerClick = () => router.push('/register');
-  const isLinkActive = (href: string) => pathname?.startsWith(href);
+  const isLinkActive = (path: string, exact: boolean = false) => {
+    if (exact) {
+      return pathname === path; // Comparación exacta
+    } else {
+      return pathname.startsWith(path); // Comparación para subrutas
+    }
+  };
 
   console.log("User Role:", userRole); // Verificar el rol en consola
 
@@ -43,7 +52,7 @@ export default function Header() {
               {/* Botón del usuario */}
               <button
                 type="button"
-                className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
                 aria-expanded={isUserMenuOpen}
                 onClick={toggleUserMenu}
               >
@@ -58,15 +67,15 @@ export default function Header() {
               </button>
 
               {/* Menú de usuario */}
-              <div className={`absolute right-0 z-50 bg-white rounded-lg shadow-sm dark:bg-gray-700 divide-y divide-gray-100 dark:divide-gray-600 ${isUserMenuOpen ? 'block' : 'hidden'}`}>
+              <div className={`absolute right-0 z-50 bg-white rounded-lg shadow-sm divide-gray-100 ${isUserMenuOpen ? 'block' : 'hidden'}`}>
                 <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                  <span className="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                  <span className="block text-sm text-gray-900 ">Bonnie Green</span>
+                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
                 </div>
-                <ul className="py-2">
-                  <li><Link href="/user/profile" className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Perfil</Link></li>
-                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Ajustes</Link></li>
-                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600">Información</Link></li>
+                <ul className="py-2 text-gray-500">
+                  <li><Link href="/user/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Perfil</Link></li>
+                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Ajustes</Link></li>
+                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Información</Link></li>
                   <li>
                     <CustomButton text='Cerrar sesión' variant='danger' type='button' onClick={logOutClick} />
                   </li>
@@ -96,29 +105,118 @@ export default function Header() {
         {/* Menú de navegación principal basado en el rol */}
         <div className={`md:flex md:w-auto md:order-1 ${isMenuOpen ? "block" : "hidden"}`} id="navbar-sticky">
           <ul className="flex flex-col md:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-primary-100 md:space-x-8 md:mt-0 md:border-0 md:bg-primary-100">
-            <li><Link href="/" className={isLinkActive('/') ? standarNavLinkSelect : standarNavLink}>Home</Link></li>
             
+            {/*Este debe de desapareces e incuroporar los home para cada role*/}
+            <li><Link href="/" className={isLinkActive('/', true) ? standarNavLinkSelect : standarNavLink}>Inicio</Link></li>
+
+            {/*Seccion para usuarios no logueados*/}
+            {userRole === null &&(
+              <>
+                <li><Link href="#about-section" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
+                <li><Link href="#what-are" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>¿Que somos?</Link></li>
+                <li><Link href="#about-us" className={isLinkActive('/us') ? standarNavLinkSelect : standarNavLink}>Nosotros</Link></li>
+              </>
+            )}
+            
+            {/*Seccion para usuarios logueados*/}
             {userRole === 'admin' && (
               <>
                 <li><Link href="/repartidor" className={isLinkActive('/repartidor') ? standarNavLinkSelect : standarNavLink}>Repartidores</Link></li>
-                <li><Link href="/users" className={isLinkActive('/users') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
+                <li><Link href="/user" className={isLinkActive('/user') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
                 <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
               </>
             )}
 
-            {userRole === 'repartidor' && (
+            {userRole === 'transporter' && (
               <>
                 <li><Link href="/repartidor/jobs" className={isLinkActive('/repartidor/jobs') ? standarNavLinkSelect : standarNavLink}>Trabajos</Link></li>
-                <li><Link href="/repartidor/entregados" className={isLinkActive('/repartidor/entregados') ? standarNavLinkSelect : standarNavLink}>Pedidos Entregados</Link></li>
-                <li><Link href="/repartidor/disponibles" className={isLinkActive('/repartidor/disponibles') ? standarNavLinkSelect : standarNavLink}>Pedidos Disponibles</Link></li>
-                <li><Link href="/repartidor/estado" className={isLinkActive('/repartidor/estado') ? standarNavLinkSelect : standarNavLink}>Estado Actual</Link></li>
+                <li>
+                  <details className="group [&_summary::-webkit-details-marker]:hidden">
+                    <summary
+                      className={`${isLinkActive('/transporter/shipments') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
+                    >
+                      <span> Fletes </span>
+
+                      <span className="transition-transform duration-300 group-open:-rotate-180">
+                        <ArrowDown />
+                      </span>
+                    </summary>
+
+                    <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg">
+                      <li>
+                        <Link 
+                          href="/transporter/shipments/available" 
+                          className={isLinkActive('/transporter/shipments/available') ? standarNavLinkSelect : standarNavLink}>
+                            Disponibles
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/transporter/shipments/actives" 
+                          className={isLinkActive('/transporter/shipments/actives') ? standarNavLinkSelect : standarNavLink}>
+                            Activos
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/transporter/shipments/all" 
+                          className={isLinkActive('/transporter/shipments/all') ? standarNavLinkSelect : standarNavLink}>
+                            Todos
+                        </Link>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+
+                <li><Link href="/transporter/wallet" className={isLinkActive('/transporter/wallet') ? standarNavLinkSelect : standarNavLink}>Billetera</Link></li>
+                <li><Link href="/transporter/current" className={isLinkActive('/transporter/current') ? standarNavLinkSelect : standarNavLink}>Estado Actual</Link></li>
               </>
             )}
 
             {userRole === 'user' && (
               <>
-                <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
-                <li><Link href="/orders" className={isLinkActive('/orders') ? standarNavLinkSelect : standarNavLink}>Mis órdenes</Link></li>
+                <li>
+                  <details className="group [&_summary::-webkit-details-marker]:hidden">
+                    <summary
+                      className={`${isLinkActive('/user/shipments') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
+                    >
+                      <span> Fletes </span>
+
+                      <span className="transition-transform duration-300 group-open:-rotate-180">
+                        <ArrowDown />
+                      </span>
+                    </summary>
+
+                    <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg group-open:-translate-x-6">
+                      <li>
+                        <Link 
+                          href="/user/shipments/create" 
+                          className={isLinkActive('/user/shipments/create') ? standarNavLinkSelect : standarNavLink}>
+                            Crear
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/user/shipments/me" 
+                          className={isLinkActive('/user/shipments/me/all') ? standarNavLinkSelect : standarNavLink}>
+                            Mis fletes
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/user/shipments/actives" 
+                          className={isLinkActive('/user/shipments/actives') ? standarNavLinkSelect : standarNavLink}>
+                            Activos
+                        </Link>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
+                <li><Link href="/user/help" className={isLinkActive('/user/help') ? standarNavLinkSelect : standarNavLink}>Ayuda</Link></li>
               </>
             )}
           </ul>
