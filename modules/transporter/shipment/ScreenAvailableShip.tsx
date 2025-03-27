@@ -58,17 +58,17 @@ export default function ShipmentsPage() {
                     <h1 className="text-3xl font-bold text-gray-800 mb-6">Fletes Disponibles</h1>
                     {shipments.map((shipment) => (
                         <ShipmentCard
-                            key={shipment._id} // Usar un ID único en lugar del índice
-                            title={shipment.title}
-                            imageUrl={shipment.imageUrl}
+                            key={shipment.shipment._id} // Usar un ID único en lugar del índice
+                            title={shipment.shipment.title}
+                            imageUrl={shipment.shipment.imageUrl}
                             distance= {5}
-                            totalCharge={shipment.cost}
+                            totalCharge={shipment.shipment.cost}
                             totalDistance= {5}
-                            profit={shipment.cost}
-                            dimensions={shipment.dimensions}
-                            weight={shipment.weight}
+                            profit={shipment.shipment.cost}
+                            dimensions={shipment.shipment.dimensions}
+                            weight={shipment.shipment.weight}
                             onOpenMap={handleOpenMap}
-                            onViewDetails={() => handleViewDetails(shipment._id)}
+                            onViewDetails={() => handleViewDetails(shipment.shipment._id)}
                             onAccept={handleAccept}
                         />
                     ))}

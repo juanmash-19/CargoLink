@@ -44,7 +44,7 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="flex-1 bg-gray-100 p-6">
+    <div className="flex-1 bg-gray-100 p-6 mt-3">
       <h1 className="text-3xl font-bold text-gray-900">Administrador</h1>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cardsData.map((card, index) => (

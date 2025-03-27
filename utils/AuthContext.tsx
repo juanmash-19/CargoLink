@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode'; // Añadir esta librería
 import Cookies from 'js-cookie';
 import { createTokenCookie } from './CreateCookieServer';
+import { refreshToken } from "@/libs/auth/api-login";
 
 interface AuthContextType {
   userRole: string | null;
@@ -15,6 +16,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [tokenExpirationTimeout, setTokenExpirationTimeout] = useState<NodeJS.Timeout | null>(null);
 
   // Función para decodificar el token y obtener el rol
   const getRoleFromToken = (token: string): string | null => {
@@ -34,14 +36,41 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const scheduleTokenRenewal = (token: string) => {
+    const decoded: { exp?: number } = jwtDecode(token);
+    if (decoded.exp) {
+      const expirationTime = decoded.exp * 1000;
+      const timeUntilRenewal = expirationTime - Date.now() - 5 * 60 * 1000; // 5 minutos antes
+
+      if (timeUntilRenewal > 0) {
+        const timeout = setTimeout(async () => {
+          try {
+            const { token: newToken } = await refreshToken();
+            login(newToken);
+          } catch (error) {
+            console.error('Error renovando token:', error);
+            logout();
+          }
+        }, timeUntilRenewal);
+
+        setTokenExpirationTimeout(timeout);
+      }
+    }
+  };
+
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
       const role = getRoleFromToken(token);
       setUserRole(role);
+      scheduleTokenRenewal(token);
     } else {
       setUserRole(null);
     }
+
+    return () => {
+      if (tokenExpirationTimeout) clearTimeout(tokenExpirationTimeout);
+    };
   }, []);
 
   const login = (token: string) => {
@@ -53,11 +82,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     createTokenCookie(token);
     const role = getRoleFromToken(token);
     setUserRole(role);
+    scheduleTokenRenewal(token);
   };
 
   const logout = () => {
     Cookies.remove('token');
     setUserRole(null);
+    if (tokenExpirationTimeout) clearTimeout(tokenExpirationTimeout);
   };
 
   return (

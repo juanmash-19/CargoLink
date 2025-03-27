@@ -34,10 +34,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased  font-sans h-full bg-slate-100 `}
       >
         <AuthProvider>
-          <header className="h-[12vh]">
+          <header className="h-[7vh]">
             <Header />
           </header>
-          <main className="h-[88vh]">
+          <main className="h-[93vh] mt-11">
             {children}
             <Footer/>
           </main>

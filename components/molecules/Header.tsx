@@ -38,10 +38,10 @@ export default function Header() {
 
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse my-3">
           <CargoLinkLogo />
         </Link>
 
@@ -85,7 +85,7 @@ export default function Header() {
           ) : (
             <div className="flex flex-row">
               <CustomButton text='Registrarse' variant='secondary' type='button' onClick={registerClick} />
-              <Link className={`${standarTextLink} my-auto text-sm text-primary-300`} href="/login">Iniciar Sesión</Link>
+              <Link className={`${isLinkActive('/login', true) ? standarNavLinkSelect : standarNavLink} my-auto text-sm text-white ml-4`} href="/login">Iniciar Sesión</Link>
             </div>
           )}
 
@@ -121,8 +121,8 @@ export default function Header() {
             {/*Seccion para usuarios logueados*/}
             {userRole === 'admin' && (
               <>
-                <li><Link href="/repartidor" className={isLinkActive('/repartidor') ? standarNavLinkSelect : standarNavLink}>Repartidores</Link></li>
-                <li><Link href="/user" className={isLinkActive('/user') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
+                <li><Link href="/admin" className={isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink}>Administrador</Link></li>
+                <li><Link href="/admin/users" className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
                 <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
               </>
             )}

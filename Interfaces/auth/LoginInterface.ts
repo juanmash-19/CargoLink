@@ -5,5 +5,5 @@ export interface LoginDTO {
 
 export interface LoginDAO {
     message: string,
-    token: string
+    token: string,
 }

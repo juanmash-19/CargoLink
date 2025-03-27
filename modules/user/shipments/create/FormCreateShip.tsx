@@ -8,7 +8,6 @@ import { useLoadingStore } from "@/store/LoadingSpinner";
 import { createShipment, uploadImageToCloudinary } from "@/libs/ServiceShipment/api-shipment";
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
-import { envVariables } from "@/utils/config";
 
 export default function FormCreateShip() {
 
@@ -69,9 +68,9 @@ export default function FormCreateShip() {
             startLoading();
             const response = await createShipment(data);
 
-            if (response._id) {
+            if (response.shipment._id) {
                 alert(response.message);
-                router.replace(`/user/shipments/me/${response._id}`);
+                router.replace(`/user/shipments/me/${response.shipment._id}`);
             }
         } catch (error) {
             console.error('Error al crear el flete:', error);

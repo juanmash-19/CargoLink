@@ -1,13 +1,15 @@
 // import { link } from "fs";
 
+import { standarPrimaryButton, standarSecondaryButton, standarDangerButton, standarGhostButton, standarGreenButton } from "@/utils/Tokens";
+
 interface CustomButtonProps {
   text: string;
   variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'green';
   type?: 'button' | 'submit';
   onClick?: () => void;
   disabled?: boolean;
-  // href?: string;
-  // typeButton?: Boolean;
+  extraAttributes?: { [key: string]: string };
+  tooltipText?: string;
 }
 
 export default function CustomButton({
@@ -16,15 +18,15 @@ export default function CustomButton({
   type = 'button',
   onClick,
   disabled = false,
-  // href = '',
-  // typeButton = false,
+  extraAttributes = {},
+  tooltipText,
 }: CustomButtonProps) {
   const variantStyles = {
-    primary: 'bg-primary-200 border-primary-200 text-white hover:bg-transparent hover:text-primary-200',
-    secondary: 'bg-secondary-200 border-secondary-200 text-white hover:bg-transparent hover:text-secondary-200',
-    danger: 'bg-red-500 border-red-500 text-white hover:bg-transparent hover:text-red-500',
-    ghost: 'bg-transparent border-white text-white hover:bg-white/10',
-    green: 'bg-green-800 border-green-800 text-white hover:bg-transparent hover:text-green-800'
+    primary: standarPrimaryButton,
+    secondary: standarSecondaryButton,
+    danger: standarDangerButton,
+    ghost: standarGhostButton,
+    green: standarGreenButton
   };
 
   // const buttonType = typeButton ? 'submit' : 'button';
@@ -48,20 +50,27 @@ export default function CustomButton({
 
   return (
 
-    // typeButton?
-    <button
-      className={`
-        ${variantStyles[variant]}
-        block w-full p-3 text-center rounded-lg
-        border transition-colors duration-300
-        disabled:opacity-50 disabled:cursor-not-allowed
-      `}
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={text}
-    >
-      {text}
-    </button>
+    <div className="relative group">
+      <button
+        className={`
+          ${variantStyles[variant]}
+          block w-full p-3 text-center rounded-lg
+          border transition-colors duration-300
+          disabled:opacity-50 disabled:cursor-not-allowed
+        `}
+        type={type}
+        onClick={onClick}
+        disabled={disabled}
+        aria-label={text}
+        {...extraAttributes}
+      >
+        {text}
+      </button>
+      {tooltipText && ( // Solo renderiza el tooltip si hay texto
+          <div className="absolute bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-2 py-1 rounded">
+              {tooltipText}
+          </div>
+      )}
+    </div>
   );
 }

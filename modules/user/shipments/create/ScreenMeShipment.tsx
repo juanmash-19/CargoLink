@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export default function ShipmentDetailPage(){
     const params = useParams();
     const idShipment = params.shipment;
-    const [shipment, setShipment] = useState<ShipmentDAO | null>(null);
+    const [shipment, setShipment] = useState<ShipmentDAO['shipment'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
 
@@ -23,8 +23,8 @@ export default function ShipmentDetailPage(){
                 startLoading(); // Activa el spinner de carga
                 const response = await getShipment(idShipment as string);
 
-                if (response._id) {
-                    setShipment(response); // Actualiza el estado con los datos del envío
+                if (response.shipment._id) {
+                    setShipment(response.shipment); // Actualiza el estado con los datos del envío
                 } else {
                     console.error('No se encontró el envío');
                     alert('No se encontró el envío');
