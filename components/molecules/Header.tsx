@@ -25,7 +25,7 @@ export default function Header() {
   const registerClick = () => router.push('/register');
   const isLinkActive = (href: string) => pathname?.startsWith(href);
 
-  console.log("User Role:", userRole); // Verificar el rol en consola
+  console.log("User Role:", userRole); 
 
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
