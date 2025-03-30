@@ -104,6 +104,13 @@ export const setActivatedShipment = async (id: string): Promise<ShipmentDAO> => 
     return await updateShipment(body, id);
 }
 
+export const setCancelledShipment = async (id: string): Promise<ShipmentDAO> => {
+    const body: ShipmentDTO = {
+        status: "cancelled",
+    };
+    return await updateShipment(body, id);
+}
+
 export const uploadImageToCloudinary = async (selectedImage: File): Promise<string> => {
     const token = Cookies.get('token');
     if(token){   

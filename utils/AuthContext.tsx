@@ -7,32 +7,42 @@ import { refreshToken } from "@/libs/auth/api-login";
 
 interface AuthContextType {
   userRole: string | null;
+  userEmail: string | null; // Cambiado a userEmail
+  userName: string | null; // Cambiado a userName
+  userLastname: string | null; // Cambiado a userLastname
   login: (token: string) => void;
   logout: () => void;
-  // Eliminar refreshUserRole (no es necesario)
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null); // Cambiado a userEmail
+  const [userName, setUserName] = useState<string | null>(null); // Cambiado a userName
+  const [userLastname, setUserLastname] = useState<string | null>(null); // Cambiado a userLastname
   const [tokenExpirationTimeout, setTokenExpirationTimeout] = useState<NodeJS.Timeout | null>(null);
 
   // Función para decodificar el token y obtener el rol
-  const getRoleFromToken = (token: string): string | null => {
+  const getInfoFromToken = (token: string): { role: string | null; userEmail: string | null; userName: string | null; userLastname: string | null } => {
     try {
-      const decoded: { role?: string; exp?: number } = jwtDecode(token);
-      
+      const decoded: { role?: string; email?: string; name?: string; lastname?: string; exp?: number } = jwtDecode(token);
+      console.log('Decoded token:', decoded); // Para depuración
       // Verificar expiración
       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
         logout();
-        return null;
+        return { role: null, userEmail: null, userName: null, userLastname: null };
       }
-      
-      return decoded.role || null;
+
+      return {
+        role: decoded.role || null,
+        userEmail: decoded.email || null,
+        userName: decoded.name || null,
+        userLastname: decoded.lastname || null,
+      };
     } catch (error) {
       console.error('Error decodificando token:', error);
-      return null;
+      return { role: null, userEmail: null, userName: null, userLastname: null };
     }
   };
 
@@ -61,11 +71,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
-      const role = getRoleFromToken(token);
+      const { role, userEmail, userName, userLastname } = getInfoFromToken(token);
       setUserRole(role);
+      setUserEmail(userEmail);
+      setUserName(userName);
+      setUserLastname(userLastname);
       scheduleTokenRenewal(token);
     } else {
       setUserRole(null);
+      setUserEmail(null);
+      setUserName(null);
+      setUserLastname(null);
     }
 
     return () => {
@@ -80,19 +96,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       sameSite: 'Strict' // Mejorar seguridad
     });
     createTokenCookie(token);
-    const role = getRoleFromToken(token);
+    const { role, userEmail, userName, userLastname } = getInfoFromToken(token);
     setUserRole(role);
+    setUserEmail(userEmail);
+    setUserName(userName);
+    setUserLastname(userLastname);
     scheduleTokenRenewal(token);
   };
 
   const logout = () => {
     Cookies.remove('token');
     setUserRole(null);
+    setUserEmail(null);
+    setUserName(null);
+    setUserLastname(null);
     if (tokenExpirationTimeout) clearTimeout(tokenExpirationTimeout);
   };
 
   return (
-    <AuthContext.Provider value={{ userRole, login, logout }}>
+    <AuthContext.Provider value={{ userRole, userEmail, userName, userLastname, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

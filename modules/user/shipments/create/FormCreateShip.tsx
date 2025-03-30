@@ -7,34 +7,109 @@ import { ShipmentDTO } from "@/Interfaces/shipment/ShipmentInterface";
 import { useLoadingStore } from "@/store/LoadingSpinner";
 import { createShipment, uploadImageToCloudinary } from "@/libs/ServiceShipment/api-shipment";
 import { useRouter } from "next/navigation";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { fetchDepartments, fetchCities } from "@/libs/ColombiaAPI";
+import { DepartmentDAO, CityDAO } from "@/Interfaces/apis/ColombiaAPIInterface";
 
 export default function FormCreateShip() {
-
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const [isImageUploaded, setIsImageUploaded] = useState(false);
     const [imageUrl, setImageUrl] = useState<string | null>(null);
 
+    const [pickupDepartments, setPickupDepartments] = useState<DepartmentDAO[]>([]);
+    const [pickupCities, setPickupCities] = useState<CityDAO[]>([]);
+    const [pickupDepartment, setPickupDepartment] = useState<{ id: string; name: string } | null>(null);
+    const [pickupCity, setPickupCity] = useState("");
+
+    const [deliveryDepartments, setDeliveryDepartments] = useState<DepartmentDAO[]>([]);
+    const [deliveryCities, setDeliveryCities] = useState<CityDAO[]>([]);
+    const [deliveryDepartment, setDeliveryDepartment] = useState<{ id: string; name: string } | null>(null);
+    const [deliveryCity, setDeliveryCity] = useState("");
+
     const { 
         register, 
         handleSubmit, 
-        watch,
-        setValue,
-        formState: { errors } } 
-        = useForm<ShipmentDTO>({
+        setValue, 
+        watch, 
+        formState: { errors } 
+    } = useForm<ShipmentDTO>();
 
-        });
-
-    
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-            if (file) {
-                setSelectedImage(file);
-                setIsImageUploaded(false); // Reinicia el estado al seleccionar una nueva imagen
+    useEffect(() => {
+        const loadDepartments = async () => {
+            try {
+                const data = await fetchDepartments();
+                setPickupDepartments(data || []);
+                setDeliveryDepartments(data || []);
+            } catch (error) {
+                console.error("Error al cargar departamentos:", error);
             }
         };
+        loadDepartments();
+    }, []);
+
+    useEffect(() => {
+        const loadPickupCities = async () => {
+            if (pickupDepartment) {
+                try {
+                    const data = await fetchCities(pickupDepartment.id);
+                    setPickupCities(data || []);
+                } catch (error) {
+                    console.error("Error al cargar ciudades de recogida:", error);
+                }
+            } else {
+                setPickupCities([]);
+            }
+        };
+        loadPickupCities();
+    }, [pickupDepartment]);
+
+    useEffect(() => {
+        const loadDeliveryCities = async () => {
+            if (deliveryDepartment) {
+                try {
+                    const data = await fetchCities(deliveryDepartment.id);
+                    setDeliveryCities(data || []);
+                } catch (error) {
+                    console.error("Error al cargar ciudades de destino:", error);
+                }
+            } else {
+                setDeliveryCities([]);
+            }
+        };
+        loadDeliveryCities();
+    }, [deliveryDepartment]);
+
+    const handlePickupDepartmentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedId = event.target.value;
+        const selectedName = pickupDepartments.find((dept) => dept.id === selectedId)?.name || "";
+        setPickupDepartment({ id: selectedId, name: selectedName });
+        setPickupCity("");
+    };
+
+    const handlePickupCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setPickupCity(event.target.value);
+    };
+
+    const handleDeliveryDepartmentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const selectedId = event.target.value;
+        const selectedName = deliveryDepartments.find((dept) => dept.id === selectedId)?.name || "";
+        setDeliveryDepartment({ id: selectedId, name: selectedName });
+        setDeliveryCity("");
+    };
+
+    const handleDeliveryCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setDeliveryCity(event.target.value);
+    };
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedImage(file);
+            setIsImageUploaded(false);
+        }
+    };
 
     const handleUploadImage = async () => {
         if (!selectedImage) {
@@ -45,9 +120,9 @@ export default function FormCreateShip() {
         try {
             startLoading();
             const uploadedImageUrl = await uploadImageToCloudinary(selectedImage);
-            setImageUrl(uploadedImageUrl); // Almacena la URL de la imagen
-            setValue('imageUrl', uploadedImageUrl); // Actualiza el valor en el formulario
-            setIsImageUploaded(true); // Marca la imagen como cargada
+            setImageUrl(uploadedImageUrl);
+            setValue('imageUrl', uploadedImageUrl);
+            setIsImageUploaded(true);
             alert('Imagen cargada correctamente.');
         } catch (error) {
             console.error('Error al cargar la imagen:', error);
@@ -57,12 +132,28 @@ export default function FormCreateShip() {
         }
     };
 
-    
     const onSubmit: SubmitHandler<ShipmentDTO> = async (data) => {
         if (!isImageUploaded) {
             alert('Por favor, carga la imagen primero.');
             return;
         }
+
+        if (!pickupDepartment || !pickupCity || !deliveryDepartment || !deliveryCity) {
+            alert('Por favor, selecciona departamento y ciudad para recogida y destino.');
+            return;
+        }
+
+        // Convertir valores numéricos a números explícitamente
+        data.weight = parseFloat(data.weight as unknown as string);
+        data.dimensions = {
+            height: parseFloat(data.dimensions?.height as unknown as string),
+            width: parseFloat(data.dimensions?.width as unknown as string),
+            length: parseFloat(data.dimensions?.length as unknown as string),
+        };
+
+        // Concatenar dirección final para recogida y destino usando el nombre del departamento
+        data.pickupAddress = `${pickupDepartment.name}, ${pickupCity}, ${data.pickupAddress}`;
+        data.deliveryAddress = `${deliveryDepartment.name}, ${deliveryCity}, ${data.deliveryAddress}`;
 
         try {
             startLoading();
@@ -80,21 +171,95 @@ export default function FormCreateShip() {
         }
     };
 
-    return(
+    return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Campo de título */}
             <div>
                 <label htmlFor="title" className="block text-lg font-medium">Titulo</label>
                 <div>
                     <input
-                    {...register("title")}
-                    className={`${standarInput} focus:outline-primary-400`}
-                    placeholder="titulo..."
-                    type="text"
-                    id="title"
+                        {...register("title")}
+                        className={`${standarInput} focus:outline-primary-400`}
+                        placeholder="titulo..."
+                        type="text"
+                        id="title"
                     />
                 </div>
             </div>
 
+            {/* Selectores de departamento y ciudad para recogida */}
+            <div>
+                <label htmlFor="pickupDepartment" className="block text-lg font-medium">Departamento de recogida</label>
+                <select
+                    id="pickupDepartment"
+                    value={pickupDepartment?.id || ""}
+                    onChange={handlePickupDepartmentChange}
+                    className={`${standarInput} focus:outline-primary-400`}
+                >
+                    <option value="">Seleccione un departamento</option>
+                    {pickupDepartments.map((dept) => (
+                        <option key={dept.id} value={dept.id}>
+                            {dept.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div>
+                <label htmlFor="pickupCity" className="block text-lg font-medium">Ciudad de recogida</label>
+                <select
+                    id="pickupCity"
+                    value={pickupCity}
+                    onChange={handlePickupCityChange}
+                    className={`${standarInput} focus:outline-primary-400`}
+                    disabled={!pickupDepartment}
+                >
+                    <option value="">Seleccione una ciudad</option>
+                    {pickupCities.map((city) => (
+                        <option key={city.id} value={city.name}>
+                            {city.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Selectores de departamento y ciudad para destino */}
+            <div>
+                <label htmlFor="deliveryDepartment" className="block text-lg font-medium">Departamento de destino</label>
+                <select
+                    id="deliveryDepartment"
+                    value={deliveryDepartment?.id || ""}
+                    onChange={handleDeliveryDepartmentChange}
+                    className={`${standarInput} focus:outline-primary-400`}
+                >
+                    <option value="">Seleccione un departamento</option>
+                    {deliveryDepartments.map((dept) => (
+                        <option key={dept.id} value={dept.id}>
+                            {dept.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            <div>
+                <label htmlFor="deliveryCity" className="block text-lg font-medium">Ciudad de destino</label>
+                <select
+                    id="deliveryCity"
+                    value={deliveryCity}
+                    onChange={handleDeliveryCityChange}
+                    className={`${standarInput} focus:outline-primary-400`}
+                    disabled={!deliveryDepartment}
+                >
+                    <option value="">Seleccione una ciudad</option>
+                    {deliveryCities.map((city) => (
+                        <option key={city.id} value={city.name}>
+                            {city.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Campos de dirección */}
             <div>
                 <label htmlFor="address" className="block text-lg font-medium">Direcciones</label>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -122,47 +287,54 @@ export default function FormCreateShip() {
                 </div>
             </div>
 
-
             <div>
                 <label htmlFor="address" className="block text-lg font-medium">Dimensiones</label>
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-4'>
                     <div>
                         <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Peso (kg)</label>
                         <QuantityInput
-                            id='weight'
-                            name='weight'
-                            register={register}
-                        
+                            id="weight"
+                            name="weight"
+                            setValue={setValue}
+                            watch={watch}
+                            min={1}
+                            step={1}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="height" className="block text-sm font-medium text-gray-700">Alto (cm)</label>
                         <QuantityInput
-                            id='height'
-                            name='dimensions.height'
-                            register={register}
-                        
+                            id="height"
+                            name="dimensions.height"
+                            setValue={setValue}
+                            watch={watch}
+                            min={1}
+                            step={1}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="width" className="block text-sm font-medium text-gray-700">Ancho (cm)</label>
                         <QuantityInput
-                            id='width'
-                            name='dimensions.width'
-                            register={register}
-                        
+                            id="width"
+                            name="dimensions.width"
+                            setValue={setValue}
+                            watch={watch}
+                            min={1}
+                            step={1}
                         />
                     </div>
 
                     <div>
                         <label htmlFor="length" className="block text-sm font-medium text-gray-700">Largo (cm)</label>
                         <QuantityInput
-                            id='length'
-                            name='dimensions.length'
-                            register={register}
-
+                            id="length"
+                            name="dimensions.length"
+                            setValue={setValue}
+                            watch={watch}
+                            min={1}
+                            step={1}
                         />
                     </div>
                 </div>

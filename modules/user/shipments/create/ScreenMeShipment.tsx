@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { ShipmentDAO } from "@/Interfaces/shipment/ShipmentInterface";
 import { useEffect, useState } from 'react';
 import { useLoadingStore } from "@/store/LoadingSpinner";
-import { getShipment, setActivatedShipment } from "@/libs/ServiceShipment/api-shipment";
+import { getShipment, setActivatedShipment, setCancelledShipment } from "@/libs/ServiceShipment/api-shipment";
 import CustomButton from "@/components/atoms/CustomButton";
 import BasicTextCardProps from "@/components/atoms/BasicTextCard";
 import { useRouter } from "next/navigation";
@@ -61,12 +61,39 @@ export default function ShipmentDetailPage(){
         }
     }
 
+    const cancelledClick = async () => {
+        try{
+            startLoading();
+            const response = await setCancelledShipment(idShipment as string);
+            if (response.message){
+                alert("¡Flete cancelado!")
+                router.push('/')
+            }
+        }
+        catch (error) {
+            console.error('Error al actualizar el estado del envío:', error);
+            alert('Error al actualizar el estado el envío');
+        }
+        finally{
+            stopLoading();
+        }
+    }
+
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
             <h1 className="text-3xl font-bold text-primary-300">Detalles del Flete</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Columna 1: Información básica */}
                 <div className="space-y-4">
+                    {shipment.imageUrl && (
+                        <div className="flex justify-center">
+                            <img
+                                src={shipment.imageUrl}
+                                alt="Imagen del Flete"
+                                className="max-w-full h-auto rounded-lg shadow-md"
+                            />
+                        </div>
+                    )}
                     <BasicTextCardProps
                         title="Información General"
                         subtitles={[
@@ -76,6 +103,9 @@ export default function ShipmentDetailPage(){
                             { label: "Estado", content: shipment.status },
                         ]}
                     />
+                </div>
+    
+                <div className="space-y-4">
 
                     <BasicTextCardProps
                         title="Direcciones"
@@ -84,9 +114,6 @@ export default function ShipmentDetailPage(){
                             { label: "Entrega", content: shipment.deliveryAddress },
                         ]}
                     />
-                </div>
-    
-                <div className="space-y-4">
                     
                     {shipment.status === 'pending' ? (
                         <BasicTextCardProps
@@ -133,6 +160,26 @@ export default function ShipmentDetailPage(){
                             />
                         </div>
                     )}
+
+                    
+
+                    {shipment.status === 'activated' && (
+                        <div>
+                            <BasicTextCardProps
+                                title="Cancelar el flete"
+                                subtitles={[
+                                    { label: "Requisitos", content: `Puedes cancelar el flete automaticamente mientras ningun repartidor lo haya aceptado.` },
+                                ]}
+                            />
+                            <CustomButton
+                                text="Cancelar"
+                                variant="danger"
+                                onClick={cancelledClick}
+                            />
+                        </div>
+                    )}
+
+                    
 
                 </div>
             </div>

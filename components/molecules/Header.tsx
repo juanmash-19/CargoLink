@@ -11,7 +11,7 @@ import CargoLinkLogo from "@/components/atoms/Logo";
 import { ArrowDown } from "../atoms/ReactIcons";
 
 export default function Header() {
-  const { userRole, logout } = useAuth();
+  const { userRole, userEmail, userName, userLastname, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isShipmentMenuOpen, setIsShipmentMenuOpen] = useState(false);
@@ -35,6 +35,9 @@ export default function Header() {
   };
 
   console.log("User Role:", userRole); // Verificar el rol en consola
+  console.log("User Email:", userEmail); // Verificar el email en consola
+  console.log("User Name:", userName); // Verificar el nombre en consola
+  console.log("User Lastname:", userLastname); // Verificar el apellido en consola
 
   return (
     <nav className="bg-primary-100 w-full z-20 top-0 start-0 border-b fixed">
@@ -69,10 +72,10 @@ export default function Header() {
               {/* Menú de usuario */}
               <div className={`absolute right-0 z-50 bg-white rounded-lg shadow-sm divide-gray-100 ${isUserMenuOpen ? 'block' : 'hidden'}`}>
                 <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900 ">Bonnie Green</span>
-                  <span className="block text-sm text-gray-500 truncate">name@flowbite.com</span>
+                  <span className="block text-sm text-gray-900 ">{userName} {userLastname}</span>
+                  <span className="block text-sm text-gray-500 truncate">{userEmail}</span>
                 </div>
-                <ul className="py-2 text-gray-500">
+                <ul className="pt-2 text-gray-500">
                   <li><Link href="/user/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Perfil</Link></li>
                   <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Ajustes</Link></li>
                   <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Información</Link></li>
