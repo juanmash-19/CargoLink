@@ -75,7 +75,7 @@ export const updateShipment = async (body: ShipmentDTO, id: string): Promise<Shi
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json"
-                },
+                },  
                 body: JSON.stringify(body),
             });
 
@@ -165,3 +165,32 @@ export const getAvailableShipments = async (): Promise<ShipmentsDAO> => {
         throw new Error("No se encontró un token. Por favor, inicia sesión.");
     } 
 }
+
+export const getUserShipments = async (): Promise<ShipmentsDAO> => {
+    const token = Cookies.get('token');
+    if (token) {
+        try {
+            const response = await fetch(`${envVariables.API_URL}/shipments/me`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error al obtener los envíos:", errorData);
+                throw new Error(errorData.message || "Error al obtener los envíos del usuario");
+            }
+
+            return await response.json() as ShipmentsDAO;
+        } catch (error) {
+            console.error("Error en la conexión:", error);
+            throw new Error("No se pudieron cargar los envíos. Por favor, inténtalo de nuevo.");
+        }
+    } else {
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+};
+
