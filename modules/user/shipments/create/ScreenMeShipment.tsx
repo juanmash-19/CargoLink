@@ -86,13 +86,16 @@ export default function ShipmentDetailPage(){
                 {/* Columna 1: Información básica */}
                 <div className="space-y-4">
                     {shipment.imageUrl && (
-                        <div className="flex justify-center">
-                            <img
-                                src={shipment.imageUrl}
-                                alt="Imagen del Flete"
-                                className="max-w-full h-auto rounded-lg shadow-md"
-                            />
-                        </div>
+                        <>
+                            <h2 className="text-lg font-semibold text-gray-600">Imagen del Flete</h2>
+                            <div className="flex justify-center">
+                                <img
+                                    src={shipment.imageUrl}
+                                    alt="Imagen del Flete"
+                                    className="max-w-full h-auto rounded-lg shadow-md"
+                                />
+                            </div>
+                        </>
                     )}
                     <BasicTextCardProps
                         title="Información General"

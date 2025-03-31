@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode'; // Añadir esta librería
 import Cookies from 'js-cookie';
 import { createTokenCookie } from './CreateCookieServer';
 import { refreshToken } from "@/libs/auth/api-login";
+import { useRouter } from 'next/navigation'; // Importar router para redirección
 
 interface AuthContextType {
   userRole: string | null;
@@ -22,6 +23,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userName, setUserName] = useState<string | null>(null); // Cambiado a userName
   const [userLastname, setUserLastname] = useState<string | null>(null); // Cambiado a userLastname
   const [tokenExpirationTimeout, setTokenExpirationTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  const router = useRouter();
 
   // Función para decodificar el token y obtener el rol
   const getInfoFromToken = (token: string): { role: string | null; userEmail: string | null; userName: string | null; userLastname: string | null } => {
@@ -102,6 +105,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserName(userName);
     setUserLastname(userLastname);
     scheduleTokenRenewal(token);
+    if(role === 'admin'){
+      router.push('/admin');
+    }else if(role === 'transporter'){
+      router.push('/');
+    }
+    else if(role === 'user'){
+      router.push('/');
+    }
   };
 
   const logout = () => {

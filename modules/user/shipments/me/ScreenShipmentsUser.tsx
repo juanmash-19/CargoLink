@@ -5,12 +5,9 @@ import { useLoadingStore } from '@/store/LoadingSpinner';
 import { getUserShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode';
 
 export default function UserShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
-    const [currentUserId, setCurrentUserId] = useState<string | null>(null)
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
 
@@ -18,16 +15,7 @@ export default function UserShipmentsPage() {
         const fetchUserShipments = async () => {
             try {
                 startLoading();
-                
-                const token = Cookies.get('token');
-                if (!token) {
-                    router.push('/login');
-                    return;
-                }
 
-                // Usamos el tipado automático de jwtDecode
-                const decoded = jwtDecode<{ clientId: string }>(token);
-                setCurrentUserId(decoded.clientId);
                 const response = await getUserShipments();
 
                 setShipments(response.shipments || []);
@@ -71,17 +59,17 @@ export default function UserShipmentsPage() {
                 <div className="space-y-4">
                     {shipments.map(shipment => (
                         <ShipmentCard
-                            key={shipment._id} // Usar un ID único en lugar del índice
-                            title={shipment.title}
-                            imageUrl={shipment.imageUrl}
+                            key={shipment.shipment._id} // Usar un ID único en lugar del índice
+                            title={shipment.shipment.title}
+                            imageUrl={shipment.shipment.imageUrl}
                             distance= {5}
-                            totalCharge={shipment.cost}
+                            totalCharge={shipment.shipment.cost}
                             totalDistance= {5}
-                            profit={shipment.cost}
-                            dimensions={shipment.dimensions}
-                            weight={shipment.weight}
+                            profit={shipment.shipment.cost}
+                            dimensions={shipment.shipment.dimensions}
+                            weight={shipment.shipment.weight}
                             onOpenMap={handleOpenMap}
-                            onViewDetails={() => handleViewDetails(shipment._id)}
+                            onViewDetails={() => handleViewDetails(shipment.shipment._id)}
                             onAccept={handleAccept}
                         />
                     ))}

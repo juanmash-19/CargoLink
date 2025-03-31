@@ -188,102 +188,116 @@ export default function FormCreateShip() {
             </div>
 
             {/* Selectores de departamento y ciudad para recogida */}
-            <div>
-                <label htmlFor="pickupDepartment" className="block text-lg font-medium">Departamento de recogida</label>
-                <select
-                    id="pickupDepartment"
-                    value={pickupDepartment?.id || ""}
-                    onChange={handlePickupDepartmentChange}
-                    className={`${standarInput} focus:outline-primary-400`}
-                >
-                    <option value="">Seleccione un departamento</option>
-                    {pickupDepartments.map((dept) => (
-                        <option key={dept.id} value={dept.id}>
-                            {dept.name}
-                        </option>
-                    ))}
-                </select>
+            <div className="space-y-4">
+                <label htmlFor="pickupLocation" className="block text-lg font-medium">Lugar de recogida</label>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                        <label htmlFor="pickupDepartment" className="block text-sm font-medium text-gray-700">Departamento</label>
+                        <select
+                            id="pickupDepartment"
+                            value={pickupDepartment?.id || ""}
+                            onChange={handlePickupDepartmentChange}
+                            className={`${standarInput} focus:outline-primary-400`}
+                        >
+                            <option value="">Seleccione un departamento</option>
+                            {pickupDepartments.map((dept) => (
+                                <option key={dept.id} value={dept.id}>
+                                    {dept.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="pickupCity" className="block text-sm font-medium text-gray-700">Ciudad</label>
+                        <select
+                            id="pickupCity"
+                            value={pickupCity}
+                            onChange={handlePickupCityChange}
+                            className={`${standarInput} focus:outline-primary-400`}
+                            disabled={!pickupDepartment}
+                        >
+                            <option value="">Seleccione una ciudad</option>
+                            {pickupCities.map((city) => (
+                                <option key={city.id} value={city.name}>
+                                    {city.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label htmlFor="pickupAddress" className="block text-sm font-medium text-gray-700">Direccion</label>
+                    <input
+                        {...register("pickupAddress")}
+                        className={`${standarInput} focus:outline-primary-400`}
+                        placeholder="Direccion de recogida..."
+                        type="text"
+                        id="pickupAddress"
+                    />
+                </div>
             </div>
 
-            <div>
-                <label htmlFor="pickupCity" className="block text-lg font-medium">Ciudad de recogida</label>
-                <select
-                    id="pickupCity"
-                    value={pickupCity}
-                    onChange={handlePickupCityChange}
-                    className={`${standarInput} focus:outline-primary-400`}
-                    disabled={!pickupDepartment}
-                >
-                    <option value="">Seleccione una ciudad</option>
-                    {pickupCities.map((city) => (
-                        <option key={city.id} value={city.name}>
-                            {city.name}
-                        </option>
-                    ))}
-                </select>
+            
+            <div className="space-y-4">
+                <label htmlFor="deliveryLocation" className="block text-lg font-medium">Lugar de entrega</label>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                        <label htmlFor="deliveryDepartment" className="block text-sm font-medium text-gray-700">Departamento de destino</label>
+                        <select
+                            id="deliveryDepartment"
+                            value={deliveryDepartment?.id || ""}
+                            onChange={handleDeliveryDepartmentChange}
+                            className={`${standarInput} focus:outline-primary-400`}
+                        >
+                            <option value="">Seleccione un departamento</option>
+                            {deliveryDepartments.map((dept) => (
+                                <option key={dept.id} value={dept.id}>
+                                    {dept.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="deliveryCity" className="block text-sm font-medium text-gray-700">Ciudad de destino</label>
+                        <select
+                            id="deliveryCity"
+                            value={deliveryCity}
+                            onChange={handleDeliveryCityChange}
+                            className={`${standarInput} focus:outline-primary-400`}
+                            disabled={!deliveryDepartment}
+                        >
+                            <option value="">Seleccione una ciudad</option>
+                            {deliveryCities.map((city) => (
+                                <option key={city.id} value={city.name}>
+                                    {city.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label htmlFor="deliveryAddress" className="block text-sm font-medium text-gray-700">Direccion de entrega</label>
+                    <input
+                        {...register("deliveryAddress")}
+                        className={`${standarInput} focus:outline-primary-400`}
+                        placeholder="Direccion de entrega..."
+                        type="text"
+                        id="deliveryAddress"
+                    />
+                </div>
+
             </div>
 
             {/* Selectores de departamento y ciudad para destino */}
-            <div>
-                <label htmlFor="deliveryDepartment" className="block text-lg font-medium">Departamento de destino</label>
-                <select
-                    id="deliveryDepartment"
-                    value={deliveryDepartment?.id || ""}
-                    onChange={handleDeliveryDepartmentChange}
-                    className={`${standarInput} focus:outline-primary-400`}
-                >
-                    <option value="">Seleccione un departamento</option>
-                    {deliveryDepartments.map((dept) => (
-                        <option key={dept.id} value={dept.id}>
-                            {dept.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
 
-            <div>
-                <label htmlFor="deliveryCity" className="block text-lg font-medium">Ciudad de destino</label>
-                <select
-                    id="deliveryCity"
-                    value={deliveryCity}
-                    onChange={handleDeliveryCityChange}
-                    className={`${standarInput} focus:outline-primary-400`}
-                    disabled={!deliveryDepartment}
-                >
-                    <option value="">Seleccione una ciudad</option>
-                    {deliveryCities.map((city) => (
-                        <option key={city.id} value={city.name}>
-                            {city.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
 
             {/* Campos de dirección */}
             <div>
                 <label htmlFor="address" className="block text-lg font-medium">Direcciones</label>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                        <label htmlFor="pickupAddress" className="block text-sm font-medium text-gray-700">Direccion de recogida</label>
-                        <input
-                            {...register("pickupAddress")}
-                            className={`${standarInput} focus:outline-primary-400`}
-                            placeholder="Direccion de recogida..."
-                            type="text"
-                            id="pickupAddress"
-                        />
-                    </div>
 
-                    <div>
-                        <label htmlFor="deliveryAddress" className="block text-sm font-medium text-gray-700">Direccion de entrega</label>
-                        <input
-                            {...register("deliveryAddress")}
-                            className={`${standarInput} focus:outline-primary-400`}
-                            placeholder="Direccion de entrega..."
-                            type="text"
-                            id="deliveryAddress"
-                        />
-                    </div>
                 </div>
             </div>
 

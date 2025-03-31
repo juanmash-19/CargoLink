@@ -26,6 +26,7 @@ export default function Header() {
     setIsUserMenuOpen(false);
   };
   const registerClick = () => router.push('/register');
+
   const isLinkActive = (path: string, exact: boolean = false) => {
     if (exact) {
       return pathname === path; // Comparación exacta
@@ -124,8 +125,45 @@ export default function Header() {
             {/*Seccion para usuarios logueados*/}
             {userRole === 'admin' && (
               <>
-                <li><Link href="/admin" className={isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink}>Administrador</Link></li>
-                <li><Link href="/admin/users" className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>Usuarios</Link></li>
+                <li>
+                  <details className="group [&_summary::-webkit-details-marker]:hidden">
+                    <summary
+                      className={`${isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
+                    >
+                      <span> Administrador </span>
+
+                      <span className="transition-transform duration-300 group-open:-rotate-180">
+                        <ArrowDown />
+                      </span>
+                    </summary>
+
+                    <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg">
+                      <li>
+                        <Link 
+                          href="/admin" 
+                          className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>
+                            Principal
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/admin/users" 
+                          className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>
+                            Gestor usuarios
+                        </Link>
+                      </li>
+
+                      <li>
+                        <Link 
+                          href="/admin/shipments" 
+                          className={isLinkActive('/admin/shipments') ? standarNavLinkSelect : standarNavLink}>
+                            Gestor envios
+                        </Link>
+                      </li>
+                    </ul>
+                  </details>
+                </li>
                 <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
               </>
             )}

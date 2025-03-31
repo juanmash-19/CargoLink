@@ -32,20 +32,38 @@ export default function CustomAlert({
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <p className="text-lg mb-4 text-black">{message}</p>
+      <div
+        className={`p-6 rounded-lg shadow-lg bg-white text-black ${
+          type === 'success' ? 'bg-green-300 text-white' : ''
+        } ${
+          type === 'error' ? 'bg-red-300 text-white' : ''
+        }`}
+      >
+        <p className="text-lg mb-4">{message}</p>
         <div className="flex justify-end space-x-2">
           {/* Mostramos los children si existen */}
           {children}
           
           {/* Botón de cerrar para tipos success/error */}
-          {(type === 'success' || type === 'error') && !children && (
+          {(type === 'error') && !children && (
             <button
               onClick={() => {
                 setIsVisible(false);
                 onClose?.();
               }}
-              className="px-4 py-2 rounded bg-gray-500 text-white"
+              className="px-4 py-2 rounded bg-red-500 text-white"
+            >
+              Cerrar
+            </button>
+          )}
+
+          {(type === 'success') && !children && (
+            <button
+              onClick={() => {
+                setIsVisible(false);
+                onClose?.();
+              }}
+              className="px-4 py-2 rounded bg-green-500 text-white"
             >
               Cerrar
             </button>

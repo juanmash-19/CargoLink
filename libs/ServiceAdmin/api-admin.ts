@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 
 import { envVariables } from "@/utils/config"
 import { MessageDAO } from "@/Interfaces/GeneralInterfaces";
+import { GeneralStatsDAO } from "@/Interfaces/GeneralInterfaces";
 
 export const getUsers = async (): Promise<UsersDAO> => {
     const token = Cookies.get('token');
@@ -178,6 +179,33 @@ export const createUser = async (body: UserDTO): Promise<UserDAO> => {
         } catch(error){
             console.error("Error en la creacion", error);
             throw new Error("No se pudo completar la creación. Por favor, inténtalo de nuevo.");
+        }
+    } else{
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+}
+
+export const getGeneralStats = async (): Promise<GeneralStatsDAO> => {
+    const token = Cookies.get('token');
+    if(token){
+        try{
+            const response = await fetch(`${envVariables.API_URL}/admin/stats`,{
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if(!response.ok) {
+                const errorData = await response.json();
+                console.error("Este es el error:", errorData);
+            }
+
+            return await response.json() as GeneralStatsDAO;
+        } catch(error){
+            console.error("Error en la obtencion de estadisticas", error);
+            throw new Error("No se pudo obtener las estadisticas. Por favor, inténtalo de nuevo.");
         }
     } else{
         throw new Error("No se encontró un token. Por favor, inicia sesión.");

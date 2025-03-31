@@ -14,8 +14,6 @@ import { standarInput, standarTextLink, standarErrorInput } from '@/utils/Tokens
 
 import { RegisterDTO } from '@/Interfaces/auth/RegisterInterface';
 
-import { useRouter } from "next/navigation";
-
 import { registerUser } from '@/libs/auth/api-register';
 
 import { useAuth } from '@/utils/AuthContext';
@@ -23,8 +21,6 @@ import { useAuth } from '@/utils/AuthContext';
 import { useLoadingStore } from '@/store/LoadingSpinner';
 
 export default function FormRegister() {
-
-    const router = useRouter();
 
     const { login } = useAuth();
     
@@ -59,7 +55,6 @@ export default function FormRegister() {
 
             if(response.token){
                 login(response.token);
-                router.replace('/'); // Redirige al usuario
             }
 
         } catch (error) {
