@@ -9,6 +9,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { standarInput } from "@/utils/Tokens";
 import CustomButton from "@/components/atoms/CustomButton";
 import CustomAlert from "@/components/atoms/CustomAlert";
+import { UserEditScheme } from "@/Schemes/adminSchemes/userEditScheme";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ScreenAdminEditUser(){
 
@@ -28,7 +30,9 @@ export default function ScreenAdminEditUser(){
         register, 
         handleSubmit, 
         watch, formState: { errors } 
-        } = useForm<UserDTO>();
+        } = useForm<UserDTO>({
+            resolver : zodResolver(UserEditScheme)
+        });
 
 
     const handleBack = () =>{
@@ -134,11 +138,11 @@ export default function ScreenAdminEditUser(){
                         // name="first_name"
                         className={`${standarInput} focus:outline-primary-400`}
                         />
-                        {/* {errors.name &&
+                        {errors.name &&
                             <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
                                 <strong className="font-bold text-sm mr-4">{errors.name.message}</strong>
                             </div>
-                        } */}
+                        }
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
@@ -153,11 +157,11 @@ export default function ScreenAdminEditUser(){
                         // name="last_name"
                         className={`${standarInput} focus:outline-primary-400`}
                         />
-                        {/* {errors.lastname && 
+                        {errors.lastname && 
                             <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
                                 <strong className="font-bold text-sm mr-4">{errors.lastname.message}</strong>
                             </div>
-                        } */}
+                        }
                     </div>
 
                     <div className="col-span-6">
@@ -169,11 +173,11 @@ export default function ScreenAdminEditUser(){
                         {...register("phone")}
                         type="number"
                         className={`${standarInput} focus:outline-primary-400`} />
-                        {/* {errors.email && 
+                        {errors.email && 
                             <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
                                 <strong className="font-bold text-sm mr-4">{errors.email.message}</strong>
                             </div>
-                        } */}
+                        }
                     </div>
 
                     <div className="col-span-6">
@@ -205,11 +209,11 @@ export default function ScreenAdminEditUser(){
                         placeholder='******'
                         className={`${standarInput} focus:outline-primary-400`}
                         />
-                        {/* {errors.password && 
+                        {errors.password && 
                             <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
                                 <strong className="font-bold text-sm mr-4">{errors.password.message}</strong>
                             </div>
-                        } */}
+                        }
                     </div>
 
                     <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
