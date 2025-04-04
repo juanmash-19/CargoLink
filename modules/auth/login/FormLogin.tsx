@@ -14,11 +14,7 @@ import { standarInput, standarTextLink, standarErrorInput } from '@/utils/Tokens
 
 import { LoginDTO } from '@/Interfaces/auth/LoginInterface';
 
-import { useRouter } from "next/navigation";
-
 import { loginUser } from '@/libs/auth/api-login';
-
-import Cookies from 'js-cookie';
 
 import { useAuth } from '@/utils/AuthContext';
 
@@ -27,8 +23,6 @@ import { useLoadingStore } from '@/store/LoadingSpinner';
 export default function FormLogin() {
     
     const { startLoading, stopLoading } = useLoadingStore();
-
-    const router = useRouter();
 
     const { login } = useAuth();
 
@@ -54,7 +48,6 @@ export default function FormLogin() {
         
         if (response.token) {
           login(response.token); // AuthContext ya maneja el rol
-          router.replace('/');
         }
       } catch (error) {
         console.error('Login failed:', error);

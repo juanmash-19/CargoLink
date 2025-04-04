@@ -1,49 +1,75 @@
+import React, { useEffect, useState } from 'react';
+
 interface CustomAlertProps {
-    title: string;
-    message: string;
-    variant: 'success' | 'error';
-    onClose: () => void;
-  }
-  
-  export default function CustomAlert({
-    title,
-    message,
-    variant,
-    onClose,
-  }: CustomAlertProps) {
-    const alertVariantStyles = {
-      success: 'bg-green-100 border-green-400 text-green-800',
-      error: 'bg-red-100 border-red-400 text-red-800',
-    };
-  
-    return (
+  message: string;
+  type: 'success' | 'error' | 'options';
+  duration?: number;
+  onClose?: () => void;
+  children?: React.ReactNode;  // <- Nuevo prop para children
+}
+
+export default function CustomAlert({
+  message,
+  type,
+  duration = 5000,
+  onClose,
+  children,
+}: CustomAlertProps) {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (type === 'success' || type === 'error') {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+        if (onClose) onClose();
+      }, duration);
+
+      return () => clearTimeout(timer);
+    }
+  }, [type, duration, onClose]);
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50">
       <div
-        className={`${alertVariantStyles[variant]} border-l-4 p-4 rounded-lg relative`}
-        role="alert"
+        className={`p-6 rounded-lg shadow-lg bg-white text-black ${
+          type === 'success' ? 'bg-green-300 text-white' : ''
+        } ${
+          type === 'error' ? 'bg-red-300 text-white' : ''
+        }`}
       >
-        <div className="flex flex-col">
-          <h3 className="font-bold text-lg mb-1">{title}</h3>
-          <p className="text-sm">{message}</p>
+        <p className="text-lg mb-4">{message}</p>
+        <div className="flex justify-end space-x-2">
+          {/* Mostramos los children si existen */}
+          {children}
+          
+          {/* Botón de cerrar para tipos success/error */}
+          {(type === 'error') && !children && (
+            <button
+              onClick={() => {
+                setIsVisible(false);
+                onClose?.();
+              }}
+              className="px-4 py-2 rounded bg-red-500 text-white"
+            >
+              Cerrar
+            </button>
+          )}
+
+          {(type === 'success') && !children && (
+            <button
+              onClick={() => {
+                setIsVisible(false);
+                onClose?.();
+              }}
+              className="px-4 py-2 rounded bg-green-500 text-white"
+            >
+              Cerrar
+            </button>
+          )}
         </div>
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 hover:opacity-75 transition-opacity"
-          aria-label="Close alert"
-        >
-          <svg
-            className={`w-5 h-5 ${variant === 'success' ? 'text-green-800' : 'text-red-800'}`}
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
       </div>
-    );
-  }
+    </div>
+  );
+};

@@ -12,7 +12,7 @@ export default function ScreenLogin() {
 
 
   return (
-    <section className="max-w-screen-sm mx-auto w-1/2 h-1/2">
+    <section className="max-w-screen-sm mx-auto w-3/4 md:w-1/2 mt-11 mb-3">
         <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-white text-secondary-100 shadow-lg">
             <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
             <FormLogin />

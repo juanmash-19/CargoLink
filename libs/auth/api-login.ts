@@ -1,4 +1,4 @@
-import { LoginDTO, LoginDAO } from "@/Interfaces/auth/LoginInterface"
+import { LoginDTO, LoginDAO } from "@/Interfaces/auth/LoginInterface";
 // import { useLoadingStore } from "@/store/LoadingSpinner";
 
 import { envVariables } from "@/utils/config";
@@ -6,9 +6,9 @@ import { envVariables } from "@/utils/config";
 export const loginUser = async (body: LoginDTO): Promise<LoginDAO> => {
     // const { startLoading, stopLoading } = useLoadingStore();
 
-    try{
+    try {
         // startLoading();
-        const response = await fetch(`${envVariables.API_URL}/auth/login`,{
+        const response = await fetch(`${envVariables.API_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -16,16 +16,36 @@ export const loginUser = async (body: LoginDTO): Promise<LoginDAO> => {
             body: JSON.stringify(body),
         });
 
-        if(!response.ok) {
+        if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.message || "Error de autenticacion")
+            throw new Error(errorData.message || "Error de autenticacion");
         }
 
         return await response.json() as LoginDAO;
-    }catch(error){
+    } catch (error) {
         console.error("Error en autenticación:", error);
         throw new Error("No se pudo completar la autenticación. Por favor, inténtalo de nuevo.");
-    }finally{
+    } finally {
         // stopLoading();
     }
-}
+};
+
+export const refreshToken = async (): Promise<{ token: string }> => {
+    try {
+        const response = await fetch(`${envVariables.API_URL}/auth/refresh-token`, {
+            method: 'POST',
+            credentials: 'include', // Para enviar cookies al backend
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Error al renovar el token:", errorData);
+            throw new Error(errorData.message || "Error al renovar el token");
+        }
+
+        return await response.json() as { token: string };
+    } catch (error) {
+        console.error("Error al renovar el token:", error);
+        throw new Error("No se pudo renovar el token. Por favor, inténtalo de nuevo.");
+    }
+};

@@ -1,41 +1,34 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ShipmentCard from '@/components/molecules/ShipmentCard';
-import { useEffect, useState } from 'react';
 import { useLoadingStore } from '@/store/LoadingSpinner';
-import { getAvailableShipments } from '@/libs/ServiceShipment/api-shipment';
+import { getUserShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
 
-export default function ShipmentsPage() {
+export default function UserShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
 
-
     useEffect(() => {
-        const fetchShipment = async () => {
-            try{
+        const fetchUserShipments = async () => {
+            try {
                 startLoading();
-                const response = await getAvailableShipments();
 
-                if (response.shipments) {
-                    setShipments(response.shipments); // Actualiza el estado con los datos del envío
-                } else {
-                    console.error('No se encontró el envío');
-                    alert('No se encontró el envío');
-                }
+                const response = await getUserShipments();
+
+                setShipments(response.shipments || []);
             } catch (error) {
-                console.error('Error al obtener los envios:', error);
-                alert('Error al obtener los envios');
+                console.error('Error:', error);
+                setShipments([]);
             } finally {
-                stopLoading(); // Desactiva el spinner de carga
+                stopLoading();
             }
         };
 
-        fetchShipment(); // Ejecuta la función para obtener los datos
-
-    }, [startLoading, stopLoading]); // Dependencias: startLoading, stopLoading
+        fetchUserShipments();
+    }, [startLoading, stopLoading, router]);
 
     const handleOpenMap = () => {
         console.log("Abrir en el mapa");
@@ -52,11 +45,19 @@ export default function ShipmentsPage() {
 
     return (
         <div className="p-6">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-3xl font-bold text-gray-800">Mis Envíos</h1>
+                <button 
+                    onClick={() => router.push('/user/shipments/create')}
+                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                >
+                    Crear Nuevo Envío
+                </button>
+            </div>
+            
             {shipments ? (
-                <>
-                    {console.log(shipments)}
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">Fletes Disponibles</h1>
-                    {shipments.map((shipment) => (
+                <div className="space-y-4">
+                    {shipments.map(shipment => (
                         <ShipmentCard
                             key={shipment.shipment._id} // Usar un ID único en lugar del índice
                             title={shipment.shipment.title}
@@ -72,11 +73,17 @@ export default function ShipmentsPage() {
                             onAccept={handleAccept}
                         />
                     ))}
-                </>
+                </div>
             ) : (
-                <>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">No hay fletes disponibles...</h1>
-                </>
+                <div className="text-center py-10">
+                    <p className="text-lg text-gray-600">No tienes envíos creados</p>
+                    <button 
+                        onClick={() => router.push('/user/shipments/create')}
+                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                        Crear Primer Envío
+                    </button>
+                </div>
             )}
         </div>
     );
