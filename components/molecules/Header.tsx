@@ -241,7 +241,7 @@ export default function Header() {
 
                       <li>
                         <Link 
-                          href="/user/shipments/me" 
+                          href="/user/shipments/me/all" 
                           className={isLinkActive('/user/shipments/me/all') ? standarNavLinkSelect : standarNavLink}>
                             Mis fletes
                         </Link>
