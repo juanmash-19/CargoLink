@@ -1,14 +1,195 @@
+'use client'
 import { standarInput } from "@/utils/Tokens";
 import Link from "next/link";
 import CustomButton from "@/components/atoms/CustomButton";
+import { useAuth } from "@/utils/AuthContext";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { UserDTO, ChangePasswordDTO, PasswordDTO } from "@/Interfaces/user/UserInterface";
+import { useEffect, useState } from "react";
+import { useLoadingStore } from "@/store/LoadingSpinner";
+import { getUser, updateUser, changePassword, verifyPassword, deleteUser } from "@/libs/ServiceUser/api-user";
+import { standarTextLink } from "@/utils/Tokens";
+import CustomModal from "@/components/molecules/CustomModal";
+import CustomAlert from "@/components/atoms/CustomAlert";
+import { GrAlert } from "react-icons/gr";
+import { useRouter } from "next/navigation";
 
-export default function UserPage(){
-    return(
+export default function UserPage() {
+    const router = useRouter();
+    const { userEmail, userName, logout } = useAuth();
+    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<UserDTO>();
+    const { register: registerPassword, handleSubmit: handlePasswordSubmit, reset: resetChangePassword, formState: { errors: passwordErrors } } = useForm<ChangePasswordDTO>();
+    const { register: registerDelete, handleSubmit: handleDeleteSubmit, reset: resetDelete, formState: { errors: deleteErrors } } = useForm<PasswordDTO>();
+    const { startLoading, stopLoading } = useLoadingStore();
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const [originalName, setOriginalName] = useState<string | null>(null);
+    const [originalLastName, setOriginalLastName] = useState<string | null>(null);
+    const [originalPhone, setOriginalPhone] = useState<string | null>(null);
+
+    
+    {/* Seccion para las alertas*/}
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
+
+    const onSubmit: SubmitHandler<UserDTO> = async (data) => {
+        const updatedFields: Partial<UserDTO> = {};
+        if (originalName !== data.name) updatedFields.name = data.name;
+        if (originalLastName !== data.lastname) updatedFields.lastname = data.lastname;
+        if (originalPhone !== data.phone) updatedFields.phone = data.phone;
+        try{
+            startLoading();
+            const response = await updateUser(updatedFields);
+            console.log('Update successful:', response);
+            if(response){
+                setAlertMessage("Los cambios han sido guardados con éxito.");
+                setAlertType('success');
+                setShowAlert(true);
+                if (updatedFields.name) setOriginalName(updatedFields.name);
+                if (updatedFields.lastname) setOriginalLastName(updatedFields.lastname);
+                if (updatedFields.phone) setOriginalPhone(updatedFields.phone);
+            }else{
+                setAlertMessage("No se han podido guardar los cambios.");
+                setAlertType('error');
+                setShowAlert(true);
+                
+                if(originalName !== null) setValue("name", originalName);
+                if(originalLastName !== null) setValue("lastname", originalLastName);
+                if(originalPhone !== null) setValue("phone", originalPhone);
+            }
+        } catch (error) {
+            setAlertMessage(`Error al actualizar los datos de usuario: ${error}`);
+            setAlertType('error');
+            setShowAlert(true);
+        } finally {
+            stopLoading();
+        }
+    };
+
+    const onChangePassword: SubmitHandler<ChangePasswordDTO> = async (data) => {
+        try {
+            startLoading();
+            resetChangePassword();
+            const response = await changePassword(data);
+            if (response.verify) {
+                setAlertMessage("Contraseña cambiada con éxito.");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                }, 2000);
+                logout();
+                router.replace('/login');
+            } else {
+                setAlertMessage("No se pudo cambiar la contraseña. Verifique los datos ingresados.");
+                setAlertType('error');
+                setShowAlert(true);
+            }
+        } catch (error) {
+            setAlertMessage(`Error al cambiar la contraseña: ${error}`);
+            setAlertType('error');
+            setShowAlert(true);
+        } finally {
+            stopLoading();
+        }
+    };
+
+    
+    
+    const onSubmitDelete: SubmitHandler<PasswordDTO>  = async (data) => {
+        setIsDeleteModalOpen(false);
+        setValue("password", '');
+        resetDelete();
+        try{
+            startLoading();
+            const response = await verifyPassword(data);
+
+            if (!response.verify) {
+                setAlertMessage(response.message);
+                setAlertType('error');
+                setShowAlert(true);
+            }
+            
+            setAlertMessage("¿Está seguro de que desea eliminar su cuenta? (Irreversible)");
+            setAlertType('options');
+            setShowAlert(true);
+
+        } catch (error) {
+            setAlertMessage(error instanceof Error ? error.message : 'Error al verificar la contraseña');
+            setAlertType('error');
+            setShowAlert(true);
+        } finally {
+            stopLoading();
+        }
+    };
+
+    const handleDeleteUser = async () => {
+        setShowAlert(false);
+        try {
+            startLoading();
+            const response = await deleteUser();
+            if (response.verify) {
+                setAlertMessage("Cuenta eliminada con éxito.");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                }, 2000);
+                logout();
+                router.replace('/');
+            } else {
+                setAlertMessage("No se pudo eliminar la cuenta. Intentelo mas tarde.");
+                setAlertType('error');
+                setShowAlert(true);
+            }
+        } catch (error) {
+            setAlertMessage(`Error al eliminar la cuenta: ${error}`);
+            setAlertType('error');
+            setShowAlert(true);
+        } finally {
+            stopLoading();
+        }
+    }
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                startLoading();
+                const response = await getUser();
+                if (response) {
+                    const { name, lastname, phone } = response.user;
+                    setOriginalName(name);
+                    setOriginalLastName(lastname);
+                    setOriginalPhone(phone ?? null);
+
+                    setValue("name", name);
+                    setValue("lastname", lastname);
+                    setValue("phone", phone);
+                } else {
+                    console.error("No user data found.");
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            } finally {
+                stopLoading();
+            }
+        };
+        fetchUser();
+    }, [setValue, startLoading, stopLoading]);
+
+    const watchName = watch("name");
+    const watchLastName = watch("lastname");
+    const watchPhone = watch("phone");
+
+    const isNameModified = originalName !== null && watchName !== originalName;
+    const isLastNameModified = originalLastName !== null && watchLastName !== originalLastName;
+    const isPhoneModified = originalPhone !== null && watchPhone !== originalPhone;
+
+    return (
         <div className="flex">
-
             <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-auto">
                 <div className="grid grid-cols-8 pt-3 sm:grid-cols-10">
-
                     <div className="col-span-2 hidden sm:block text-gray-800">
                         <ul>
                             <li className="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">Cuenta</li>
@@ -16,44 +197,87 @@ export default function UserPage(){
                             <li className="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">Notificaciones</li>
                         </ul>
                     </div>
-
                     <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
                         <div className="pt-4">
-                            <h1 className="py-2 text-2xl font-semibold text-gray-800">Configuracion de Cuenta</h1>
-                            <p className="font- text-slate-600">Desde aquí puede cambiar su contraseña o correo.</p>
+                            <h1 className="py-2 text-2xl font-semibold text-gray-800">Configuración de Cuenta</h1>
+                            <p className="font- text-slate-600">¡Bienvenido <strong>{userName}</strong>! aquí puede cambiar su contraseña, correo o información personal.</p>
                         </div>
                         <hr className="mt-4 mb-8" />
                         <p className="py-2 text-xl font-semibold text-gray-800">Correo</p>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                            <p className="text-gray-600">Su direccion de correo es <strong>john.doe@company.com</strong></p>
-                            <button className="inline-flex text-sm font-semibold text-blue-600 underline decoration-2">Cambiar</button>
+                            <p className="text-gray-600">Su direccion de correo es <strong>{userEmail}</strong></p>
                         </div>
                         <hr className="mt-4 mb-8" />
-                        <p className="py-2 text-xl font-semibold text-gray-800">Contraseña</p>
-                        <div className="flex items-center">
-                            <div className="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-3">
-                                <label htmlFor="login-password">
-                                    <span className="text-sm text-gray-500">Contraseña actual</span>
-                                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                                        <input type="password" id="login-password" className={`${standarInput} focus:outline-primary-300`} placeholder="***********" />
-                                    </div>
+                        <form onSubmit={handleSubmit(onSubmit)} className="mr-20">
+                            <p className="py-2 text-xl font-semibold text-gray-800">Información Personal</p>
+                            <div className="space-y-4">
+                                <label className="block">
+                                    <span className="text-sm text-gray-500">Nombre</span>
+                                    <input
+                                        type="text"
+                                        {...register("name", { required: "El nombre es obligatorio" })}
+                                        className={`${standarInput} focus:outline-primary-400 ${isNameModified ? "border-2 border-secondary-200" : ""}`}
+                                    />
+                                    {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
                                 </label>
-                                <label htmlFor="login-password">
-                                    <span className="text-sm text-gray-500">Nueva contraseña</span>
-                                    <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
-                                        <input type="password" id="login-new-password" className={`${standarInput} focus:outline-primary-300`} placeholder="***********" />
-                                    </div>
+                                <label className="block">
+                                    <span className="text-sm text-gray-500">Apellido</span>
+                                    <input
+                                        type="text"
+                                        {...register("lastname")}
+                                        className={`${standarInput} focus:outline-primary-400 ${isLastNameModified ? "border-2 border-secondary-200" : ""}`}
+                                    />
+                                </label>
+                                <label className="block">
+                                    <span className="text-sm text-gray-500">Teléfono</span>
+                                    <input
+                                        type="tel"
+                                        {...register("phone")}
+                                        className={`${standarInput} focus:outline-primary-400 ${isPhoneModified ? "border-2 border-secondary-200" : ""}`}
+                                    />
                                 </label>
                             </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="mt-5 ml-2 h-6 w-6 cursor-pointer text-sm font-semibold text-gray-600 underline decoration-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                            </svg>
-                        </div>
+                            <div className="mt-4 w-fit">
+                                <CustomButton
+                                    text="Guardar cambios"
+                                    type="submit"
+                                    variant="secondary"
+                                />
+                            </div>
+                        </form>
+                        <hr className="mt-4 mb-8" />
+                        <p className="py-2 text-xl font-semibold text-gray-800">Contraseña</p>
+                        <form onSubmit={handlePasswordSubmit(onChangePassword)} className="space-y-4">
+                            <label className="block">
+                                <span className="text-sm text-gray-500">Contraseña actual</span>
+                                <input
+                                    type="password"
+                                    {...registerPassword("password", { required: "La contraseña actual es obligatoria" })}
+                                    className={standarInput}
+                                />
+                                {passwordErrors.password && <p className="text-sm text-red-500">{passwordErrors.password.message}</p>}
+                            </label>
+                            <label className="block">
+                                <span className="text-sm text-gray-500">Nueva contraseña</span>
+                                <input
+                                    type="password"
+                                    {...registerPassword("newPassword", { required: "La nueva contraseña es obligatoria" })}
+                                    className={standarInput}
+                                />
+                                {passwordErrors.newPassword && <p className="text-sm text-red-500">{passwordErrors.newPassword.message}</p>}
+                            </label>
+                            <div className="mt-4 w-fit">
+                                <CustomButton
+                                    text="Guardar contraseña"
+                                    type="submit"
+                                    variant="primary"
+                                />
+                            </div>
+                        </form>
                         <p className="mt-2 text-slate-600">No recuerdo mi contraseña. <Link className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recuperar cuenta</Link></p>
                         <div className="">
 
                         </div>
-                        <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">Guardar contraseña</button>
                         <hr className="mt-4 mb-8" />
 
                         <div className="mb-10">
@@ -62,17 +286,78 @@ export default function UserPage(){
                             <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                             </svg>
-                            Proceed with caution
+                            Procede con precaución
                             </p>
-                            <p className="mt-2 text-slate-600">Make sure you have taken backup of your account in case you ever need to get access to your data. We will completely wipe your data. There is no way to access your account after this action.</p>
-                            <button className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2">Continue with deletion</button>
+                            <p className="mt-2 text-slate-600">
+                                Eliminar la cuenta es una acción permanente e irreversible. Todos sus datos serán eliminados y no podrán ser recuperados. Por favor, asegúrese de que desea proceder antes de continuar.
+                            </p>
+                            <button className={`${standarTextLink} text-rose-600 underline decoration-2`} onClick={() => {setIsDeleteModalOpen(true);}}>Borrar mi cuenta</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                >
+                    {alertType === 'options' && (
+                        <div className="flex gap-2 justify-end">
+                            <CustomButton
+                                text="Cancelar"
+                                variant="primary"
+                                onClick={() => setShowAlert(false)}
+
+                            />
+                            <CustomButton
+                                text="Eliminar"
+                                variant="danger"
+                                onClick={handleDeleteUser}
+                            />
+                        </div>
+                    )}
+                </CustomAlert>
+            )}
+
+            {/* Modal para editar */}
+            <CustomModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => {
+                    resetDelete();
+                    setIsDeleteModalOpen(false);
+                }}
+                title="Por seguridad, antes de eliminar su cuenta debe de ingresar su contraseña."
+            >
+                <form onSubmit={handleDeleteSubmit(onSubmitDelete) } className="space-y-4">
+                    <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
+                        Contraseña
+                        </label>
+            
+                        <input
+                        {...registerDelete("password")}
+                        type="password"
+                        placeholder='******'
+                        // id="Password"
+                        // name="password"
+                        className={`${standarInput} focus:outline-primary-400`}
+                        />
+                        {errors.password && 
+                            <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                                <strong className="font-bold text-sm mr-4">{errors.password.message}</strong>
+                            </div>
+                        }
+                    </div>
+                    <div className="mt-6 flex justify-end">
+                        <CustomButton
+                            text="Verificar"
+                            variant="danger"
+                            type="submit"
+                        />
+                    </div>
+                </form>
+            </CustomModal>
         </div>
-
-        
-
     );
 }

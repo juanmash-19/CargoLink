@@ -9,7 +9,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { standarInput } from "@/utils/Tokens";
 import CustomButton from "@/components/atoms/CustomButton";
 import CustomAlert from "@/components/atoms/CustomAlert";
-import { UserEditScheme } from "@/Schemes/adminSchemes/userEditScheme";
+import { UserEditScheme } from "@/Schemes/adminSchemes/UserEditScheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ScreenAdminEditUser(){

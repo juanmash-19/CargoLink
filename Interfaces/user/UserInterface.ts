@@ -12,6 +12,11 @@ export interface PasswordDTO{
     password: string,
 }
 
+export interface ChangePasswordDTO{
+    password: string,
+    newPassword: string,
+}
+
 export interface UserDAO {
     message?: string,
     user: {
