@@ -302,7 +302,7 @@ export default function FormCreateShip() {
             </div>
 
             <div>
-                <label htmlFor="address" className="block text-lg font-medium">Dimensiones</label>
+                <label htmlFor="dimensions" className="block text-lg font-medium">Dimensiones</label>
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-4'>
                     <div>
                         <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Peso (kg)</label>

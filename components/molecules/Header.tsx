@@ -109,13 +109,12 @@ export default function Header() {
         {/* Menú de navegación principal basado en el rol */}
         <div className={`md:flex md:w-auto md:order-1 ${isMenuOpen ? "block" : "hidden"}`} id="navbar-sticky">
           <ul className="flex flex-col md:flex-row p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-primary-100 md:space-x-8 md:mt-0 md:border-0 md:bg-primary-100">
-            
-            {/*Este debe de desapareces e incuroporar los home para cada role*/}
-            <li><Link href="/" className={isLinkActive('/', true) ? standarNavLinkSelect : standarNavLink}>Inicio</Link></li>
 
             {/*Seccion para usuarios no logueados*/}
             {userRole === null &&(
               <>
+              {/*Este debe de desaparecer e incuroporar los home para cada role*/}
+                <li><Link href="/" className={isLinkActive('/', true) ? standarNavLinkSelect : standarNavLink}>Inicio</Link></li>
                 <li><Link href="#about-section" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
                 <li><Link href="#what-are" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>¿Que somos?</Link></li>
                 <li><Link href="#about-us" className={isLinkActive('/us') ? standarNavLinkSelect : standarNavLink}>Nosotros</Link></li>
@@ -125,6 +124,7 @@ export default function Header() {
             {/*Seccion para usuarios logueados*/}
             {userRole === 'admin' && (
               <>
+              <li><Link href="/admin" className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>Dashboard</Link></li>
                 <li>
                   <details className="group [&_summary::-webkit-details-marker]:hidden">
                     <summary
@@ -140,17 +140,9 @@ export default function Header() {
                     <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg">
                       <li>
                         <Link 
-                          href="/admin" 
-                          className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>
-                            Principal
-                        </Link>
-                      </li>
-
-                      <li>
-                        <Link 
                           href="/admin/users" 
                           className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>
-                            Gestor usuarios
+                            Gestionar usuarios
                         </Link>
                       </li>
 
@@ -158,19 +150,18 @@ export default function Header() {
                         <Link 
                           href="/admin/shipments" 
                           className={isLinkActive('/admin/shipments') ? standarNavLinkSelect : standarNavLink}>
-                            Gestor envios
+                            Gestionar envios
                         </Link>
                       </li>
                     </ul>
                   </details>
                 </li>
-                <li><Link href="/services" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
               </>
             )}
 
             {userRole === 'transporter' && (
               <>
-                <li><Link href="/repartidor/jobs" className={isLinkActive('/repartidor/jobs') ? standarNavLinkSelect : standarNavLink}>Trabajos</Link></li>
+              <li><Link href="/transporter" className={isLinkActive('/transporter', true) ? standarNavLinkSelect : standarNavLink}>Dashboard</Link></li>
                 <li>
                   <details className="group [&_summary::-webkit-details-marker]:hidden">
                     <summary
