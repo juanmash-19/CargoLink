@@ -59,13 +59,13 @@ export default function ScreenAdminShipments(){
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            alert('No se ha seleccionado ningún usuario');
+            alert('No se ha seleccionado ningún envio');
             return;
         }
     
         const correctPassword = await fetchVerifyUser(data);
         if (correctPassword) {
-            setAlertMessage('¿Esta seguro de que quiere eliminar el usuario?');
+            setAlertMessage('¿Esta seguro de que quiere eliminar el envio?');
             setAlertType('options');
             setShowAlert(true);
         }
@@ -76,7 +76,7 @@ export default function ScreenAdminShipments(){
             startLoading();
             const response = await deleteShipmentById(shipmentIdAction as string);
 
-            setAlertMessage('Usuario eliminado correctamente');
+            setAlertMessage('Envio eliminado correctamente');
             setAlertType('success');
             setShowAlert(true);
             fetchShipment();
@@ -225,10 +225,10 @@ export default function ScreenAdminShipments(){
                             Titulo
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Dimensiones
+                            Estado
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Estado
+                            Opciones
                         </th>
                     </tr>
                 </thead>
@@ -372,7 +372,7 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsDeleteModalOpen(false);
                 }}
-                title="Por seguridad, para eliminar un usuario debe ingresar su contraseña."
+                title="Por seguridad, para eliminar un envio debe ingresar su contraseña."
             >
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
