@@ -9,8 +9,8 @@ import { standarInput } from "@/utils/Tokens";
 import CustomButton from "@/components/atoms/CustomButton";
 import CustomAlert from "@/components/atoms/CustomAlert";
 import QuantityInput from "@/components/molecules/QuantityInput";
-// import { ShipmentEditScheme } from "@/Schemes/adminSchemes/ShipmentEditScheme";
-// import { zodResolver } from "@hookform/resolvers/zod";
+import { ShipmentEditScheme } from "@/Schemes/adminSchemes/ShipmentEditScheme";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function ScreenAdminEditShipment(){
 
@@ -42,7 +42,7 @@ export default function ScreenAdminEditShipment(){
         handleSubmit, 
         watch, setValue, formState: { errors } 
         } = useForm<ShipmentDTO>({
-            // resolver : zodResolver(ShipmentEditScheme)
+            resolver : zodResolver(ShipmentEditScheme)
         });
 
 

@@ -256,7 +256,7 @@ export default function ScreenAdminShipments(){
                                 <tr key={shipment.shipment._id} className="bg-white border-b border-gray-200 hover:bg-gray-100">
                                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                         <Image 
-                                            src="/profile.png" 
+                                            src={shipment.shipment.imageUrl || "/default-shipment.png"} 
                                             alt="Foto del envio" 
                                             width={32} 
                                             height={32} 
