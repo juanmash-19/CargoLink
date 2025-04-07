@@ -97,6 +97,37 @@ export const getUserById = async (userId: string): Promise<UserDAO> => {
     }
 }
 
+export const getShipmentById = async (shipmentId: string): Promise<ShipmentDAO> => {
+    const token = Cookies.get('token');
+    if(token){
+
+        try{
+            const response = await fetch(`${envVariables.API_URL}/admin/shipments/${shipmentId}`, {
+                method: 'GET',
+                headers:{
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if(!response.ok) {
+                const errorData = await response.json();
+                console.error("Este es el error:", errorData);
+            }
+
+            return await response.json() as ShipmentDAO;
+
+        }catch (error) {
+            console.error("Error al obtener el envio:", error);
+            throw new Error("No se pudo obtener el envio. Por favor, inténtalo de nuevo.");
+        }
+
+    }else{
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+}
+
+
 export const searchUsers = async (term: string): Promise<UsersDAO> => {
     
     const token = Cookies.get('token');
@@ -194,7 +225,7 @@ export const putShipmentById = async (body: ShipmentDTO, shipmentId: string): Pr
     const token = Cookies.get('token');
     if(token){
         try{
-            const response = await fetch(`${envVariables.API_URL}/admin/shimpents/${shipmentId}`,{
+            const response = await fetch(`${envVariables.API_URL}/admin/shipments/${shipmentId}`,{
                 method: 'PUT',
                 headers: {
                     "Authorization": `Bearer ${token}`,

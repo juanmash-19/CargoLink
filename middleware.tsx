@@ -8,7 +8,7 @@ export function middleware(req: NextRequest) {
     // Definir rutas protegidas con los roles requeridos
     const protectedRoutes: { [key: string]: string } = {
         '/admin': 'admin',
-        '/user': 'user',
+        '/user/shipments': 'user',
         '/transporter': 'transporter',
     };
 

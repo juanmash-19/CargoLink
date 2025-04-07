@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import ScreenShipmentMe from "@/modules/user/shipments/create/ScreenMeShipment"
+import ScreenShipmentMe from "@/modules/user/shipments/me/ScreenMeShipment"
 import { getShipment } from '@/libs/ServiceShipment/api-shipment' 
 import { ShipmentDAO } from '@/Interfaces/shipment/ShipmentInterface' 
 import { notFound } from "next/navigation"

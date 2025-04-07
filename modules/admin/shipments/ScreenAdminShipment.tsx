@@ -1,6 +1,6 @@
 'use client'
-import { Search } from "@/components/atoms/ReactIcons";
-import DropdownShipment from "./DropdownShipments";
+import { } from "@/components/atoms/ReactIcons";
+// import DropdownShipment from "./DropdownShipments";
 import {PasswordDTO} from "@/Interfaces/user/UserInterface";
 import { useState, useEffect } from "react";
 import { useLoadingStore } from "@/store/LoadingSpinner";
@@ -12,7 +12,7 @@ import CustomIconButton from "@/components/atoms/CustomIconButton";
 import CustomAlert from "@/components/atoms/CustomAlert";
 import { standarInput } from "@/utils/Tokens";
 import Image from "next/image";
-import { UserEdit, Delete, PersonSearch, Clean } from "@/components/atoms/ReactIcons";
+import { RegEdit, Delete, Clean, PackageSearch, Search, InfoCard } from "@/components/atoms/ReactIcons";
 import { verifyPassword } from "@/libs/ServiceUser/api-user";
 import { useRouter } from "next/navigation";
 import { ShipmentsDAO } from "@/Interfaces/shipment/ShipmentInterface";
@@ -21,6 +21,7 @@ import { ShipmentsDAO } from "@/Interfaces/shipment/ShipmentInterface";
 export default function ScreenAdminShipments(){
     const [shipments, setShipemts] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
+    const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [shipmentIdAction, setShipmentIdAction] = useState<string | null>(null);
@@ -40,6 +41,22 @@ export default function ScreenAdminShipments(){
         formState: { errors },
     } = useForm<PasswordDTO>();
 
+    const onSubmitInfo: SubmitHandler<PasswordDTO> = async (data) => {
+        reset();
+        setIsInfoModalOpen(false);
+        if (!shipmentIdAction) {
+            alert('No se ha seleccionado ningún envio');
+            return;
+        }
+
+        const correctPassword = await fetchVerifyUser(data);
+        if (correctPassword) {
+            setIsInfoModalOpen(false);
+            router.push(`/admin/shipments/me/${shipmentIdAction}`)
+
+        }
+    };
+
     const onSubmitEdit: SubmitHandler<PasswordDTO> = async (data) => {
         reset();
         setIsDeleteModalOpen(false);
@@ -51,7 +68,7 @@ export default function ScreenAdminShipments(){
         const correctPassword = await fetchVerifyUser(data);
         if (correctPassword) {
             setIsEditModalOpen(false);
-            router.push(`/admin/sipments/edit/${shipmentIdAction}`)
+            router.push(`/admin/shipments/edit/${shipmentIdAction}`)
         }
     };
 
@@ -123,11 +140,11 @@ export default function ScreenAdminShipments(){
                 if (response.shipments) {
                     setShipemts(response.shipments);
                 } else {
-                    console.error('No se encontró usuarios');
-                    alert('No se encontró usuarios');
+                    console.error('No se encontró envios');
+                    alert('No se encontró envios');
                 }
             } catch (error) {
-                console.error('Error al obtener los usuarios:', error);
+                console.error('Error al obtener los envios:', error);
                 alert(error);
             } finally {
                 stopLoading();
@@ -170,7 +187,7 @@ export default function ScreenAdminShipments(){
             <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">Gestión de envios</h1>
 
             <div className="flex items-center justify-between flex-column flex-wrap md:flex-row pb-4 mx-6">
-                <DropdownShipment/>
+                {/* <DropdownShipment/> */}
                 <div className="flex">
                     <label htmlFor="table-search" className="sr-only">Search</label>
                     <div className="relative mr-3">
@@ -181,17 +198,17 @@ export default function ScreenAdminShipments(){
                             type="text"
                             id="table-search-shipments"
                             className="block p-3 ps-10 text-md text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Buscador de usuarios"
+                            placeholder="Buscador de envios"
                             value={searchTerm} // Valor controlado por el estado
                             onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado cuando el usuario escribe
                         />
                     </div>
                     <CustomIconButton
-                        icon={<PersonSearch/>}
+                        icon={<PackageSearch/>}
                         variant="primary"
                         ariaLabel="search"
                         onClick={handleShipmentSearch}
-                        tooltipText="Buscar usuario"
+                        tooltipText="Buscar envio"
                         className="size-12 mr-3"
                     />
                     <CustomIconButton
@@ -225,7 +242,7 @@ export default function ScreenAdminShipments(){
                             Titulo
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Estado
+                            Estado Actual
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Opciones
@@ -240,7 +257,7 @@ export default function ScreenAdminShipments(){
                                     <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                         <Image 
                                             src="/profile.png" 
-                                            alt="Foto de usuario" 
+                                            alt="Foto del envio" 
                                             width={32} 
                                             height={32} 
                                             className="rounded-sm" 
@@ -256,6 +273,21 @@ export default function ScreenAdminShipments(){
                                     <td scope="row" className="flex items-center h-full">
                                         <div className="pr-2">
                                             <CustomIconButton
+                                                variant="primary"
+                                                type="button"
+                                                onClick={() => {
+                                                    setShipmentIdAction(shipment.shipment._id);
+                                                    setIsInfoModalOpen(true);
+                                                }}
+                                                className="size-10"
+                                                icon={<InfoCard/>} // Icono de "Mostrar contraseña"
+                                                ariaLabel="Detalles" // Texto descriptivo para accesibilidad
+                                                tooltipText="Detalles"
+                                            />
+                                        </div>
+                                        
+                                        <div className="pr-2">
+                                            <CustomIconButton
                                                 variant="secondary"
                                                 type="button"
                                                 onClick={() => {
@@ -263,7 +295,7 @@ export default function ScreenAdminShipments(){
                                                     setIsEditModalOpen(true);
                                                 }}
                                                 className="size-10"
-                                                icon={<UserEdit/>} // Icono de "Mostrar contraseña"
+                                                icon={<RegEdit/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Editar" // Texto descriptivo para accesibilidad
                                                 tooltipText="Editar"
                                             />
@@ -326,6 +358,45 @@ export default function ScreenAdminShipments(){
                 </tbody>
             </table>
 
+            {/* Modal para ver detalles */}
+            <CustomModal
+                isOpen={isInfoModalOpen}
+                onClose={() => {
+                    reset(); // Limpiar los campos al cerrar
+                    setIsInfoModalOpen(false);
+                }}
+                title="Por seguridad, para ver detalles del flete debe ingresar su contraseña."
+            >
+                <form onSubmit={handleSubmit(onSubmitInfo)} className="space-y-4">
+                    <div className="col-span-6 sm:col-span-3">
+                        <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
+                        Contraseña
+                        </label>
+            
+                        <input
+                        {...register("password")}
+                        type="password"
+                        placeholder='******'
+                        // id="Password"
+                        // name="password"
+                        className={`${standarInput} focus:outline-primary-400`}
+                        />
+                        {errors.password && 
+                            <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
+                                <strong className="font-bold text-sm mr-4">{errors.password.message}</strong>
+                            </div>
+                        }
+                    </div>
+                    <div className="mt-6 flex justify-end">
+                        <CustomButton
+                            text="Verificar"
+                            variant="primary"
+                            type="submit"
+                        />
+                    </div>
+                </form>
+            </CustomModal>
+
             {/* Modal para editar */}
             <CustomModal
                 isOpen={isEditModalOpen}
@@ -333,7 +404,7 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsEditModalOpen(false);
                 }}
-                title="Por seguridad, para editar un usuario debe ingresar su contraseña."
+                title="Por seguridad, para editar un flete debe ingresar su contraseña."
             >
                 <form onSubmit={handleSubmit(onSubmitEdit)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
@@ -372,7 +443,7 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsDeleteModalOpen(false);
                 }}
-                title="Por seguridad, para eliminar un envio debe ingresar su contraseña."
+                title="Por seguridad, para eliminar un flete debe ingresar su contraseña."
             >
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
