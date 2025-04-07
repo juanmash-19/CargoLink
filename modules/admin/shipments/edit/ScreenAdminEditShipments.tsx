@@ -12,7 +12,7 @@ import CustomAlert from "@/components/atoms/CustomAlert";
 import { UserEditScheme } from "@/Schemes/adminSchemes/UserEditScheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function ScreenAdminEditUser(){
+export default function ScreenAdminEditShipment(){
 
     const params = useParams();
     const idUser = params.user;
