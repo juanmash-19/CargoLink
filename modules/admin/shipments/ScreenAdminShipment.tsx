@@ -45,7 +45,9 @@ export default function ScreenAdminShipments(){
         reset();
         setIsInfoModalOpen(false);
         if (!shipmentIdAction) {
-            alert('No se ha seleccionado ningún envio');
+            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
 
@@ -61,7 +63,9 @@ export default function ScreenAdminShipments(){
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            alert('No se ha seleccionado ningún envio');
+            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
     
@@ -76,7 +80,9 @@ export default function ScreenAdminShipments(){
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            alert('No se ha seleccionado ningún envio');
+            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
     
@@ -140,12 +146,14 @@ export default function ScreenAdminShipments(){
                 if (response.shipments) {
                     setShipemts(response.shipments);
                 } else {
-                    console.error('No se encontró envios');
-                    alert('No se encontró envios');
+                    setAlertMessage('No se encontró envios');
+                    setAlertType('error');
+                    setShowAlert(true);
                 }
             } catch (error) {
-                console.error('Error al obtener los envios:', error);
-                alert(error);
+                setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los envios');
+                setAlertType('error');
+                setShowAlert(true);
             } finally {
                 stopLoading();
             }
@@ -164,13 +172,14 @@ export default function ScreenAdminShipments(){
             if (response.shipments) {
                 setShipemts(response.shipments);
             } else {
-                console.error('No se encontró envios');
-                alert('No se encontró envios');
+                setAlertMessage('No se encontró envios');
+                setAlertType('error');
+                setShowAlert(true);
             }
         } catch (error) {
-            console.error('Error al obtener los envios:', error);
-            alert(error);
-
+            setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los envios');
+            setAlertType('error');
+            setShowAlert(true);
         } finally {
             stopLoading();
         }
