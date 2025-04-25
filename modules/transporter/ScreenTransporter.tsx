@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import SimpleCard from '@/components/atoms/SimpleCard';
 import { useRouter } from 'next/navigation';
-//Servicio getDriverStats() si tienes uno en libs/ServiceTransportador
+//Servicio getDriverStats() si tiene uno en libs/ServiceTransportador
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
