@@ -21,6 +21,8 @@
     "paths": {
       "@/*": ["./*"]
     },
+
+    //Tipado para permitir usarse funciones de jest-dom
     "types": ["jest", "@testing-library/jest-dom"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "store/LoadingSpinner.tsx"],
