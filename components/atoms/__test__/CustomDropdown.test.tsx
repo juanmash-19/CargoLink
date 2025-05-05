@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import CustomDropdown from '@/components/atoms/CustomDropdown';
 
 describe('CustomDropdown', () => {
@@ -17,46 +18,37 @@ describe('CustomDropdown', () => {
 
   it('renderiza el botón con el texto proporcionado', () => {
     render(<CustomDropdown buttonText="Abrir menú" options={options} variant="primary" />);
-    expect(screen.getByText('Abrir menú'));
+    expect(screen.getByText('Abrir menú')).toBeInTheDocument();
   });
 
   it('abre y muestra las opciones al hacer clic en el botón', () => {
     render(<CustomDropdown buttonText="Abrir menú" options={options} variant="primary" />);
 
-    // El dropdown no debería estar abierto inicialmente
     expect(screen.queryByText('Opción 1')).not.toBeInTheDocument();
 
-    // Hacer clic en el botón
     fireEvent.click(screen.getByText('Abrir menú'));
 
-    // Ahora debería mostrarse la opción
-    expect(screen.getByText('Opción 1'));
-    expect(screen.getByText('Opción 2'));
+    expect(screen.getByText('Opción 1')).toBeInTheDocument();
+    expect(screen.getByText('Opción 2')).toBeInTheDocument();
   });
 
   it('ejecuta la función onClick y cierra el dropdown al seleccionar una opción', () => {
     render(<CustomDropdown buttonText="Abrir menú" options={options} variant="primary" />);
 
-    // Abrimos el dropdown
     fireEvent.click(screen.getByText('Abrir menú'));
-
-    // Hacemos clic en la opción 1
     fireEvent.click(screen.getByText('Opción 1'));
 
-    // Verificamos que se haya llamado la función
     expect(mockOptionClick).toHaveBeenCalledTimes(1);
-
-    // Y que se haya cerrado el dropdown
-    expect(screen.queryByText('Opción 1')).not;
+    expect(screen.queryByText('Opción 1')).not.toBeInTheDocument(); // Dropdown se cerró
   });
 
-  it('muestra correctamente las opciones de texto', () => {
+  it('muestra correctamente todas las opciones de texto al abrir', () => {
     render(<CustomDropdown buttonText="Abrir menú" options={options} variant="primary" />);
 
     fireEvent.click(screen.getByText('Abrir menú'));
 
     options.forEach((option) => {
-      expect(screen.getByText(option.text));
+      expect(screen.getByText(option.text)).toBeInTheDocument();
     });
   });
 });
