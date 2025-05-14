@@ -6,12 +6,13 @@ import { useLoadingStore } from '@/store/LoadingSpinner';
 import { getAvailableShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from "next-intl";
 
 export default function ShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
-
+    const t = useTranslations();
 
     useEffect(() => {
         const fetchShipment = async () => {
@@ -55,7 +56,9 @@ export default function ShipmentsPage() {
             {shipments ? (
                 <>
                     {console.log(shipments)}
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">Fletes Disponibles</h1>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">
+                        {t('transporter.shipments.available.title')}
+                    </h1>
                     {shipments.map((shipment) => (
                         <ShipmentCard
                             key={shipment.shipment._id} // Usar un ID único en lugar del índice
@@ -75,7 +78,9 @@ export default function ShipmentsPage() {
                 </>
             ) : (
                 <>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">No hay fletes disponibles...</h1>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">
+                        {t('transporter.shipments.available.noShipments')}
+                    </h1>
                 </>
             )}
         </div>

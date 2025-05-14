@@ -8,6 +8,7 @@ import { useLoadingStore } from "@/store/LoadingSpinner";
 import { createUser } from "@/libs/ServiceAdmin/api-admin";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ScreenAdminCreateUser() {
     const { 
@@ -19,6 +20,8 @@ export default function ScreenAdminCreateUser() {
     const router = useRouter();
 
     const { startLoading, stopLoading } = useLoadingStore();
+
+    const t = useTranslations();
 
     {/* Seccion para las alertas*/}
     const [showAlert, setShowAlert] = useState(false);
@@ -49,11 +52,11 @@ export default function ScreenAdminCreateUser() {
     return (
         <div className="flex justify-center items-center min-h-screen">
             <div className="w-full max-w-lg">
-                <h1 className="text-3xl font-bold text-primary-300 text-center">Crear usuario</h1>
+                <h1 className="text-3xl font-bold text-primary-300 text-center">{t('admin.users.create.title')}</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
-                            Nombre(s)
+                            {t('admin.users.create.firstName')}
                         </label>
                         <input
                             {...register("name")}
@@ -64,7 +67,7 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
-                            Apellido(s)
+                            {t('admin.users.create.lastName')}
                         </label>
                         <input
                             {...register("lastname")}
@@ -75,7 +78,7 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6">
                         <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
-                            Correo
+                            {t('admin.users.create.email')}
                         </label>
                         <input
                             {...register("email")}
@@ -86,7 +89,7 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6">
                         <label htmlFor="Phone" className="block text-sm font-medium text-gray-700">
-                            Teléfono (opcional)
+                            {t('admin.users.create.phone')}
                         </label>
                         <input
                             {...register("phone")}
@@ -97,7 +100,7 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                            Contraseña
+                            {t('admin.users.create.password')}
                         </label>
                         <input
                             {...register("password")}
@@ -109,7 +112,7 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="ConfirmPassword" className="block text-sm font-medium text-gray-700">
-                            Confirmar contraseña
+                            {t('admin.users.create.confirmPassword')}
                         </label>
                         <input
                             {...register("confirmPassword")}
@@ -121,23 +124,23 @@ export default function ScreenAdminCreateUser() {
 
                     <div className="col-span-6">
                         <label htmlFor="Role" className="block text-sm font-medium text-gray-700">
-                            Rol
+                            {t('admin.users.create.role')}
                         </label>
                         <select
                             {...register("role", { required: "El rol es obligatorio" })}
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary-400 peer"
                         >
-                            <option value="">Seleccione un rol</option>
-                            <option value="admin">Administrador</option>
-                            <option value="transporter">Repartidor</option>
-                            <option value="user">Usuario</option>
+                            <option value="">{t('admin.users.create.selectRole')}</option>
+                            <option value="admin">{t('admin.users.create.roles.admin')}</option>
+                            <option value="transporter">{t('admin.users.create.roles.transporter')}</option>
+                            <option value="user">{t('admin.users.create.roles.user')}</option>
                         </select>
                     </div>
 
                     <div className="col-span-6">
                         <CustomButton
                             type="submit"
-                            text="Crear usuario"
+                            text={t('admin.users.create.createButton')}
                             variant="primary"
                         />
                     </div>

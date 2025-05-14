@@ -9,6 +9,7 @@ import CustomButton from '@/components/atoms/CustomButton';
 import { useAuth } from "@/utils/AuthContext";
 import CargoLinkLogo from "@/components/atoms/Logo";
 import { ArrowDown } from "../atoms/ReactIcons";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const { userRole, userEmail, userName, userLastname, logout } = useAuth();
@@ -17,6 +18,7 @@ export default function Header() {
   const [isShipmentMenuOpen, setIsShipmentMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
@@ -60,10 +62,10 @@ export default function Header() {
                 aria-expanded={isUserMenuOpen}
                 onClick={toggleUserMenu}
               >
-                <span className="sr-only">Abrir menú de usuario</span>
+                <span className="sr-only">{t('header.openUserMenu')}</span>
                 <Image 
                   src="/profile.png" 
-                  alt="Foto de usuario" 
+                  alt={t('header.userImageAlt')} 
                   width={32} 
                   height={32} 
                   className="rounded-full" 
@@ -77,19 +79,19 @@ export default function Header() {
                   <span className="block text-sm text-gray-500 truncate">{userEmail}</span>
                 </div>
                 <ul className="pt-2 text-gray-500">
-                  <li><Link href="/user/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">Perfil</Link></li>
-                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Ajustes</Link></li>
-                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">Información</Link></li>
+                  <li><Link href="/user/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">{t('header.profile')}</Link></li>
+                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">{t('header.settings')}</Link></li>
+                  <li><Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-100">{t('header.information')}</Link></li>
                   <li>
-                    <CustomButton text='Cerrar sesión' variant='danger' type='button' onClick={logOutClick} />
+                    <CustomButton text={t('header.logout')} variant='danger' type='button' onClick={logOutClick} />
                   </li>
                 </ul>
               </div>
             </div>
           ) : (
             <div className="flex flex-row">
-              <CustomButton text='Registrarse' variant='secondary' type='button' onClick={registerClick} />
-              <Link className={`${isLinkActive('/login', true) ? standarNavLinkSelect : standarNavLink} my-auto text-sm text-white ml-4`} href="/login">Iniciar Sesión</Link>
+              <CustomButton text={t('header.register')} variant='secondary' type='button' onClick={registerClick} />
+              <Link className={`${isLinkActive('/login', true) ? standarNavLinkSelect : standarNavLink} my-auto text-sm text-white ml-4`} href="/login">{t('header.login')}</Link>
             </div>
           )}
 
@@ -99,7 +101,7 @@ export default function Header() {
             className="md:hidden p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:ring-2 focus:ring-gray-200"
             aria-expanded={isMenuOpen}
           >
-            <span className="sr-only">Abrir menú principal</span>
+            <span className="sr-only">{t('header.openMainMenu')}</span>
             <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
             </svg>
@@ -113,11 +115,10 @@ export default function Header() {
             {/*Seccion para usuarios no logueados*/}
             {userRole === null &&(
               <>
-              {/*Este debe de desaparecer e incuroporar los home para cada role*/}
-                <li><Link href="/" className={isLinkActive('/', true) ? standarNavLinkSelect : standarNavLink}>Inicio</Link></li>
-                <li><Link href="#about-section" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>Servicios</Link></li>
-                <li><Link href="#what-are" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>¿Que somos?</Link></li>
-                <li><Link href="#about-us" className={isLinkActive('/us') ? standarNavLinkSelect : standarNavLink}>Nosotros</Link></li>
+                <li><Link href="/" className={isLinkActive('/', true) ? standarNavLinkSelect : standarNavLink}>{t('header.home')}</Link></li>
+                <li><Link href="#about-section" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>{t('header.services')}</Link></li>
+                <li><Link href="#what-are" className={isLinkActive('/services') ? standarNavLinkSelect : standarNavLink}>{t('header.whatWeAre')}</Link></li>
+                <li><Link href="#about-us" className={isLinkActive('/us') ? standarNavLinkSelect : standarNavLink}>{t('header.aboutUs')}</Link></li>
               </>
             )}
             

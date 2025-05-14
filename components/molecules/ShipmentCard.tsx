@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import CustomButton from '../atoms/CustomButton';
+import { useTranslations } from "next-intl";
 
 interface ShipmentCardProps {
     imageUrl?: string; // URL de la imagen
@@ -33,13 +34,15 @@ export default function ShipmentCard({
     onViewDetails,
     onAccept,
 }: ShipmentCardProps) {
+    const t = useTranslations();
+
     return (
         <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden mb-6">
             {/* Imagen */}
             <div className="w-full md:w-1/4 relative">
                 <Image
                     src={imageUrl}
-                    alt="Flete"
+                    alt={t('shipmentCard.imageAlt')}
                     width={350} // Ancho especificado
                     height={200} // Alto especificado
                     className="w-full h-48 object-cover"
@@ -50,35 +53,35 @@ export default function ShipmentCard({
             <div className="w-full md:w-1/2 p-4">
                 <h2 className="text-xl font-bold text-gray-800 mb-2">{title}</h2>
                 <div className="grid grid-cols-2 gap-4">
-                    <p className="text-gray-600"><span className="font-medium">Distancia:</span> {distance} km</p>
-                    <p className="text-gray-600"><span className="font-medium">Cobro total:</span> ${totalCharge}</p>
-                    <p className="text-gray-600"><span className="font-medium">Recorrido Total:</span> {totalDistance} km</p>
-                    <p className="text-gray-600"><span className="font-medium">Ganancia:</span> ${profit}</p>
+                    <p className="text-gray-600"><span className="font-medium">{t('shipmentCard.distance')}:</span> {distance} km</p>
+                    <p className="text-gray-600"><span className="font-medium">{t('shipmentCard.totalCharge')}:</span> ${totalCharge}</p>
+                    <p className="text-gray-600"><span className="font-medium">{t('shipmentCard.totalDistance')}:</span> {totalDistance} km</p>
+                    <p className="text-gray-600"><span className="font-medium">{t('shipmentCard.profit')}:</span> ${profit}</p>
                     <p className="text-gray-600">
-                        <span className="font-medium">Dimensiones:</span> {dimensions.height} x {dimensions.width} x {dimensions.length} cm
+                        <span className="font-medium">{t('shipmentCard.dimensions')}:</span> {dimensions.height} x {dimensions.width} x {dimensions.length} cm
                     </p>
-                    <p className="text-gray-600"><span className="font-medium">Peso:</span> {weight} kg</p>
+                    <p className="text-gray-600"><span className="font-medium">{t('shipmentCard.weight')}:</span> {weight} kg</p>
                 </div>
             </div>
 
             {/* Botones de acción */}
             <div className="w-full md:w-1/4 p-4 flex flex-col justify-center space-y-4">
                 <CustomButton
-                    text='Abrir en el mapa'
+                    text={t('shipmentCard.openMapButton')}
                     variant='primary'
                     type='button'
                     onClick={onOpenMap}
                 />
 
                 <CustomButton
-                    text='Ver detalles'
+                    text={t('shipmentCard.viewDetailsButton')}
                     variant='secondary'
                     type='button'
                     onClick={onViewDetails}
                 />
                 
                 <CustomButton
-                    text='Aceptar flete'
+                    text={t('shipmentCard.acceptShipmentButton')}
                     variant='green'
                     type='button'
                     onClick={onAccept}

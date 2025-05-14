@@ -1,9 +1,11 @@
 'use client'
 import CustomDropdown from "@/components/atoms/CustomDropdown";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function DropdownUser() {
     const router = useRouter();
+    const t = useTranslations();
 
     const createOption = () => {
         router.push("/admin/users/create");
@@ -21,18 +23,18 @@ export default function DropdownUser() {
         <>
             {/* Usa el Dropdown */}
             <CustomDropdown
-                buttonText="Menú"
+                buttonText={t('admin.users.dropdown.menu')}
                 options={[
                     {
-                        text: "Crear usuario",
+                        text: t('admin.users.dropdown.createUser'),
                         onClick: createOption,
                     },
                     {
-                        text: "Organizar por rol",
+                        text: t('admin.users.dropdown.sortByRole'),
                         onClick: handleOption2,
                     },
                     {
-                        text: "Organizar por correo",
+                        text: t('admin.users.dropdown.sortByEmail'),
                         onClick: handleOption3,
                     },
                 ]}

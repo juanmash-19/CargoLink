@@ -1,9 +1,11 @@
 'use client'
 import CustomDropdown from "@/components/atoms/CustomDropdown";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function DropdownShipment() {
     const router = useRouter();
+    const t = useTranslations();
 
     const createOption = () => {
         router.push("/admin/users/create");
@@ -21,18 +23,18 @@ export default function DropdownShipment() {
         <>
             {/* Usa el Dropdown */}
             <CustomDropdown
-                buttonText="Menú"
+                buttonText={t('admin.shipments.dropdown.menu')}
                 options={[
                     {
-                        text: "Crear Envio",
+                        text: t('admin.shipments.dropdown.createShipment'),
                         onClick: createOption,
                     },
                     {
-                        text: "Organizar por precio",
+                        text: t('admin.shipments.dropdown.sortByPrice'),
                         onClick: handleOption2,
                     },
                     {
-                        text: "Organizar por fecha de creación",
+                        text: t('admin.shipments.dropdown.sortByCreationDate'),
                         onClick: handleOption3,
                     },
                 ]}

@@ -15,6 +15,7 @@ import Image from "next/image";
 import { UserEdit, Delete, PersonSearch, Clean } from "@/components/atoms/ReactIcons";
 import { verifyPassword } from "@/libs/ServiceUser/api-user";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function AdminUsers(){
     const [users, setUsers] = useState<UsersDAO['users'] | null>(null);
@@ -25,6 +26,7 @@ export default function AdminUsers(){
     const [searchTerm, setSearchTerm] = useState("");
 
     const router = useRouter();  
+    const t = useTranslations();
 
     {/* Seccion para las alertas*/}
     const [showAlert, setShowAlert] = useState(false);
@@ -165,7 +167,7 @@ export default function AdminUsers(){
     return(
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5  bg-white">
-            <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">Gestión de usuarios</h1>
+            <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">{t('admin.users.manage.title')}</h1>
 
             <div className="flex items-center justify-between flex-column flex-wrap md:flex-row pb-4 mx-6">
                 <DropdownUser/>
@@ -179,7 +181,7 @@ export default function AdminUsers(){
                             type="text"
                             id="table-search-users"
                             className="block p-3 ps-10 text-md text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Buscador de usuarios"
+                            placeholder={t('admin.users.manage.searchPlaceholder')}
                             value={searchTerm} // Valor controlado por el estado
                             onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado cuando el usuario escribe
                         />
@@ -189,7 +191,7 @@ export default function AdminUsers(){
                         variant="primary"
                         ariaLabel="search"
                         onClick={handleUserSearch}
-                        tooltipText="Buscar usuario"
+                        tooltipText={t('admin.users.manage.searchTooltip')}
                         className="size-12 mr-3"
                     />
                     <CustomIconButton
@@ -197,7 +199,7 @@ export default function AdminUsers(){
                         variant="secondary"
                         ariaLabel="search"
                         onClick={handleCleanSearch}
-                        tooltipText="Limpiar busqueda"
+                        tooltipText={t('admin.users.manage.clearSearchTooltip')}
                         className="size-12"
                     />
                 </div>
@@ -205,32 +207,10 @@ export default function AdminUsers(){
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
-                        {/* <th scope="col" className="p-4">
-                            <div className="flex items-center">
-                                <input 
-                                    id="checkbox-all-search" 
-                                    type="checkbox" 
-                                    className="w-4 h-4 
-                                    text-blue-600 bg-gray-100 
-                                    border-gray-300 rounded-sm 
-                                    focus:ring-blue-500
-                                    focus:ring-2"
-                                />
-                                <label htmlFor="checkbox-all-search" className="sr-only">checkbox</label>
-                            </div>
-                        </th> */}
-                        <th scope="col" className="px-6 py-3">
-                            Nombre
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Rol
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Telefono
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Acciones
-                        </th>
+                        <th scope="col" className="px-6 py-3">{t('admin.users.manage.nameColumn')}</th>
+                        <th scope="col" className="px-6 py-3">{t('admin.users.manage.roleColumn')}</th>
+                        <th scope="col" className="px-6 py-3">{t('admin.users.manage.phoneColumn')}</th>
+                        <th scope="col" className="px-6 py-3">{t('admin.users.manage.actionsColumn')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -269,7 +249,7 @@ export default function AdminUsers(){
                                                 className="size-10"
                                                 icon={<UserEdit/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Editar" // Texto descriptivo para accesibilidad
-                                                tooltipText="Editar"
+                                                tooltipText={t('admin.users.manage.editTooltip')}
                                             />
                                         </div>
                                         <div>
@@ -283,7 +263,7 @@ export default function AdminUsers(){
                                                 className="size-10"
                                                 icon={<Delete/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Eliminar" // Texto descriptivo para accesibilidad
-                                                tooltipText="Eliminar"
+                                                tooltipText={t('admin.users.manage.deleteTooltip')}
                                             />
                                         </div>
                                     </td>
@@ -294,39 +274,6 @@ export default function AdminUsers(){
                     ) : (
                         <tr className="bg-white border-b border-gray-200 hover:bg-gray-50"></tr>
                     )}  
-                    {/* <tr className="bg-white border-b border-gray-200 hover:bg-gray-50">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <input 
-                                    id="checkbox-table-search-1" 
-                                    type="checkbox" 
-                                    className="w-4 h-4 text-blue-600 
-                                    bg-gray-100 border-gray-300 rounded-sm 
-                                    focus:ring-blue-500
-                                    focus:ring-2"
-                                />
-                                <label htmlFor="checkbox-table-search-1" className="sr-only">checkbox</label>
-                            </div>
-                        </td>
-                        <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
-                            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Jese image"/>
-                            <div className="ps-3">
-                                <div className="text-base font-semibold">Neil Sims</div>
-                                <div className="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
-                        </th>
-                        <td className="px-6 py-4">
-                            React Developer
-                        </td>
-                        <td className="px-6 py-4">
-                            <div className="flex items-center">
-                                <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Online
-                            </div>
-                        </td>
-                        <td className="px-6 py-4">
-                            <a href="#" className="font-medium text-blue-600">Edit user</a>
-                        </td>
-                    </tr> */}
                 </tbody>
             </table>
 
@@ -337,7 +284,7 @@ export default function AdminUsers(){
                     reset(); // Limpiar los campos al cerrar
                     setIsEditModalOpen(false);
                 }}
-                title="Por seguridad, para editar un usuario debe ingresar su contraseña."
+                title={t('admin.users.manage.securityEditModalTitle')}
             >
                 <form onSubmit={handleSubmit(onSubmitEdit)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
@@ -349,8 +296,6 @@ export default function AdminUsers(){
                         {...register("password")}
                         type="password"
                         placeholder='******'
-                        // id="Password"
-                        // name="password"
                         className={`${standarInput} focus:outline-primary-400`}
                         />
                         {errors.password && 
@@ -361,7 +306,7 @@ export default function AdminUsers(){
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('admin.users.manage.verifyButton')}
                             variant="primary"
                             type="submit"
                         />
@@ -376,7 +321,7 @@ export default function AdminUsers(){
                     reset(); // Limpiar los campos al cerrar
                     setIsDeleteModalOpen(false);
                 }}
-                title="Por seguridad, para eliminar un usuario debe ingresar su contraseña."
+                title={t('admin.users.manage.securityDeleteModalTitle')}
             >
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
@@ -388,8 +333,6 @@ export default function AdminUsers(){
                         {...register("password")}
                         type="password"
                         placeholder='******'
-                        // id="Password"
-                        // name="password"
                         className={`${standarInput} focus:outline-primary-400`}
                         />
                         {errors.password && 
@@ -400,7 +343,7 @@ export default function AdminUsers(){
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('admin.users.manage.verifyButton')}
                             variant="primary"
                             type="submit"
                         />
@@ -416,13 +359,13 @@ export default function AdminUsers(){
                     {alertType === 'options' && (
                         <div className="flex gap-2 justify-end">
                             <CustomButton
-                                text="Cancelar"
+                                text={t('admin.users.manage.cancelButton')}
                                 variant="danger"
                                 onClick={() => setShowAlert(false)}
 
                             />
                             <CustomButton
-                                text="Confirmar"
+                                text={t('admin.users.manage.confirmButton')}
                                 variant="green"
                                 onClick={handleDeleteUser}
                             />

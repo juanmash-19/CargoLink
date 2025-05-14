@@ -20,6 +20,8 @@ import { useAuth } from '@/utils/AuthContext';
 
 import { useLoadingStore } from '@/store/LoadingSpinner';
 
+import { useTranslations } from "next-intl";
+
 export default function FormRegister() {
 
     const { login } = useAuth();
@@ -45,6 +47,8 @@ export default function FormRegister() {
     //   const password = watch("password");
     //   const confirmPassword = watch("confirmPassword");
     //   const passwordMatch = confirmPassword === password;
+
+    const t = useTranslations();
     
     const onSubmit: SubmitHandler<RegisterDTO> = async (data) => {
         try {
@@ -73,7 +77,7 @@ export default function FormRegister() {
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
         <div className="col-span-6 sm:col-span-3">
             <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
-            Nombre(s)
+            {t('auth.register.firstName')}
             </label>
 
             <input
@@ -93,7 +97,7 @@ export default function FormRegister() {
 
         <div className="col-span-6 sm:col-span-3">
             <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
-            Apellido(s)
+            {t('auth.register.lastName')}
             </label>
 
             <input
@@ -113,7 +117,7 @@ export default function FormRegister() {
 
         <div className="col-span-6">
             <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> 
-            Correo
+            {t('auth.register.email')}
             </label>
 
             <input
@@ -131,7 +135,7 @@ export default function FormRegister() {
 
         <div className="col-span-6 sm:col-span-3">
             <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-            Contraseña
+            {t('auth.register.password')}
             </label>
 
             <input
@@ -151,7 +155,7 @@ export default function FormRegister() {
 
         <div className="col-span-6 sm:col-span-3">
             <label htmlFor="PasswordConfirmation" className="block text-sm font-medium text-gray-700">
-            Confirmar contraseña
+            {t('auth.register.confirmPassword')}
             </label>
 
             <input
@@ -179,30 +183,29 @@ export default function FormRegister() {
             />
 
             <span className="text-sm text-gray-700">
-            Quiero recibir correos electrónicos sobre eventos, actualizaciones y anuncios de CargoLink.
+            {t('auth.register.marketingAccept')}
             </span>
             </label>
         </div>
 
         <div className="col-span-6">
             <p className="text-sm text-gray-500">
-            Al crear una cuenta, aceptas nuestros
-             <Link href="#" className={`underline ${standarTextLink}`}> términos y condiciones</Link>
-            .
+            {t('auth.register.termsAndConditions')}
+             <Link href="#" className={`underline ${standarTextLink}`}>{t('auth.register.termsLink')}</Link>.
             </p>
         </div>
 
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <CustomButton
-                text='Crear cuenta'
+                text={t('auth.register.createAccountButton')}
                 variant='primary'
                 type='submit'
                 onClick={() => {}}
                 />
 
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-            ¿Ya tienes una cuenta?
-            <Link href="#" className={`underline ${standarTextLink}`}>Ingresa</Link>.
+            {t('auth.register.alreadyHaveAccount')}
+            <Link href="#" className={`underline ${standarTextLink}`}>{t('auth.register.loginLink')}</Link>.
             </p>
         </div>
     </form>

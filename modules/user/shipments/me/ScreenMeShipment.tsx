@@ -7,13 +7,15 @@ import { getShipment, setActivatedShipment, setCancelledShipment } from "@/libs/
 import CustomButton from "@/components/atoms/CustomButton";
 import BasicTextCardProps from "@/components/atoms/BasicTextCard";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function ShipmentDetailPage(){
     const params = useParams();
-    const idShipment = params.shipment;
+    const idShipment = params?.shipment;
     const [shipment, setShipment] = useState<ShipmentDAO['shipment'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
+    const t = useTranslations();
 
     useEffect(() => {
         const fetchShipment = async () => {
@@ -81,13 +83,17 @@ export default function ShipmentDetailPage(){
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h1 className="text-3xl font-bold text-primary-300">Detalles del Flete</h1>
+            <h1 className="text-3xl font-bold text-primary-300">
+                {t('user.shipments.details.title')}
+            </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Columna 1: Información básica */}
                 <div className="space-y-4">
                     {shipment.imageUrl && (
                         <>
-                            <h2 className="text-lg font-semibold text-gray-600">Imagen del Flete</h2>
+                            <h2 className="text-lg font-semibold text-gray-600">
+                                {t('user.shipments.details.image')}
+                            </h2>
                             <div className="flex justify-center">
                                 <img
                                     src={shipment.imageUrl}
@@ -98,12 +104,12 @@ export default function ShipmentDetailPage(){
                         </>
                     )}
                     <BasicTextCardProps
-                        title="Información General"
+                        title={t('user.shipments.details.generalInfo')}
                         subtitles={[
-                            { label: "ID", content: shipment._id },
-                            { label: "Título", content: shipment.title },
-                            { label: "Descripción", content: shipment.description },
-                            { label: "Estado", content: shipment.status },
+                            { label: t('user.shipments.details.id'), content: shipment._id },
+                            { label: t('user.shipments.details.titleg'), content: shipment.title },
+                            { label: t('user.shipments.details.description'), content: shipment.description },
+                            { label: t('user.shipments.details.status'), content: shipment.status },
                         ]}
                     />
                 </div>
@@ -111,39 +117,29 @@ export default function ShipmentDetailPage(){
                 <div className="space-y-4">
 
                     <BasicTextCardProps
-                        title="Direcciones"
+                        title={t('user.shipments.details.addresses')}
                         subtitles={[
-                            { label: "Recogida", content: shipment.pickupAddress },
-                            { label: "Entrega", content: shipment.deliveryAddress },
+                            { label: t('user.shipments.details.pickupAddress'), content: shipment.pickupAddress },
+                            { label: t('user.shipments.details.deliveryAddress'), content: shipment.deliveryAddress },
                         ]}
                     />
                     
-                    {shipment.status === 'pending' ? (
-                        <BasicTextCardProps
-                            title="Detalles Técnicos"
-                            subtitles={[
-                                { label: "Peso", content: `${shipment.weight} kg` },
-                                { label: "Dimensiones", content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
-                            ]}
-                            />
-                    ) : (
-                        <BasicTextCardProps
-                            title="Detalles Técnicos"
-                            subtitles={[
-                                { label: "Peso", content: `${shipment.weight} kg` },
-                                { label: "Dimensiones", content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
-                                { label: "Costo", content: `$ ${shipment.cost}` },
-                            ]}
-                        />
-                    )}
+                    <BasicTextCardProps
+                        title={t('user.shipments.details.technicalDetails')}
+                        subtitles={[
+                            { label: t('user.shipments.details.weight'), content: `${shipment.weight} kg` },
+                            { label: t('user.shipments.details.dimensions'), content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
+                            ...(shipment.status !== 'pending' ? [{ label: t('user.shipments.details.cost'), content: `$ ${shipment.cost}` }] : []),
+                        ]}
+                    />
     
                     {shipment.transporter && (
                         <BasicTextCardProps
-                            title="Transportista"
+                            title={t('user.shipments.details.transporter')}
                             subtitles={[
-                                { label: "Nombre", content: shipment.transporter.name },
-                                { label: "Email", content: shipment.transporter.email },
-                                { label: "Teléfono", content: shipment.transporter.phone },
+                                { label: t('user.shipments.details.transporterName'), content: shipment.transporter.name },
+                                { label: t('user.shipments.details.transporterEmail'), content: shipment.transporter.email },
+                                { label: t('user.shipments.details.transporterPhone'), content: shipment.transporter.phone },
                             ]}
                         />
                     )}
@@ -151,13 +147,13 @@ export default function ShipmentDetailPage(){
                     {shipment.status === 'pending' && (
                         <div>
                             <BasicTextCardProps
-                                title="Confirma el flete"
+                                title={t('user.shipments.details.confirmShipment')}
                                 subtitles={[
-                                    { label: "Costo", content: `$ ${shipment.cost}` },
+                                    { label: t('user.shipments.details.cost'), content: `$ ${shipment.cost}` },
                                 ]}
                             />
                             <CustomButton
-                                text="Confirmar"
+                                text={t('user.shipments.details.confirmButton')}
                                 variant="primary"
                                 onClick={acceptedClick}
                             />
@@ -169,13 +165,13 @@ export default function ShipmentDetailPage(){
                     {shipment.status === 'activated' && (
                         <div>
                             <BasicTextCardProps
-                                title="Cancelar el flete"
+                                title={t('user.shipments.details.cancelShipment')}
                                 subtitles={[
-                                    { label: "Requisitos", content: `Puedes cancelar el flete automaticamente mientras ningun repartidor lo haya aceptado.` },
+                                    { label: t('user.shipments.details.requirements'), content: t('user.shipments.details.cancelRequirements') },
                                 ]}
                             />
                             <CustomButton
-                                text="Cancelar"
+                                text={t('user.shipments.details.cancelButton')}
                                 variant="danger"
                                 onClick={cancelledClick}
                             />

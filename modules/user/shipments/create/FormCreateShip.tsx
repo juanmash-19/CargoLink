@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from 'react';
 import { fetchDepartments, fetchCities } from "@/libs/ColombiaAPI";
 import { DepartmentDAO, CityDAO } from "@/Interfaces/apis/ColombiaAPIInterface";
+import { useTranslations } from "next-intl";
 
 export default function FormCreateShip() {
     const { startLoading, stopLoading } = useLoadingStore();
@@ -35,6 +36,8 @@ export default function FormCreateShip() {
         watch, 
         formState: { errors } 
     } = useForm<ShipmentDTO>();
+
+    const t = useTranslations();
 
     useEffect(() => {
         const loadDepartments = async () => {
@@ -302,10 +305,14 @@ export default function FormCreateShip() {
             </div>
 
             <div>
-                <label htmlFor="dimensions" className="block text-lg font-medium">Dimensiones</label>
+                <label htmlFor="dimensions" className="block text-lg font-medium">
+                    {t('user.shipments.create.dimensions')}
+                </label>
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-4'>
                     <div>
-                        <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Peso (kg)</label>
+                        <label htmlFor="weight" className="block text-sm font-medium text-gray-700">
+                            {t('user.shipments.create.weight')}
+                        </label>
                         <QuantityInput
                             id="weight"
                             name="weight"
@@ -317,7 +324,9 @@ export default function FormCreateShip() {
                     </div>
 
                     <div>
-                        <label htmlFor="height" className="block text-sm font-medium text-gray-700">Alto (cm)</label>
+                        <label htmlFor="height" className="block text-sm font-medium text-gray-700">
+                            {t('user.shipments.create.height')}
+                        </label>
                         <QuantityInput
                             id="height"
                             name="dimensions.height"
@@ -329,7 +338,9 @@ export default function FormCreateShip() {
                     </div>
 
                     <div>
-                        <label htmlFor="width" className="block text-sm font-medium text-gray-700">Ancho (cm)</label>
+                        <label htmlFor="width" className="block text-sm font-medium text-gray-700">
+                            {t('user.shipments.create.width')}
+                        </label>
                         <QuantityInput
                             id="width"
                             name="dimensions.width"
@@ -341,7 +352,9 @@ export default function FormCreateShip() {
                     </div>
 
                     <div>
-                        <label htmlFor="length" className="block text-sm font-medium text-gray-700">Largo (cm)</label>
+                        <label htmlFor="length" className="block text-sm font-medium text-gray-700">
+                            {t('user.shipments.create.length')}
+                        </label>
                         <QuantityInput
                             id="length"
                             name="dimensions.length"

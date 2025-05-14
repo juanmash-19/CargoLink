@@ -1,0 +1,326 @@
+{
+    "auth": {
+        "register": {
+            "title": "Join CargoLink and simplify your shipments! 🚚",
+            "description": "Join CargoLink and simplify freight transportation. Whether you're a customer looking for the ideal vehicle or a transporter with available space, CargoLink has the perfect solution. Register for free and start connecting today!",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm Password",
+            "marketingAccept": "I want to receive emails about events, updates, and announcements from CargoLink.",
+            "termsAndConditions": "By creating an account, you agree to our",
+            "termsLink": "terms and conditions",
+            "createAccountButton": "Create Account",
+            "alreadyHaveAccount": "Already have an account?",
+            "loginLink": "Log in"
+        },
+        "login": {
+            "title": "Log In",
+            "noAccount": "Don't have an account?",
+            "createAccount": "Create one",
+            "email": "Email",
+            "password": "Password",
+            "forgotPassword": "Forgot your password?",
+            "continueButton": "Continue"
+        }
+    },
+    "admin": {
+        "users": {
+            "dropdown": {
+                "menu": "Menu",
+                "createUser": "Create user",
+                "sortByRole": "Sort by role",
+                "sortByEmail": "Sort by email"
+            },
+            "create": {
+                "title": "Create user",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+                "phone": "Phone (optional)",
+                "password": "Password",
+                "confirmPassword": "Confirm Password",
+                "role": "Role",
+                "selectRole": "Select a role",
+                "roles": {
+                    "admin": "Administrator",
+                    "transporter": "Transporter",
+                    "user": "User"
+                },
+                "createButton": "Create user"
+            },
+            "edit": {
+                "detailsTitle": "User Details",
+                "generalInfo": "General Information",
+                "id": "ID",
+                "email": "Email",
+                "phone": "Phone",
+                "names": "Names",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "role": "Role",
+                "roleLabel": "Role",
+                "editTitle": "Edit User",
+                "selectRole": "Select a role",
+                "roles": {
+                    "admin": "Administrator",
+                    "transporter": "Transporter",
+                    "user": "User"
+                },
+                "password": "Password",
+                "saveButton": "Save Changes",
+                "backButton": "Back"
+            },
+            "manage": {
+                "title": "User Management",
+                "searchPlaceholder": "User search",
+                "searchTooltip": "Search user",
+                "clearSearchTooltip": "Clear search",
+                "nameColumn": "Name",
+                "roleColumn": "Role",
+                "phoneColumn": "Phone",
+                "actionsColumn": "Actions",
+                "editTooltip": "Edit",
+                "deleteTooltip": "Delete",
+                "securityEditModalTitle": "For security, to edit a user you must enter your password.",
+                "securityDeleteModalTitle": "For security, to delete a user you must enter your password.",
+                "verifyButton": "Verify",
+                "cancelButton": "Cancel",
+                "confirmButton": "Confirm"
+            }
+        },
+        "shipments": {
+            "dropdown": {
+                "menu": "Menu",
+                "createShipment": "Create Shipment",
+                "sortByPrice": "Sort by price",
+                "sortByCreationDate": "Sort by creation date"
+            },
+            "details": {
+                "title": "Shipment Details",
+                "image": "Shipment Image",
+                "generalInfo": "General Information",
+                "id": "ID",
+                "titleg": "Title",
+                "description": "Description",
+                "status": "Status",
+                "addresses": "Addresses",
+                "pickupAddress": "Pickup",
+                "deliveryAddress": "Delivery",
+                "technicalDetails": "Technical Details",
+                "weight": "Weight",
+                "dimensions": "Dimensions",
+                "transporter": "Transporter",
+                "transporterName": "Name",
+                "transporterEmail": "Email",
+                "transporterPhone": "Phone",
+                "confirmButton": "Confirm",
+                "cancelButton": "Cancel",
+                "backButton": "Back"
+            },
+            "edit": {
+                "title": "Edit Shipment",
+                "titleLabel": "Title",
+                "pickupAddress": "Pickup Address",
+                "deliveryAddress": "Delivery Address",
+                "weight": "Weight",
+                "dimensions": "Dimensions",
+                "height": "Height (cm)",
+                "width": "Width (cm)",
+                "length": "Length (cm)",
+                "description": "Description",
+                "status": "Status",
+                "statuses": {
+                    "pending": "Pending",
+                    "activated": "Activated",
+                    "accepted": "Accepted",
+                    "inTransit": "In Transit",
+                    "delivered": "Delivered",
+                    "canceled": "Canceled"
+                },
+                "saveButton": "Save Changes",
+                "backButton": "Back"
+            },
+            "manage": {
+                "title": "Shipment Management",
+                "searchPlaceholder": "Shipment search",
+                "searchTooltip": "Search shipment",
+                "clearSearchTooltip": "Clear search",
+                "titleColumn": "Title",
+                "statusColumn": "Current Status",
+                "optionsColumn": "Options",
+                "detailsTooltip": "Details",
+                "editTooltip": "Edit",
+                "deleteTooltip": "Delete",
+                "securityDetailsModalTitle": "For security, to view shipment details you must enter your password.",
+                "securityEditModalTitle": "For security, to edit a shipment you must enter your password.",
+                "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",
+                "verifyButton": "Verify",
+                "cancelButton": "Cancel",
+                "confirmButton": "Confirm"
+            }
+        },
+        "dashboard": {
+            "title": "Administrator",
+            "totalShipments": "Total Shipments",
+            "totalUsers": "Total Users",
+            "pendingReports": "Pending Reports",
+            "shipmentsChart": "Shipments Chart",
+            "usersChart": "Users Chart",
+            "reportsChart": "Reports Chart"
+        }
+    },
+    "home": {
+        "aboutUs": {
+            "developers": "DEVELOPERS",
+            "engineers": "Engineers",
+            "santiagoName": "Santiago Castaño",
+            "santiagoRole": "Backend Developer",
+            "juanMartinName": "Juan Martin",
+            "juanMartinRole": "Frontend Developer",
+            "juanDiegoName": "Juan Diego",
+            "juanDiegoRole": "Data Engineer"
+        },
+        "cargoLinkInfo": {
+            "title": "What is Cargo Link?",
+            "description1": "Cargo Link is a comprehensive shipping and logistics platform designed for businesses and individuals. It allows you to manage, track, and optimize the transportation of goods quickly, safely, and efficiently. Whether you need to make a local or national shipment, our technology simplifies the entire process in one place.",
+            "description2": "With smart tools and personalized attention, we guarantee a hassle-free experience for both carriers and customers. Cargo Link is the ideal ally for your logistics operations!",
+            "seeMoreButton": "See more"
+        },
+        "features": {
+            "title": "Get started with our application...",
+            "clientTitle": "Client",
+            "clientDescription": "As a client, you can request shipments, track your packages in real-time, choose from multiple carriers, and manage everything from a simple and fast interface.",
+            "transporterTitle": "Transporter",
+            "transporterDescription": "As a transporter, you can accept orders, optimize your routes, receive secure payments, and access management tools to enhance your logistics operation.",
+            "seeMoreButton": "See more"
+        },
+        "startPage": {
+            "welcome": "Welcome to CargoLink",
+            "description": "We are a company dedicated to logistics and freight transportation, offering efficient and secure solutions for your shipments. With our platform, you can manage your shipments easily and quickly, ensuring customer satisfaction.",
+            "startNowButton": "Start now",
+            "seeMoreButton": "See more"
+        }
+    },
+    "transporter": {
+        "shipments": {
+            "available": {
+                "title": "Available Shipments",
+                "noShipments": "No shipments available..."
+            }
+        },
+        "dashboard": {
+            "title": "Transporter",
+            "availableShipments": "Available Shipments",
+            "activeShipments": "Active Shipments",
+            "allShipments": "All Shipments",
+            "completedShipmentsHistory": "Completed Shipments History"
+        }
+    },
+    "user": {
+        "shipments": {
+            "create": {
+                "dimensions": "Dimensions",
+                "weight": "Weight (kg)",
+                "height": "Height (cm)",
+                "width": "Width (cm)",
+                "length": "Length (cm)",
+                "infoText": "At the same time, the fact that we are wholly owned and totally independent from manufacturers and other group control gives you confidence that we will only recommend what is right for you.",
+                "contactNumber": "0151 475 4450",
+                "address": "282 Kevin Brook, Imogeneborough, CA 58517"
+            },
+            "details": {
+                "title": "Shipment Details",
+                "image": "Shipment Image",
+                "generalInfo": "General Information",
+                "id": "ID",
+                "titleg": "Title",
+                "description": "Description",
+                "status": "Status",
+                "addresses": "Addresses",
+                "pickupAddress": "Pickup",
+                "deliveryAddress": "Delivery",
+                "technicalDetails": "Technical Details",
+                "weight": "Weight",
+                "dimensions": "Dimensions",
+                "cost": "Cost",
+                "transporter": "Transporter",
+                "transporterName": "Name",
+                "transporterEmail": "Email",
+                "transporterPhone": "Phone",
+                "confirmButton": "Confirm",
+                "cancelButton": "Cancel"
+            },
+            "manage": {
+                "title": "My Shipments",
+                "createButton": "Create New Shipment",
+                "noShipments": "You have no created shipments",
+                "createFirstButton": "Create First Shipment"
+            }
+        },
+        "account": {
+            "settingsTitle": "Account Settings",
+            "welcomeMessage": "Welcome {{userName}}! Here you can change your password, email, or personal information.",
+            "emailTitle": "Email",
+            "emailMessage": "Your email address is {{userEmail}}",
+            "personalInfoTitle": "Personal Information",
+            "nameLabel": "Name",
+            "lastNameLabel": "Last Name",
+            "phoneLabel": "Phone",
+            "saveChangesButton": "Save changes",
+            "passwordTitle": "Password",
+            "currentPasswordLabel": "Current password",
+            "newPasswordLabel": "New password",
+            "savePasswordButton": "Save password",
+            "deleteAccountTitle": "Delete Account",
+            "deleteAccountWarning": "Deleting your account is a permanent and irreversible action. All your data will be deleted and cannot be recovered. Please make sure you want to proceed before continuing.",
+            "deleteAccountButton": "Delete my account",
+            "deleteAccountModalTitle": "For security, before deleting your account you must enter your password.",
+            "verifyButton": "Verify",
+            "cancelButton": "Cancel",
+            "confirmDeleteButton": "Delete"
+        }
+    },
+    "shipmentCard": {
+        "imageAlt": "Shipment",
+        "distance": "Distance",
+        "totalCharge": "Total Charge",
+        "totalDistance": "Total Distance",
+        "profit": "Profit",
+        "dimensions": "Dimensions",
+        "weight": "Weight",
+        "openMapButton": "Open in Map",
+        "viewDetailsButton": "View Details",
+        "acceptShipmentButton": "Accept Shipment"
+    },
+    "header": {
+        "openUserMenu": "Open user menu",
+        "userImageAlt": "User profile picture",
+        "profile": "Profile",
+        "settings": "Settings",
+        "information": "Information",
+        "logout": "Log out",
+        "register": "Register",
+        "login": "Log in",
+        "openMainMenu": "Open main menu",
+        "home": "Home",
+        "services": "Services",
+        "whatWeAre": "What we are",
+        "aboutUs": "About us"
+    },
+    "footer": {
+        "logoAlt": "FlowBite Logo",
+        "companyName": "Cargo Link",
+        "resources": "Resources",
+        "flowbite": "Flowbite",
+        "tailwind": "Tailwind CSS",
+        "followUs": "Follow us",
+        "github": "Github",
+        "discord": "Discord",
+        "legal": "Legal",
+        "privacyPolicy": "Privacy Policy",
+        "termsConditions": "Terms & Conditions",
+        "rightsReserved": "All Rights Reserved."
+    }
+}

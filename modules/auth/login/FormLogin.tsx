@@ -20,11 +20,15 @@ import { useAuth } from '@/utils/AuthContext';
 
 import { useLoadingStore } from '@/store/LoadingSpinner';
 
+import { useTranslations } from "next-intl";
+
 export default function FormLogin() {
     
     const { startLoading, stopLoading } = useLoadingStore();
 
     const { login } = useAuth();
+
+    const t = useTranslations();
 
     const { 
         register, 
@@ -61,7 +65,7 @@ export default function FormLogin() {
 
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-1 text-sm">
-        <label htmlFor="email" className="block">Correo Electronico</label>
+        <label htmlFor="email" className="block">{t('auth.login.email')}</label>
         <input {...register("email")} placeholder="@" className={`${standarInput} focus:outline-secondary-200`} />
         {errors.email &&
           <div className="bg-red-100 text-red-800 p-4 rounded-lg" role="alert">
@@ -72,7 +76,7 @@ export default function FormLogin() {
         }
       </div>
       <div className="space-y-1 text-sm">
-        <label htmlFor="password" className="block">Contraseña</label>
+        <label htmlFor="password" className="block">{t('auth.login.password')}</label>
         <input {...register("password")} type="password" placeholder="****" className={`${standarInput} focus:outline-secondary-200`} />
         {errors.password &&
           // <p className={`${standarErrorInput}`}>{errors.password.message}</p>
@@ -82,11 +86,11 @@ export default function FormLogin() {
           </div>
         }
         <div className="flex justify-end text-xs ">
-          <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">¿Olvidaste tu contraseña?</Link>
+          <Link className={`underline ${standarTextLink}`} rel="noopener noreferrer" href="#">{t('auth.login.forgotPassword')}</Link>
         </div>
       </div>
       <CustomButton
-        text='Continuar'
+        text={t('auth.login.continueButton')}
         variant='secondary'
         type='submit'
         onClick={() => { }}
