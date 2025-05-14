@@ -1,23 +1,17 @@
-'use client'
 
+'use client'
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from "react-hook-form";
-// import {z} from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { loginSchemes } from '@/Schemes/LoginSchemes';
-
 import CustomButton from '@/components/atoms/CustomButton';
-
+import CustomAlert from '@/components/atoms/CustomAlert'; // Nueva importación
 import { standarInput, standarTextLink, standarErrorInput } from '@/utils/Tokens';
-
 import { LoginDTO } from '@/Interfaces/auth/LoginInterface';
-
 import { loginUser } from '@/libs/auth/api-login';
-
 import { useAuth } from '@/utils/AuthContext';
-
 import { useLoadingStore } from '@/store/LoadingSpinner';
 
 import { useTranslations } from "next-intl";
@@ -29,11 +23,15 @@ export default function FormLogin() {
     const { login } = useAuth();
 
     const t = useTranslations();
+    // Estados para alertas
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
 
     const { 
         register, 
         handleSubmit, 
-        watch, formState: { errors } 
+        formState: { errors } 
       } = useForm<LoginDTO>({
         resolver: zodResolver(loginSchemes),
         // mode : "onBlur",     
@@ -51,17 +49,21 @@ export default function FormLogin() {
         const response = await loginUser(data);
         
         if (response.token) {
-          login(response.token); // AuthContext ya maneja el rol
+            login(response.token);
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Login failed:', error);
-        alert('Error en el inicio de sesión');
-      } finally {
+        setAlertMessage('Error en el inicio de sesión');
+        setAlertType('error');
+        setShowAlert(true);
+    } finally {
         stopLoading();
-      }
+    }
     };
     
     return(
+
+      <>
 
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-1 text-sm">
@@ -96,5 +98,14 @@ export default function FormLogin() {
         onClick={() => { }}
       />
     </form>
+      {showAlert && (
+          <CustomAlert
+            message={alertMessage}
+            type={alertType}
+            onClose={() => setShowAlert(false)}
+          />
+        )
+      }
+    </>
   );
 }

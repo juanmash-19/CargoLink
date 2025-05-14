@@ -9,6 +9,7 @@ import CustomButton from "@/components/atoms/CustomButton";
 import BasicTextCardProps from "@/components/atoms/BasicTextCard";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import CustomAlert from "@/components/atoms/CustomAlert";
 
 export default function ScreenMeAdminShipments(){
     const params = useParams();
@@ -18,47 +19,52 @@ export default function ScreenMeAdminShipments(){
     const router = useRouter();
     const t = useTranslations();
 
+    // Estados para las alertas
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
+
     useEffect(() => {
         const fetchShipment = async () => {
-            if (!idShipment) return; // Si no hay ID, no hacemos nada
+            if (!idShipment) return;
 
             try {
-                startLoading(); // Activa el spinner de carga
+                startLoading();
                 const response = await getShipmentById(idShipment as string);
 
                 if (response.shipment._id) {
-                    setShipment(response.shipment); // Actualiza el estado con los datos del envío
+                    setShipment(response.shipment);
                 } else {
-                    console.error('No se encontró el envío');
-                    alert('No se encontró el envío');
+                    setAlertMessage('No se encontró el envío');
+                    setAlertType('error');
+                    setShowAlert(true);
                 }
             } catch (error) {
-                console.error('Error al obtener el envío:', error);
-                alert('Error al obtener el envío');
+                setAlertMessage('Error al obtener el envío');
+                setAlertType('error');
+                setShowAlert(true);
             } finally {
-                stopLoading(); // Desactiva el spinner de carga
+                stopLoading();
             }
         };
 
-        fetchShipment(); // Ejecuta la función para obtener los datos
-    }, [idShipment, startLoading, stopLoading]); // Dependencias: id, startLoading, stopLoading
-
-    if (!shipment) {
-        return <p>Cargando...</p>; // Muestra un mensaje de carga si no hay datos
-    }
+        fetchShipment();
+    }, [idShipment, startLoading, stopLoading]);
 
     const acceptedClick = async () => {
         try{
             startLoading();
             const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                alert("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.")
-                router.push('/')
+                setAlertMessage("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            
-            console.error('Error al actualizar el estado del envío:', error);
-            alert('Error al actualizar el estado el envío');
+            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertType('error');
+            setShowAlert(true);
         } finally{
             stopLoading();
         }
@@ -69,13 +75,16 @@ export default function ScreenMeAdminShipments(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                alert("¡Flete cancelado!")
-                router.push('/')
+                setAlertMessage("¡Flete cancelado!");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            console.error('Error al actualizar el estado del envío:', error);
-            alert('Error al actualizar el estado el envío');
+            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertType('error');
+            setShowAlert(true);
         }
         finally{
             stopLoading();
@@ -84,6 +93,10 @@ export default function ScreenMeAdminShipments(){
 
     const handleBack = () =>{
         router.back()
+    }
+
+    if (!shipment) {
+        return <p>Cargando...</p>;
     }
 
     return (
@@ -116,7 +129,6 @@ export default function ScreenMeAdminShipments(){
                 </div>
     
                 <div className="space-y-4">
-
                     <BasicTextCardProps
                         title={t('admin.shipments.details.addresses')}
                         subtitles={[
@@ -171,8 +183,6 @@ export default function ScreenMeAdminShipments(){
                         </div>
                     )}
 
-                    
-
                     {shipment.status === 'activated' && (
                         <div>
                             <BasicTextCardProps
@@ -188,7 +198,6 @@ export default function ScreenMeAdminShipments(){
                             />
                         </div>
                     )}
-
                     
                     <CustomButton
                         text={t('admin.shipments.details.backButton')}
@@ -196,9 +205,16 @@ export default function ScreenMeAdminShipments(){
                         type='button'
                         onClick={handleBack}
                     />
-
                 </div>
             </div>
+
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
         </div>
     );
 }

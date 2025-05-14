@@ -11,7 +11,6 @@ import { getUser, updateUser, changePassword, verifyPassword, deleteUser } from 
 import { standarTextLink } from "@/utils/Tokens";
 import CustomModal from "@/components/molecules/CustomModal";
 import CustomAlert from "@/components/atoms/CustomAlert";
-import { GrAlert } from "react-icons/gr";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 

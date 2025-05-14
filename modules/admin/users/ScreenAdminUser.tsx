@@ -44,7 +44,9 @@ export default function AdminUsers(){
         reset();
         setIsDeleteModalOpen(false);
         if (!userIdAction) {
-            alert('No se ha seleccionado ningún usuario');
+            setAlertMessage('No se ha seleccionado ningún usuario');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
     
@@ -59,7 +61,9 @@ export default function AdminUsers(){
         reset();
         setIsDeleteModalOpen(false);
         if (!userIdAction) {
-            alert('No se ha seleccionado ningún usuario');
+            setAlertMessage('No se ha seleccionado ningún usuario');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
     
@@ -123,12 +127,14 @@ export default function AdminUsers(){
                 if (response.users) {
                     setUsers(response.users);
                 } else {
-                    console.error('No se encontró usuarios');
-                    alert('No se encontró usuarios');
+                    setAlertMessage('No se encontró usuarios');
+                    setAlertType('error');
+                    setShowAlert(true);
                 }
             } catch (error) {
-                console.error('Error al obtener los usuarios:', error);
-                alert(error);
+                setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los usuarios');
+                setAlertType('error');
+                setShowAlert(true);
             } finally {
                 stopLoading();
             }
@@ -147,13 +153,14 @@ export default function AdminUsers(){
             if (response.users) {
                 setUsers(response.users);
             } else {
-                console.error('No se encontró usuarios');
-                alert('No se encontró usuarios');
+                setAlertMessage('No se encontró usuarios');
+                setAlertType('error');
+                setShowAlert(true);
             }
         } catch (error) {
-            console.error('Error al obtener los usuarios:', error);
-            alert(error);
-
+            setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los usuarios');
+            setAlertType('error');
+            setShowAlert(true);
         } finally {
             stopLoading();
         }

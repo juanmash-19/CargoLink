@@ -8,6 +8,7 @@ import CustomButton from "@/components/atoms/CustomButton";
 import BasicTextCardProps from "@/components/atoms/BasicTextCard";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import CustomAlert from "@/components/atoms/CustomAlert";
 
 export default function ShipmentDetailPage(){
     const params = useParams();
@@ -17,25 +18,32 @@ export default function ShipmentDetailPage(){
     const router = useRouter();
     const t = useTranslations();
 
+    // Estados para alertas
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
+
     useEffect(() => {
         const fetchShipment = async () => {
-            if (!idShipment) return; // Si no hay ID, no hacemos nada
+            if (!idShipment) return;
 
             try {
-                startLoading(); // Activa el spinner de carga
+                startLoading();
                 const response = await getShipment(idShipment as string);
 
                 if (response.shipment._id) {
-                    setShipment(response.shipment); // Actualiza el estado con los datos del envío
+                    setShipment(response.shipment);
                 } else {
-                    console.error('No se encontró el envío');
-                    alert('No se encontró el envío');
+                    setAlertMessage('No se encontró el envío');
+                    setAlertType('error');
+                    setShowAlert(true);
                 }
             } catch (error) {
-                console.error('Error al obtener el envío:', error);
-                alert('Error al obtener el envío');
+                setAlertMessage('Error al obtener el envío');
+                setAlertType('error');
+                setShowAlert(true);
             } finally {
-                stopLoading(); // Desactiva el spinner de carga
+                stopLoading();
             }
         };
 
@@ -51,13 +59,15 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                alert("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.")
-                router.push('/')
+                setAlertMessage("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            
-            console.error('Error al actualizar el estado del envío:', error);
-            alert('Error al actualizar el estado el envío');
+            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertType('error');
+            setShowAlert(true);
         } finally{
             stopLoading();
         }
@@ -68,13 +78,16 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                alert("¡Flete cancelado!")
-                router.push('/')
+                setAlertMessage("¡Flete cancelado!");
+                setAlertType('success');
+                setShowAlert(true);
+                setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            console.error('Error al actualizar el estado del envío:', error);
-            alert('Error al actualizar el estado el envío');
+            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertType('error');
+            setShowAlert(true);
         }
         finally{
             stopLoading();
@@ -182,6 +195,13 @@ export default function ShipmentDetailPage(){
 
                 </div>
             </div>
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
         </div>
     );
 }

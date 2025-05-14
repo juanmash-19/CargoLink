@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { fetchDepartments, fetchCities } from "@/libs/ColombiaAPI";
 import { DepartmentDAO, CityDAO } from "@/Interfaces/apis/ColombiaAPIInterface";
 import { useTranslations } from "next-intl";
+import CustomAlert from "@/components/atoms/CustomAlert";
 
 export default function FormCreateShip() {
     const { startLoading, stopLoading } = useLoadingStore();
@@ -28,6 +29,11 @@ export default function FormCreateShip() {
     const [deliveryCities, setDeliveryCities] = useState<CityDAO[]>([]);
     const [deliveryDepartment, setDeliveryDepartment] = useState<{ id: string; name: string } | null>(null);
     const [deliveryCity, setDeliveryCity] = useState("");
+
+    // Estados para alertas
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
 
     const { 
         register, 
@@ -116,7 +122,9 @@ export default function FormCreateShip() {
 
     const handleUploadImage = async () => {
         if (!selectedImage) {
-            alert('Por favor, selecciona una imagen.');
+            setAlertMessage('Por favor, selecciona una imagen.');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
 
@@ -126,10 +134,14 @@ export default function FormCreateShip() {
             setImageUrl(uploadedImageUrl);
             setValue('imageUrl', uploadedImageUrl);
             setIsImageUploaded(true);
-            alert('Imagen cargada correctamente.');
+            setAlertMessage('Imagen cargada correctamente.');
+            setAlertType('success');
+            setShowAlert(true);
         } catch (error) {
             console.error('Error al cargar la imagen:', error);
-            alert('Error al cargar la imagen');
+            setAlertMessage('Error al cargar la imagen');
+            setAlertType('error');
+            setShowAlert(true);
         } finally {
             stopLoading();
         }
@@ -137,12 +149,16 @@ export default function FormCreateShip() {
 
     const onSubmit: SubmitHandler<ShipmentDTO> = async (data) => {
         if (!isImageUploaded) {
-            alert('Por favor, carga la imagen primero.');
+            setAlertMessage('Por favor, carga la imagen primero.');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
 
         if (!pickupDepartment || !pickupCity || !deliveryDepartment || !deliveryCity) {
-            alert('Por favor, selecciona departamento y ciudad para recogida y destino.');
+            setAlertMessage('Por favor, selecciona departamento y ciudad para recogida y destino.');
+            setAlertType('error');
+            setShowAlert(true);
             return;
         }
 
@@ -163,12 +179,17 @@ export default function FormCreateShip() {
             const response = await createShipment(data);
 
             if (response.shipment._id) {
-                alert(response.message);
+                //setAlertMessage(response.message);
+                setAlertMessage('El flete se creo exitosamente');
+                setAlertType('success');
+                setShowAlert(true);
                 router.replace(`/user/shipments/me/${response.shipment._id}`);
             }
         } catch (error) {
             console.error('Error al crear el flete:', error);
-            alert('Error al crear el flete');
+            setAlertMessage('Error al crear el flete');
+            setAlertType('error');
+            setShowAlert(true);
         } finally {
             stopLoading();
         }
@@ -432,6 +453,13 @@ export default function FormCreateShip() {
                         disabled={!isImageUploaded}
                 />
             </div>
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                />
+            )}
         </form>
     );
 }

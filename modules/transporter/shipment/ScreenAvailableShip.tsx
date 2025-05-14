@@ -7,12 +7,18 @@ import { getAvailableShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from "next-intl";
+import CustomAlert from '@/components/atoms/CustomAlert';
 
 export default function ShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
     const t = useTranslations();
+    
+    // Estados para alertas
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
 
     useEffect(() => {
         const fetchShipment = async () => {
@@ -21,22 +27,23 @@ export default function ShipmentsPage() {
                 const response = await getAvailableShipments();
 
                 if (response.shipments) {
-                    setShipments(response.shipments); // Actualiza el estado con los datos del envío
+                    setShipments(response.shipments);
                 } else {
-                    console.error('No se encontró el envío');
-                    alert('No se encontró el envío');
+                    setAlertMessage('No se encontró el envío');
+                    setAlertType('error');
+                    setShowAlert(true);
                 }
             } catch (error) {
-                console.error('Error al obtener los envios:', error);
-                alert('Error al obtener los envios');
+                setAlertMessage('Error al obtener los envios');
+                setAlertType('error');
+                setShowAlert(true);
             } finally {
-                stopLoading(); // Desactiva el spinner de carga
+                stopLoading();
             }
         };
 
-        fetchShipment(); // Ejecuta la función para obtener los datos
-
-    }, [startLoading, stopLoading]); // Dependencias: startLoading, stopLoading
+        fetchShipment();
+    }, [startLoading, stopLoading]);
 
     const handleOpenMap = () => {
         console.log("Abrir en el mapa");
@@ -61,12 +68,12 @@ export default function ShipmentsPage() {
                     </h1>
                     {shipments.map((shipment) => (
                         <ShipmentCard
-                            key={shipment.shipment._id} // Usar un ID único en lugar del índice
+                            key={shipment.shipment._id}
                             title={shipment.shipment.title}
                             imageUrl={shipment.shipment.imageUrl}
-                            distance= {5}
+                            distance={5}
                             totalCharge={shipment.shipment.cost}
-                            totalDistance= {5}
+                            totalDistance={5}
                             profit={shipment.shipment.cost}
                             dimensions={shipment.shipment.dimensions}
                             weight={shipment.shipment.weight}
@@ -82,6 +89,14 @@ export default function ShipmentsPage() {
                         {t('transporter.shipments.available.noShipments')}
                     </h1>
                 </>
+            )}
+
+            {showAlert && (
+                <CustomAlert
+                    message={alertMessage}
+                    type={alertType}
+                    onClose={() => setShowAlert(false)}
+                />
             )}
         </div>
     );
