@@ -346,7 +346,8 @@
             "title": "Qu'est-ce que Cargo Link ?",
             "description1": "Cargo Link est une plateforme complète d'expédition et de logistique conçue pour les entreprises et les particuliers. Elle permet de gérer, suivre et optimiser le transport de marchandises rapidement, en toute sécurité et efficacement. Que vous ayez besoin d'effectuer une expédition locale ou nationale, notre technologie simplifie tout le processus en un seul endroit.",
             "description2": "Avec des outils intelligents et une attention personnalisée, nous garantissons une expérience sans tracas pour les transporteurs et les clients. Cargo Link est l'allié idéal pour vos opérations logistiques !",
-            "seeMoreButton": "Voir plus"
+            "seeMoreButton": "Voir plus",
+            "deliveryImageUrl": "Repartidor_France.png"
         },
         "features": {
             "title": "Commencez avec notre application...",
