@@ -62,7 +62,7 @@ const FeaturesHomePage = () => {
                     {/* Imagen a la derecha */}
                     <div className="flex justify-center">
                         <Image
-                            src="/images/RepartidorCargoLink.png"
+                            src={`/images/${t('home.features.RepartidorCargoLinkImageUrl')}`}
                             alt="Camión de reparto"
                             width={500}
                             height={500}

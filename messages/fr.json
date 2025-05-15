@@ -355,7 +355,8 @@
             "clientDescription": "En tant que client, vous pouvez demander des envois, suivre vos colis en temps réel, choisir parmi plusieurs transporteurs et tout gérer depuis une interface simple et rapide.",
             "transporterTitle": "Transporteur",
             "transporterDescription": "En tant que transporteur, vous pouvez accepter des commandes, optimiser vos itinéraires, recevoir des paiements sécurisés et accéder à des outils de gestion pour améliorer votre opération logistique.",
-            "seeMoreButton": "Voir plus"
+            "seeMoreButton": "Voir plus",
+            "RepartidorCargoLinkImageUrl": "frisby_fr.png"
         },
         "startPage": {
             "welcome": "Bienvenue sur CargoLink",
