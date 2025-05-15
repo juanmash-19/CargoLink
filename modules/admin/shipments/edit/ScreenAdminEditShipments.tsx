@@ -11,12 +11,13 @@ import CustomAlert from "@/components/atoms/CustomAlert";
 import QuantityInput from "@/components/molecules/QuantityInput";
 import { ShipmentEditScheme } from "@/Schemes/adminSchemes/ShipmentEditScheme";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 
 export default function ScreenAdminEditShipment(){
 
+    const t = useTranslations();
     const params = useParams();
     const idShipment = params.shipment;
-    // const [ shipment, setShipment ] = useState<ShipmentDAO['shipment'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
 
     const router = useRouter();
@@ -72,7 +73,6 @@ export default function ScreenAdminEditShipment(){
                 setOriginalWidth(dimensions.width);
                 setOriginalLength(dimensions.length);
 
-                // setValue("imageUrl", imageUrl);
                 setValue("pickupAddress", pickupAddress);
                 setValue("deliveryAddress", deliveryAddress);
                 setValue("title", title);
@@ -106,7 +106,6 @@ export default function ScreenAdminEditShipment(){
 
     const onSubmit: SubmitHandler<ShipmentDTO> = async (data) => {
         const updatedFields: Partial<ShipmentDTO> = {};
-        // if (originalImageUrl !== data.imageUrl) updatedFields.imageUrl = data.imageUrl;
         if (originalPickupAddress !== data.pickupAddress) updatedFields.pickupAddress = data.pickupAddress;
         if (originalDeliveryAddress !== data.deliveryAddress) updatedFields.deliveryAddress = data.deliveryAddress;
         if (originalTitle !== data.title) updatedFields.title = data.title;
@@ -137,7 +136,6 @@ export default function ScreenAdminEditShipment(){
         }
     }
 
-    // const watchImageUrl = watch("imageUrl");
     const watchTitle = watch("title");
     const watchPickupAddress = watch("pickupAddress");
     const watchDeliveryAddress = watch("deliveryAddress");
@@ -148,7 +146,6 @@ export default function ScreenAdminEditShipment(){
     const watchWidth = watch("dimensions.width");
     const watchLength = watch("dimensions.length");
 
-    // const isImgeUrlModified = originalImageUrl !== null && watchImageUrl !== originalImageUrl;
     const isPickupAddressModified = originalPickupAddress !== null && watchPickupAddress !== originalPickupAddress;
     const isDeliveryAddressModified = originalDeliveryAddress !== null && watchDeliveryAddress !== originalDeliveryAddress;
     const isTitleModified = originalTitle !== null && watchTitle !== originalTitle;
@@ -162,11 +159,11 @@ export default function ScreenAdminEditShipment(){
     return(
         <div className="max-w-screen-sm mx-auto w-3/4 md:w-3/4 mt-11 mb-3">
             <div className="">
-                <h1 className="text-3xl font-bold text-secondary-200">Editar envio</h1>
+                <h1 className="text-3xl font-bold text-secondary-200">{t('admin.shipments.edit.title')}</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
                     <div className="col-span-6">
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                            Titulo
+                            {t('admin.shipments.edit.titleLabel')}
                         </label>
 
                         <input
@@ -183,7 +180,7 @@ export default function ScreenAdminEditShipment(){
 
                     <div className="col-span-6">
                         <label htmlFor="pickipAddress" className="block text-sm font-medium text-gray-700">
-                            Dirección de recogida
+                            {t('admin.shipments.edit.pickupAddress')}
                         </label>
 
                         <input
@@ -200,7 +197,7 @@ export default function ScreenAdminEditShipment(){
 
                     <div className="col-span-6">
                         <label htmlFor="deliveryAddress" className="block text-sm font-medium text-gray-700"> 
-                            Direccion de entrega
+                            {t('admin.shipments.edit.deliveryAddress')}
                         </label>
 
                         <input
@@ -217,7 +214,7 @@ export default function ScreenAdminEditShipment(){
 
                     <div className="col-span-6">
                         <label htmlFor="weight" className="block text-sm font-medium text-gray-700">
-                            Peso
+                            {t('admin.shipments.edit.weight')}
                         </label>
                         <input
                         {...register("weight")}
@@ -232,10 +229,10 @@ export default function ScreenAdminEditShipment(){
                     </div>
 
                     <div className="col-span-6">
-                        <label htmlFor="dimensions" className="block text-lg font-medium">Dimensiones</label>
+                        <label htmlFor="dimensions" className="block text-lg font-medium">{t('admin.shipments.edit.dimensions')}</label>
                         <div className='grid grid-cols-2 gap-4 sm:grid-cols-4'>
                             <div>
-                                <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Peso (kg)</label>
+                                <label htmlFor="weight" className="block text-sm font-medium text-gray-700">{t('admin.shipments.edit.weight')}</label>
                                 <QuantityInput
                                     id="weight"
                                     name="weight"
@@ -248,7 +245,7 @@ export default function ScreenAdminEditShipment(){
                             </div>
         
                             <div>
-                                <label htmlFor="height" className="block text-sm font-medium text-gray-700">Alto (cm)</label>
+                                <label htmlFor="height" className="block text-sm font-medium text-gray-700">{t('admin.shipments.edit.height')}</label>
                                 <QuantityInput
                                     id="height"
                                     name="dimensions.height"
@@ -261,7 +258,7 @@ export default function ScreenAdminEditShipment(){
                             </div>
         
                             <div>
-                                <label htmlFor="width" className="block text-sm font-medium text-gray-700">Ancho (cm)</label>
+                                <label htmlFor="width" className="block text-sm font-medium text-gray-700">{t('admin.shipments.edit.width')}</label>
                                 <QuantityInput
                                     id="width"
                                     name="dimensions.width"
@@ -274,7 +271,7 @@ export default function ScreenAdminEditShipment(){
                             </div>
         
                             <div>
-                                <label htmlFor="length" className="block text-sm font-medium text-gray-700">Largo (cm)</label>
+                                <label htmlFor="length" className="block text-sm font-medium text-gray-700">{t('admin.shipments.edit.length')}</label>
                                 <QuantityInput
                                     id="length"
                                     name="dimensions.length"
@@ -290,7 +287,7 @@ export default function ScreenAdminEditShipment(){
 
                     <div className="col-span-6">
                         <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                            Descripcion
+                            {t('admin.shipments.edit.description')}
                         </label>
 
                         <textarea
@@ -307,7 +304,7 @@ export default function ScreenAdminEditShipment(){
 
                     <div className="col-span-6">
                         <label htmlFor="Status" className="block text-sm font-medium text-gray-700"> 
-                            Estatus
+                            {t('admin.shipments.edit.status')}
                         </label>
 
                         <select 
@@ -315,25 +312,25 @@ export default function ScreenAdminEditShipment(){
                             defaultValue={originalStatus} 
                             className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 ${isStatusModified ? "border-2 border-secondary-200" : ""} appearance-none focus:outline-none focus:ring-0 focus:border-primary-400 peer`}
                         >
-                            <option value="pending">Pendiente</option>
-                            <option value="activated">Activo</option>
-                            <option value="accepted">Aceptado</option>
-                            <option value="in_transit">En transito</option>
-                            <option value="delivered">Entregado</option>
-                            <option value="canceled">Cancelado</option>
+                            <option value="pending">{t('admin.shipments.edit.statuses.pending')}</option>
+                            <option value="activated">{t('admin.shipments.edit.statuses.activated')}</option>
+                            <option value="accepted">{t('admin.shipments.edit.statuses.accepted')}</option>
+                            <option value="in_transit">{t('admin.shipments.edit.statuses.inTransit')}</option>
+                            <option value="delivered">{t('admin.shipments.edit.statuses.delivered')}</option>
+                            <option value="canceled">{t('admin.shipments.edit.statuses.canceled')}</option>
                         </select>
 
                     </div>
 
                     <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                         <CustomButton
-                            text='Editar envio'
+                            text={t('admin.shipments.edit.saveButton')}
                             variant='primary'
                             type='submit'
                             onClick={() => {}}
                         />
                         <CustomButton
-                            text='Volver'
+                            text={t('admin.shipments.edit.backButton')}
                             variant='secondary'
                             type='button'
                             onClick={handleBack}

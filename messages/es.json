@@ -1,0 +1,366 @@
+{
+    "auth": {
+        "register": {
+            "title": "¡Únete a CargoLink y simplifica tus envíos! 🚚",
+            "description": "Únete a CargoLink y simplifica el transporte de mercancías. Ya seas cliente buscando el vehículo ideal o transportador con espacio disponible, en CargoLink encuentras la solución perfecta. ¡Regístrate gratis y empieza a conectar hoy mismo!",
+            "firstName": "Nombre(s)",
+            "lastName": "Apellido(s)",
+            "email": "Correo",
+            "password": "Contraseña",
+            "confirmPassword": "Confirmar contraseña",
+            "marketingAccept": "Quiero recibir correos electrónicos sobre eventos, actualizaciones y anuncios de CargoLink.",
+            "termsAndConditions": "Al crear una cuenta, aceptas nuestros",
+            "termsLink": "términos y condiciones",
+            "createAccountButton": "Crear cuenta",
+            "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+            "loginLink": "Ingresa"
+        },
+        "login": {
+            "title": "Iniciar Sesión",
+            "noAccount": "¿No tienes una cuenta?",
+            "createAccount": "Crea una",
+            "email": "Correo Electrónico",
+            "password": "Contraseña",
+            "forgotPassword": "¿Olvidaste tu contraseña?",
+            "continueButton": "Continuar"
+        }
+    },
+    "admin": {
+        "users": {
+            "dropdown": {
+                "menu": "Menú",
+                "createUser": "Crear usuario",
+                "sortByRole": "Organizar por rol",
+                "sortByEmail": "Organizar por correo"
+            },
+            "create": {
+                "title": "Crear usuario",
+                "firstName": "Nombre(s)",
+                "lastName": "Apellido(s)",
+                "email": "Correo",
+                "phone": "Teléfono (opcional)",
+                "password": "Contraseña",
+                "confirmPassword": "Confirmar contraseña",
+                "role": "Rol",
+                "selectRole": "Seleccione un rol",
+                "roles": {
+                    "admin": "Administrador",
+                    "transporter": "Repartidor",
+                    "user": "Usuario"
+                },
+                "createButton": "Crear usuario"
+            },
+            "edit": {
+                "detailsTitle": "Detalles del usuario",
+                "generalInfo": "Información General",
+                "id": "ID",
+                "email": "Correo",
+                "phone": "Teléfono",
+                "names": "Nombres",
+                "firstName": "Nombre(s)",
+                "lastName": "Apellido(s)",
+                "role": "Rol",
+                "roleLabel": "Rol",
+                "editTitle": "Editar usuario",
+                "selectRole": "Seleccione un rol",
+                "roles": {
+                    "admin": "Administrador",
+                    "transporter": "Repartidor",
+                    "user": "Usuario"
+                },
+                "password": "Contraseña",
+                "saveButton": "Guardar cambios",
+                "backButton": "Volver"
+            },
+            "manage": {
+                "title": "Gestión de usuarios",
+                "searchPlaceholder": "Buscador de usuarios",
+                "searchTooltip": "Buscar usuario",
+                "clearSearchTooltip": "Limpiar búsqueda",
+                "nameColumn": "Nombre",
+                "roleColumn": "Rol",
+                "phoneColumn": "Teléfono",
+                "actionsColumn": "Acciones",
+                "editTooltip": "Editar",
+                "deleteTooltip": "Eliminar",
+                "securityEditModalTitle": "Por seguridad, para editar un usuario debe ingresar su contraseña.",
+                "securityDeleteModalTitle": "Por seguridad, para eliminar un usuario debe ingresar su contraseña.",
+                "verifyButton": "Verificar",
+                "cancelButton": "Cancelar",
+                "confirmButton": "Confirmar"
+            }
+        },
+        "shipments": {
+            "dropdown": {
+                "menu": "Menú",
+                "createShipment": "Crear Envío",
+                "sortByPrice": "Organizar por precio",
+                "sortByCreationDate": "Organizar por fecha de creación"
+            },
+            "details": {
+                "title": "Detalles del Flete",
+                "image": "Imagen del Flete",
+                "generalInfo": "Información General",
+                "id": "ID",
+                "titleg": "Título",
+                "description": "Descripción",
+                "status": "Estado",
+                "addresses": "Direcciones",
+                "pickupAddress": "Recogida",
+                "deliveryAddress": "Entrega",
+                "technicalDetails": "Detalles Técnicos",
+                "weight": "Peso",
+                "dimensions": "Dimensiones",
+                "transporter": "Transportista",
+                "transporterName": "Nombre",
+                "transporterEmail": "Email",
+                "transporterPhone": "Teléfono",
+                "confirmButton": "Confirmar",
+                "cancelButton": "Cancelar",
+                "backButton": "Volver"
+            },
+            "edit": {
+                "title": "Editar envío",
+                "titleLabel": "Título",
+                "pickupAddress": "Dirección de recogida",
+                "deliveryAddress": "Dirección de entrega",
+                "weight": "Peso",
+                "dimensions": "Dimensiones",
+                "height": "Alto (cm)",
+                "width": "Ancho (cm)",
+                "length": "Largo (cm)",
+                "description": "Descripción",
+                "status": "Estatus",
+                "statuses": {
+                    "pending": "Pendiente",
+                    "activated": "Activo",
+                    "accepted": "Aceptado",
+                    "inTransit": "En tránsito",
+                    "delivered": "Entregado",
+                    "canceled": "Cancelado"
+                },
+                "saveButton": "Guardar cambios",
+                "backButton": "Volver"
+            },
+            "manage": {
+                "title": "Gestión de envíos",
+                "searchPlaceholder": "Buscador de envíos",
+                "searchTooltip": "Buscar envío",
+                "clearSearchTooltip": "Limpiar búsqueda",
+                "titleColumn": "Título",
+                "statusColumn": "Estado Actual",
+                "optionsColumn": "Opciones",
+                "detailsTooltip": "Detalles",
+                "editTooltip": "Editar",
+                "deleteTooltip": "Eliminar",
+                "securityDetailsModalTitle": "Por seguridad, para ver detalles del envío debe ingresar su contraseña.",
+                "securityEditModalTitle": "Por seguridad, para editar un envío debe ingresar su contraseña.",
+                "securityDeleteModalTitle": "Por seguridad, para eliminar un envío debe ingresar su contraseña.",
+                "verifyButton": "Verificar",
+                "cancelButton": "Cancelar",
+                "confirmButton": "Confirmar"
+            }
+        },
+        "dashboard": {
+            "title": "Administrador",
+            "totalShipments": "Envios Totales",
+            "totalUsers": "Usuarios Totales",
+            "pendingReports": "Reportes Pendientes",
+            "shipmentsChart": "Gráfico de Envios",
+            "usersChart": "Gráfico de Usuarios",
+            "reportsChart": "Gráfico de Reportes"
+        }
+    },
+    "home": {
+        "aboutUs": {
+            "developers": "DESARROLLADORES",
+            "engineers": "Ingenieros",
+            "santiagoName": "Santiago Castaño",
+            "santiagoRole": "Desarrollador backend",
+            "juanMartinName": "Juan Martin",
+            "juanMartinRole": "Desarrollador frontend",
+            "juanDiegoName": "Juan Diego",
+            "juanDiegoRole": "Ingeniero de datos"
+        },
+        "cargoLinkInfo": {
+            "title": "¿Qué es Cargo Link?",
+            "description1": "Cargo Link es una plataforma integral de envíos y logística diseñada para empresas y particulares. Permite gestionar, rastrear y optimizar el transporte de mercancías de forma rápida, segura y eficiente. Ya sea que necesites realizar un envío local o nacional, nuestra tecnología simplifica todo el proceso en un solo lugar.",
+            "description2": "Con herramientas inteligentes y atención personalizada, garantizamos una experiencia sin complicaciones tanto para transportistas como para clientes. ¡Cargo Link es el aliado ideal para tus operaciones logísticas!",
+            "seeMoreButton": "Ver más"
+        },
+        "features": {
+            "title": "Empieza con nuestra aplicación...",
+            "clientTitle": "Cliente",
+            "clientDescription": "Como cliente, puedes solicitar envíos, rastrear tus paquetes en tiempo real, elegir entre múltiples transportistas y gestionar todo desde una interfaz sencilla y rápida.",
+            "transporterTitle": "Transportador",
+            "transporterDescription": "Como transportador, puedes aceptar pedidos, optimizar tus rutas, recibir pagos seguros y acceder a herramientas de gestión para potenciar tu operación logística.",
+            "seeMoreButton": "Ver más"
+        },
+        "startPage": {
+            "welcome": "Bienvenido a CargoLink",
+            "description": "Somos una empresa dedicada a la logística y el transporte de mercancías, ofreciendo soluciones eficientes y seguras para tus envíos. Con nuestra plataforma, podrás gestionar tus envíos de manera fácil y rápida, asegurando la satisfacción de tus clientes.",
+            "startNowButton": "Empieza ya",
+            "seeMoreButton": "Ver más"
+        }
+    },
+    "transporter": {
+        "shipments": {
+            "available": {
+                "title": "Fletes Disponibles",
+                "noShipments": "No hay fletes disponibles..."
+            }
+        },
+        "dashboard": {
+            "title": "Transportador",
+            "availableShipments": "Fletes Disponibles",
+            "activeShipments": "Fletes Activos",
+            "allShipments": "Todos los Fletes",
+            "completedShipmentsHistory": "Historial de Fletes Completados"
+        }
+    },
+    "user": {
+        "shipments": {
+            "create": {
+                "dimensions": "Dimensiones",
+                "weight": "Peso (kg)",
+                "height": "Alto (cm)",
+                "width": "Ancho (cm)",
+                "length": "Largo (cm)",
+                "infoText": "Al mismo tiempo, el hecho de que somos completamente independientes de fabricantes y otros grupos de control le da la confianza de que solo recomendaremos lo que es adecuado para usted.",
+                "contactNumber": "0151 475 4450",
+                "successMessage": "El flete se creó exitosamente",
+                "errorMessage": "Error al crear el flete",
+                "titleLabel": "Título",
+                "titlePlaceholder": "Ingrese el título del flete",
+                "address": "Direcciones",
+                "pickupLocation": "Lugar de recogida",
+                "pickupDepartment": "Departamento",
+                "selectDepartment": "Seleccione un departamento",
+                "pickupCity": "Ciudad",
+                "selectCity": "Seleccione una ciudad",
+                "pickupAddress": "Dirección de recogida",
+                "deliveryLocation": "Lugar de entrega",
+                "deliveryDepartment": "Departamento de destino",
+                "deliveryCity": "Ciudad de destino",
+                "deliveryAddress": "Dirección de entrega",
+                "description": "Descripción",
+                "image": "Imagen del flete",
+                "clickToUpload": "Haga clic para cargar la imagen",
+                "orDragAndDrop": "o arrástrela y suéltela aquí",
+                "imageFormats": "SVG, PNG o JPG",
+                "imageUploaded": "Imagen cargada",
+                "uploadImage": "Cargar imagen",
+                "continue": "Continuar"
+            },
+            "details": {
+                "title": "Detalles del Flete",
+                "image": "Imagen del Flete",
+                "generalInfo": "Información General",
+                "id": "ID",
+                "titleg": "Título",
+                "description": "Descripción",
+                "status": "Estado",
+                "addresses": "Direcciones",
+                "pickupAddress": "Recogida",
+                "deliveryAddress": "Entrega",
+                "technicalDetails": "Detalles Técnicos",
+                "weight": "Peso",
+                "dimensions": "Dimensiones",
+                "cost": "Costo",
+                "transporter": "Transportista",
+                "transporterName": "Nombre",
+                "transporterEmail": "Email",
+                "transporterPhone": "Teléfono",
+                "confirmButton": "Confirmar",
+                "cancelButton": "Cancelar"
+            },
+            "manage": {
+                "title": "Mis Envíos",
+                "createButton": "Crear Nuevo Envío",
+                "noShipments": "No tienes envíos creados",
+                "createFirstButton": "Crear Primer Envío"
+            }
+        },
+        "account": {
+            "settingsTitle": "Configuración de Cuenta",
+            "welcomeMessage": "¡Bienvenido {{userName}}! Aquí puede cambiar su contraseña, correo o información personal.",
+            "emailTitle": "Correo",
+            "emailMessage": "Su dirección de correo es {{userEmail}}",
+            "personalInfoTitle": "Información Personal",
+            "nameLabel": "Nombre",
+            "lastNameLabel": "Apellido",
+            "phoneLabel": "Teléfono",
+            "saveChangesButton": "Guardar cambios",
+            "passwordTitle": "Contraseña",
+            "currentPasswordLabel": "Contraseña actual",
+            "newPasswordLabel": "Nueva contraseña",
+            "savePasswordButton": "Guardar contraseña",
+            "deleteAccountTitle": "Borrar cuenta",
+            "deleteAccountWarning": "Eliminar la cuenta es una acción permanente e irreversible. Todos sus datos serán eliminados y no podrán ser recuperados. Por favor, asegúrese de que desea proceder antes de continuar.",
+            "deleteAccountButton": "Borrar mi cuenta",
+            "deleteAccountModalTitle": "Por seguridad, antes de eliminar su cuenta debe de ingresar su contraseña.",
+            "verifyButton": "Verificar",
+            "cancelButton": "Cancelar",
+            "confirmDeleteButton": "Eliminar",
+            "proceedWithCaution": "Procede con precaución",
+            "forgotPasswordText": "No recuerdo mi contraseña.",
+            "recoverAccountLink": "Recuperar cuenta"
+        }
+    },
+    "shipmentCard": {
+        "imageAlt": "Flete",
+        "distance": "Distancia",
+        "totalCharge": "Cobro Total",
+        "totalDistance": "Recorrido Total",
+        "profit": "Ganancia",
+        "dimensions": "Dimensiones",
+        "weight": "Peso",
+        "openMapButton": "Abrir en el mapa",
+        "viewDetailsButton": "Ver detalles",
+        "acceptShipmentButton": "Aceptar flete"
+    },
+    "header": {
+        "openUserMenu": "Abrir menú de usuario",
+        "userImageAlt": "Foto de perfil del usuario",
+        "profile": "Perfil",
+        "settings": "Ajustes",
+        "information": "Información",
+        "logout": "Cerrar sesión",
+        "register": "Registrarse",
+        "login": "Iniciar sesión",
+        "openMainMenu": "Abrir menú principal",
+        "home": "Inicio",
+        "services": "Servicios",
+        "whatWeAre": "¿Qué somos?",
+        "aboutUs": "Nosotros",
+        "adminDashboard": "Panel de administración",
+        "adminSection": "Administrador",
+        "manageUsers": "Gestionar usuarios",
+        "manageShipments": "Gestionar envíos",
+        "transporterDashboard": "Panel de transportador",
+        "transporterShipments": "Fletes",
+        "availableShipments": "Disponibles",
+        "allShipments": "Todos",
+        "wallet": "Billetera",
+        "currentStatus": "Estado Actual",
+        "userShipments": "Fletes",
+        "createShipment": "Crear",
+        "myShipments": "Mis fletes",
+        "activeShipments": "Activos",
+        "help": "Ayuda"
+    },
+    "footer": {
+        "logoAlt": "Logo de FlowBite",
+        "companyName": "Cargo Link",
+        "resources": "Recursos",
+        "flowbite": "Flowbite",
+        "tailwind": "Tailwind CSS",
+        "followUs": "Síguenos",
+        "github": "Github",
+        "discord": "Discord",
+        "legal": "Legal",
+        "privacyPolicy": "Política de Privacidad",
+        "termsConditions": "Términos y Condiciones",
+        "rightsReserved": "Todos los derechos reservados."
+    }
+}

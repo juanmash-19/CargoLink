@@ -5,7 +5,8 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import SimpleCard from '@/components/atoms/SimpleCard';
 import { useRouter } from 'next/navigation';
-//Servicio getDriverStats() si tiene uno en libs/ServiceTransportador
+import { useTranslations } from "next-intl";
+//Servicio getDriverStats() si tienes uno en libs/ServiceTransportador
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -27,6 +28,7 @@ export default function TransportadorDashboard() {
   });
 
   const router = useRouter();
+  const t = useTranslations();
 
   useEffect(() => {
     // Simulando respuesta del backend
@@ -48,21 +50,21 @@ export default function TransportadorDashboard() {
 
   const cardsData: CardType[] = [
     {
-      title: 'Fletes Disponibles',
+      title: t('transporter.dashboard.availableShipments'),
       value: totals.disponibles.toString(),
       variant: 'primary',
       icon: '🟢',
       onClick: () => router.push('/transportador/fletes/disponibles'),
     },
     {
-      title: 'Fletes Activos',
+      title: t('transporter.dashboard.activeShipments'),
       value: totals.activos.toString(),
       variant: 'secondary',
       icon: '🚚',
       onClick: () => router.push('/transportador/fletes/activos'),
     },
     {
-      title: 'Todos los Fletes',
+      title: t('transporter.dashboard.allShipments'),
       value: totals.todos.toString(),
       variant: 'ghost',
       icon: '📦',
@@ -81,7 +83,9 @@ export default function TransportadorDashboard() {
 
   return (
     <div className="flex-1 bg-gray-100 p-6 mt-3">
-      <h1 className="text-3xl font-bold text-gray-900">Transportador</h1>
+      <h1 className="text-3xl font-bold text-gray-900">
+        {t('transporter.dashboard.title')}
+      </h1>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cardsData.map((card, index) => (
@@ -90,7 +94,9 @@ export default function TransportadorDashboard() {
       </div>
 
       <div className="mt-6 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-xl font-bold">Historial de Fletes Completados</h2>
+        <h2 className="text-xl font-bold">
+          {t('transporter.dashboard.completedShipmentsHistory')}
+        </h2>
         <Bar data={chartData} />
       </div>
     </div>

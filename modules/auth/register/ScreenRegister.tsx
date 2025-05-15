@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from "next-intl";
 
 import FormRegister from './FormRegister';
 
@@ -12,11 +13,9 @@ import FormRegister from './FormRegister';
 // };
 
 export default function ScreenRegister() {
-
-  
+  const t = useTranslations();
 
   return (
-
     <section className="bg-white">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
             <aside className="relative block h-24 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
@@ -47,11 +46,11 @@ export default function ScreenRegister() {
                     </Link>
 
                     <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                    ¡Únete a CargoLink y simplifica tus envíos! 🚚
+                    {t('auth.register.title')}
                     </h1>
 
                     <p className="mt-4 leading-relaxed text-gray-500">
-                    Únete a CargoLink y simplifica el transporte de mercancías. Ya seas cliente buscando el vehículo ideal o transportador con espacio disponible, en CargoLink encuentras la solución perfecta. ¡Regístrate gratis y empieza a conectar hoy mismo!
+                    {t('auth.register.description')}
                     </p>
 
                     <FormRegister />

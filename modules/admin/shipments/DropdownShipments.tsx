@@ -1,12 +1,14 @@
 'use client'
 import CustomDropdown from "@/components/atoms/CustomDropdown";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import CustomAlert from "@/components/atoms/CustomAlert";
 import CustomButton from "@/components/atoms/CustomButton";
 
 export default function DropdownShipment() {
     const router = useRouter();
+    const t = useTranslations();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('success');
@@ -24,18 +26,18 @@ export default function DropdownShipment() {
     return (
         <>
             <CustomDropdown
-                buttonText="Menú"
+                buttonText={t('admin.shipments.dropdown.menu')}
                 options={[
                     {
-                        text: "Crear Envio",
+                        text: t('admin.shipments.dropdown.createShipment'),
                         onClick: createOption,
                     },
                     {
-                        text: "Organizar por precio",
+                        text: t('admin.shipments.dropdown.sortByPrice'),
                         onClick: () => handleOrganization("precio"),
                     },
                     {
-                        text: "Organizar por fecha de creación",
+                        text: t('admin.shipments.dropdown.sortByCreationDate'),
                         onClick: () => handleOrganization("fecha de creación"),
                     },
                 ]}
