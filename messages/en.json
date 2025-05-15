@@ -228,7 +228,29 @@
                 "length": "Length (cm)",
                 "infoText": "At the same time, the fact that we are wholly owned and totally independent from manufacturers and other group control gives you confidence that we will only recommend what is right for you.",
                 "contactNumber": "0151 475 4450",
-                "address": "282 Kevin Brook, Imogeneborough, CA 58517"
+                "successMessage": "The shipment was created successfully",
+                "errorMessage": "Error creating the shipment",
+                "titleLabel": "Title",
+                "titlePlaceholder": "Enter the shipment title",
+                "address": "Addresses",
+                "pickupLocation": "Pickup Location",
+                "pickupDepartment": "Department",
+                "selectDepartment": "Select a department",
+                "pickupCity": "City",
+                "selectCity": "Select a city",
+                "pickupAddress": "Pickup Address",
+                "deliveryLocation": "Delivery Location",
+                "deliveryDepartment": "Delivery Department",
+                "deliveryCity": "Delivery City",
+                "deliveryAddress": "Delivery Address",
+                "description": "Description",
+                "image": "Shipment Image",
+                "clickToUpload": "Click to upload the image",
+                "orDragAndDrop": "or drag and drop it here",
+                "imageFormats": "SVG, PNG, or JPG",
+                "imageUploaded": "Image uploaded",
+                "uploadImage": "Upload image",
+                "continue": "Continue"
             },
             "details": {
                 "title": "Shipment Details",
@@ -279,7 +301,10 @@
             "deleteAccountModalTitle": "For security, before deleting your account you must enter your password.",
             "verifyButton": "Verify",
             "cancelButton": "Cancel",
-            "confirmDeleteButton": "Delete"
+            "confirmDeleteButton": "Delete",
+            "proceedWithCaution": "Proceed with caution",
+            "forgotPasswordText": "I forgot my password.",
+            "recoverAccountLink": "Recover account"
         }
     },
     "shipmentCard": {
@@ -307,7 +332,21 @@
         "home": "Home",
         "services": "Services",
         "whatWeAre": "What we are",
-        "aboutUs": "About us"
+        "aboutUs": "About us",
+        "adminDashboard": "Admin Dashboard",
+        "adminSection": "Administrator",
+        "manageUsers": "Manage Users",
+        "manageShipments": "Manage Shipments",
+        "transporterDashboard": "Transporter Dashboard",
+        "transporterShipments": "Shipments",
+        "availableShipments": "Available",
+        "wallet": "Wallet",
+        "currentStatus": "Current Status",
+        "userShipments": "Shipments",
+        "createShipment": "Create",
+        "myShipments": "My Shipments",
+        "activeShipments": "Active",
+        "help": "Help"
     },
     "footer": {
         "logoAlt": "FlowBite Logo",

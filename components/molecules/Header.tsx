@@ -125,13 +125,13 @@ export default function Header() {
             {/*Seccion para usuarios logueados*/}
             {userRole === 'admin' && (
               <>
-              <li><Link href="/admin" className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>Dashboard</Link></li>
+                <li><Link href="/admin" className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>{t('header.adminDashboard')}</Link></li>
                 <li>
                   <details className="group [&_summary::-webkit-details-marker]:hidden">
                     <summary
                       className={`${isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
                     >
-                      <span> Administrador </span>
+                      <span>{t('header.adminSection')}</span>
 
                       <span className="transition-transform duration-300 group-open:-rotate-180">
                         <ArrowDown />
@@ -143,7 +143,7 @@ export default function Header() {
                         <Link 
                           href="/admin/users" 
                           className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>
-                            Gestionar usuarios
+                          {t('header.manageUsers')}
                         </Link>
                       </li>
 
@@ -151,7 +151,7 @@ export default function Header() {
                         <Link 
                           href="/admin/shipments" 
                           className={isLinkActive('/admin/shipments') ? standarNavLinkSelect : standarNavLink}>
-                            Gestionar envios
+                          {t('header.manageShipments')}
                         </Link>
                       </li>
                     </ul>
@@ -162,49 +162,44 @@ export default function Header() {
 
             {userRole === 'transporter' && (
               <>
-              <li><Link href="/transporter" className={isLinkActive('/transporter', true) ? standarNavLinkSelect : standarNavLink}>Dashboard</Link></li>
+                <li><Link href="/transporter" className={isLinkActive('/transporter', true) ? standarNavLinkSelect : standarNavLink}>{t('header.transporterDashboard')}</Link></li>
                 <li>
                   <details className="group [&_summary::-webkit-details-marker]:hidden">
                     <summary
                       className={`${isLinkActive('/transporter/shipments') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
                     >
-                      <span> Fletes </span>
-
+                      <span>{t('header.transporterShipments')}</span>
                       <span className="transition-transform duration-300 group-open:-rotate-180">
                         <ArrowDown />
                       </span>
                     </summary>
-
                     <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg">
                       <li>
                         <Link 
                           href="/transporter/shipments/available" 
                           className={isLinkActive('/transporter/shipments/available') ? standarNavLinkSelect : standarNavLink}>
-                            Disponibles
+                          {t('header.availableShipments')}
                         </Link>
                       </li>
-
                       <li>
                         <Link 
                           href="/transporter/shipments/actives" 
                           className={isLinkActive('/transporter/shipments/actives') ? standarNavLinkSelect : standarNavLink}>
-                            Activos
+                          {t('header.activeShipments')}
                         </Link>
                       </li>
-
                       <li>
                         <Link 
                           href="/transporter/shipments/all" 
                           className={isLinkActive('/transporter/shipments/all') ? standarNavLinkSelect : standarNavLink}>
-                            Todos
+                          {t('header.allShipments')}
                         </Link>
                       </li>
                     </ul>
                   </details>
                 </li>
-
-                <li><Link href="/transporter/wallet" className={isLinkActive('/transporter/wallet') ? standarNavLinkSelect : standarNavLink}>Billetera</Link></li>
-                <li><Link href="/transporter/current" className={isLinkActive('/transporter/current') ? standarNavLinkSelect : standarNavLink}>Estado Actual</Link></li>
+                <li><Link href="/transporter/wallet" className={isLinkActive('/transporter/wallet') ? standarNavLinkSelect : standarNavLink}>{t('header.wallet')}</Link></li>
+                <li><Link href="/transporter/current" className={isLinkActive('/transporter/current') ? standarNavLinkSelect : standarNavLink}>{t('header.currentStatus')}</Link></li>
               </>
             )}
 
@@ -215,41 +210,37 @@ export default function Header() {
                     <summary
                       className={`${isLinkActive('/user/shipments') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
                     >
-                      <span> Fletes </span>
-
+                      <span>{t('header.userShipments')}</span>
                       <span className="transition-transform duration-300 group-open:-rotate-180">
                         <ArrowDown />
                       </span>
                     </summary>
-
                     <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg group-open:-translate-x-6">
                       <li>
                         <Link 
                           href="/user/shipments/create" 
                           className={isLinkActive('/user/shipments/create') ? standarNavLinkSelect : standarNavLink}>
-                            Crear
+                          {t('header.createShipment')}
                         </Link>
                       </li>
-
                       <li>
                         <Link 
                           href="/user/shipments/me/all" 
                           className={isLinkActive('/user/shipments/me/all') ? standarNavLinkSelect : standarNavLink}>
-                            Mis fletes
+                          {t('header.myShipments')}
                         </Link>
                       </li>
-
                       <li>
                         <Link 
                           href="/user/shipments/actives" 
                           className={isLinkActive('/user/shipments/actives') ? standarNavLinkSelect : standarNavLink}>
-                            Activos
+                          {t('header.activeShipments')}
                         </Link>
                       </li>
                     </ul>
                   </details>
                 </li>
-                <li><Link href="/user/help" className={isLinkActive('/user/help') ? standarNavLinkSelect : standarNavLink}>Ayuda</Link></li>
+                <li><Link href="/user/help" className={isLinkActive('/user/help') ? standarNavLinkSelect : standarNavLink}>{t('header.help')}</Link></li>
               </>
             )}
           </ul>

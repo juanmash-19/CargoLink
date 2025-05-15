@@ -5,6 +5,7 @@ import Header from "@/components/molecules/Header";
 import Footer from "@/components/molecules/footer";
 import Spinner from "@/components/atoms/Spinner";
 import { AuthProvider } from "@/utils/AuthContext";
+import LanguageSelector from "@/components/molecules/LanguageSelector";
 
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale} from 'next-intl/server';
@@ -45,6 +46,9 @@ export default async function RootLayout({
               {children}
               <Footer/>
             </main>
+            <div className="fixed bottom-4 right-4">
+              <LanguageSelector />
+            </div>
           </NextIntlClientProvider>
           <Spinner />
         </AuthProvider>

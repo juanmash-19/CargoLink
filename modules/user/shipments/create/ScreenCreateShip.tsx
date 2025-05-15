@@ -18,10 +18,6 @@ export default function ScreenCreateShip() {
                             <a href="#" className="text-2xl font-bold text-pink-600">
                                 {t('user.shipments.create.contactNumber')}
                             </a>
-
-                            <address className="mt-2 not-italic">
-                                {t('user.shipments.create.address')}
-                            </address>
                         </div>
                     </div>
 

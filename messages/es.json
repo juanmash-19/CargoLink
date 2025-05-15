@@ -228,7 +228,29 @@
                 "length": "Largo (cm)",
                 "infoText": "Al mismo tiempo, el hecho de que somos completamente independientes de fabricantes y otros grupos de control le da la confianza de que solo recomendaremos lo que es adecuado para usted.",
                 "contactNumber": "0151 475 4450",
-                "address": "282 Kevin Brook, Imogeneborough, CA 58517"
+                "successMessage": "El flete se creó exitosamente",
+                "errorMessage": "Error al crear el flete",
+                "titleLabel": "Título",
+                "titlePlaceholder": "Ingrese el título del flete",
+                "address": "Direcciones",
+                "pickupLocation": "Lugar de recogida",
+                "pickupDepartment": "Departamento",
+                "selectDepartment": "Seleccione un departamento",
+                "pickupCity": "Ciudad",
+                "selectCity": "Seleccione una ciudad",
+                "pickupAddress": "Dirección de recogida",
+                "deliveryLocation": "Lugar de entrega",
+                "deliveryDepartment": "Departamento de destino",
+                "deliveryCity": "Ciudad de destino",
+                "deliveryAddress": "Dirección de entrega",
+                "description": "Descripción",
+                "image": "Imagen del flete",
+                "clickToUpload": "Haga clic para cargar la imagen",
+                "orDragAndDrop": "o arrástrela y suéltela aquí",
+                "imageFormats": "SVG, PNG o JPG",
+                "imageUploaded": "Imagen cargada",
+                "uploadImage": "Cargar imagen",
+                "continue": "Continuar"
             },
             "details": {
                 "title": "Detalles del Flete",
@@ -279,7 +301,10 @@
             "deleteAccountModalTitle": "Por seguridad, antes de eliminar su cuenta debe de ingresar su contraseña.",
             "verifyButton": "Verificar",
             "cancelButton": "Cancelar",
-            "confirmDeleteButton": "Eliminar"
+            "confirmDeleteButton": "Eliminar",
+            "proceedWithCaution": "Procede con precaución",
+            "forgotPasswordText": "No recuerdo mi contraseña.",
+            "recoverAccountLink": "Recuperar cuenta"
         }
     },
     "shipmentCard": {
@@ -307,7 +332,22 @@
         "home": "Inicio",
         "services": "Servicios",
         "whatWeAre": "¿Qué somos?",
-        "aboutUs": "Nosotros"
+        "aboutUs": "Nosotros",
+        "adminDashboard": "Panel de administración",
+        "adminSection": "Administrador",
+        "manageUsers": "Gestionar usuarios",
+        "manageShipments": "Gestionar envíos",
+        "transporterDashboard": "Panel de transportador",
+        "transporterShipments": "Fletes",
+        "availableShipments": "Disponibles",
+        "allShipments": "Todos",
+        "wallet": "Billetera",
+        "currentStatus": "Estado Actual",
+        "userShipments": "Fletes",
+        "createShipment": "Crear",
+        "myShipments": "Mis fletes",
+        "activeShipments": "Activos",
+        "help": "Ayuda"
     },
     "footer": {
         "logoAlt": "Logo de FlowBite",

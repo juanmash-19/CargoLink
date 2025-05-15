@@ -199,31 +199,40 @@ export default function FormCreateShip() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Campo de título */}
             <div>
-                <label htmlFor="title" className="block text-lg font-medium">Titulo</label>
+                <label htmlFor="title" className="block text-lg font-medium">{t('user.shipments.create.titleLabel')}</label>
                 <div>
                     <input
                         {...register("title")}
                         className={`${standarInput} focus:outline-primary-400`}
-                        placeholder="titulo..."
+                        placeholder={t('user.shipments.create.titlePlaceholder')}
                         type="text"
                         id="title"
                     />
                 </div>
             </div>
 
+
+            {/* Campos de dirección */}
+            <div>
+                <label htmlFor="address" className="block text-lg font-medium">{t('user.shipments.create.address')}</label>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+                </div>
+            </div>
+
             {/* Selectores de departamento y ciudad para recogida */}
             <div className="space-y-4">
-                <label htmlFor="pickupLocation" className="block text-lg font-medium">Lugar de recogida</label>
+                <label htmlFor="pickupLocation" className="block text-lg font-medium">{t('user.shipments.create.pickupLocation')}</label>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                        <label htmlFor="pickupDepartment" className="block text-sm font-medium text-gray-700">Departamento</label>
+                        <label htmlFor="pickupDepartment" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.pickupDepartment')}</label>
                         <select
                             id="pickupDepartment"
                             value={pickupDepartment?.id || ""}
                             onChange={handlePickupDepartmentChange}
                             className={`${standarInput} focus:outline-primary-400`}
                         >
-                            <option value="">Seleccione un departamento</option>
+                            <option value="">{t('user.shipments.create.selectDepartment')}</option>
                             {pickupDepartments.map((dept) => (
                                 <option key={dept.id} value={dept.id}>
                                     {dept.name}
@@ -232,7 +241,7 @@ export default function FormCreateShip() {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="pickupCity" className="block text-sm font-medium text-gray-700">Ciudad</label>
+                        <label htmlFor="pickupCity" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.pickupCity')}</label>
                         <select
                             id="pickupCity"
                             value={pickupCity}
@@ -240,7 +249,7 @@ export default function FormCreateShip() {
                             className={`${standarInput} focus:outline-primary-400`}
                             disabled={!pickupDepartment}
                         >
-                            <option value="">Seleccione una ciudad</option>
+                            <option value="">{t('user.shipments.create.selectCity')}</option>
                             {pickupCities.map((city) => (
                                 <option key={city.id} value={city.name}>
                                     {city.name}
@@ -251,7 +260,7 @@ export default function FormCreateShip() {
                 </div>
                 
                 <div>
-                    <label htmlFor="pickupAddress" className="block text-sm font-medium text-gray-700">Direccion</label>
+                    <label htmlFor="pickupAddress" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.pickupAddress')}</label>
                     <input
                         {...register("pickupAddress")}
                         className={`${standarInput} focus:outline-primary-400`}
@@ -264,17 +273,17 @@ export default function FormCreateShip() {
 
             
             <div className="space-y-4">
-                <label htmlFor="deliveryLocation" className="block text-lg font-medium">Lugar de entrega</label>
+                <label htmlFor="deliveryLocation" className="block text-lg font-medium">{t('user.shipments.create.deliveryLocation')}</label>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                        <label htmlFor="deliveryDepartment" className="block text-sm font-medium text-gray-700">Departamento de destino</label>
+                        <label htmlFor="deliveryDepartment" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.deliveryDepartment')}</label>
                         <select
                             id="deliveryDepartment"
                             value={deliveryDepartment?.id || ""}
                             onChange={handleDeliveryDepartmentChange}
                             className={`${standarInput} focus:outline-primary-400`}
                         >
-                            <option value="">Seleccione un departamento</option>
+                            <option value="">{t('user.shipments.create.selectDepartment')}</option>
                             {deliveryDepartments.map((dept) => (
                                 <option key={dept.id} value={dept.id}>
                                     {dept.name}
@@ -284,7 +293,7 @@ export default function FormCreateShip() {
                     </div>
 
                     <div>
-                        <label htmlFor="deliveryCity" className="block text-sm font-medium text-gray-700">Ciudad de destino</label>
+                        <label htmlFor="deliveryCity" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.deliveryCity')}</label>
                         <select
                             id="deliveryCity"
                             value={deliveryCity}
@@ -292,7 +301,7 @@ export default function FormCreateShip() {
                             className={`${standarInput} focus:outline-primary-400`}
                             disabled={!deliveryDepartment}
                         >
-                            <option value="">Seleccione una ciudad</option>
+                            <option value="">{t('user.shipments.create.selectCity')}</option>
                             {deliveryCities.map((city) => (
                                 <option key={city.id} value={city.name}>
                                     {city.name}
@@ -302,7 +311,7 @@ export default function FormCreateShip() {
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="deliveryAddress" className="block text-sm font-medium text-gray-700">Direccion de entrega</label>
+                    <label htmlFor="deliveryAddress" className="block text-sm font-medium text-gray-700">{t('user.shipments.create.deliveryAddress')}</label>
                     <input
                         {...register("deliveryAddress")}
                         className={`${standarInput} focus:outline-primary-400`}
@@ -315,15 +324,6 @@ export default function FormCreateShip() {
             </div>
 
             {/* Selectores de departamento y ciudad para destino */}
-
-
-            {/* Campos de dirección */}
-            <div>
-                <label htmlFor="address" className="block text-lg font-medium">Direcciones</label>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
-                </div>
-            </div>
 
             <div>
                 <label htmlFor="dimensions" className="block text-lg font-medium">
@@ -389,7 +389,7 @@ export default function FormCreateShip() {
             </div>
             
             <div>
-                <label htmlFor="description" className="block text-lg font-medium">Descripcion</label>
+                <label htmlFor="description" className="block text-lg font-medium">{t('user.shipments.create.description')}</label>
                 <textarea
                     {...register("description")}
                     className={`${standarInput} focus:outline-primary-400`}
@@ -400,7 +400,7 @@ export default function FormCreateShip() {
             </div>
 
             <div>
-                <label htmlFor="image" className="block text-lg font-medium">Imagen del flete</label>
+                <label htmlFor="image" className="block text-lg font-medium">{t('user.shipments.create.image')}</label>
                 <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                     {selectedImage ? (
                         <>
@@ -425,9 +425,9 @@ export default function FormCreateShip() {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                             </svg>
                             <p className="mb-2 text-sm text-gray-500">
-                                <span className="font-semibold">Haga clic para cargar la imagen</span> o arrástrela y suéltela aquí
+                                <span className="font-semibold">{t('user.shipments.create.clickToUpload')}</span> {t('user.shipments.create.orDragAndDrop')}
                             </p>
-                            <p className="text-xs text-gray-500">SVG, PNG o JPG</p>
+                            <p className="text-xs text-gray-500">{t('user.shipments.create.imageFormats')}</p>
                         </div>
                     )}
                     <input id="dropzone-file" type="file" className="hidden" onChange={handleImageChange}/>
@@ -436,7 +436,7 @@ export default function FormCreateShip() {
                 {/* Botón para cargar la imagen */}
                 <div className="mt-2">
                     <CustomButton
-                        text={isImageUploaded ? 'Imagen cargada' : 'Cargar imagen'}
+                        text={isImageUploaded ? t('user.shipments.create.imageUploaded') : t('user.shipments.create.uploadImage')}
                         variant='secondary'
                         type='button'
                         onClick={handleUploadImage}
@@ -447,7 +447,7 @@ export default function FormCreateShip() {
 
             <div className="mt-4">
                 <CustomButton
-                        text='Continuar'
+                        text={t('user.shipments.create.continue')}
                         variant='secondary'
                         type='submit'
                         disabled={!isImageUploaded}

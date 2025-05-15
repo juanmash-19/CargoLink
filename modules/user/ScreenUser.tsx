@@ -204,7 +204,7 @@ export default function UserPage() {
                                 {t('user.account.settingsTitle')}
                             </h1>
                             <p className="font- text-slate-600">
-                                {t('user.account.welcomeMessage', { userName })}
+                                {t('user.account.welcomeMessage')} {originalName}
                             </p>
                         </div>
                         <hr className="mt-4 mb-8" />
@@ -213,7 +213,7 @@ export default function UserPage() {
                         </p>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <p className="text-gray-600">
-                                {t('user.account.emailMessage', { userEmail })}
+                                {t('user.account.emailMessage')} {userEmail}
                             </p>
                         </div>
                         <hr className="mt-4 mb-8" />
@@ -298,7 +298,7 @@ export default function UserPage() {
                             </div>
                         </form>
                         <p className="mt-2 text-slate-600">
-                            No recuerdo mi contraseña. <Link className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recuperar cuenta</Link>
+                            {t('user.account.forgotPasswordText')} <Link className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">{t('user.account.recoverAccountLink')}</Link>
                         </p>
                         <div className="">
 
@@ -310,10 +310,10 @@ export default function UserPage() {
                                 {t('user.account.deleteAccountTitle')}
                             </p>
                             <p className="inline-flex items-center rounded-full bg-rose-100 px-4 py-1 text-rose-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            Procede con precaución
+                                <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                </svg>
+                                {t('user.account.proceedWithCaution')}
                             </p>
                             <p className="mt-2 text-slate-600">
                                 {t('user.account.deleteAccountWarning')}
@@ -361,7 +361,7 @@ export default function UserPage() {
                 <form onSubmit={handleDeleteSubmit(onSubmitDelete) } className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('user.account.passwordTitle')}
                         </label>
             
                         <input
