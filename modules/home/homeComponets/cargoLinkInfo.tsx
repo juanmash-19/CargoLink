@@ -14,7 +14,7 @@ const InfoCargo = () => {
                     {/* Imagen a la izquierda */}
                     <div className='col-span-6 flex justify-center items-center'>
                         <Image
-                            src="/images/Repartidor.png"
+                            src={`/images/${t('home.cargoLinkInfo.deliveryImageUrl')}`}
                             alt="Repartidor CargoLink"
                             width={500}
                             height={500}

@@ -186,7 +186,8 @@
             "title": "What is Cargo Link?",
             "description1": "Cargo Link is a comprehensive shipping and logistics platform designed for businesses and individuals. It allows you to manage, track, and optimize the transportation of goods quickly, safely, and efficiently. Whether you need to make a local or national shipment, our technology simplifies the entire process in one place.",
             "description2": "With smart tools and personalized attention, we guarantee a hassle-free experience for both carriers and customers. Cargo Link is the ideal ally for your logistics operations!",
-            "seeMoreButton": "See more"
+            "seeMoreButton": "See more",
+            "deliveryImageUrl": "Repartidor_English.png"
         },
         "features": {
             "title": "Get started with our application...",
