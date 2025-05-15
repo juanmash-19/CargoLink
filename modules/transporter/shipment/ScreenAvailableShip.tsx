@@ -6,12 +6,14 @@ import { useLoadingStore } from '@/store/LoadingSpinner';
 import { getAvailableShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from "next-intl";
 import CustomAlert from '@/components/atoms/CustomAlert';
 
 export default function ShipmentsPage() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
+    const t = useTranslations();
     
     // Estados para alertas
     const [showAlert, setShowAlert] = useState(false);
@@ -60,7 +62,10 @@ export default function ShipmentsPage() {
         <div className="p-6">
             {shipments ? (
                 <>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">Fletes Disponibles</h1>
+                    {console.log(shipments)}
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">
+                        {t('transporter.shipments.available.title')}
+                    </h1>
                     {shipments.map((shipment) => (
                         <ShipmentCard
                             key={shipment.shipment._id}
@@ -80,7 +85,9 @@ export default function ShipmentsPage() {
                 </>
             ) : (
                 <>
-                    <h1 className="text-3xl font-bold text-gray-800 mb-6">No hay fletes disponibles...</h1>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-6">
+                        {t('transporter.shipments.available.noShipments')}
+                    </h1>
                 </>
             )}
 
