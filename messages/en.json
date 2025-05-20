@@ -195,7 +195,8 @@
             "clientDescription": "As a client, you can request shipments, track your packages in real-time, choose from multiple carriers, and manage everything from a simple and fast interface.",
             "transporterTitle": "Transporter",
             "transporterDescription": "As a transporter, you can accept orders, optimize your routes, receive secure payments, and access management tools to enhance your logistics operation.",
-            "seeMoreButton": "See more"
+            "seeMoreButton": "See more",
+            "RepartidorCargoLinkImageUrl": "frisby_en.png"
         },
         "startPage": {
             "welcome": "Welcome to CargoLink",
