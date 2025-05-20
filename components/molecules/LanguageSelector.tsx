@@ -7,7 +7,7 @@ import Image from "next/image";
 const LANGUAGES: Record<string, { src: string; alt: string; short: string; }> = {
   es: { src: "/flags/spain.png", alt: "Español", short: "Es" },
   en: { src: "/flags/usa.png", alt: "English", short: "En" },
-  fr: { src: "/flags/france.png", alt: "Français", short: "Fr" }, // Example for French
+  fr: { src: "/flags/france.png", alt: "Français", short: "Fr" },
 };
 
 const LanguageSelector = () => {
@@ -22,7 +22,7 @@ const LanguageSelector = () => {
   const handleLanguageChange = (lang: string) => {
     setLanguage(lang);
     Cookies.set("language", lang, { expires: 365 });
-    window.location.reload(); // Reload the page to apply the new language
+    window.location.reload();
   };
 
   return (
