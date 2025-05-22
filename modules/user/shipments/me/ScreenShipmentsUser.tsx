@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import ShipmentCard from '@/components/molecules/ShipmentCard';
+import ShipmentCardUser from '@/components/molecules/ShipmentCardUser';
 import { useLoadingStore } from '@/store/LoadingSpinner';
 import { getUserShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
@@ -21,6 +21,8 @@ export default function UserShipmentsPage() {
                 const response = await getUserShipments();
 
                 setShipments(response.shipments || []);
+
+                console.log("Shipments:", response.shipments);
             } catch (error) {
                 console.error('Error:', error);
                 setShipments([]);
@@ -33,7 +35,7 @@ export default function UserShipmentsPage() {
     }, [startLoading, stopLoading, router]);
 
     const handleOpenMap = () => {
-        console.log("Abrir en el mapa");
+        window.open('https://maps.app.goo.gl/WYf6YMdX2fEYx5yq9', '_blank');
     };
 
     const handleViewDetails = (id: string) => {
@@ -62,7 +64,7 @@ export default function UserShipmentsPage() {
             {shipments ? (
                 <div className="space-y-4">
                     {shipments.map(shipment => (
-                        <ShipmentCard
+                        <ShipmentCardUser
                             key={shipment.shipment._id} // Usar un ID único en lugar del índice
                             title={shipment.shipment.title}
                             imageUrl={shipment.shipment.imageUrl}
@@ -74,7 +76,6 @@ export default function UserShipmentsPage() {
                             weight={shipment.shipment.weight}
                             onOpenMap={handleOpenMap}
                             onViewDetails={() => handleViewDetails(shipment.shipment._id)}
-                            onAccept={handleAccept}
                         />
                     ))}
                 </div>

@@ -274,7 +274,25 @@
                 "transporterEmail": "Email",
                 "transporterPhone": "Teléfono",
                 "confirmButton": "Confirmar",
-                "cancelButton": "Cancelar"
+                "cancelButton": "Cancelar",
+                "confirmShipment": "Confirmar Envío",
+                "cancelShipment": "Cancelar Envío",
+                "requirements": "Requisitos",
+                "cancelRequirements": "El envío solo puede ser cancelado si aún no ha sido aceptado por un transportista.",
+                "reportProblem": "Reportar Problema",
+                "reportShipment": "Reportar Problema con el Envío",
+                "reportTitle": "Título",
+                "reportTitlePlaceholder": "Breve descripción del problema",
+                "reportCategory": "Categoría",
+                "selectCategory": "Seleccione una categoría",
+                "categoryPayment": "Problema de Pago",
+                "categoryDelivery": "Problema de Entrega",
+                "categoryDamage": "Artículos Dañados",
+                "categoryCommunication": "Problema de Comunicación",
+                "categoryOther": "Otro Problema",
+                "reportDescription": "Descripción",
+                "reportDescriptionPlaceholder": "Por favor describa el problema en detalle",
+                "submitReport": "Enviar Reporte"
             },
             "manage": {
                 "title": "Mis Envíos",
@@ -285,9 +303,9 @@
         },
         "account": {
             "settingsTitle": "Configuración de Cuenta",
-            "welcomeMessage": "¡Bienvenido {{userName}}! Aquí puede cambiar su contraseña, correo o información personal.",
+            "welcomeMessage": ", ¡Bienvenido! Aquí puede cambiar su contraseña, correo o información personal.",
             "emailTitle": "Correo",
-            "emailMessage": "Su dirección de correo es {{userEmail}}",
+            "emailMessage": "Su dirección de correo es ",
             "personalInfoTitle": "Información Personal",
             "nameLabel": "Nombre",
             "lastNameLabel": "Apellido",
@@ -307,6 +325,35 @@
             "proceedWithCaution": "Procede con precaución",
             "forgotPasswordText": "No recuerdo mi contraseña.",
             "recoverAccountLink": "Recuperar cuenta"
+        },
+        "reports": {
+            "title": "Mis Reportes",
+            "noReports": "No tienes reportes aún",
+            "viewShipments": "Ver Mis Envíos",
+            "pendingReports": "Reportes Pendientes",
+            "resolvedReports": "Reportes Resueltos",
+            "closedReports": "Reportes Cerrados",
+            "category": "Categoría",
+            "date": "Fecha",
+            "relatedShipment": "Envío Relacionado",
+            "pickup": "Recogida",
+            "delivery": "Entrega",
+            "solution": "Solución",
+            "status": {
+                "pending": "Pendiente",
+                "resolved": "Resuelto",
+                "closed": "Cerrado"
+            },
+            "categories": {
+                "delayService": "Retraso en el Servicio",
+                "packageDamage": "Daño en Paquete",
+                "addressProblem": "Problema de Dirección",
+                "payment": "Problema de Pago",
+                "delivery": "Problema de Entrega",
+                "damage": "Problema de Daños",
+                "communication": "Problema de Comunicación",
+                "other": "Otro Problema"
+            }
         }
     },
     "shipmentCard": {
@@ -349,11 +396,11 @@
         "createShipment": "Crear",
         "myShipments": "Mis fletes",
         "activeShipments": "Activos",
-        "help": "Ayuda"
+        "reports": "Reportes"
     },
     "footer": {
         "logoAlt": "Logo de FlowBite",
-        "companyName": "Cargo Link",
+        "companyName": "CargoLink",
         "resources": "Recursos",
         "flowbite": "Flowbite",
         "tailwind": "Tailwind CSS",

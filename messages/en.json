@@ -274,7 +274,25 @@
                 "transporterEmail": "Email",
                 "transporterPhone": "Phone",
                 "confirmButton": "Confirm",
-                "cancelButton": "Cancel"
+                "cancelButton": "Cancel",
+                "confirmShipment": "Confirm Shipment",
+                "cancelShipment": "Cancel Shipment",
+                "requirements": "Requirements",
+                "cancelRequirements": "The shipment can only be canceled if it has not yet been accepted by a transporter.",
+                "reportProblem": "Report Problem",
+                "reportShipment": "Report Issue with Shipment",
+                "reportTitle": "Title",
+                "reportTitlePlaceholder": "Brief description of the issue",
+                "reportCategory": "Category",
+                "selectCategory": "Select a category",
+                "categoryPayment": "Payment Issue",
+                "categoryDelivery": "Delivery Problem",
+                "categoryDamage": "Damaged Items",
+                "categoryCommunication": "Communication Problem",
+                "categoryOther": "Other Issue",
+                "reportDescription": "Description",
+                "reportDescriptionPlaceholder": "Please describe the issue in detail",
+                "submitReport": "Submit Report"
             },
             "manage": {
                 "title": "My Shipments",
@@ -285,9 +303,9 @@
         },
         "account": {
             "settingsTitle": "Account Settings",
-            "welcomeMessage": "Welcome {{userName}}! Here you can change your password, email, or personal information.",
+            "welcomeMessage": "Welcome Here you can change your password, email, or personal information.",
             "emailTitle": "Email",
-            "emailMessage": "Your email address is {{userEmail}}",
+            "emailMessage": "Your email address is ",
             "personalInfoTitle": "Personal Information",
             "nameLabel": "Name",
             "lastNameLabel": "Last Name",
@@ -307,6 +325,35 @@
             "proceedWithCaution": "Proceed with caution",
             "forgotPasswordText": "I forgot my password.",
             "recoverAccountLink": "Recover account"
+        },
+        "reports": {
+            "title": "My Reports",
+            "noReports": "You don't have any reports yet",
+            "viewShipments": "View My Shipments",
+            "pendingReports": "Pending Reports",
+            "resolvedReports": "Resolved Reports",
+            "closedReports": "Closed Reports",
+            "category": "Category",
+            "date": "Date",
+            "relatedShipment": "Related Shipment",
+            "pickup": "Pickup",
+            "delivery": "Delivery",
+            "solution": "Solution",
+            "status": {
+                "pending": "Pending",
+                "resolved": "Resolved",
+                "closed": "Closed"
+            },
+            "categories": {
+                "delayService": "Service Delay",
+                "packageDamage": "Package Damage",
+                "addressProblem": "Address Problem",
+                "payment": "Payment Issue",
+                "delivery": "Delivery Issue",
+                "damage": "Damage Issue",
+                "communication": "Communication Issue",
+                "other": "Other Issue"
+            }
         }
     },
     "shipmentCard": {
@@ -348,11 +395,11 @@
         "createShipment": "Create",
         "myShipments": "My Shipments",
         "activeShipments": "Active",
-        "help": "Help"
+        "reports": "Reports"
     },
     "footer": {
         "logoAlt": "FlowBite Logo",
-        "companyName": "Cargo Link",
+        "companyName": "CargoLink",
         "resources": "Resources",
         "flowbite": "Flowbite",
         "tailwind": "Tailwind CSS",

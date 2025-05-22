@@ -27,6 +27,7 @@ export default function UserPage() {
     const [originalName, setOriginalName] = useState<string | null>(null);
     const [originalLastName, setOriginalLastName] = useState<string | null>(null);
     const [originalPhone, setOriginalPhone] = useState<string | null>(null);
+    const [originalEmail, setOriginalEmail] = useState<string | null>(null);
 
     
     {/* Seccion para las alertas*/}
@@ -159,10 +160,11 @@ export default function UserPage() {
                 startLoading();
                 const response = await getUser();
                 if (response) {
-                    const { name, lastname, phone } = response.user;
+                    const { name, lastname, phone, email } = response.user;
                     setOriginalName(name);
                     setOriginalLastName(lastname);
                     setOriginalPhone(phone ?? null);
+                    setOriginalEmail(email ?? null);
 
                     setValue("name", name);
                     setValue("lastname", lastname);
@@ -204,7 +206,7 @@ export default function UserPage() {
                                 {t('user.account.settingsTitle')}
                             </h1>
                             <p className="font- text-slate-600">
-                                {t('user.account.welcomeMessage')} {originalName}
+                                {originalName || userName} {t('user.account.welcomeMessage')}
                             </p>
                         </div>
                         <hr className="mt-4 mb-8" />
@@ -213,7 +215,7 @@ export default function UserPage() {
                         </p>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                             <p className="text-gray-600">
-                                {t('user.account.emailMessage')} {userEmail}
+                                {t('user.account.emailMessage')} {originalEmail || userEmail}
                             </p>
                         </div>
                         <hr className="mt-4 mb-8" />

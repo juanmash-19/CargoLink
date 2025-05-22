@@ -240,7 +240,7 @@ export default function Header() {
                     </ul>
                   </details>
                 </li>
-                <li><Link href="/user/help" className={isLinkActive('/user/help') ? standarNavLinkSelect : standarNavLink}>{t('header.help')}</Link></li>
+                <li><Link href="/user/reports" className={isLinkActive('/user/reports') ? standarNavLinkSelect : standarNavLink}>{t('header.reports')}</Link></li>
               </>
             )}
           </ul>
