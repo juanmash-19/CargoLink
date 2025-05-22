@@ -460,7 +460,8 @@
         "createShipment": "Create",
         "myShipments": "My Shipments",
         "activeShipments": "Active",
-        "reports": "Reports"
+        "reports": "Reports",
+        "allShipments": "All"
     },
     "footer": {
         "logoAlt": "FlowBite Logo",

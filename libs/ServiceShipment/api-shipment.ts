@@ -200,4 +200,3 @@ export const getUserShipments = async (): Promise<ShipmentsDAO> => {
         throw new Error("No se encontró un token. Por favor, inicia sesión.");
     }
 };
-
