@@ -70,7 +70,12 @@
                 },
                 "password": "Contraseña",
                 "saveButton": "Guardar cambios",
-                "backButton": "Volver"
+                "backButton": "Volver",
+                "successMessage" :"El usuario se edito exitosamente",
+                "errorMessage" :"El usuario se edito exitosamente",
+                "notFoundMessage" : "No se encontro el usuario",
+                "fetchErrorMessage" : "Error al obtener el usuario",
+                "notFoundUserMessage" : "No se ha seleccionado ningún usuario"
             },
             "manage": {
                 "title": "Gestión de usuarios",
@@ -87,7 +92,12 @@
                 "securityDeleteModalTitle": "Por seguridad, para eliminar un usuario debe ingresar su contraseña.",
                 "verifyButton": "Verificar",
                 "cancelButton": "Cancelar",
-                "confirmButton": "Confirmar"
+                "confirmButton": "Confirmar",
+                "deleteSuccessMessage": "Usuario eliminado correctamente.",
+                "deleteErrorMessage": "Error al eliminar el usuario.",
+                "notFoundUserMessage": "No se ha seleccionado ningún usuario.",
+                "deleteConfirmationMessage": "¿Estás seguro de querer eliminar este usuario?",
+                "fetchErrorMessage": "Error al verificar la contraseña."
             }
         },
         "shipments": {
@@ -140,7 +150,11 @@
                     "canceled": "Cancelado"
                 },
                 "saveButton": "Guardar cambios",
-                "backButton": "Volver"
+                "backButton": "Volver",
+                "successMessage" :"El envio se edito exitosamente",
+                "errorMessage" :"El envio se edito exitosamente",
+                "notFoundMessage" : "No se encontro el envio",
+                "fetchErrorMessage" : "Error al obtener el envio"
             },
             "manage": {
                 "title": "Gestión de envíos",
@@ -158,7 +172,12 @@
                 "securityDeleteModalTitle": "Por seguridad, para eliminar un envío debe ingresar su contraseña.",
                 "verifyButton": "Verificar",
                 "cancelButton": "Cancelar",
-                "confirmButton": "Confirmar"
+                "confirmButton": "Confirmar",
+                "deleteSuccessMessage": "Envío eliminado correctamente.",
+                "deleteErrorMessage": "Error al eliminar el envío.",
+                "notFoundUserMessage": "No se ha seleccionado ningún usuario.",
+                "deleteConfirmationMessage": "¿Estás seguro de querer eliminar este usuario?",
+                "fetchErrorMessage": "Error al verificar la contraseña."
             }
         },
         "dashboard": {
@@ -254,6 +273,28 @@
                 "uploadImage": "Cargar imagen",
                 "continue": "Continuar"
             },
+            "edit": {
+                "detailsTitle": "Detalles del usuario",
+                "generalInfo": "Información General",
+                "id": "ID",
+                "email": "Correo",
+                "phone": "Teléfono",
+                "names": "Nombres",
+                "firstName": "Nombre(s)",
+                "lastName": "Apellido(s)",
+                "role": "Rol",
+                "roleLabel": "Rol",
+                "editTitle": "Editar usuario",
+                "selectRole": "Seleccione un rol",
+                "roles": {
+                    "admin": "Administrador",
+                    "transporter": "Repartidor",
+                    "user": "Usuario"
+                },
+                "password": "Contraseña",
+                "saveButton": "Guardar cambios",
+                "backButton": "Volver"
+            },
             "details": {
                 "title": "Detalles del Flete",
                 "image": "Imagen del Flete",
@@ -298,7 +339,12 @@
                 "title": "Mis Envíos",
                 "createButton": "Crear Nuevo Envío",
                 "noShipments": "No tienes envíos creados",
-                "createFirstButton": "Crear Primer Envío"
+                "createFirstButton": "Crear Primer Envío",
+                "deleteSuccessMessage": "User deleted successfully.",
+                "deleteErrorMessage": "Error al eliminar el envío.",
+                "notFoundUserMessage": "No se ha seleccionado ningún envío.",
+                "deleteConfirmationMessage": "¿Estás seguro de querer eliminar este envío?",
+                "fetchErrorMessage": "Error al verificar la contraseña."
             }
         },
         "account": {
@@ -356,6 +402,54 @@
             }
         }
     },
+    "schemas": {
+        "loginSchemes": {
+            "emailRequired": "*Por favor introduzca su correo",
+            "emailInvalid": "*El correo es incorrecto",
+            "emailSpecialChars": "*El correo no puede contener caracteres especiales",
+            "passwordRequired": "*Por favor introduzca su contraseña",
+            "passwordSpecialChars": "*La contraseña no puede contener caracteres especiales"
+        },
+        "registerSchemes": {
+            "nameRequired": "*Este campo es obligatorio",
+            "nameMax": "*Máximo de caracteres permitidos",
+            "nameMin": "*No hay suficientes caracteres",
+            "nameInvalid": "El nombre no puede contener números o caracteres especiales",
+            "lastnameRequired": "*Este campo es obligatorio",
+            "lastnameMax": "*Máximo de caracteres permitidos",
+            "lastnameMin": "*No hay suficientes caracteres",
+            "lastnameInvalid": "*El apellido no puede contener números o caracteres especiales",
+            "emailInvalid": "*Correo inválido",
+            "passwordInvalid": "*Mínimo 5 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
+            "confirmPasswordMismatch": "*Las contraseñas no coinciden"
+        },
+        "shipmentEditScheme": {
+            "pickupAddressMin": "La dirección de recogida debe tener entre 5 y 100 caracteres",
+            "pickupAddressMax": "La dirección de recogida debe tener entre 5 y 100 caracteres",
+            "deliveryAddressMin": "La dirección de entrega debe tener entre 5 y 100 caracteres",
+            "deliveryAddressMax": "La dirección de entrega debe tener entre 5 y 100 caracteres",
+            "descriptionMin": "La descripción debe tener entre 5 y 200 caracteres",
+            "descriptionMax": "La descripción debe tener entre 5 y 200 caracteres",
+            "titleMin": "El título debe tener entre 5 y 25 caracteres",
+            "titleMax": "El título debe tener entre 5 y 25 caracteres",
+            "weightMin": "El peso debe ser un número mayor que 0",
+            "dimensionsHeightMin": "La altura debe ser un número mayor que 0",
+            "dimensionsWidthMin": "El ancho debe ser un número mayor que 0",
+            "dimensionsLengthMin": "El largo debe ser un número mayor que 0",
+            "pickupTimeInvalid": "La fecha y hora deben tener un formato válido (ISO 8601)",
+            "costMin": "El costo debe ser un número mayor o igual a 0",
+            "transporterInvalid": "El ID del transportador no es válido"
+        },
+        "userEditScheme": {
+            "nameLength": "El nombre debe tener entre 2 y 40 caracteres",
+            "lastnameLength": "El apellido debe tener entre 2 y 40 caracteres",
+            "emailInvalid": "El correo electrónico no es válido",
+            "phoneNumbersOnly": "Solo se permiten números",
+            "phoneLength": "Debe tener entre 7 y 15 dígitos",
+            "passwordSpecialChars": "*La contraseña no puede contener caracteres especiales"
+        }
+    },
+
     "shipmentCard": {
         "imageAlt": "Flete",
         "distance": "Distancia",
@@ -411,5 +505,11 @@
         "privacyPolicy": "Política de Privacidad",
         "termsConditions": "Términos y Condiciones",
         "rightsReserved": "Todos los derechos reservados."
+    },
+    "notFoundPage": {
+        "title": "404",
+        "message": "Algo está perdido.",
+        "defaultMessage": "Ruta no encontrada.",
+        "redirectButton": "Volver al menú"
     }
 }

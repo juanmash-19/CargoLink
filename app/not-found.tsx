@@ -2,6 +2,7 @@
 
 import CustomButton from '@/components/atoms/CustomButton'
 import { useRouter, usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 interface NotFoundItem {
     redirectPath: string;
@@ -36,6 +37,7 @@ const getMessage = (obj: NotFoundDataType, current: string[]): [string | undefin
 export default function NotFound(){
     const router = useRouter();
     const currentPath = usePathname().split('/').filter((v) => Boolean(v));
+    const t = useTranslations();
 
     let data: [string | undefined, string] = ["Path not found", "/"];
     if (currentPath.length) {
@@ -51,11 +53,11 @@ export default function NotFound(){
             <section className="bg-white">
                 <div className="object-center py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div className="mx-auto max-w-screen-sm text-center">
-                        <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600">404</h1>
-                        <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">Something&rsquo;s missing.</p>
+                        <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600">{t('notFoundPage.title')}</h1>
+                        <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl">{t('notFoundPage.redirectButton')}</p>
                         <p className="mb-4 text-lg font-light text-gray-500 ">{data[0]}</p>
                             <CustomButton 
-                                text='Volver al menu'
+                                text={t('notFoundPage.redirectButton')}
                                 variant='primary'
                                 type='button' 
                                 onClick={menuClick}
