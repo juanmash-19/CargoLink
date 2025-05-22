@@ -17,7 +17,7 @@ import { verifyPassword } from "@/libs/ServiceUser/api-user";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-export default function AdminUsers(){
+export default function AdminUsers() {
     const [users, setUsers] = useState<UsersDAO['users'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function AdminUsers(){
     const router = useRouter();  
     const t = useTranslations();
 
-    {/* Seccion para las alertas*/}
+    {/* Sección para las alertas */}
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
@@ -44,7 +44,7 @@ export default function AdminUsers(){
         reset();
         setIsDeleteModalOpen(false);
         if (!userIdAction) {
-            setAlertMessage('No se ha seleccionado ningún usuario');
+            setAlertMessage(t('admin.users.manage.notFoundUserMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -53,7 +53,7 @@ export default function AdminUsers(){
         const correctPassword = await fetchVerifyUser(data);
         if (correctPassword) {
             setIsEditModalOpen(false);
-            router.push(`/admin/users/edit/${userIdAction}`)
+            router.push(`/admin/users/edit/${userIdAction}`);
         }
     };
 
@@ -61,7 +61,7 @@ export default function AdminUsers(){
         reset();
         setIsDeleteModalOpen(false);
         if (!userIdAction) {
-            setAlertMessage('No se ha seleccionado ningún usuario');
+            setAlertMessage(t('admin.users.manage.notFoundUserMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -69,23 +69,23 @@ export default function AdminUsers(){
     
         const correctPassword = await fetchVerifyUser(data);
         if (correctPassword) {
-            setAlertMessage('¿Esta seguro de que quiere eliminar el usuario?');
+            setAlertMessage(t('admin.users.manage.deleteConfirmationMessage'));
             setAlertType('options');
             setShowAlert(true);
         }
     };
 
     const handleDeleteUser = async () => {
-        try{
+        try {
             startLoading();
             const response = await deleteUserById(userIdAction as string);
 
-            setAlertMessage('Usuario eliminado correctamente');
+            setAlertMessage(t('admin.users.manage.deleteSuccessMessage'));
             setAlertType('success');
             setShowAlert(true);
             fetchUser();
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al eliminar');
+            setAlertMessage(error instanceof Error ? error.message : t('admin.users.manage.deleteErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
             return false;
@@ -95,7 +95,7 @@ export default function AdminUsers(){
     }
 
     const fetchVerifyUser = async (data: PasswordDTO) => {
-        try{
+        try {
             startLoading();
             const response = await verifyPassword(data);
 
@@ -106,7 +106,7 @@ export default function AdminUsers(){
             }
             return true;
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al verificar la contraseña');
+            setAlertMessage(error instanceof Error ? error.message : t('admin.users.manage.fetchErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
             return false;
@@ -116,10 +116,9 @@ export default function AdminUsers(){
     }
 
     const handleUserSearch = async () => {
-        if(searchTerm === ""){
-            return
-        }
-        else{
+        if (searchTerm === "") {
+            return;
+        } else {
             try {
                 startLoading();
                 const response = await searchUsers(searchTerm);
@@ -127,12 +126,12 @@ export default function AdminUsers(){
                 if (response.users) {
                     setUsers(response.users);
                 } else {
-                    setAlertMessage('No se encontró usuarios');
+                    setAlertMessage(t('admin.users.manage.notFoundUserMessage'));
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los usuarios');
+                setAlertMessage(error instanceof Error ? error.message : t('admin.users.manage.fetchErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -146,19 +145,19 @@ export default function AdminUsers(){
     }
 
     const fetchUser = async () => {
-        try{
+        try {
             startLoading();
             const response = await getUsers();
 
             if (response.users) {
                 setUsers(response.users);
             } else {
-                setAlertMessage('No se encontró usuarios');
+                setAlertMessage(t('admin.users.manage.notFoundUserMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             }
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los usuarios');
+            setAlertMessage(error instanceof Error ? error.message : t('admin.users.manage.fetchErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -166,18 +165,16 @@ export default function AdminUsers(){
         }
     }
 
-    useEffect(() =>{
-
+    useEffect(() => {
         fetchUser();
     }, [startLoading, stopLoading]);
 
-    return(
-
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5  bg-white">
+    return (
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5 bg-white">
             <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">{t('admin.users.manage.title')}</h1>
 
             <div className="flex items-center justify-between flex-column flex-wrap md:flex-row pb-4 mx-6">
-                <DropdownUser/>
+                <DropdownUser />
                 <div className="flex">
                     <label htmlFor="table-search" className="sr-only">Search</label>
                     <div className="relative mr-3">
@@ -189,12 +186,12 @@ export default function AdminUsers(){
                             id="table-search-users"
                             className="block p-3 ps-10 text-md text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                             placeholder={t('admin.users.manage.searchPlaceholder')}
-                            value={searchTerm} // Valor controlado por el estado
-                            onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado cuando el usuario escribe
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                         />
                     </div>
                     <CustomIconButton
-                        icon={<PersonSearch/>}
+                        icon={<PersonSearch />}
                         variant="primary"
                         ariaLabel="search"
                         onClick={handleUserSearch}
@@ -202,7 +199,7 @@ export default function AdminUsers(){
                         className="size-12 mr-3"
                     />
                     <CustomIconButton
-                        icon={<Clean/>}
+                        icon={<Clean />}
                         variant="secondary"
                         ariaLabel="search"
                         onClick={handleCleanSearch}
@@ -275,7 +272,6 @@ export default function AdminUsers(){
                                         </div>
                                     </td>
                                 </tr>
-
                             ))}
                         </>
                     ) : (
@@ -288,7 +284,7 @@ export default function AdminUsers(){
             <CustomModal
                 isOpen={isEditModalOpen}
                 onClose={() => {
-                    reset(); // Limpiar los campos al cerrar
+                    reset();
                     setIsEditModalOpen(false);
                 }}
                 title={t('admin.users.manage.securityEditModalTitle')}
@@ -296,9 +292,8 @@ export default function AdminUsers(){
                 <form onSubmit={handleSubmit(onSubmitEdit)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                            {t('auth.register.password')}
                         </label>
-            
                         <input
                         {...register("password")}
                         type="password"
@@ -333,9 +328,8 @@ export default function AdminUsers(){
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                            {t('auth.register.password')}
                         </label>
-            
                         <input
                         {...register("password")}
                         type="password"
@@ -357,6 +351,7 @@ export default function AdminUsers(){
                     </div>
                 </form>
             </CustomModal>
+
             {showAlert && (
                 <CustomAlert
                     message={alertMessage}
@@ -369,7 +364,6 @@ export default function AdminUsers(){
                                 text={t('admin.users.manage.cancelButton')}
                                 variant="danger"
                                 onClick={() => setShowAlert(false)}
-
                             />
                             <CustomButton
                                 text={t('admin.users.manage.confirmButton')}
@@ -381,6 +375,5 @@ export default function AdminUsers(){
                 </CustomAlert>
             )}
         </div>
-        
     );
 }

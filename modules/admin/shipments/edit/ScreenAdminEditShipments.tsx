@@ -85,12 +85,12 @@ export default function ScreenAdminEditShipment(){
 
 
             } else {
-                setAlertMessage('No se encontro el envio');
+                setAlertMessage(t('admin.shipments.edit.notFoundMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             }
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al obtener el envio');
+            setAlertMessage(t('admin.shipments.edit.fetchErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -118,17 +118,16 @@ export default function ScreenAdminEditShipment(){
         try {
             startLoading();
             const response = await putShipmentById(updatedFields, idShipment as string);
-            console.log('Edit successful:', response);
 
             if(response.shipment._id) {
-                setAlertMessage('Envio actualizado correctamente');
+                setAlertMessage(t('admin.shipments.edit.successMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 fetchShipment(); // Refresca los datos después de la edición
             }
 
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al actualizar');
+            setAlertMessage(t('admin.shipments.edit.errorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {

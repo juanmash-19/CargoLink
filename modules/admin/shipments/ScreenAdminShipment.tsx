@@ -64,7 +64,7 @@ export default function ScreenAdminShipments(){
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertMessage(t('admin.users.manage.notFoundMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -374,7 +374,7 @@ export default function ScreenAdminShipments(){
                 <form onSubmit={handleSubmit(onSubmitInfo)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input
@@ -413,7 +413,7 @@ export default function ScreenAdminShipments(){
                 <form onSubmit={handleSubmit(onSubmitEdit)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input
@@ -452,7 +452,7 @@ export default function ScreenAdminShipments(){
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input

@@ -70,7 +70,12 @@
                 },
                 "password": "Password",
                 "saveButton": "Save Changes",
-                "backButton": "Back"
+                "backButton": "Back",
+                "deleteSuccessMessage": "User deleted successfully.",
+                "deleteErrorMessage": "Error deleting the user.",
+                "notFoundUserMessage": "No user has been selected.",
+                "deleteConfirmationMessage": "Are you sure you want to delete this user?",
+                "fetchErrorMessage": "Error verifying the password."
             },
             "manage": {
                 "title": "User Management",
@@ -87,7 +92,12 @@
                 "securityDeleteModalTitle": "For security, to delete a user you must enter your password.",
                 "verifyButton": "Verify",
                 "cancelButton": "Cancel",
-                "confirmButton": "Confirm"
+                "confirmButton": "Confirm",
+                "deleteSuccessMessage": "User deleted successfully.",
+                "deleteErrorMessage": "Error deleting the user.",
+                "notFoundUserMessage": "No user has been selected.",
+                "deleteConfirmationMessage": "Are you sure you want to delete this user?",
+                "fetchErrorMessage": "Error verifying the password."
             }
         },
         "shipments": {
@@ -140,7 +150,11 @@
                     "canceled": "Canceled"
                 },
                 "saveButton": "Save Changes",
-                "backButton": "Back"
+                "backButton": "Back",
+                "successMessage": "The shipment was edited successfully.",
+                "errorMessage": "Error editing the shipment.",
+                "notFoundMessage": "Shipment not found.",
+                "fetchErrorMessage": "Error fetching the shipment."
             },
             "manage": {
                 "title": "Shipment Management",
@@ -158,7 +172,9 @@
                 "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",
                 "verifyButton": "Verify",
                 "cancelButton": "Cancel",
-                "confirmButton": "Confirm"
+                "confirmButton": "Confirm",
+                "deleteSuccessMessage":"Shipment deleted successfully",
+                "deleteErrorMessage": "Error deleting the shipment"
             }
         },
         "dashboard": {
@@ -169,6 +185,53 @@
             "shipmentsChart": "Shipments Chart",
             "usersChart": "Users Chart",
             "reportsChart": "Reports Chart"
+        }
+    },
+    "schemas": {
+        "loginSchemes": {
+            "emailRequired": "*Please enter your email",
+            "emailInvalid": "*The email is incorrect",
+            "emailSpecialChars": "*The email cannot contain special characters",
+            "passwordRequired": "*Please enter your password",
+            "passwordSpecialChars": "*The password cannot contain special characters"
+        },
+        "registerSchemes": {
+            "nameRequired": "*This field is required",
+            "nameMax": "*Maximum allowed characters",
+            "nameMin": "*Not enough characters",
+            "nameInvalid": "The name cannot contain numbers or special characters",
+            "lastnameRequired": "*This field is required",
+            "lastnameMax": "*Maximum allowed characters",
+            "lastnameMin": "*Not enough characters",
+            "lastnameInvalid": "*The last name cannot contain numbers or special characters",
+            "emailInvalid": "*Invalid email",
+            "passwordInvalid": "*Minimum 5 characters, one uppercase, one lowercase, one number, and one special character",
+            "confirmPasswordMismatch": "*Passwords do not match"
+        },
+        "shipmentEditScheme": {
+            "pickupAddressMin": "The pickup address must be between 5 and 100 characters",
+            "pickupAddressMax": "The pickup address must be between 5 and 100 characters",
+            "deliveryAddressMin": "The delivery address must be between 5 and 100 characters",
+            "deliveryAddressMax": "The delivery address must be between 5 and 100 characters",
+            "descriptionMin": "The description must be between 5 and 200 characters",
+            "descriptionMax": "The description must be between 5 and 200 characters",
+            "titleMin": "The title must be between 5 and 25 characters",
+            "titleMax": "The title must be between 5 and 25 characters",
+            "weightMin": "The weight must be a number greater than 0",
+            "dimensionsHeightMin": "The height must be a number greater than 0",
+            "dimensionsWidthMin": "The width must be a number greater than 0",
+            "dimensionsLengthMin": "The length must be a number greater than 0",
+            "pickupTimeInvalid": "The date and time must be in a valid format (ISO 8601)",
+            "costMin": "The cost must be a number greater than or equal to 0",
+            "transporterInvalid": "The transporter ID is not valid"
+        },
+        "userEditScheme": {
+            "nameLength": "The name must be between 2 and 40 characters",
+            "lastnameLength": "The last name must be between 2 and 40 characters",
+            "emailInvalid": "The email address is not valid",
+            "phoneNumbersOnly": "Only numbers are allowed",
+            "phoneLength": "Must be between 7 and 15 digits",
+            "passwordSpecialChars": "*The password cannot contain special characters"
         }
     },
     "home": {
@@ -253,6 +316,8 @@
                 "imageUploaded": "Image uploaded",
                 "uploadImage": "Upload image",
                 "continue": "Continue"
+                
+                
             },
             "details": {
                 "title": "Shipment Details",
@@ -363,5 +428,11 @@
         "privacyPolicy": "Privacy Policy",
         "termsConditions": "Terms & Conditions",
         "rightsReserved": "All Rights Reserved."
+    },
+    "notFoundPage": {
+        "title": "404",
+        "message": "Something's missing.",
+        "defaultMessage": "Path not found.",
+        "redirectButton": "Back to menu"
     }
 }
