@@ -127,36 +127,23 @@ export default function Header() {
               <>
                 <li><Link href="/admin" className={isLinkActive('/admin', true) ? standarNavLinkSelect : standarNavLink}>{t('header.adminDashboard')}</Link></li>
                 <li>
-                  <details className="group [&_summary::-webkit-details-marker]:hidden">
-                    <summary
-                      className={`${isLinkActive('/admin') ? standarNavLinkSelect : standarNavLink} flex cursor-pointer items-center justify-between`}
-                    >
-                      <span>{t('header.adminSection')}</span>
-
-                      <span className="transition-transform duration-300 group-open:-rotate-180">
-                        <ArrowDown />
-                      </span>
-                    </summary>
-
-                    <ul className="absolute mx-auto mt-2 space-y-1 bg-primary-100 pb-2 px-3 rounded-lg">
-                      <li>
-                        <Link 
-                          href="/admin/users" 
-                          className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>
-                          {t('header.manageUsers')}
-                        </Link>
-                      </li>
-
-                      <li>
-                        <Link 
-                          href="/admin/shipments" 
-                          className={isLinkActive('/admin/shipments') ? standarNavLinkSelect : standarNavLink}>
-                          {t('header.manageShipments')}
-                        </Link>
-                      </li>
-                    </ul>
-                  </details>
+                  <Link 
+                    href="/admin/users" 
+                    className={isLinkActive('/admin/users') ? standarNavLinkSelect : standarNavLink}>
+                    {t('header.manageUsers')}
+                  </Link>
                 </li>
+
+                <li>
+                  <Link 
+                    href="/admin/shipments" 
+                    className={isLinkActive('/admin/shipments') ? standarNavLinkSelect : standarNavLink}>
+                    {t('header.manageShipments')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/reports" className={isLinkActive('/admin/reports') ? standarNavLinkSelect : standarNavLink}>{t('header.manageReports')}</Link>
+                  </li>
               </>
             )}
 
@@ -200,6 +187,7 @@ export default function Header() {
                 </li>
                 <li><Link href="/transporter/wallet" className={isLinkActive('/transporter/wallet') ? standarNavLinkSelect : standarNavLink}>{t('header.wallet')}</Link></li>
                 <li><Link href="/transporter/current" className={isLinkActive('/transporter/current') ? standarNavLinkSelect : standarNavLink}>{t('header.currentStatus')}</Link></li>
+                <li><Link href="/transporter/reports" className={isLinkActive('/transporter/reports') ? standarNavLinkSelect : standarNavLink}>{t('header.reports')}</Link></li>
               </>
             )}
 

@@ -192,6 +192,10 @@
             "available": {
                 "title": "Envois disponibles",
                 "noShipments": "Aucun envoi disponible..."
+            },
+            "active": {
+                "title": "Envois Actifs",
+                "noShipments": "Vous n'avez pas d'envois actifs..."
             }
         },
         "dashboard": {
@@ -210,7 +214,7 @@
                 "height": "Hauteur (cm)",
                 "width": "Largeur (cm)",
                 "length": "Longueur (cm)",
-                "infoText": "En même temps, le fait que nous soyons entièrement indépendants des fabricants et d'autres groupes de contrôle vous donne la confiance que nous ne recommanderons que ce qui vous convient.",
+                "infoText": "Ici, vous pouvez créer une demande d'envoi d'un envoi. N'oubliez pas de fournir autant d'informations détaillées que possible afin que le transporteur puisse accepter votre demande.",
                 "contactNumber": "0151 475 4450",
                 "successMessage": "L'envoi a été créé avec succès",
                 "errorMessage": "Erreur lors de la création de l'envoi",
@@ -395,7 +399,10 @@
         "weight": "Poids",
         "openMapButton": "Ouvrir dans la carte",
         "viewDetailsButton": "Voir les détails",
-        "acceptShipmentButton": "Accepter l'envoi"
+        "acceptShipmentButton": "Accepter l'envoi",
+        "confirmDeliveryButton": "Confirmer la Livraison",
+        "confirmTransitButton": "Marquer En Transit",
+        "status": "Statut"
     },
     "header": {
         "openUserMenu": "Ouvrir le menu utilisateur",
@@ -415,6 +422,7 @@
         "adminSection": "Administrateur",
         "manageUsers": "Gérer les utilisateurs",
         "manageShipments": "Gérer les envois",
+        "manageReports": "Gérer les rapports",
         "transporterDashboard": "Tableau de bord transporteur",
         "transporterShipments": "Envois",
         "availableShipments": "Disponibles",
@@ -439,7 +447,127 @@
         "legal": "Légal",
         "privacyPolicy": "Politique de confidentialité",
         "termsConditions": "Conditions générales",
-        "rightsReserved": "Tous droits réservés."
+        "rightsReserved": "Tous droits réservés.",
+        "copyright": "CargoLink. Tous droits réservés.",
+        "lastUpdated": "Dernière mise à jour:"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Politique de Confidentialité",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Cette Politique de Confidentialité décrit comment CargoLink collecte, utilise et partage vos informations personnelles lorsque vous utilisez notre plateforme."
+            },
+            "dataCollection": {
+                "title": "Informations Que Nous Collectons",
+                "content": "Nous pouvons collecter plusieurs types d'informations auprès des utilisateurs de notre plateforme, notamment :",
+                "items": {
+                    "personal": "Informations d'identification personnelle (nom, adresse e-mail, numéro de téléphone, etc.)",
+                    "usage": "Données d'utilisation (comment vous interagissez avec notre plateforme)",
+                    "cookies": "Cookies et technologies de suivi"
+                }
+            },
+            "dataUsage": {
+                "title": "Comment Nous Utilisons Vos Informations",
+                "content": "Nous utilisons les informations que nous collectons à votre sujet à diverses fins, notamment :",
+                "items": {
+                    "serviceProvision": "Pour fournir et maintenir notre Service",
+                    "serviceImprovement": "Pour améliorer et personnaliser votre expérience",
+                    "communication": "Pour communiquer avec vous au sujet des mises à jour, du support et des offres promotionnelles"
+                }
+            },
+            "dataSharing": {
+                "title": "Partage de Vos Informations",
+                "content": "Nous pouvons partager vos informations personnelles avec des tiers uniquement de la manière décrite dans cette Politique de Confidentialité."
+            },
+            "dataSecurity": {
+                "title": "Sécurité des Données",
+                "content": "Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, l'altération, la divulgation ou la destruction non autorisés."
+            },
+            "userRights": {
+                "title": "Vos Droits",
+                "content": "Vous disposez de certains droits concernant vos informations personnelles, notamment :",
+                "items": {
+                    "access": "Le droit d'accéder aux informations personnelles que nous possédons à votre sujet",
+                    "rectification": "Le droit de demander que nous corrigions toute information personnelle que vous jugez inexacte",
+                    "deletion": "Le droit de demander que nous supprimions vos informations personnelles",
+                    "objection": "Le droit de vous opposer au traitement de vos informations personnelles"
+                }
+            },
+            "changes": {
+                "title": "Modifications de cette Politique de Confidentialité",
+                "content": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :",
+                "email": "E-mail"
+            }
+        },
+        "termsConditions": {
+            "title": "Conditions Générales",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Ces Conditions Générales régissent votre utilisation de la plateforme CargoLink et des services fournis par celle-ci."
+            },
+            "definitions": {
+                "title": "Définitions",
+                "items": {
+                    "service": {
+                        "term": "Service",
+                        "definition": "La plateforme CargoLink, le site Web et les applications mobiles"
+                    },
+                    "user": {
+                        "term": "Utilisateur",
+                        "definition": "Toute personne qui accède ou utilise le Service, y compris les clients qui créent des demandes d'expédition"
+                    },
+                    "transporter": {
+                        "term": "Transporteur",
+                        "definition": "Tout utilisateur inscrit qui offre des services de transport via la plateforme"
+                    },
+                    "shipment": {
+                        "term": "Envoi",
+                        "definition": "Biens ou articles qui sont transportés d'un endroit à un autre en utilisant le Service"
+                    }
+                }
+            },
+            "accountUse": {
+                "title": "Création et Utilisation de Compte",
+                "content": "En créant un compte sur notre plateforme, vous acceptez :",
+                "items": {
+                    "responsibility": "D'être responsable du maintien de la confidentialité des informations de votre compte",
+                    "accuracy": "De fournir des informations précises, actuelles et complètes",
+                    "security": "De nous notifier immédiatement de tout accès non autorisé à votre compte"
+                }
+            },
+            "serviceUsage": {
+                "title": "Utilisation du Service",
+                "content": "En utilisant notre Service, vous acceptez de ne pas l'utiliser à des fins illégales ou non autorisées. Vous devez vous conformer à toutes les lois et réglementations applicables."
+            },
+            "payments": {
+                "title": "Paiements et Frais",
+                "content": "Les utilisateurs acceptent de payer tous les frais associés aux services. Les transporteurs acceptent notre structure de commission pour les livraisons terminées."
+            },
+            "liability": {
+                "title": "Limitation de Responsabilité",
+                "content": "CargoLink ne sera pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs résultant de votre utilisation ou de votre incapacité à utiliser le Service."
+            },
+            "propertyRights": {
+                "title": "Droits de Propriété Intellectuelle",
+                "content": "Le Service et son contenu original, ses fonctionnalités et sa fonctionnalité appartiennent à CargoLink et sont protégés par les lois internationales sur les droits d'auteur, les marques déposées et autres lois sur la propriété intellectuelle."
+            },
+            "changes": {
+                "title": "Modifications des Conditions",
+                "content": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous fournirons un avis de tout changement important."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
+                "email": "E-mail"
+            },
+        "copyright": "CargoLink. Tous droits réservés.",
+        "lastUpdated": "Dernière mise à jour:"
+        }
     },
     "home": {
         "aboutUs": {

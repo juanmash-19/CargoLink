@@ -1,17 +1,17 @@
 'use client'
 import React from 'react';
-import ShipmentCard from '@/components/molecules/ShipmentCard';
+import DeliveryShipmentCard from '@/components/molecules/DeliveryShipmentCard';
 import { useEffect, useState } from 'react';
 import { useLoadingStore } from '@/store/LoadingSpinner';
-import { getAvailableShipments } from '@/libs/ServiceShipment/api-shipment';
+import { getAcceptedShipments } from '@/libs/ServiceShipment/api-shipment';
 import { ShipmentsDAO } from '@/Interfaces/shipment/ShipmentInterface';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from "next-intl";
 import CustomAlert from '@/components/atoms/CustomAlert';
 import CustomButton from '@/components/atoms/CustomButton';
-import {  acceptShipment } from "@/libs/ServiceTransporter/api-transporter";
+import { confirmShipmentTransit, confirmShipmentDelivery } from "@/libs/ServiceTransporter/api-transporter";
 
-export default function ShipmentsPage() {
+export default function ScreenActivedShip() {
     const [shipments, setShipments] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
@@ -21,23 +21,25 @@ export default function ShipmentsPage() {
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('error');
-    const [shipmentToAccept, setShipmentToAccept] = useState<string | null>(null);
+    const [shipmentToConfirm, setShipmentToConfirm] = useState<string | null>(null);
+    const [actionType, setActionType] = useState<'transit' | 'delivery'>('delivery');
 
     useEffect(() => {
         const fetchShipment = async () => {
             try{
                 startLoading();
-                const response = await getAvailableShipments();
+                // Usar la nueva función para obtener los envíos aceptados
+                const response = await getAcceptedShipments();
 
                 if (response.shipments) {
                     setShipments(response.shipments);
                 } else {
-                    setAlertMessage('No se encontró el envío');
+                    setAlertMessage('No se encontraron envíos activos');
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage('Error al obtener los envios');
+                setAlertMessage('Error al obtener los envíos activos');
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -57,56 +59,69 @@ export default function ShipmentsPage() {
         console.log("Ver detalles");
     };
 
-    const handleAccept = (id: string) => {
-        // Mostrar el diálogo de confirmación
-        setShipmentToAccept(id);
-        setAlertMessage("¿Estás seguro que deseas aceptar este envío? Una vez aceptado, serás responsable de completarlo.");
+    const handleConfirmTransit = (id: string) => {
+        setShipmentToConfirm(id);
+        setActionType('transit');
+        setAlertMessage("¿Estás seguro que deseas marcar este envío como en tránsito?");
         setAlertType('options');
         setShowAlert(true);
     };
 
-    const confirmAcceptShipment = async () => {
-        if (!shipmentToAccept) return;
+    const handleConfirmDelivery = (id: string) => {
+        setShipmentToConfirm(id);
+        setActionType('delivery');
+        setAlertMessage("¿Estás seguro que deseas confirmar la entrega de este envío? Esta acción no se puede deshacer.");
+        setAlertType('options');
+        setShowAlert(true);
+    };
+
+    const confirmAction = async () => {
+        if (!shipmentToConfirm) return;
         
         try {
             startLoading();
-            const response = await acceptShipment(shipmentToAccept);
             
-            if (response.message) {
-                setAlertMessage("¡Envío aceptado! Ahora es tu responsabilidad completar este flete.");
-                setAlertType('success');
-                setShowAlert(true);
-                
-                // Esperar un momento antes de redirigir para que el usuario pueda ver el mensaje
-                setTimeout(() => {
-                    router.push(`/transporter/shipments/${shipmentToAccept}`);
-                }, 1500);
+            if (actionType === 'transit') {
+                await confirmShipmentTransit(shipmentToConfirm);
+                setAlertMessage("¡Envío marcado como en tránsito!");
+            } else {
+                await confirmShipmentDelivery(shipmentToConfirm);
+                setAlertMessage("¡Entrega confirmada con éxito!");
             }
+            
+            setAlertType('success');
+            setShowAlert(true);
+            
+            // Refresh shipments list after action
+            const response = await getAcceptedShipments();
+            if (response.shipments) {
+                setShipments(response.shipments);
+            }
+            
         } catch (error) {
-            setAlertMessage('Error al aceptar el envío');
+            setAlertMessage(`Error al ${actionType === 'transit' ? 'marcar como en tránsito' : 'confirmar entrega'}`);
             setAlertType('error');
             setShowAlert(true);
         } finally {
             stopLoading();
-            setShipmentToAccept(null);
+            setShipmentToConfirm(null);
         }
     };
 
     const handleAlertClose = () => {
         setShowAlert(false);
-        setShipmentToAccept(null);
+        setShipmentToConfirm(null);
     };
 
     return (
         <div className="p-6">
-            {shipments ? (
+            {shipments && shipments.length > 0 ? (
                 <>
-                    {console.log(shipments)}
                     <h1 className="text-3xl font-bold text-gray-800 mb-6">
-                        {t('transporter.shipments.available.title')}
+                        {t('transporter.shipments.active.title')}
                     </h1>
                     {shipments.map((shipment) => (
-                        <ShipmentCard
+                        <DeliveryShipmentCard
                             key={shipment.shipment._id}
                             title={shipment.shipment.title}
                             imageUrl={shipment.shipment.imageUrl}
@@ -116,17 +131,30 @@ export default function ShipmentsPage() {
                             profit={shipment.shipment.cost}
                             dimensions={shipment.shipment.dimensions}
                             weight={shipment.shipment.weight}
+                            status={shipment.shipment.status}
                             onOpenMap={handleOpenMap}
                             onViewDetails={() => handleViewDetails(shipment.shipment._id)}
-                            onAccept={() => handleAccept(shipment.shipment._id)}
+                            onConfirmDelivery={
+                                shipment.shipment.status === 'in_transit' 
+                                ? () => handleConfirmDelivery(shipment.shipment._id) 
+                                : undefined
+                            }
+                            onConfirmTransit={
+                                shipment.shipment.status === 'accepted' 
+                                ? () => handleConfirmTransit(shipment.shipment._id) 
+                                : undefined
+                            }
                         />
                     ))}
                 </>
             ) : (
                 <>
                     <h1 className="text-3xl font-bold text-gray-800 mb-6">
-                        {t('transporter.shipments.available.noShipments')}
+                        {t('transporter.shipments.active.title')}
                     </h1>
+                    <p className="text-lg text-gray-600">
+                        {t('transporter.shipments.active.noShipments')}
+                    </p>
                 </>
             )}
 
@@ -148,7 +176,7 @@ export default function ShipmentsPage() {
                                 text={t('admin.shipments.manage.confirmButton')}
                                 variant="green"
                                 type="button"
-                                onClick={confirmAcceptShipment}
+                                onClick={confirmAction}
                             />
                         </div>
                     )}

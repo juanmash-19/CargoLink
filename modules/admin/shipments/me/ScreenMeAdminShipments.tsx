@@ -34,6 +34,7 @@ export default function ScreenMeAdminShipments(){
 
                 if (response.shipment._id) {
                     setShipment(response.shipment);
+                    console.log('Shipment:', response.shipment);
                 } else {
                     setAlertMessage('No se encontró el envío');
                     setAlertType('error');
@@ -126,6 +127,18 @@ export default function ScreenMeAdminShipments(){
                             { label: t('admin.shipments.details.status'), content: shipment.status },
                         ]}
                     />
+                    
+                    {/* Añadir información del cliente (usuario) */}
+                    {shipment.client && (
+                        <BasicTextCardProps
+                            title="Cliente"
+                            subtitles={[
+                                { label: t('admin.shipments.details.transporterName'), content: shipment.client.name},
+                                { label: t('admin.shipments.details.transporterEmail'), content: shipment.client.email},
+                                { label: t('admin.shipments.details.transporterPhone'), content: shipment.client.phone},
+                            ]}
+                        />
+                    )}
                 </div>
     
                 <div className="space-y-4">

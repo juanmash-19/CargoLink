@@ -48,9 +48,9 @@ export interface ShipmentDAO {
         dimensions: DimensionsDAO,
         cost: number,
         status: string,
-        user?: {
+        client?: {
           _id: string,
-          firstName: string,
+          name: string,
           lastName: string,
           email: string,
           phone?: string,

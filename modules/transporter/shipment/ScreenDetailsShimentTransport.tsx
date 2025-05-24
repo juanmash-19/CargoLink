@@ -177,13 +177,13 @@ export default function TransporterShipmentDetailPage() {
                     />
     
                     {/* Now we can access the user property properly */}
-                    {shipment.user && (
+                    {shipment.client && (
                         <BasicTextCardProps
                             title="Cliente"
                             subtitles={[
-                                { label: "Nombre", content: `${shipment.user.firstName || ''} ${shipment.user.lastName || ''}` },
-                                { label: "Email", content: shipment.user.email || '' },
-                                { label: "Teléfono", content: shipment.user.phone || "No disponible" },
+                                { label: "Nombre", content: `${shipment.client.name || ''} ${shipment.client.lastName || ''}` },
+                                { label: "Email", content: shipment.client.email || '' },
+                                { label: "Teléfono", content: shipment.client.phone || "No disponible" },
                             ]}
                         />
                     )}

@@ -22,7 +22,8 @@ export default function ScreenUserReports() {
       try {
         startLoading();
         const response = await getUserReports();
-        // Transform the response to a flat array of reports
+        // The response now includes detailed information including reportingUser, reportedUser, and reportedShipment
+        // Directly map to get all reports with their nested information
         const fetchedReports = response.reports.map(item => item.report);
         setReports(fetchedReports);
       } catch (error) {

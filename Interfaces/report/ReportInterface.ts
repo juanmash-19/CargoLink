@@ -22,17 +22,34 @@ export interface ShipmentBasic {
   status: string;
 }
 
+export interface ReportUser {
+  _id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  phone?: string;
+  role: string;
+}
+
+export interface ReportShipment {
+  _id: string;
+  title: string;
+  pickupAddress: string;
+  deliveryAddress: string;
+  status: string;
+}
+
 export interface Report {
   _id: string;
   title: string;
   description: string;
   category: string;
-  status: string;
-  reportingUser: UserBasic;
+  status: 'pending' | 'resolved' | 'closed';
+  reportingUser: ReportUser;
   reportingUserType: string;
-  reportedUser?: UserBasic;
-  reportedUserType?: string;
-  reportedShipment: ShipmentBasic;
+  reportedUser: ReportUser;
+  reportedUserType: string;
+  reportedShipment: ReportShipment;
   solutionExplanation?: string;
   createdAt: string;
   updatedAt: string;
@@ -44,7 +61,9 @@ export interface ReportResponse {
 }
 
 export interface ReportsResponse {
-  reports: {
-    report: Report;
-  }[];
+  reports: ReportWrapper[];
+}
+
+export interface ReportWrapper {
+  report: Report;
 }

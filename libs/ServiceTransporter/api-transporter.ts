@@ -68,3 +68,57 @@ export const acceptShipment = async (shipmentId: string): Promise<MessageDAO> =>
     throw new Error("No se encontró un token. Por favor, inicia sesión.");
   }
 };
+
+/**
+ * Confirm that the shipment is in transit
+ * @param shipmentId ID of the shipment
+ * @returns Response with success message
+ */
+export const confirmShipmentTransit = async (shipmentId: string) => {
+  const token = Cookies.get('token');
+    try {
+        const response = await fetch(`${envVariables.API_URL}/shipments/transit/${shipmentId}`, {
+        method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to mark shipment as in transit');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error marking shipment as in transit:', error);
+        throw error;
+    }
+};
+
+/**
+ * Confirm the delivery of the shipment
+ * @param shipmentId ID of the shipment
+ * @returns Response with success message
+ */
+export const confirmShipmentDelivery = async (shipmentId: string) => {
+  const token = Cookies.get('token');
+    try {
+        const response = await fetch(`${envVariables.API_URL}/shipments/deliver/${shipmentId}`, {
+        method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to confirm shipment delivery');
+        }
+        
+        return await response.json();
+    } catch (error) {
+        console.error('Error confirming shipment delivery:', error);
+        throw error;
+    }
+};

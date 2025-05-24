@@ -273,6 +273,10 @@
             "available": {
                 "title": "Available Shipments",
                 "noShipments": "No shipments available..."
+            },
+            "active": {
+                "title": "Active Shipments",
+                "noShipments": "You don't have any active shipments..."
             }
         },
         "dashboard": {
@@ -291,7 +295,7 @@
                 "height": "Height (cm)",
                 "width": "Width (cm)",
                 "length": "Length (cm)",
-                "infoText": "At the same time, the fact that we are wholly owned and totally independent from manufacturers and other group control gives you confidence that we will only recommend what is right for you.",
+                "infoText": "Here you can create a request to send a shipment. Remember to provide as much detailed information as possible so the carrier can accept your request.",
                 "contactNumber": "0151 475 4450",
                 "successMessage": "The shipment was created successfully",
                 "errorMessage": "Error creating the shipment",
@@ -431,7 +435,10 @@
         "weight": "Weight",
         "openMapButton": "Open in Map",
         "viewDetailsButton": "View Details",
-        "acceptShipmentButton": "Accept Shipment"
+        "acceptShipmentButton": "Accept Shipment",
+        "confirmDeliveryButton": "Confirm Delivery",
+        "confirmTransitButton": "Mark As In Transit",
+        "status": "Status"
     },
     "header": {
         "openUserMenu": "Open user menu",
@@ -451,6 +458,7 @@
         "adminSection": "Administrator",
         "manageUsers": "Manage Users",
         "manageShipments": "Manage Shipments",
+        "manageReports": "Manage Reports",
         "transporterDashboard": "Transporter Dashboard",
         "transporterShipments": "Shipments",
         "availableShipments": "Available",
@@ -475,7 +483,128 @@
         "legal": "Legal",
         "privacyPolicy": "Privacy Policy",
         "termsConditions": "Terms & Conditions",
-        "rightsReserved": "All Rights Reserved."
+        "rightsReserved": "All Rights Reserved.",
+        "copyright": "CargoLink. All rights reserved.",
+        "lastUpdated": "Last updated:"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Privacy Policy",
+            "introduction": {
+                "title": "Introduction",
+                "content": "This Privacy Policy describes how CargoLink collects, uses, and shares your personal information when you use our platform."
+            },
+            "dataCollection": {
+                "title": "Information We Collect",
+                "content": "We may collect several types of information from and about users of our platform, including:",
+                "items": {
+                    "personal": "Personal identification information (Name, email address, phone number, etc.)",
+                    "usage": "Usage data (how you interact with our platform)",
+                    "cookies": "Cookies and tracking technologies"
+                }
+            },
+            "dataUsage": {
+                "title": "How We Use Your Information",
+                "content": "We use the information we collect about you for various purposes, including:",
+                "items": {
+                    "serviceProvision": "To provide and maintain our Service",
+                    "serviceImprovement": "To improve and personalize your experience",
+                    "communication": "To communicate with you about updates, support, and promotional offerings"
+                }
+            },
+            "dataSharing": {
+                "title": "Sharing Your Information",
+                "content": "We may share your personal information with third parties only in the ways that are described in this Privacy Policy."
+            },
+            "dataSecurity": {
+                "title": "Data Security",
+                "content": "We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction."
+            },
+            "userRights": {
+                "title": "Your Rights",
+                "content": "You have certain rights regarding your personal information, including:",
+                "items": {
+                    "access": "The right to access the personal information we have about you",
+                    "rectification": "The right to request that we correct any personal information you believe is inaccurate",
+                    "deletion": "The right to request that we delete your personal information",
+                    "objection": "The right to object to processing of your personal information"
+                }
+            },
+            "changes": {
+                "title": "Changes to This Privacy Policy",
+                "content": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content": "If you have any questions about this Privacy Policy, please contact us:",
+                "email": "Email"
+            }
+        },
+        "termsConditions": {
+            "title": "Terms and Conditions",
+            "introduction": {
+                "title": "Introduction",
+                "content": "These Terms and Conditions govern your use of the CargoLink platform and the services provided through it."
+            },
+            "definitions": {
+                "title": "Definitions",
+                "items": {
+                    "service": {
+                        "term": "Service",
+                        "definition": "The CargoLink platform, website, and mobile applications"
+                    },
+                    "user": {
+                        "term": "User",
+                        "definition": "Any person who accesses or uses the Service, including customers who create shipment requests"
+                    },
+                    "transporter": {
+                        "term": "Transporter",
+                        "definition": "Any registered user who offers transportation services through the platform"
+                    },
+                    "shipment": {
+                        "term": "Shipment",
+                        "definition": "Goods or items that are transported from one location to another using the Service"
+                    }
+                }
+            },
+            "accountUse": {
+                "title": "Account Creation and Use",
+                "content": "When creating an account on our platform, you agree to:",
+                "items": {
+                    "responsibility": "Be responsible for maintaining the confidentiality of your account information",
+                    "accuracy": "Provide accurate, current, and complete information",
+                    "security": "Notify us immediately of any unauthorized access to your account"
+                }
+            },
+            "serviceUsage": {
+                "title": "Service Usage",
+                "content": "By using our Service, you agree not to use it for any illegal or unauthorized purposes. You must comply with all applicable laws and regulations."
+            },
+            "payments": {
+                "title": "Payments and Fees",
+                "content": "Users agree to pay all fees associated with the services. Transporters agree to our commission structure for completed deliveries."
+            },
+            "liability": {
+                "title": "Limitation of Liability",
+                "content": "CargoLink shall not be liable for any indirect, incidental, special, consequential or punitive damages resulting from your use or inability to use the Service."
+            },
+            "propertyRights": {
+                "title": "Intellectual Property Rights",
+                "content": "The Service and its original content, features, and functionality are owned by CargoLink and are protected by international copyright, trademark, and other intellectual property laws."
+            },
+            "changes": {
+                "title": "Changes to Terms",
+                "content": "We reserve the right to modify these Terms at any time. We will provide notice of any material changes."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content": "If you have any questions about these Terms, please contact us:",
+                "email": "Email"
+            }
+        },
+        
+        "copyright": "CargoLink. All rights reserved.",
+        "lastUpdated": "Last updated:"
     },
     "notFoundPage": {
         "title": "404",
