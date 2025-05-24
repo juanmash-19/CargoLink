@@ -2,56 +2,69 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { useTranslations } from "next-intl";
+import Link from 'next/link';
+import CargoLinkLogo from '../atoms/Logo';
 
 export default function Footer() {
+  const t = useTranslations();
+
   return (
     <div>
         <footer className="bg-white mt-5">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                 <div className="mb-6 md:mb-0">
-                    <a href="https://flowbite.com/" className="flex items-center">
-                        <Image 
-                            src="https://flowbite.com/docs/images/logo.svg" 
-                            width={32} 
-                            height={32} 
-                            alt="FlowBite Logo" 
-                            className="h-8 me-3"
-                        />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap">Cargo Link</span>
-                    </a>
+                    <Link href="/" className="flex items-center">
+                        <div className="self-center text-2xl font-semibold whitespace-nowrap">
+                            <span className='text-logoCargo'>Cargo</span><span className='text-logoLink'>Link</span>
+                        </div>
+                    </Link>
                 </div>
                 <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">Resources</h2>
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">{t('footer.resources')}</h2>
                         <ul className="text-gray-500  font-medium">
                             <li className="mb-4">
-                                <a href="https://flowbite.com/" className="hover:underline">Flowbite</a>
+                                <Link href="https://flowbite.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                    {t('footer.flowbite')}
+                                </Link>
                             </li>
-                            <li>
-                                <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                            <li className="mb-4">
+                                <Link href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                    {t('footer.tailwind')}
+                                </Link>
+                            </li>
+                            <li className="mb-4">
+                                <Link href="https://tailwindcss.com/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                    HyperUI
+                                </Link>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">Follow us</h2>
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">{t('footer.followUs')}</h2>
                         <ul className="text-gray-500 font-medium">
                             <li className="mb-4">
-                                <a href="https://github.com/themesberg/flowbite" className="hover:underline ">Github</a>
+                                <Link href="https://github.com/juanmash-19/CargoLink" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                    {t('footer.github')}
+                                </Link>
                             </li>
                             <li>
-                                <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
+                                <Link href="https://www.instagram.com/cargolink/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                    Instagram
+                                </Link>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">Legal</h2>
+                        <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase ">{t('footer.legal')}</h2>
                         <ul className="text-gray-500  font-medium">
                             <li className="mb-4">
-                                <a href="#" className="hover:underline">Privacy Policy</a>
+                                <Link href="/info/privacy-policy" className="hover:underline">{t('footer.privacyPolicy')}</Link>
                             </li>
                             <li>
-                                <a href="#" className="hover:underline">Terms &amp; Conditions</a>
+                                <Link href="/info/terms-conditions" className="hover:underline">{t('footer.termsConditions')}</Link>
                             </li>
                         </ul>
                     </div>
@@ -59,7 +72,8 @@ export default function Footer() {
             </div>
             <hr className="my-6 border-gray-200 sm:mx-auto  lg:my-8" />
             <div className="sm:flex sm:items-center sm:justify-between">
-                <span className="text-sm text-gray-500 sm:text-center ">© 2023 <a href="https://flowbite.com/" className="hover:underline">Cargo Link</a>. All Rights Reserved.
+                <span className="text-sm text-gray-500 sm:text-center ">
+                    © 2025 <Link href="/" className="hover:underline">{t('footer.companyName')}</Link>. {t('footer.rightsReserved')}
                 </span>
             </div>
             </div>

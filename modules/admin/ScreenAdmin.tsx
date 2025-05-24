@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import SimpleCard from '@/components/atoms/SimpleCard';
 import { getGeneralStats } from '@/libs/ServiceAdmin/api-admin';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from "next-intl";
 
 // Registrar componentes de Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -22,6 +23,7 @@ interface CardType {
 }
 
 export default function AdminPage() {
+  const t = useTranslations();
   const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
   const [totals, setTotals] = useState({ totalUsers: 0, totalShipments: 0, totalReports: 0 });
   const router = useRouter(); // Hook para redirigir
@@ -60,21 +62,21 @@ export default function AdminPage() {
 
   const cardsData: CardType[] = [
     { 
-      title: 'Envios Totales', 
+      title: t('admin.dashboard.totalShipments'), 
       value: totals.totalShipments.toString(), 
       variant: 'primary', 
       icon: '📦', 
       onClick: () => router.push('/admin/shipments') // Redirige a /admin/envios
     },
     { 
-      title: 'Usuarios Totales', 
+      title: t('admin.dashboard.totalUsers'), 
       value: totals.totalUsers.toString(), 
       variant: 'secondary', 
       icon: '👥', 
       onClick: () => router.push('/admin/users') // Redirige a /admin/usuarios
     },
     { 
-      title: 'Reportes Pendientes', 
+      title: t('admin.dashboard.pendingReports'), 
       value: totals.totalReports.toString(), 
       variant: 'danger', 
       icon: '📋', 
@@ -84,7 +86,7 @@ export default function AdminPage() {
 
   return (
     <div className="flex-1 bg-gray-100 p-6 mt-3">
-      <h1 className="text-3xl font-bold text-gray-900">Administrador</h1>
+      <h1 className="text-3xl font-bold text-gray-900">{t('admin.dashboard.title')}</h1>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cardsData.map((card, index) => (
           <SimpleCard key={index} {...card} onClick={card.onClick} />
@@ -97,15 +99,15 @@ export default function AdminPage() {
         </div>
       )}
       <div className="mt-6 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-xl font-bold">Gráfico de Envios</h2>
+        <h2 className="text-xl font-bold">{t('admin.dashboard.shipmentsChart')}</h2>
         <Bar data={chartData.envios} />
       </div>
       <div className="mt-6 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-xl font-bold">Gráfico de Usuarios</h2>
+        <h2 className="text-xl font-bold">{t('admin.dashboard.usersChart')}</h2>
         <Bar data={chartData.usuarios} />
       </div>
       <div className="mt-6 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-xl font-bold">Gráfico de Reportes</h2>
+        <h2 className="text-xl font-bold">{t('admin.dashboard.reportsChart')}</h2>
         <Bar data={chartData.reportes} />
       </div>
     </div>

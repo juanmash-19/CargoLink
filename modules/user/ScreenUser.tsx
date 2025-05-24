@@ -12,6 +12,7 @@ import { standarTextLink } from "@/utils/Tokens";
 import CustomModal from "@/components/molecules/CustomModal";
 import CustomAlert from "@/components/atoms/CustomAlert";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function UserPage() {
     const router = useRouter();
@@ -21,10 +22,12 @@ export default function UserPage() {
     const { register: registerDelete, handleSubmit: handleDeleteSubmit, reset: resetDelete, formState: { errors: deleteErrors } } = useForm<PasswordDTO>();
     const { startLoading, stopLoading } = useLoadingStore();
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const t = useTranslations();
 
     const [originalName, setOriginalName] = useState<string | null>(null);
     const [originalLastName, setOriginalLastName] = useState<string | null>(null);
     const [originalPhone, setOriginalPhone] = useState<string | null>(null);
+    const [originalEmail, setOriginalEmail] = useState<string | null>(null);
 
     
     {/* Seccion para las alertas*/}
@@ -157,10 +160,11 @@ export default function UserPage() {
                 startLoading();
                 const response = await getUser();
                 if (response) {
-                    const { name, lastname, phone } = response.user;
+                    const { name, lastname, phone, email } = response.user;
                     setOriginalName(name);
                     setOriginalLastName(lastname);
                     setOriginalPhone(phone ?? null);
+                    setOriginalEmail(email ?? null);
 
                     setValue("name", name);
                     setValue("lastname", lastname);
@@ -191,27 +195,39 @@ export default function UserPage() {
                 <div className="grid grid-cols-8 pt-3 sm:grid-cols-10">
                     <div className="col-span-2 hidden sm:block text-gray-800">
                         <ul>
-                            <li className="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">Cuenta</li>
+                            <li className="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">{t('user.account.settingsTitle')}</li>
                             <li className="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">Billetera</li>
                             <li className="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">Notificaciones</li>
                         </ul>
                     </div>
                     <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
                         <div className="pt-4">
-                            <h1 className="py-2 text-2xl font-semibold text-gray-800">Configuración de Cuenta</h1>
-                            <p className="font- text-slate-600">¡Bienvenido <strong>{userName}</strong>! aquí puede cambiar su contraseña, correo o información personal.</p>
+                            <h1 className="py-2 text-2xl font-semibold text-gray-800">
+                                {t('user.account.settingsTitle')}
+                            </h1>
+                            <p className="font- text-slate-600">
+                                {originalName || userName} {t('user.account.welcomeMessage')}
+                            </p>
                         </div>
                         <hr className="mt-4 mb-8" />
-                        <p className="py-2 text-xl font-semibold text-gray-800">Correo</p>
+                        <p className="py-2 text-xl font-semibold text-gray-800">
+                            {t('user.account.emailTitle')}
+                        </p>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                            <p className="text-gray-600">Su direccion de correo es <strong>{userEmail}</strong></p>
+                            <p className="text-gray-600">
+                                {t('user.account.emailMessage')} {originalEmail || userEmail}
+                            </p>
                         </div>
                         <hr className="mt-4 mb-8" />
                         <form onSubmit={handleSubmit(onSubmit)} className="mr-20">
-                            <p className="py-2 text-xl font-semibold text-gray-800">Información Personal</p>
+                            <p className="py-2 text-xl font-semibold text-gray-800">
+                                {t('user.account.personalInfoTitle')}
+                            </p>
                             <div className="space-y-4">
                                 <label className="block">
-                                    <span className="text-sm text-gray-500">Nombre</span>
+                                    <span className="text-sm text-gray-500">
+                                        {t('user.account.nameLabel')}
+                                    </span>
                                     <input
                                         type="text"
                                         {...register("name", { required: "El nombre es obligatorio" })}
@@ -220,7 +236,9 @@ export default function UserPage() {
                                     {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
                                 </label>
                                 <label className="block">
-                                    <span className="text-sm text-gray-500">Apellido</span>
+                                    <span className="text-sm text-gray-500">
+                                        {t('user.account.lastNameLabel')}
+                                    </span>
                                     <input
                                         type="text"
                                         {...register("lastname")}
@@ -228,7 +246,9 @@ export default function UserPage() {
                                     />
                                 </label>
                                 <label className="block">
-                                    <span className="text-sm text-gray-500">Teléfono</span>
+                                    <span className="text-sm text-gray-500">
+                                        {t('user.account.phoneLabel')}
+                                    </span>
                                     <input
                                         type="tel"
                                         {...register("phone")}
@@ -238,17 +258,21 @@ export default function UserPage() {
                             </div>
                             <div className="mt-4 w-fit">
                                 <CustomButton
-                                    text="Guardar cambios"
+                                    text={t('user.account.saveChangesButton')}
                                     type="submit"
                                     variant="secondary"
                                 />
                             </div>
                         </form>
                         <hr className="mt-4 mb-8" />
-                        <p className="py-2 text-xl font-semibold text-gray-800">Contraseña</p>
+                        <p className="py-2 text-xl font-semibold text-gray-800">
+                            {t('user.account.passwordTitle')}
+                        </p>
                         <form onSubmit={handlePasswordSubmit(onChangePassword)} className="space-y-4">
                             <label className="block">
-                                <span className="text-sm text-gray-500">Contraseña actual</span>
+                                <span className="text-sm text-gray-500">
+                                    {t('user.account.currentPasswordLabel')}
+                                </span>
                                 <input
                                     type="password"
                                     {...registerPassword("password", { required: "La contraseña actual es obligatoria" })}
@@ -257,7 +281,9 @@ export default function UserPage() {
                                 {passwordErrors.password && <p className="text-sm text-red-500">{passwordErrors.password.message}</p>}
                             </label>
                             <label className="block">
-                                <span className="text-sm text-gray-500">Nueva contraseña</span>
+                                <span className="text-sm text-gray-500">
+                                    {t('user.account.newPasswordLabel')}
+                                </span>
                                 <input
                                     type="password"
                                     {...registerPassword("newPassword", { required: "La nueva contraseña es obligatoria" })}
@@ -267,30 +293,36 @@ export default function UserPage() {
                             </label>
                             <div className="mt-4 w-fit">
                                 <CustomButton
-                                    text="Guardar contraseña"
+                                    text={t('user.account.savePasswordButton')}
                                     type="submit"
                                     variant="primary"
                                 />
                             </div>
                         </form>
-                        <p className="mt-2 text-slate-600">No recuerdo mi contraseña. <Link className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">Recuperar cuenta</Link></p>
+                        <p className="mt-2 text-slate-600">
+                            {t('user.account.forgotPasswordText')} <Link className="text-sm font-semibold text-blue-600 underline decoration-2" href="#">{t('user.account.recoverAccountLink')}</Link>
+                        </p>
                         <div className="">
 
                         </div>
                         <hr className="mt-4 mb-8" />
 
                         <div className="mb-10">
-                            <p className="py-2 text-xl font-semibold text-gray-800">Borrar cuenta</p>
+                            <p className="py-2 text-xl font-semibold text-gray-800">
+                                {t('user.account.deleteAccountTitle')}
+                            </p>
                             <p className="inline-flex items-center rounded-full bg-rose-100 px-4 py-1 text-rose-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                            </svg>
-                            Procede con precaución
+                                <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                </svg>
+                                {t('user.account.proceedWithCaution')}
                             </p>
                             <p className="mt-2 text-slate-600">
-                                Eliminar la cuenta es una acción permanente e irreversible. Todos sus datos serán eliminados y no podrán ser recuperados. Por favor, asegúrese de que desea proceder antes de continuar.
+                                {t('user.account.deleteAccountWarning')}
                             </p>
-                            <button className={`${standarTextLink} text-rose-600 underline decoration-2`} onClick={() => {setIsDeleteModalOpen(true);}}>Borrar mi cuenta</button>
+                            <button className={`${standarTextLink} text-rose-600 underline decoration-2`} onClick={() => {setIsDeleteModalOpen(true);}}>
+                                {t('user.account.deleteAccountButton')}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -304,13 +336,13 @@ export default function UserPage() {
                     {alertType === 'options' && (
                         <div className="flex gap-2 justify-end">
                             <CustomButton
-                                text="Cancelar"
+                                text={t('user.account.cancelButton')}
                                 variant="primary"
                                 onClick={() => setShowAlert(false)}
 
                             />
                             <CustomButton
-                                text="Eliminar"
+                                text={t('user.account.confirmDeleteButton')}
                                 variant="danger"
                                 onClick={handleDeleteUser}
                             />
@@ -326,12 +358,12 @@ export default function UserPage() {
                     resetDelete();
                     setIsDeleteModalOpen(false);
                 }}
-                title="Por seguridad, antes de eliminar su cuenta debe de ingresar su contraseña."
+                title={t('user.account.deleteAccountModalTitle')}
             >
                 <form onSubmit={handleDeleteSubmit(onSubmitDelete) } className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('user.account.passwordTitle')}
                         </label>
             
                         <input
@@ -350,7 +382,7 @@ export default function UserPage() {
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('user.account.verifyButton')}
                             variant="danger"
                             type="submit"
                         />

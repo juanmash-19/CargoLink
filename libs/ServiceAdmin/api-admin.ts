@@ -363,3 +363,62 @@ export const getGeneralStats = async (): Promise<GeneralStatsDAO> => {
         throw new Error("No se encontró un token. Por favor, inicia sesión.");
     }
 }
+
+// Get all reports for admin
+export const getAdminReports = async () => {
+    const token = Cookies.get('token');
+    if(token){
+        try{
+            const response = await fetch(`${envVariables.API_URL}/reports`, {
+                method: 'GET',
+                headers:{
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            });
+
+            if(!response.ok) {
+                const errorData = await response.json();
+                console.error("Este es el error:", errorData);
+                throw new Error(errorData.message || "Error al obtener los reportes");
+            }
+
+            return await response.json();
+        } catch(error){
+            console.error("Error al obtener los reportes:", error);
+            throw new Error("No se pudo obtener los reportes. Por favor, inténtalo de nuevo.");
+        }
+    } else{
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+}
+
+// Resolve or close a report
+export const resolveReport = async (reportId: string, resolutionData: { status: string, solutionExplanation: string }) => {
+    const token = Cookies.get('token');
+    if(token){
+        try{
+            const response = await fetch(`${envVariables.API_URL}/reports/${reportId}`, {
+                method: 'PUT',
+                headers:{
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(resolutionData)
+            });
+
+            if(!response.ok) {
+                const errorData = await response.json();
+                console.error("Este es el error:", errorData);
+                throw new Error(errorData.message || "Error al actualizar el reporte");
+            }
+
+            return await response.json();
+        } catch(error){
+            console.error("Error al actualizar el reporte:", error);
+            throw new Error("No se pudo actualizar el reporte. Por favor, inténtalo de nuevo.");
+        }
+    } else{
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+}

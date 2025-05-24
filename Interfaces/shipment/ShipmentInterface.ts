@@ -46,11 +46,21 @@ export interface ShipmentDAO {
         description: string,
         weight: number,
         dimensions: DimensionsDAO,
-        pickupTime?: Date,
         cost: number,
         status: string,
-        client: ClientDAO,
-        transporter?: TransporterDAO,
+        client?: {
+          _id: string,
+          name: string,
+          lastName: string,
+          email: string,
+          phone?: string,
+        },
+        transporter?: {
+          _id: string,
+          name: string,
+          email: string,
+          phone?: string,
+        },
         __v?: number,
     }
 }

@@ -30,6 +30,12 @@ export default {
         danger: {
           DEFAULT: '#FF0E0E',
         },
+        logoCargo: {
+          DEFAULT: '#E95A0C',
+        },
+        logoLink: {
+          DEFAULT: '#4D7DE7',
+        }
       },
       fontFamily: {
         sans: ['Kufam', 'sans-serif'], // Usar Kufam como fuente principal

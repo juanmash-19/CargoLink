@@ -201,3 +201,30 @@ export const getUserShipments = async (): Promise<ShipmentsDAO> => {
     }
 };
 
+export const getAcceptedShipments = async (): Promise<ShipmentsDAO> => {
+    const token = Cookies.get('token');
+    if (token) {
+        try {
+            const response = await fetch(`${envVariables.API_URL}/shipments/accepted`, {
+                method: 'GET',
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Este es el error:", errorData);
+                throw new Error(errorData.message || "Error al obtener los envíos aceptados");
+            }
+            
+            return await response.json() as ShipmentsDAO;
+        } catch (error) {
+            console.error("Error en la obtención de envíos aceptados:", error);
+            throw new Error("No se pudo completar la obtención de envíos aceptados. Por favor, inténtalo de nuevo.");
+        }
+    } else {
+        throw new Error("No se encontró un token. Por favor, inicia sesión.");
+    }
+};
