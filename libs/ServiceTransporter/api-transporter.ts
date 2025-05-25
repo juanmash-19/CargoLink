@@ -122,3 +122,41 @@ export const confirmShipmentDelivery = async (shipmentId: string) => {
         throw error;
     }
 };
+
+/**
+ * Get general stats for the transporter dashboard
+ * @returns Object with stats for cards and charts
+ */
+export const getDriverStats = async () => {
+  const token = Cookies.get('token');
+  if (!token) throw new Error("No se encontró un token. Por favor, inicia sesión.");
+
+  try {
+    const response = await fetch(`${envVariables.API_URL}/shipments/driver/stats`, {
+      method: 'GET',
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Error al obtener estadísticas del transportador");
+    }
+
+    // Espera que el backend devuelva algo como:
+    // {
+    //   disponibles: number,
+    //   activos: number,
+    //   completados: number,
+    //   disponiblesStats: number[],
+    //   activosStats: number[],
+    //   completadosStats: number[]
+    // }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al obtener estadísticas del transportador:", error);
+    throw error;
+  }
+};

@@ -239,8 +239,10 @@
             "title": "Transportador",
             "availableShipments": "Fletes Disponibles",
             "activeShipments": "Fletes Activos",
-            "allShipments": "Todos los Fletes",
-            "completedShipmentsHistory": "Historial de Fletes Completados"
+            "completedShipments": "Fletes Completados",
+            "availableShipmentsChart": "Gráfico de Fletes Disponibles",
+            "activeShipmentsChart": "Gráfico de Fletes Activos",
+            "completedShipmentsChart": "Gráfico de Fletes Completados"
         }
     },
     "user": {
