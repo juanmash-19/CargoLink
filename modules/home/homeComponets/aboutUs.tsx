@@ -4,8 +4,11 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { useTranslations } from "next-intl";
 
 const AboutUs = () => {
+    const t = useTranslations();
+
     const settings = {
         dots: false,
         infinite: true,
@@ -37,21 +40,20 @@ const AboutUs = () => {
         ]
     };
 
-    // Definimos los datos estáticos
     const expertData = [
         {
-            name: "Santiago Castaño",
-            description: "Desarrollador backend",
+            name: t('home.aboutUs.santiagoName'),
+            description: t('home.aboutUs.santiagoRole'),
             imgSrc: "/images/Expert/santiago.jpg"
         },
         {
-            name: "Juan Martin",
-            description: "Desarrollador frontend",
+            name: t('home.aboutUs.juanMartinName'),
+            description: t('home.aboutUs.juanMartinRole'),
             imgSrc: "/images/Expert/maria.jpg"
         },
         {
-            name: "Juan Diego",
-            description: "Ingeniero de datos",
+            name: t('home.aboutUs.juanDiegoName'),
+            description: t('home.aboutUs.juanDiegoRole'),
             imgSrc: "/images/Expert/carlos.jpg"
         }
     ];
@@ -60,21 +62,17 @@ const AboutUs = () => {
         <section className="bg-primary/15" id="about-us">
             <div className='container mx-auto lg:max-w-screen-xl md:max-w-screen-md'>
                 <div className="text-center">
-                    <p className='text-primary text-lg font-normal mb-2 tracking-widest uppercase'>DESARROLLADORES</p>
+                    <p className='text-primary text-lg font-normal mb-2 tracking-widest uppercase'>
+                        {t('home.aboutUs.developers')}
+                    </p>
                     <h2 className="text-3xl lg:text-5xl font-semibold text-black">
-                        Ingenieros
+                        {t('home.aboutUs.engineers')}
                     </h2>
                 </div>
                 <Slider {...settings}>
                     {expertData.map((item, i) => (
                         <div key={i}>
                             <div className='m-2 py-10 my-10 text-center inline-flex'>
-                                {/* <div className="relative">
-                                    <Image src={item.imgSrc} alt={item.name} width={362} height={262} className="inline-block m-auto" />
-                                    <div className="absolute top-[50%] right-[2%]">
-                                        <Image src={'/images/Expert/Linkedin.svg'} alt="linkedin" width={220} height={120} />
-                                    </div>
-                                </div> */}
                                 <h3 className='text-2xl font-semibold text-lightblack'>{item.name}</h3>
                                 <h4 className='text-lg font-normal text-lightblack pt-2 pb-2 opacity-50'>{item.description}</h4>
                             </div>

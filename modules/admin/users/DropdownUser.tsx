@@ -1,11 +1,13 @@
 'use client'
 import CustomDropdown from "@/components/atoms/CustomDropdown";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import CustomAlert from "@/components/atoms/CustomAlert";
 
 export default function DropdownUser() {
     const router = useRouter();
+    const t = useTranslations();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('success');
@@ -23,18 +25,18 @@ export default function DropdownUser() {
     return (
         <>
             <CustomDropdown
-                buttonText="Menú"
+                buttonText={t('admin.users.dropdown.menu')}
                 options={[
                     {
-                        text: "Crear usuario",
+                        text: t('admin.users.dropdown.createUser'),
                         onClick: createOption,
                     },
                     {
-                        text: "Organizar por rol",
+                        text: t('admin.users.dropdown.sortByRole'),
                         onClick: () => handleAlert("Opción 2 seleccionada"),
                     },
                     {
-                        text: "Organizar por correo",
+                        text: t('admin.users.dropdown.sortByEmail'),
                         onClick: () => handleAlert("Opción 3 seleccionada"),
                     },
                 ]}

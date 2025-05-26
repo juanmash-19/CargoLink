@@ -8,14 +8,16 @@ import { getShipmentById } from "@/libs/ServiceAdmin/api-admin";
 import CustomButton from "@/components/atoms/CustomButton";
 import BasicTextCardProps from "@/components/atoms/BasicTextCard";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import CustomAlert from "@/components/atoms/CustomAlert";
 
 export default function ScreenMeAdminShipments(){
     const params = useParams();
-    const idShipment = params.shipment;
+    const idShipment = params?.shipment;
     const [shipment, setShipment] = useState<ShipmentDAO['shipment'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const router = useRouter();
+    const t = useTranslations();
 
     // Estados para las alertas
     const [showAlert, setShowAlert] = useState(false);
@@ -32,6 +34,7 @@ export default function ScreenMeAdminShipments(){
 
                 if (response.shipment._id) {
                     setShipment(response.shipment);
+                    console.log('Shipment:', response.shipment);
                 } else {
                     setAlertMessage('No se encontró el envío');
                     setAlertType('error');
@@ -99,13 +102,13 @@ export default function ScreenMeAdminShipments(){
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h1 className="text-3xl font-bold text-primary-300">Detalles del Flete</h1>
+            <h1 className="text-3xl font-bold text-primary-300">{t('admin.shipments.details.title')}</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Columna 1: Información básica */}
                 <div className="space-y-4">
                     {shipment.imageUrl && (
                         <>
-                            <h2 className="text-lg font-semibold text-gray-600">Imagen del Flete</h2>
+                            <h2 className="text-lg font-semibold text-gray-600">{t('admin.shipments.details.image')}</h2>
                             <div className="flex justify-center">
                                 <img
                                     src={shipment.imageUrl}
@@ -116,39 +119,51 @@ export default function ScreenMeAdminShipments(){
                         </>
                     )}
                     <BasicTextCardProps
-                        title="Información General"
+                        title={t('admin.shipments.details.generalInfo')}
                         subtitles={[
-                            { label: "ID", content: shipment._id },
-                            { label: "Título", content: shipment.title },
-                            { label: "Descripción", content: shipment.description },
-                            { label: "Estado", content: shipment.status },
+                            { label: t('admin.shipments.details.id'), content: shipment._id },
+                            { label: t('admin.shipments.details.titleg'), content: shipment.title },
+                            { label: t('admin.shipments.details.description'), content: shipment.description },
+                            { label: t('admin.shipments.details.status'), content: shipment.status },
                         ]}
                     />
+                    
+                    {/* Añadir información del cliente (usuario) */}
+                    {shipment.client && (
+                        <BasicTextCardProps
+                            title="Cliente"
+                            subtitles={[
+                                { label: t('admin.shipments.details.transporterName'), content: shipment.client.name},
+                                { label: t('admin.shipments.details.transporterEmail'), content: shipment.client.email},
+                                { label: t('admin.shipments.details.transporterPhone'), content: shipment.client.phone},
+                            ]}
+                        />
+                    )}
                 </div>
     
                 <div className="space-y-4">
                     <BasicTextCardProps
-                        title="Direcciones"
+                        title={t('admin.shipments.details.addresses')}
                         subtitles={[
-                            { label: "Recogida", content: shipment.pickupAddress },
-                            { label: "Entrega", content: shipment.deliveryAddress },
+                            { label: t('admin.shipments.details.pickupAddress'), content: shipment.pickupAddress },
+                            { label: t('admin.shipments.details.deliveryAddress'), content: shipment.deliveryAddress },
                         ]}
                     />
                     
                     {shipment.status === 'pending' ? (
                         <BasicTextCardProps
-                            title="Detalles Técnicos"
+                            title={t('admin.shipments.details.technicalDetails')}
                             subtitles={[
-                                { label: "Peso", content: `${shipment.weight} kg` },
-                                { label: "Dimensiones", content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
+                                { label: t('admin.shipments.details.weight'), content: `${shipment.weight} kg` },
+                                { label: t('admin.shipments.details.dimensions'), content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
                             ]}
                             />
                     ) : (
                         <BasicTextCardProps
-                            title="Detalles Técnicos"
+                            title={t('admin.shipments.details.technicalDetails')}
                             subtitles={[
-                                { label: "Peso", content: `${shipment.weight} kg` },
-                                { label: "Dimensiones", content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
+                                { label: t('admin.shipments.details.weight'), content: `${shipment.weight} kg` },
+                                { label: t('admin.shipments.details.dimensions'), content: `${shipment.dimensions?.height}x${shipment.dimensions?.width}x${shipment.dimensions?.length} cm` },
                                 { label: "Costo", content: `$ ${shipment.cost}` },
                             ]}
                         />
@@ -156,11 +171,11 @@ export default function ScreenMeAdminShipments(){
     
                     {shipment.transporter && (
                         <BasicTextCardProps
-                            title="Transportista"
+                            title={t('admin.shipments.details.transporter')}
                             subtitles={[
-                                { label: "Nombre", content: shipment.transporter.name },
-                                { label: "Email", content: shipment.transporter.email },
-                                { label: "Teléfono", content: shipment.transporter.phone },
+                                { label: t('admin.shipments.details.transporterName'), content: shipment.transporter.name },
+                                { label: t('admin.shipments.details.transporterEmail'), content: shipment.transporter.email },
+                                { label: t('admin.shipments.details.transporterPhone'), content: shipment.transporter.phone },
                             ]}
                         />
                     )}
@@ -174,7 +189,7 @@ export default function ScreenMeAdminShipments(){
                                 ]}
                             />
                             <CustomButton
-                                text="Confirmar"
+                                text={t('admin.shipments.details.confirmButton')}
                                 variant="primary"
                                 onClick={acceptedClick}
                             />
@@ -190,7 +205,7 @@ export default function ScreenMeAdminShipments(){
                                 ]}
                             />
                             <CustomButton
-                                text="Cancelar"
+                                text={t('admin.shipments.details.cancelButton')}
                                 variant="danger"
                                 onClick={cancelledClick}
                             />
@@ -198,7 +213,7 @@ export default function ScreenMeAdminShipments(){
                     )}
                     
                     <CustomButton
-                        text='Volver'
+                        text={t('admin.shipments.details.backButton')}
                         variant='secondary'
                         type='button'
                         onClick={handleBack}

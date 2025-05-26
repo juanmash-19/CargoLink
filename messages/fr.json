@@ -1,0 +1,612 @@
+{
+    "auth": {
+        "register": {
+            "title": "Rejoignez CargoLink et simplifiez vos expéditions ! 🚚",
+            "description": "Rejoignez CargoLink et simplifiez le transport de marchandises. Que vous soyez un client à la recherche du véhicule idéal ou un transporteur avec de l'espace disponible, CargoLink a la solution parfaite. Inscrivez-vous gratuitement et commencez à connecter dès aujourd'hui !",
+            "firstName": "Prénom",
+            "lastName": "Nom",
+            "email": "Email",
+            "password": "Mot de passe",
+            "confirmPassword": "Confirmer le mot de passe",
+            "marketingAccept": "Je souhaite recevoir des emails sur les événements, mises à jour et annonces de CargoLink.",
+            "termsAndConditions": "En créant un compte, vous acceptez nos",
+            "termsLink": "termes et conditions",
+            "createAccountButton": "Créer un compte",
+            "alreadyHaveAccount": "Vous avez déjà un compte ?",
+            "loginLink": "Connectez-vous"
+        },
+        "login": {
+            "title": "Connexion",
+            "noAccount": "Vous n'avez pas de compte ?",
+            "createAccount": "Créez-en un",
+            "email": "Email",
+            "password": "Mot de passe",
+            "forgotPassword": "Mot de passe oublié ?",
+            "continueButton": "Continuer"
+        }
+    },
+    "admin": {
+        "users": {
+            "dropdown": {
+                "menu": "Menu",
+                "createUser": "Créer un utilisateur",
+                "sortByRole": "Trier par rôle",
+                "sortByEmail": "Trier par email"
+            },
+            "create": {
+                "title": "Créer un utilisateur",
+                "firstName": "Prénom",
+                "lastName": "Nom",
+                "email": "Email",
+                "phone": "Téléphone (optionnel)",
+                "password": "Mot de passe",
+                "confirmPassword": "Confirmer le mot de passe",
+                "role": "Rôle",
+                "selectRole": "Sélectionnez un rôle",
+                "roles": {
+                    "admin": "Administrateur",
+                    "transporter": "Transporteur",
+                    "user": "Utilisateur"
+                },
+                "createButton": "Créer un utilisateur"
+            },
+            "edit": {
+                "detailsTitle": "Détails de l'utilisateur",
+                "generalInfo": "Informations générales",
+                "id": "ID",
+                "email": "Email",
+                "phone": "Téléphone",
+                "names": "Noms",
+                "firstName": "Prénom",
+                "lastName": "Nom",
+                "role": "Rôle",
+                "roleLabel": "Rôle",
+                "editTitle": "Modifier l'utilisateur",
+                "selectRole": "Sélectionnez un rôle",
+                "roles": {
+                    "admin": "Administrateur",
+                    "transporter": "Transporteur",
+                    "user": "Utilisateur"
+                },
+                "password": "Mot de passe",
+                "saveButton": "Enregistrer les modifications",
+                "backButton": "Retour",
+                "deleteSuccessMessage": "Utilisateur supprimé avec succès.",
+                "deleteErrorMessage": "Erreur lors de la suppression de l'utilisateur.",
+                "notFoundUserMessage": "Aucun utilisateur n'a été sélectionné.",
+                "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+                "fetchErrorMessage": "Erreur lors de la vérification du mot de passe."
+            },
+            "manage": {
+                "title": "Gestion des utilisateurs",
+                "searchPlaceholder": "Recherche d'utilisateur",
+                "searchTooltip": "Rechercher un utilisateur",
+                "clearSearchTooltip": "Effacer la recherche",
+                "nameColumn": "Nom",
+                "roleColumn": "Rôle",
+                "phoneColumn": "Téléphone",
+                "actionsColumn": "Actions",
+                "editTooltip": "Modifier",
+                "deleteTooltip": "Supprimer",
+                "securityEditModalTitle": "Pour des raisons de sécurité, pour modifier un utilisateur, vous devez entrer votre mot de passe.",
+                "securityDeleteModalTitle": "Pour des raisons de sécurité, pour supprimer un utilisateur, vous devez entrer votre mot de passe.",
+                "verifyButton": "Vérifier",
+                "cancelButton": "Annuler",
+                "confirmButton": "Confirmer",
+                "deleteSuccessMessage": "Utilisateur supprimé avec succès.",
+                "deleteErrorMessage": "Erreur lors de la suppression de l'utilisateur."
+            }
+        },
+        "shipments": {
+            "dropdown": {
+                "menu": "Menu",
+                "createShipment": "Créer un envoi",
+                "sortByPrice": "Trier par prix",
+                "sortByCreationDate": "Trier par date de création"
+            },
+            "details": {
+                "title": "Détails de l'envoi",
+                "image": "Image de l'envoi",
+                "generalInfo": "Informations générales",
+                "id": "ID",
+                "titleg": "Titre",
+                "description": "Description",
+                "status": "Statut",
+                "addresses": "Adresses",
+                "pickupAddress": "Adresse de collecte",
+                "deliveryAddress": "Adresse de livraison",
+                "technicalDetails": "Détails techniques",
+                "weight": "Poids",
+                "dimensions": "Dimensions",
+                "transporter": "Transporteur",
+                "transporterName": "Nom",
+                "transporterEmail": "Email",
+                "transporterPhone": "Téléphone",
+                "confirmButton": "Confirmer",
+                "cancelButton": "Annuler",
+                "backButton": "Retour"
+            },
+            "edit": {
+                "title": "Modifier l'envoi",
+                "titleLabel": "Titre",
+                "pickupAddress": "Adresse de collecte",
+                "deliveryAddress": "Adresse de livraison",
+                "weight": "Poids",
+                "dimensions": "Dimensions",
+                "height": "Hauteur (cm)",
+                "width": "Largeur (cm)",
+                "length": "Longueur (cm)",
+                "description": "Description",
+                "status": "Statut",
+                "statuses": {
+                    "pending": "En attente",
+                    "activated": "Activé",
+                    "accepted": "Accepté",
+                    "inTransit": "En transit",
+                    "delivered": "Livré",
+                    "canceled": "Annulé"
+                },
+                "saveButton": "Enregistrer les modifications",
+                "backButton": "Retour",
+                "successMessage": "L'envoi a été modifié avec succès.",
+                "errorMessage": "Erreur lors de la modification de l'envoi.",
+                "notFoundMessage": "Envoi non trouvé.",
+                "fetchErrorMessage": "Erreur lors de la récupération de l'envoi."
+            },
+            "manage": {
+                "title": "Gestion des envois",
+                "searchPlaceholder": "Recherche d'envois",
+                "searchTooltip": "Rechercher un envoi",
+                "clearSearchTooltip": "Effacer la recherche",
+                "titleColumn": "Titre",
+                "statusColumn": "Statut actuel",
+                "optionsColumn": "Options",
+                "detailsTooltip": "Détails",
+                "editTooltip": "Modifier",
+                "deleteTooltip": "Supprimer",
+                "securityDetailsModalTitle": "Pour des raisons de sécurité, pour voir les détails de l'envoi, vous devez entrer votre mot de passe.",
+                "securityEditModalTitle": "Pour des raisons de sécurité, pour modifier un envoi, vous devez entrer votre mot de passe.",
+                "securityDeleteModalTitle": "Pour des raisons de sécurité, pour supprimer un envoi, vous devez entrer votre mot de passe.",
+                "verifyButton": "Vérifier",
+                "cancelButton": "Annuler",
+                "confirmButton": "Confirmer",
+                "deleteSuccessMessage": "Shipment deleted successfully.",
+                "deleteErrorMessage": "Error deleting the shipment.",
+                "notFoundShipmentMessage": "No shipment has been selected.",
+                "deleteConfirmationMessage": "Are you sure you want to delete this shipment?",
+                "fetchErrorMessage": "Error verifying the password."
+            }
+        },
+        "dashboard": {
+            "title": "Administrateur",
+            "totalShipments": "Envois totaux",
+            "totalUsers": "Utilisateurs totaux",
+            "pendingReports": "Rapports en attente",
+            "shipmentsChart": "Graphique des envois",
+            "usersChart": "Graphique des utilisateurs",
+            "reportsChart": "Graphique des rapports"
+        }
+    },
+    "transporter": {
+        "shipments": {
+            "available": {
+                "title": "Envois disponibles",
+                "noShipments": "Aucun envoi disponible..."
+            },
+            "active": {
+                "title": "Envois Actifs",
+                "noShipments": "Vous n'avez pas d'envois actifs..."
+            }
+        },
+        "dashboard": {
+            "title": "Transporteur",
+            "availableShipments": "Envois disponibles",
+            "activeShipments": "Envois actifs",
+            "allShipments": "Tous les envois",
+            "completedShipmentsHistory": "Historique des envois terminés"
+        }
+    },
+    "user": {
+        "shipments": {
+            "create": {
+                "dimensions": "Dimensions",
+                "weight": "Poids (kg)",
+                "height": "Hauteur (cm)",
+                "width": "Largeur (cm)",
+                "length": "Longueur (cm)",
+                "infoText": "Ici, vous pouvez créer une demande d'envoi d'un envoi. N'oubliez pas de fournir autant d'informations détaillées que possible afin que le transporteur puisse accepter votre demande.",
+                "contactNumber": "0151 475 4450",
+                "successMessage": "L'envoi a été créé avec succès",
+                "errorMessage": "Erreur lors de la création de l'envoi",
+                "titleLabel": "Titre",
+                "titlePlaceholder": "Entrez le titre de l'envoi",
+                "address": "Adresses",
+                "pickupLocation": "Lieu de collecte",
+                "pickupDepartment": "Département",
+                "selectDepartment": "Sélectionnez un département",
+                "pickupCity": "Ville",
+                "selectCity": "Sélectionnez une ville",
+                "pickupAddress": "Adresse de collecte",
+                "deliveryLocation": "Lieu de livraison",
+                "deliveryDepartment": "Département de livraison",
+                "deliveryCity": "Ville de livraison",
+                "deliveryAddress": "Adresse de livraison",
+                "description": "Description",
+                "image": "Image de l'envoi",
+                "clickToUpload": "Cliquez pour télécharger l'image",
+                "orDragAndDrop": "ou glissez-la ici",
+                "imageFormats": "SVG, PNG ou JPG",
+                "imageUploaded": "Image téléchargée",
+                "uploadImage": "Télécharger l'image",
+                "continue": "Continuer"
+            },
+            "details": {
+                "title": "Détails de l'envoi",
+                "image": "Image de l'envoi",
+                "generalInfo": "Informations générales",
+                "id": "ID",
+                "titleg": "Titre",
+                "description": "Description",
+                "status": "Statut",
+                "addresses": "Adresses",
+                "pickupAddress": "Adresse de collecte",
+                "deliveryAddress": "Adresse de livraison",
+                "technicalDetails": "Détails techniques",
+                "weight": "Poids",
+                "dimensions": "Dimensions",
+                "cost": "Coût",
+                "transporter": "Transporteur",
+                "transporterName": "Nom",
+                "transporterEmail": "Email",
+                "transporterPhone": "Téléphone",
+                "confirmButton": "Confirmer",
+                "cancelButton": "Annuler",
+                "confirmShipment": "Confirmer l'expédition",
+                "cancelShipment": "Annuler l'expédition",
+                "requirements": "Conditions",
+                "cancelRequirements": "L'envoi peut être annulé uniquement s'il n'a pas encore été accepté par un transporteur.",
+                "reportProblem": "Signaler un Problème",
+                "reportShipment": "Signaler un Problème avec l'Envoi",
+                "reportTitle": "Titre",
+                "reportTitlePlaceholder": "Brève description du problème",
+                "reportCategory": "Catégorie",
+                "selectCategory": "Sélectionnez une catégorie",
+                "categoryPayment": "Problème de Paiement",
+                "categoryDelivery": "Problème de Livraison",
+                "categoryDamage": "Articles Endommagés",
+                "categoryCommunication": "Problème de Communication",
+                "categoryOther": "Autre Problème",
+                "reportDescription": "Description",
+                "reportDescriptionPlaceholder": "Veuillez décrire le problème en détail",
+                "submitReport": "Soumettre le Rapport"
+            },
+            "manage": {
+                "title": "Mes envois",
+                "createButton": "Créer un nouvel envoi",
+                "noShipments": "Vous n'avez pas encore créé d'envois",
+                "createFirstButton": "Créer le premier envoi"
+            }
+        },
+        "account": {
+            "settingsTitle": "Paramètres du compte",
+            "welcomeMessage": ", Bienvenue! Ici, vous pouvez modifier votre mot de passe, votre email ou vos informations personnelles.",
+            "emailTitle": "Email",
+            "emailMessage": "Votre adresse email est ",
+            "personalInfoTitle": "Informations personnelles",
+            "nameLabel": "Prénom",
+            "lastNameLabel": "Nom",
+            "phoneLabel": "Téléphone",
+            "saveChangesButton": "Enregistrer les modifications",
+            "passwordTitle": "Mot de passe",
+            "currentPasswordLabel": "Mot de passe actuel",
+            "newPasswordLabel": "Nouveau mot de passe",
+            "savePasswordButton": "Enregistrer le mot de passe",
+            "deleteAccountTitle": "Supprimer le compte",
+            "deleteAccountWarning": "La suppression de votre compte est une action permanente et irréversible. Toutes vos données seront supprimées et ne pourront pas être récupérées. Assurez-vous de vouloir continuer avant de procéder.",
+            "deleteAccountButton": "Supprimer mon compte",
+            "deleteAccountModalTitle": "Pour des raisons de sécurité, avant de supprimer votre compte, vous devez entrer votre mot de passe.",
+            "verifyButton": "Vérifier",
+            "cancelButton": "Annuler",
+            "confirmDeleteButton": "Supprimer",
+            "proceedWithCaution": "Procédez avec prudence",
+            "forgotPasswordText": "J'ai oublié mon mot de passe.",
+            "recoverAccountLink": "Récupérer le compte"
+        },
+        "reports": {
+            "title": "Mes Rapports",
+            "noReports": "Vous n'avez pas encore de rapports",
+            "viewShipments": "Voir Mes Envois",
+            "pendingReports": "Rapports en Attente",
+            "resolvedReports": "Rapports Résolus",
+            "closedReports": "Rapports Fermés",
+            "category": "Catégorie",
+            "date": "Date",
+            "relatedShipment": "Envoi Associé",
+            "pickup": "Collecte",
+            "delivery": "Livraison",
+            "solution": "Solution",
+            "status": {
+                "pending": "En attente",
+                "resolved": "Résolu",
+                "closed": "Fermé"
+            },
+            "categories": {
+                "delayService": "Retard de Service",
+                "packageDamage": "Dommage du Colis",
+                "addressProblem": "Problème d'Adresse",
+                "payment": "Problème de Paiement",
+                "delivery": "Problème de Livraison",
+                "damage": "Problème de Dommages",
+                "communication": "Problème de Communication",
+                "other": "Autre Problème"
+            }
+        }
+    },
+    "schemas": {
+        "loginSchemes": {
+            "emailRequired": "*Veuillez entrer votre email",
+            "emailInvalid": "*L'email est incorrect",
+            "emailSpecialChars": "*L'email ne peut pas contenir de caractères spéciaux",
+            "passwordRequired": "*Veuillez entrer votre mot de passe",
+            "passwordSpecialChars": "*Le mot de passe ne peut pas contenir de caractères spéciaux"
+        },
+        "registerSchemes": {
+            "nameRequired": "*Ce champ est obligatoire",
+            "nameMax": "*Nombre maximum de caractères autorisés",
+            "nameMin": "*Pas assez de caractères",
+            "nameInvalid": "Le nom ne peut pas contenir de chiffres ou de caractères spéciaux",
+            "lastnameRequired": "*Ce champ est obligatoire",
+            "lastnameMax": "*Nombre maximum de caractères autorisés",
+            "lastnameMin": "*Pas assez de caractères",
+            "lastnameInvalid": "*Le prénom ne peut pas contenir de chiffres ou de caractères spéciaux",
+            "emailInvalid": "*Email invalide",
+            "passwordInvalid": "*Minimum 5 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial",
+            "confirmPasswordMismatch": "*Les mots de passe ne correspondent pas"
+        },
+        "shipmentEditScheme": {
+            "pickupAddressMin": "L'adresse de collecte doit comporter entre 5 et 100 caractères",
+            "pickupAddressMax": "L'adresse de collecte doit comporter entre 5 et 100 caractères",
+            "deliveryAddressMin": "L'adresse de livraison doit comporter entre 5 et 100 caractères",
+            "deliveryAddressMax": "L'adresse de livraison doit comporter entre 5 et 100 caractères",
+            "descriptionMin": "La description doit comporter entre 5 et 200 caractères",
+            "descriptionMax": "La description doit comporter entre 5 et 200 caractères",
+            "titleMin": "Le titre doit comporter entre 5 et 25 caractères",
+            "titleMax": "Le titre doit comporter entre 5 et 25 caractères",
+            "weightMin": "Le poids doit être un nombre supérieur à 0",
+            "dimensionsHeightMin": "La hauteur doit être un nombre supérieur à 0",
+            "dimensionsWidthMin": "La largeur doit être un nombre supérieur à 0",
+            "dimensionsLengthMin": "La longueur doit être un nombre supérieur à 0",
+            "pickupTimeInvalid": "La date et l'heure doivent être au format valide (ISO 8601)",
+            "costMin": "Le coût doit être un nombre supérieur ou égal à 0",
+            "transporterInvalid": "L'ID du transporteur n'est pas valide"
+        },
+        "userEditScheme": {
+            "nameLength": "Le nom doit comporter entre 2 et 40 caractères",
+            "lastnameLength": "Le prénom doit comporter entre 2 et 40 caractères",
+            "emailInvalid": "L'adresse email n'est pas valide",
+            "phoneNumbersOnly": "Seuls les chiffres sont autorisés",
+            "phoneLength": "Doit comporter entre 7 et 15 chiffres",
+            "passwordSpecialChars": "*Le mot de passe ne peut pas contenir de caractères spéciaux"
+        }
+    },
+    "shipmentCard": {
+        "imageAlt": "Envoi",
+        "distance": "Distance",
+        "totalCharge": "Charge totale",
+        "totalDistance": "Distance totale",
+        "profit": "Profit",
+        "dimensions": "Dimensions",
+        "weight": "Poids",
+        "openMapButton": "Ouvrir dans la carte",
+        "viewDetailsButton": "Voir les détails",
+        "acceptShipmentButton": "Accepter l'envoi",
+        "confirmDeliveryButton": "Confirmer la Livraison",
+        "confirmTransitButton": "Marquer En Transit",
+        "status": "Statut"
+    },
+    "header": {
+        "openUserMenu": "Ouvrir le menu utilisateur",
+        "userImageAlt": "Photo de profil de l'utilisateur",
+        "profile": "Profil",
+        "settings": "Paramètres",
+        "information": "Informations",
+        "logout": "Se déconnecter",
+        "register": "S'inscrire",
+        "login": "Se connecter",
+        "openMainMenu": "Ouvrir le menu principal",
+        "home": "Accueil",
+        "services": "Services",
+        "whatWeAre": "Qui sommes-nous",
+        "aboutUs": "À propos de nous",
+        "adminDashboard": "Tableau de bord admin",
+        "adminSection": "Administrateur",
+        "manageUsers": "Gérer les utilisateurs",
+        "manageShipments": "Gérer les envois",
+        "manageReports": "Gérer les rapports",
+        "transporterDashboard": "Tableau de bord transporteur",
+        "transporterShipments": "Envois",
+        "availableShipments": "Disponibles",
+        "allShipments": "Tous",
+        "wallet": "Portefeuille",
+        "currentStatus": "Statut actuel",
+        "userShipments": "Envois",
+        "createShipment": "Créer",
+        "myShipments": "Mes envois",
+        "activeShipments": "Actifs",
+        "reports": "Rapports"
+    },
+    "footer": {
+        "logoAlt": "Logo FlowBite",
+        "companyName": "CargoLink",
+        "resources": "Ressources",
+        "flowbite": "Flowbite",
+        "tailwind": "Tailwind CSS",
+        "followUs": "Suivez-nous",
+        "github": "Github",
+        "discord": "Discord",
+        "legal": "Légal",
+        "privacyPolicy": "Politique de confidentialité",
+        "termsConditions": "Conditions générales",
+        "rightsReserved": "Tous droits réservés.",
+        "copyright": "CargoLink. Tous droits réservés.",
+        "lastUpdated": "Dernière mise à jour:"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Politique de Confidentialité",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Cette Politique de Confidentialité décrit comment CargoLink collecte, utilise et partage vos informations personnelles lorsque vous utilisez notre plateforme."
+            },
+            "dataCollection": {
+                "title": "Informations Que Nous Collectons",
+                "content": "Nous pouvons collecter plusieurs types d'informations auprès des utilisateurs de notre plateforme, notamment :",
+                "items": {
+                    "personal": "Informations d'identification personnelle (nom, adresse e-mail, numéro de téléphone, etc.)",
+                    "usage": "Données d'utilisation (comment vous interagissez avec notre plateforme)",
+                    "cookies": "Cookies et technologies de suivi"
+                }
+            },
+            "dataUsage": {
+                "title": "Comment Nous Utilisons Vos Informations",
+                "content": "Nous utilisons les informations que nous collectons à votre sujet à diverses fins, notamment :",
+                "items": {
+                    "serviceProvision": "Pour fournir et maintenir notre Service",
+                    "serviceImprovement": "Pour améliorer et personnaliser votre expérience",
+                    "communication": "Pour communiquer avec vous au sujet des mises à jour, du support et des offres promotionnelles"
+                }
+            },
+            "dataSharing": {
+                "title": "Partage de Vos Informations",
+                "content": "Nous pouvons partager vos informations personnelles avec des tiers uniquement de la manière décrite dans cette Politique de Confidentialité."
+            },
+            "dataSecurity": {
+                "title": "Sécurité des Données",
+                "content": "Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, l'altération, la divulgation ou la destruction non autorisés."
+            },
+            "userRights": {
+                "title": "Vos Droits",
+                "content": "Vous disposez de certains droits concernant vos informations personnelles, notamment :",
+                "items": {
+                    "access": "Le droit d'accéder aux informations personnelles que nous possédons à votre sujet",
+                    "rectification": "Le droit de demander que nous corrigions toute information personnelle que vous jugez inexacte",
+                    "deletion": "Le droit de demander que nous supprimions vos informations personnelles",
+                    "objection": "Le droit de vous opposer au traitement de vos informations personnelles"
+                }
+            },
+            "changes": {
+                "title": "Modifications de cette Politique de Confidentialité",
+                "content": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :",
+                "email": "E-mail"
+            }
+        },
+        "termsConditions": {
+            "title": "Conditions Générales",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Ces Conditions Générales régissent votre utilisation de la plateforme CargoLink et des services fournis par celle-ci."
+            },
+            "definitions": {
+                "title": "Définitions",
+                "items": {
+                    "service": {
+                        "term": "Service",
+                        "definition": "La plateforme CargoLink, le site Web et les applications mobiles"
+                    },
+                    "user": {
+                        "term": "Utilisateur",
+                        "definition": "Toute personne qui accède ou utilise le Service, y compris les clients qui créent des demandes d'expédition"
+                    },
+                    "transporter": {
+                        "term": "Transporteur",
+                        "definition": "Tout utilisateur inscrit qui offre des services de transport via la plateforme"
+                    },
+                    "shipment": {
+                        "term": "Envoi",
+                        "definition": "Biens ou articles qui sont transportés d'un endroit à un autre en utilisant le Service"
+                    }
+                }
+            },
+            "accountUse": {
+                "title": "Création et Utilisation de Compte",
+                "content": "En créant un compte sur notre plateforme, vous acceptez :",
+                "items": {
+                    "responsibility": "D'être responsable du maintien de la confidentialité des informations de votre compte",
+                    "accuracy": "De fournir des informations précises, actuelles et complètes",
+                    "security": "De nous notifier immédiatement de tout accès non autorisé à votre compte"
+                }
+            },
+            "serviceUsage": {
+                "title": "Utilisation du Service",
+                "content": "En utilisant notre Service, vous acceptez de ne pas l'utiliser à des fins illégales ou non autorisées. Vous devez vous conformer à toutes les lois et réglementations applicables."
+            },
+            "payments": {
+                "title": "Paiements et Frais",
+                "content": "Les utilisateurs acceptent de payer tous les frais associés aux services. Les transporteurs acceptent notre structure de commission pour les livraisons terminées."
+            },
+            "liability": {
+                "title": "Limitation de Responsabilité",
+                "content": "CargoLink ne sera pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs résultant de votre utilisation ou de votre incapacité à utiliser le Service."
+            },
+            "propertyRights": {
+                "title": "Droits de Propriété Intellectuelle",
+                "content": "Le Service et son contenu original, ses fonctionnalités et sa fonctionnalité appartiennent à CargoLink et sont protégés par les lois internationales sur les droits d'auteur, les marques déposées et autres lois sur la propriété intellectuelle."
+            },
+            "changes": {
+                "title": "Modifications des Conditions",
+                "content": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous fournirons un avis de tout changement important."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
+                "email": "E-mail"
+            },
+        "copyright": "CargoLink. Tous droits réservés.",
+        "lastUpdated": "Dernière mise à jour:"
+        }
+    },
+    "home": {
+        "aboutUs": {
+            "developers": "DÉVELOPPEURS",
+            "engineers": "Ingénieurs",
+            "santiagoName": "Santiago Castaño",
+            "santiagoRole": "Développeur backend",
+            "juanMartinName": "Juan Martin",
+            "juanMartinRole": "Développeur frontend",
+            "juanDiegoName": "Juan Diego",
+            "juanDiegoRole": "Ingénieur en données"
+        },
+        "cargoLinkInfo": {
+            "title": "Qu'est-ce que Cargo Link ?",
+            "description1": "Cargo Link est une plateforme complète d'expédition et de logistique conçue pour les entreprises et les particuliers. Elle permet de gérer, suivre et optimiser le transport de marchandises rapidement, en toute sécurité et efficacement. Que vous ayez besoin d'effectuer une expédition locale ou nationale, notre technologie simplifie tout le processus en un seul endroit.",
+            "description2": "Avec des outils intelligents et une attention personnalisée, nous garantissons une expérience sans tracas pour les transporteurs et les clients. Cargo Link est l'allié idéal pour vos opérations logistiques !",
+            "seeMoreButton": "Voir plus",
+            "deliveryImageUrl": "Repartidor_France.png"
+        },
+        "features": {
+            "title": "Commencez avec notre application...",
+            "clientTitle": "Client",
+            "clientDescription": "En tant que client, vous pouvez demander des envois, suivre vos colis en temps réel, choisir parmi plusieurs transporteurs et tout gérer depuis une interface simple et rapide.",
+            "transporterTitle": "Transporteur",
+            "transporterDescription": "En tant que transporteur, vous pouvez accepter des commandes, optimiser vos itinéraires, recevoir des paiements sécurisés et accéder à des outils de gestion pour améliorer votre opération logistique.",
+            "seeMoreButton": "Voir plus",
+            "RepartidorCargoLinkImageUrl": "frisby_fr.png"
+        },
+        "startPage": {
+            "welcome": "Bienvenue sur CargoLink",
+            "description": "Nous sommes une entreprise dédiée à la logistique et au transport de marchandises, offrant des solutions efficaces et sécurisées pour vos envois. Avec notre plateforme, vous pouvez gérer vos envois facilement et rapidement, garantissant la satisfaction des clients.",
+            "startNowButton": "Commencez maintenant",
+            "seeMoreButton": "Voir plus"
+        }
+    },
+    "notFoundPage": {
+        "title": "404",
+        "message": "Quelque chose manque.",
+        "defaultMessage": "Chemin non trouvé.",
+        "redirectButton": "Retour au menu"
+    }
+}

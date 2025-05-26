@@ -1,7 +1,7 @@
 interface SimpleCardProps {
   title: string;
   value: string;
-  variant: 'primary' | 'secondary' | 'danger' | 'ghost';
+  variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'gray'; 
   icon: string;
   onClick?: () => void;
 }
@@ -17,7 +17,8 @@ export default function SimpleCard({
     primary: 'bg-primary-100 border-primary-400 text-white hover:bg-primary-200',
     secondary: 'bg-secondary-200 border-secondary-200 text-white hover:bg-secondary-300',
     danger: 'bg-red-500 border-red-500 text-white hover:bg-red-600',
-    ghost: 'bg-transparent border-white text-white hover:bg-white/10'
+    ghost: 'bg-white border-gray-300 text-gray-700 hover:bg-gray-100',
+    gray: 'bg-gray-700 border-gray-700 text-white hover:bg-gray-600' 
   };
 
   return (

@@ -16,9 +16,10 @@ import { RegEdit, Delete, Clean, PackageSearch, Search, InfoCard } from "@/compo
 import { verifyPassword } from "@/libs/ServiceUser/api-user";
 import { useRouter } from "next/navigation";
 import { ShipmentsDAO } from "@/Interfaces/shipment/ShipmentInterface";
-
+import { useTranslations } from "next-intl";
 
 export default function ScreenAdminShipments(){
+    const t = useTranslations();
     const [shipments, setShipemts] = useState<ShipmentsDAO['shipments'] | null>(null);
     const { startLoading, stopLoading } = useLoadingStore();
     const [isInfoModalOpen, setIsInfoModalOpen] = useState(false);
@@ -63,7 +64,7 @@ export default function ScreenAdminShipments(){
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertMessage(t('admin.users.manage.notFoundMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -193,7 +194,7 @@ export default function ScreenAdminShipments(){
     return(
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-5  bg-white">
-            <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">Gestión de envios</h1>
+            <h1 className="text-2xl font-bold my-5 ml-5 text-secondary-200">{t('admin.shipments.manage.title')}</h1>
 
             <div className="flex items-center justify-between flex-column flex-wrap md:flex-row pb-4 mx-6">
                 {/* <DropdownShipment/> */}
@@ -207,7 +208,7 @@ export default function ScreenAdminShipments(){
                             type="text"
                             id="table-search-shipments"
                             className="block p-3 ps-10 text-md text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                            placeholder="Buscador de envios"
+                            placeholder={t('admin.shipments.manage.searchPlaceholder')}
                             value={searchTerm} // Valor controlado por el estado
                             onChange={(e) => setSearchTerm(e.target.value)} // Actualiza el estado cuando el usuario escribe
                         />
@@ -217,7 +218,7 @@ export default function ScreenAdminShipments(){
                         variant="primary"
                         ariaLabel="search"
                         onClick={handleShipmentSearch}
-                        tooltipText="Buscar envio"
+                        tooltipText={t('admin.shipments.manage.searchTooltip')}
                         className="size-12 mr-3"
                     />
                     <CustomIconButton
@@ -225,7 +226,7 @@ export default function ScreenAdminShipments(){
                         variant="secondary"
                         ariaLabel="search"
                         onClick={handleCleanSearch}
-                        tooltipText="Limpiar busqueda"
+                        tooltipText={t('admin.shipments.manage.clearSearchTooltip')}
                         className="size-12"
                     />
                 </div>
@@ -247,15 +248,9 @@ export default function ScreenAdminShipments(){
                                 <label htmlFor="checkbox-all-search" className="sr-only">checkbox</label>
                             </div>
                         </th> */}
-                        <th scope="col" className="px-6 py-3">
-                            Titulo
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Estado Actual
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Opciones
-                        </th>
+                        <th scope="col" className="px-6 py-3">{t('admin.shipments.manage.titleColumn')}</th>
+                        <th scope="col" className="px-6 py-3">{t('admin.shipments.manage.statusColumn')}</th>
+                        <th scope="col" className="px-6 py-3">{t('admin.shipments.manage.optionsColumn')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -291,7 +286,7 @@ export default function ScreenAdminShipments(){
                                                 className="size-10"
                                                 icon={<InfoCard/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Detalles" // Texto descriptivo para accesibilidad
-                                                tooltipText="Detalles"
+                                                tooltipText={t('admin.shipments.manage.detailsTooltip')}
                                             />
                                         </div>
                                         
@@ -306,7 +301,7 @@ export default function ScreenAdminShipments(){
                                                 className="size-10"
                                                 icon={<RegEdit/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Editar" // Texto descriptivo para accesibilidad
-                                                tooltipText="Editar"
+                                                tooltipText={t('admin.shipments.manage.editTooltip')}
                                             />
                                         </div>
                                         <div>
@@ -320,7 +315,7 @@ export default function ScreenAdminShipments(){
                                                 className="size-10"
                                                 icon={<Delete/>} // Icono de "Mostrar contraseña"
                                                 ariaLabel="Eliminar" // Texto descriptivo para accesibilidad
-                                                tooltipText="Eliminar"
+                                                tooltipText={t('admin.shipments.manage.deleteTooltip')}
                                             />
                                         </div>
                                     </td>
@@ -374,12 +369,12 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsInfoModalOpen(false);
                 }}
-                title="Por seguridad, para ver detalles del flete debe ingresar su contraseña."
+                title={t('admin.shipments.manage.securityDetailsModalTitle')}
             >
                 <form onSubmit={handleSubmit(onSubmitInfo)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input
@@ -398,7 +393,7 @@ export default function ScreenAdminShipments(){
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('admin.shipments.manage.verifyButton')}
                             variant="primary"
                             type="submit"
                         />
@@ -413,12 +408,12 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsEditModalOpen(false);
                 }}
-                title="Por seguridad, para editar un flete debe ingresar su contraseña."
+                title={t('admin.shipments.manage.securityEditModalTitle')}
             >
                 <form onSubmit={handleSubmit(onSubmitEdit)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input
@@ -437,7 +432,7 @@ export default function ScreenAdminShipments(){
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('admin.shipments.manage.verifyButton')}
                             variant="primary"
                             type="submit"
                         />
@@ -452,12 +447,12 @@ export default function ScreenAdminShipments(){
                     reset(); // Limpiar los campos al cerrar
                     setIsDeleteModalOpen(false);
                 }}
-                title="Por seguridad, para eliminar un flete debe ingresar su contraseña."
+                title={t('admin.shipments.manage.securityDeleteModalTitle')}
             >
                 <form onSubmit={handleSubmit(onSubmitDelete)} className="space-y-4">
                     <div className="col-span-6 sm:col-span-3">
                         <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                        Contraseña
+                        {t('auth.register.password')}
                         </label>
             
                         <input
@@ -476,7 +471,7 @@ export default function ScreenAdminShipments(){
                     </div>
                     <div className="mt-6 flex justify-end">
                         <CustomButton
-                            text="Verificar"
+                            text={t('admin.shipments.manage.verifyButton')}
                             variant="primary"
                             type="submit"
                         />
@@ -492,13 +487,13 @@ export default function ScreenAdminShipments(){
                     {alertType === 'options' && (
                         <div className="flex gap-2 justify-end">
                             <CustomButton
-                                text="Cancelar"
+                                text={t('admin.shipments.manage.cancelButton')}
                                 variant="danger"
                                 onClick={() => setShowAlert(false)}
 
                             />
                             <CustomButton
-                                text="Confirmar"
+                                text={t('admin.shipments.manage.confirmButton')}
                                 variant="green"
                                 onClick={handleDeleteShipment}
                             />

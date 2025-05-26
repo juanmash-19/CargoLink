@@ -1,5 +1,6 @@
 import FormLogin from "./FormLogin"
 import { standarInput, standarTextLink } from '@/utils/Tokens';
+import { useTranslations } from "next-intl";
 
 import Link from 'next/link';
 // type FormLoginInputs = {
@@ -8,13 +9,12 @@ import Link from 'next/link';
 // };
 
 export default function ScreenLogin() {
-
-
+  const t = useTranslations();
 
   return (
     <section className="max-w-screen-sm mx-auto w-3/4 md:w-1/2 mt-11 mb-3">
         <div className="w-full mx-auto max-w-md p-8 space-y-3 rounded-xl bg-white text-secondary-100 shadow-lg">
-            <h1 className="text-2xl font-bold text-center">Iniciar Sesión</h1>
+            <h1 className="text-2xl font-bold text-center">{t('auth.login.title')}</h1>
             <FormLogin />
             <div className="flex items-center pt-4 space-x-1">
                 <div className="flex-1 h-px sm:w-16 bg-secondary-200"></div>
@@ -38,14 +38,10 @@ export default function ScreenLogin() {
                     </svg>
                 </button>
             </div>
-            <p className="text-xs text-center sm:px-6 ">¿No tienes una cuenta?
-                <Link rel="noopener noreferrer" href="#" className={`underline ${standarTextLink}`}>Crea una</Link>
+            <p className="text-xs text-center sm:px-6">{t('auth.login.noAccount')}
+                <Link rel="noopener noreferrer" href="#" className={`underline ${standarTextLink}`}>{t('auth.login.createAccount')}</Link>
             </p>
         </div>
-
-
     </section>
-
-    
   )
 }

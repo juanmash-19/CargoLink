@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserLastname(userLastname);
     scheduleTokenRenewal(token);
     if(role === 'admin'){
-      router.push('/admin');
+      router.push('/');
     }else if(role === 'transporter'){
       router.push('/');
     }
