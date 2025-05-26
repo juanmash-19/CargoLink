@@ -21,8 +21,11 @@ export default function UserShipmentsPage() {
                 const response = await getUserShipments();
 
                 setShipments(response.shipments || []);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             } catch (error) {
-                console.error('Error:', error);
                 setShipments([]);
             } finally {
                 stopLoading();

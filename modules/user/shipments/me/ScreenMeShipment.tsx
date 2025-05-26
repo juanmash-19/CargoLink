@@ -34,12 +34,12 @@ export default function ShipmentDetailPage(){
                 if (response.shipment._id) {
                     setShipment(response.shipment);
                 } else {
-                    setAlertMessage('No se encontró el envío');
+                    setAlertMessage('');
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage('Error al obtener el envío');
+                setAlertMessage(t(''));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -59,13 +59,13 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.");
+                setAlertMessage(t('user.shipments.details.confirmationMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally{
@@ -78,14 +78,14 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete cancelado!");
+                setAlertMessage(t('user.shipments.details.cancelMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         }
@@ -94,6 +94,51 @@ export default function ShipmentDetailPage(){
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    const handleSubmitReport = async () => {
+        if (!reportTitle || !reportDescription || !reportCategory) {
+            setAlertMessage(t('user.shipments.details.reportMessage'));
+            setAlertType('error');
+            setShowAlert(true);
+            return;
+        }
+
+        try {
+            startLoading();
+            
+            const reportData = {
+                title: reportTitle,
+                description: reportDescription,
+                category: reportCategory,
+                reportingUserType: "User",
+                // Change "System" to "User" since the API requires a valid user type
+                reportedUserType: shipment.transporter ? "Transporter" : "User",
+                reportedShipment: idShipment as string
+            };
+            
+            const response = await createReport(reportData);
+            
+            if (response.report) {
+                setAlertMessage(t('user.shipments.details.reportSuccess'));
+                setAlertType('success');
+                setShowAlert(true);
+                setIsReportModalOpen(false);
+                // Reset form
+                setReportTitle('');
+                setReportDescription('');
+                setReportCategory('');
+            }
+        } catch (error) {
+            setAlertMessage(t('user.shipments.details.reportErrorMessage'));
+            setAlertType('error');
+            setShowAlert(true);
+        } finally {
+            stopLoading();
+        }
+    };
+
+>>>>>>> Stashed changes
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
             <h1 className="text-3xl font-bold text-primary-300">

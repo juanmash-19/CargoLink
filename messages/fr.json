@@ -256,7 +256,36 @@
                 "transporterEmail": "Email",
                 "transporterPhone": "Téléphone",
                 "confirmButton": "Confirmer",
+<<<<<<< Updated upstream
                 "cancelButton": "Annuler"
+=======
+                "cancelButton": "Annuler",
+                "confirmShipment": "Confirmer l'expédition",
+                "cancelShipment": "Annuler l'expédition",
+                "requirements": "Conditions",
+                "cancelRequirements": "L'envoi peut être annulé uniquement s'il n'a pas encore été accepté par un transporteur.",
+                "reportProblem": "Signaler un Problème",
+                "reportShipment": "Signaler un Problème avec l'Envoi",
+                "reportTitle": "Titre",
+                "reportTitlePlaceholder": "Brève description du problème",
+                "reportCategory": "Catégorie",
+                "selectCategory": "Sélectionnez une catégorie",
+                "categoryPayment": "Problème de Paiement",
+                "categoryDelivery": "Problème de Livraison",
+                "categoryDamage": "Articles Endommagés",
+                "categoryCommunication": "Problème de Communication",
+                "categoryOther": "Autre Problème",
+                "reportDescription": "Description",
+                "reportDescriptionPlaceholder": "Veuillez décrire le problème en détail",
+                "submitReport": "Soumettre le Rapport",
+                "loadingMessage": "Chargement...",
+                "confirmationMessage": "Expédition confirmée ! Veuillez attendre qu'un transporteur accepte votre commande.",
+                "updateErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi",
+                "cancelMessage": "Expédition annulée !",
+                "reportMessage": "Veuillez remplir tous les champs du rapport",
+                "reportSuccess": "Rapport soumis avec succès",
+                "reportErrorMessage": "Erreur lors de l'envoi du rapport"
+>>>>>>> Stashed changes
             },
             "manage": {
                 "title": "Mes envois",
@@ -289,6 +318,39 @@
             "proceedWithCaution": "Procédez avec prudence",
             "forgotPasswordText": "J'ai oublié mon mot de passe.",
             "recoverAccountLink": "Récupérer le compte"
+<<<<<<< Updated upstream
+=======
+        },
+        "reports": {
+            "title": "Mes Rapports",
+            "noReports": "Vous n'avez pas encore de rapports",
+            "viewShipments": "Voir Mes Envois",
+            "pendingReports": "Rapports en Attente",
+            "resolvedReports": "Rapports Résolus",
+            "closedReports": "Rapports Fermés",
+            "category": "Catégorie",
+            "date": "Date",
+            "relatedShipment": "Envoi Associé",
+            "pickup": "Collecte",
+            "delivery": "Livraison",
+            "solution": "Solution",
+            "errorMessage": "Erreur lors du chargement des rapports",
+            "status": {
+                "pending": "En attente",
+                "resolved": "Résolu",
+                "closed": "Fermé"
+            },
+            "categories": {
+                "delayService": "Retard de Service",
+                "packageDamage": "Dommage du Colis",
+                "addressProblem": "Problème d'Adresse",
+                "payment": "Problème de Paiement",
+                "delivery": "Problème de Livraison",
+                "damage": "Problème de Dommages",
+                "communication": "Problème de Communication",
+                "other": "Autre Problème"
+            }
+>>>>>>> Stashed changes
         }
     },
     "schemas": {
@@ -392,7 +454,239 @@
         "legal": "Légal",
         "privacyPolicy": "Politique de confidentialité",
         "termsConditions": "Conditions générales",
+<<<<<<< Updated upstream
         "rightsReserved": "Tous droits réservés."
+=======
+        "rightsReserved": "Tous droits réservés.",
+        "copyright": "CargoLink. Tous droits réservés.",
+        "lastUpdated": "Dernière mise à jour:"
+    },
+    "legal": {
+        "privacyPolicy": {
+            "title": "Politique de Confidentialité",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Cette Politique de Confidentialité décrit comment CargoLink collecte, utilise et partage vos informations personnelles lorsque vous utilisez notre plateforme."
+            },
+            "dataCollection": {
+                "title": "Informations Que Nous Collectons",
+                "content": "Nous pouvons collecter plusieurs types d'informations auprès des utilisateurs de notre plateforme, notamment :",
+                "items": {
+                    "personal": "Informations d'identification personnelle (nom, adresse e-mail, numéro de téléphone, etc.)",
+                    "usage": "Données d'utilisation (comment vous interagissez avec notre plateforme)",
+                    "cookies": "Cookies et technologies de suivi"
+                }
+            },
+            "dataUsage": {
+                "title": "Comment Nous Utilisons Vos Informations",
+                "content": "Nous utilisons les informations que nous collectons à votre sujet à diverses fins, notamment :",
+                "items": {
+                    "serviceProvision": "Pour fournir et maintenir notre Service",
+                    "serviceImprovement": "Pour améliorer et personnaliser votre expérience",
+                    "communication": "Pour communiquer avec vous au sujet des mises à jour, du support et des offres promotionnelles"
+                }
+            },
+            "dataSharing": {
+                "title": "Partage de Vos Informations",
+                "content": "Nous pouvons partager vos informations personnelles avec des tiers uniquement de la manière décrite dans cette Politique de Confidentialité."
+            },
+            "dataSecurity": {
+                "title": "Sécurité des Données",
+                "content": "Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre l'accès, l'altération, la divulgation ou la destruction non autorisés."
+            },
+            "userRights": {
+                "title": "Vos Droits",
+                "content": "Vous disposez de certains droits concernant vos informations personnelles, notamment :",
+                "items": {
+                    "access": "Le droit d'accéder aux informations personnelles que nous possédons à votre sujet",
+                    "rectification": "Le droit de demander que nous corrigions toute information personnelle que vous jugez inexacte",
+                    "deletion": "Le droit de demander que nous supprimions vos informations personnelles",
+                    "objection": "Le droit de vous opposer au traitement de vos informations personnelles"
+                }
+            },
+            "changes": {
+                "title": "Modifications de cette Politique de Confidentialité",
+                "content": "Nous pouvons mettre à jour notre Politique de Confidentialité de temps à autre. Nous vous informerons de tout changement en publiant la nouvelle Politique de Confidentialité sur cette page."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter :",
+                "email": "E-mail"
+            }
+        },
+        "termsConditions": {
+            "title": "Conditions Générales",
+            "introduction": {
+                "title": "Introduction",
+                "content": "Ces Conditions Générales régissent votre utilisation de la plateforme CargoLink et des services fournis par celle-ci."
+            },
+            "definitions": {
+                "title": "Définitions",
+                "items": {
+                    "service": {
+                        "term": "Service",
+                        "definition": "La plateforme CargoLink, le site Web et les applications mobiles"
+                    },
+                    "user": {
+                        "term": "Utilisateur",
+                        "definition": "Toute personne qui accède ou utilise le Service, y compris les clients qui créent des demandes d'expédition"
+                    },
+                    "transporter": {
+                        "term": "Transporteur",
+                        "definition": "Tout utilisateur inscrit qui offre des services de transport via la plateforme"
+                    },
+                    "shipment": {
+                        "term": "Envoi",
+                        "definition": "Biens ou articles qui sont transportés d'un endroit à un autre en utilisant le Service"
+                    }
+                }
+            },
+            "accountUse": {
+                "title": "Création et Utilisation de Compte",
+                "content": "En créant un compte sur notre plateforme, vous acceptez :",
+                "items": {
+                    "responsibility": "D'être responsable du maintien de la confidentialité des informations de votre compte",
+                    "accuracy": "De fournir des informations précises, actuelles et complètes",
+                    "security": "De nous notifier immédiatement de tout accès non autorisé à votre compte"
+                }
+            },
+            "serviceUsage": {
+                "title": "Utilisation du Service",
+                "content": "En utilisant notre Service, vous acceptez de ne pas l'utiliser à des fins illégales ou non autorisées. Vous devez vous conformer à toutes les lois et réglementations applicables."
+            },
+            "payments": {
+                "title": "Paiements et Frais",
+                "content": "Les utilisateurs acceptent de payer tous les frais associés aux services. Les transporteurs acceptent notre structure de commission pour les livraisons terminées."
+            },
+            "liability": {
+                "title": "Limitation de Responsabilité",
+                "content": "CargoLink ne sera pas responsable des dommages indirects, accessoires, spéciaux, consécutifs ou punitifs résultant de votre utilisation ou de votre incapacité à utiliser le Service."
+            },
+            "propertyRights": {
+                "title": "Droits de Propriété Intellectuelle",
+                "content": "Le Service et son contenu original, ses fonctionnalités et sa fonctionnalité appartiennent à CargoLink et sont protégés par les lois internationales sur les droits d'auteur, les marques déposées et autres lois sur la propriété intellectuelle."
+            },
+            "changes": {
+                "title": "Modifications des Conditions",
+                "content": "Nous nous réservons le droit de modifier ces Conditions à tout moment. Nous fournirons un avis de tout changement important."
+            },
+            "contact": {
+                "title": "Contactez-Nous",
+                "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
+                "email": "E-mail"
+            },
+            "copyright": "CargoLink. Tous droits réservés.",
+            "lastUpdated": "Dernière mise à jour:"
+        }
+    },
+    "services": {
+        "title": "Qu'est-ce que CargoLink ?",
+        "description": "CargoLink est une plateforme numérique conçue pour faciliter et optimiser la gestion des envois entre clients et transporteurs. Notre objectif est d'offrir une expérience rapide, fiable et transparente pour toutes les parties impliquées dans un processus logistique. Nous avons développé un système fonctionnel avec des modules clés et continuons à l'améliorer pour en faire une solution complète pour toute entreprise nécessitant le transport de marchandises.",
+        "features": {
+            "available": "Fonctionnalités déjà disponibles :",
+            "userManagement": "Gestion des utilisateurs : Enregistrement et administration des comptes pour les clients et les transporteurs.",
+            "secureAuthentication": "Authentification sécurisée : Système de connexion fiable et contrôle d'accès par rôles.",
+            "bilateralReviews": "Avis bilatéraux : Évaluations entre clients et transporteurs après chaque envoi.",
+            "adminPanel": "Panneau d'administration : Accès centralisé avec statistiques et contrôle général (statistiques simulées pour l'instant).",
+            "transporterPanel": "Panneau de transporteur : Visualisation des envois assignés et outils de gestion de base.",
+            "availableShipments": "Liste des envois disponibles : Visualisation en temps réel selon leur état.",
+            "detailedView": "Vue détaillée de chaque envoi : Consultation de l'origine, de la destination et des données clés pour confirmer la disponibilité.",
+            "responsiveInterface": "Interface responsive : Adaptée aux mobiles, tablettes et ordinateurs de bureau.",
+            "cloudinaryIntegration": "Connexion avec Cloudinary : Gestion des images optimisée et rapide."
+        },
+        "additionalFeatures": {
+            "profileSettings": "Paramètres de profil : Changement de mot de passe, nom, téléphone et option pour supprimer le compte.",
+            "userManagementPanel": "Panneau de gestion des utilisateurs : Pour que les administrateurs puissent créer, éditer et supprimer facilement des utilisateurs.",
+            "shipmentManagementPanel": "Panneau de gestion des envois : Contrôle total sur tous les envois de la plateforme.",
+            "myShipmentsPanel": "Panneau « Mes envois » : Pour que les clients et les transporteurs voient tous leurs envois (actifs, inactifs, avec filtres).",
+            "customHomepage": "Page d'accueil personnalisée : Pour montrer à chaque utilisateur ses statistiques et son activité récente après connexion.",
+            "transporterHomepage": "Page d'accueil du transporteur : Avec visualisation du solde, des statistiques et des envois actifs.",
+            "mapIntegration": "Intégration avec des cartes : Pour voir les emplacements actuels, l'origine et la destination des envois.",
+            "informativePages": "Pages informatives : Sur les rôles, les avantages et comment tirer le meilleur parti de la plateforme (client/transporteur).",
+            "smartRedirects": "Redirections intelligentes : Pour s'assurer que chaque utilisateur accède à ce qui lui correspond selon son rôle.",
+            "dynamicCharts": "Graphiques dynamiques : Statistiques claires et visuelles sur les panneaux.",
+            "visualProfilePanel": "Panneau de profil visuel : Où l'on peut voir clairement le nom et l'email de l'utilisateur."
+        },
+        "commitment": "Chez CargoLink, nous travaillons jour après jour pour devenir la plateforme de confiance pour la gestion des envois. Notre objectif est de fournir une solution technologique utile, facile à utiliser et prête à s'adapter à différents modèles commerciaux.",
+        "transporterServices": {
+            "title": "Services pour Transporteurs",
+            "description": "Chez CargoLink, nous fournissons aux transporteurs tous les outils dont ils ont besoin pour travailler de manière efficace, organisée et rentable. Connectez-vous avec plus de clients, gérez vos itinéraires et développez votre opération logistique depuis un seul endroit !",
+            "serviceCards": {
+                "acceptOrders": {
+                    "title": "Acceptez facilement les commandes",
+                    "description": "Visualisez les envois disponibles et acceptez ceux qui correspondent le mieux à votre emplacement, votre emploi du temps et votre capacité."
+                },
+                "optimizeRoutes": {
+                    "title": "Optimisez vos itinéraires",
+                    "description": "Utilisez des cartes interactives pour planifier vos trajets et livrer plus en moins de temps."
+                },
+                "securePayments": {
+                    "title": "Recevez des paiements sécurisés",
+                    "description": "Recevez vos paiements rapidement et en toute sécurité via notre plateforme intégrée."
+                },
+                "consultStatistics": {
+                    "title": "Consultez les statistiques",
+                    "description": "Vérifiez vos revenus, le nombre de livraisons, les performances et plus encore depuis votre tableau de bord."
+                },
+                "realTimeLocation": {
+                    "title": "Emplacement en temps réel",
+                    "description": "Suivez votre itinéraire actuel et visualisez l'origine et la destination des colis sur la carte."
+                },
+                "receiveRatings": {
+                    "title": "Recevez des évaluations",
+                    "description": "Gagnez en réputation à chaque livraison. Les clients peuvent vous laisser des avis qui vous aideront à obtenir plus de commandes."
+                },
+                "totalFlexibility": {
+                    "title": "Flexibilité totale",
+                    "description": "Vous décidez quand travailler et quelles livraisons accepter. Gérez votre temps de manière indépendante."
+                },
+                "profileManagement": {
+                    "title": "Gestion de profil",
+                    "description": "Configurez votre profil, consultez vos données et préparez-vous à de futurs outils comme l'édition et la suppression de compte."
+                }
+            },
+            "maximizingProductivity": "Maximisez votre productivité et obtenez plus de revenus avec CargoLink, la plateforme conçue pour les professionnels du transport. Commencez dès aujourd'hui !"
+        },
+        "userServices": {
+            "title": "Services pour Clients",
+            "description": "Chez CargoLink, nous vous offrons tous les outils dont vous avez besoin pour gérer vos envois rapidement, en toute sécurité et sans complications. Notre plateforme est conçue pour que vous ayez un contrôle total sur vos livraisons depuis un seul endroit.",
+            "serviceCards": {
+                "requestShipments": {
+                    "title": "Demandez des envois en quelques secondes",
+                    "description": "Remplissez un formulaire facile et intuitif pour générer votre demande d'envoi en quelques étapes."
+                },
+                "trackPackages": {
+                    "title": "Suivez vos colis",
+                    "description": "Visualisez en temps réel l'état et la localisation de vos envois depuis votre tableau de bord personnel."
+                },
+                "chooseCarrier": {
+                    "title": "Choisissez votre transporteur",
+                    "description": "Comparez les transporteurs disponibles et sélectionnez celui qui correspond le mieux à vos besoins."
+                },
+                "rateExperience": {
+                    "title": "Évaluez votre expérience",
+                    "description": "Laissez un avis sur le transporteur et améliorez la qualité du service pour toute la communauté."
+                },
+                "manageProfile": {
+                    "title": "Gérez votre profil",
+                    "description": "Vous pourrez modifier vos informations personnelles, changer de mot de passe et, prochainement, gérer tout depuis vos paramètres."
+                },
+                "shipmentHistory": {
+                    "title": "Historique des envois",
+                    "description": "Consultez tous les envois que vous avez réalisés, en filtrant par état, date ou transporteur."
+                },
+                "smartLocations": {
+                    "title": "Emplacements intelligents",
+                    "description": "Visualisez l'origine et la destination de vos envois sur la carte, ainsi que votre position actuelle."
+                },
+                "personalizedSupport": {
+                    "title": "Support personnalisé",
+                    "description": "Recevez un support et un suivi depuis votre compte si des questions ou des problèmes surviennent."
+                }
+            },
+            "maximizingProductivity": "Tout cela depuis une plateforme facile à utiliser, sécurisée et adaptée à votre quotidien. Commencez dès aujourd'hui avec CargoLink !"
+        }
+>>>>>>> Stashed changes
     },
     "home": {
         "aboutUs": {
