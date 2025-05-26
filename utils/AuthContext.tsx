@@ -1,27 +1,29 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Añadir esta librería
+import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import { createTokenCookie } from './CreateCookieServer';
 import { refreshToken } from "@/libs/auth/api-login";
-import { useRouter } from 'next/navigation'; // Importar router para redirección
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   userRole: string | null;
-  userEmail: string | null; // Cambiado a userEmail
-  userName: string | null; // Cambiado a userName
-  userLastname: string | null; // Cambiado a userLastname
+  userEmail: string | null;
+  userName: string | null;
+  userLastname: string | null;
   login: (token: string) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+export { AuthContext }; // <-- Exporta el contexto para los tests y otros usos
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [userRole, setUserRole] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null); // Cambiado a userEmail
-  const [userName, setUserName] = useState<string | null>(null); // Cambiado a userName
-  const [userLastname, setUserLastname] = useState<string | null>(null); // Cambiado a userLastname
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [userLastname, setUserLastname] = useState<string | null>(null);
   const [tokenExpirationTimeout, setTokenExpirationTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const router = useRouter();
@@ -30,13 +32,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const getInfoFromToken = (token: string): { role: string | null; userEmail: string | null; userName: string | null; userLastname: string | null } => {
     try {
       const decoded: { role?: string; email?: string; name?: string; lastname?: string; exp?: number } = jwtDecode(token);
-      console.log('Decoded token:', decoded); // Para depuración
       // Verificar expiración
       if (decoded.exp && decoded.exp * 1000 < Date.now()) {
         logout();
         return { role: null, userEmail: null, userName: null, userLastname: null };
       }
-
       return {
         role: decoded.role || null,
         userEmail: decoded.email || null,
@@ -90,13 +90,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return () => {
       if (tokenExpirationTimeout) clearTimeout(tokenExpirationTimeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const login = (token: string) => {
-    Cookies.set('token', token, { 
-      maxAge: '3600', 
-      secure: true, 
-      sameSite: 'Strict' // Mejorar seguridad
+    Cookies.set('token', token, {
+      maxAge: '3600',
+      secure: true,
+      sameSite: 'Strict'
     });
     createTokenCookie(token);
     const { role, userEmail, userName, userLastname } = getInfoFromToken(token);
@@ -105,12 +106,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserName(userName);
     setUserLastname(userLastname);
     scheduleTokenRenewal(token);
-    if(role === 'admin'){
+    if (role === 'admin') {
       router.push('/admin');
-    }else if(role === 'transporter'){
+    } else if (role === 'transporter') {
       router.push('/');
-    }
-    else if(role === 'user'){
+    } else if (role === 'user') {
       router.push('/');
     }
   };
