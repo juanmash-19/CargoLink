@@ -32,7 +32,7 @@ const FeaturesHomePage = () => {
                             </p>
                             <div className='flex justify-center'>
                                 <Link
-                                    href='/services'
+                                    href='/info/services-user'
                                     className='text-center text-lg group duration-300 ease-in-out font-medium text-primary mt-2 overflow-hidden flex items-center relative after:absolute after:w-full after:h-px after:bg-primary after:bottom-0 after:right-0 after:translate-x-full hover:after:translate-x-0'
                                 >
                                     {t('home.features.seeMoreButton')}
@@ -50,7 +50,7 @@ const FeaturesHomePage = () => {
                             </p>
                             <div className='flex justify-center'>
                                 <Link
-                                    href='/services'
+                                    href='/info/services-transporter'
                                     className='text-center text-lg group duration-300 ease-in-out font-medium text-primary mt-2 overflow-hidden flex items-center relative after:absolute after:w-full after:h-px after:bg-primary after:bottom-0 after:right-0 after:translate-x-full hover:after:translate-x-0'
                                 >
                                     {t('home.features.seeMoreButton')}

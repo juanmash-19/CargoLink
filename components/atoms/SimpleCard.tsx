@@ -1,7 +1,7 @@
 interface SimpleCardProps {
   title: string;
   value: string;
-  variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'gray'; // ➕ Añadida 'gray'
+  variant: 'primary' | 'secondary' | 'danger' | 'ghost' | 'gray'; 
   icon: string;
   onClick?: () => void;
 }
