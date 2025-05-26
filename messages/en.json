@@ -172,9 +172,16 @@
                 "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",
                 "verifyButton": "Verify",
                 "cancelButton": "Cancel",
-                "confirmButton": "Confirm",
-                "deleteSuccessMessage":"Shipment deleted successfully",
+                "confirmButton": "Confirm",                "deleteSuccessMessage":"Shipment deleted successfully",
                 "deleteErrorMessage": "Error deleting the shipment"
+            },
+            "me": {
+                "notFoundMessage": "Shipment not found",
+                "fetchErrorMessage": "Error fetching shipment",
+                "confirmSuccessMessage": "Shipment confirmed! Please wait until a transporter accepts your request.",
+                "updateErrorMessage": "Error updating shipment status",
+                "cancelSuccessMessage": "Shipment canceled!",
+                "cancelErrorMessage": "Error updating shipment status"
             }
         },
         "dashboard": {
@@ -185,6 +192,30 @@
             "shipmentsChart": "Shipments Chart",
             "usersChart": "Users Chart",
             "reportsChart": "Reports Chart"
+        },
+        "reports": {
+            "title": "Reports Management",
+            "noReportsMessage": "No reports available",
+            "markAsResolvedButton": "Mark as Resolved",
+            "closeReportButton": "Close Report",
+            "solutionLabel": "Solution:",
+            "closeJustificationLabel": "Closure justification:",
+            "resolveReportModalTitle": "Resolve Report",
+            "closeReportModalTitle": "Close Report",
+            "statusLabel": "Status",
+            "resolvedOption": "Resolved",
+            "closedOption": "Closed",
+            "solutionExplanationLabel": "Solution explanation",
+            "closeJustificationInputLabel": "Closure justification",
+            "solutionPlaceholder": "Describe how the problem was solved...",
+            "closePlaceholder": "Explain why the report is being closed without resolution...",
+            "cancelButton": "Cancel",
+            "resolveButton": "Resolve",
+            "completeFieldsError": "Please complete all fields",
+            "resolvedSuccessMessage": "Report resolved successfully",
+            "closedSuccessMessage": "Report closed successfully",
+            "updateReportError": "Error updating the report",
+            "loadReportsError": "Error loading reports"
         }
     },
     "schemas": {
@@ -267,8 +298,7 @@
             "startNowButton": "Start now",
             "seeMoreButton": "See more"
         }
-    },
-    "transporter": {
+    },    "transporter": {
         "shipments": {
             "available": {
                 "title": "Available Shipments",
@@ -276,7 +306,15 @@
             },
             "active": {
                 "title": "Active Shipments",
-                "noShipments": "You don't have any active shipments..."
+                "noShipments": "You don't have any active shipments...",
+                "noActiveShipmentsMessage": "No active shipments found",
+                "fetchErrorMessage": "Error fetching active shipments",
+                "transitConfirmationMessage": "Are you sure you want to mark this shipment as in transit?",
+                "deliveryConfirmationMessage": "Are you sure you want to confirm the delivery of this shipment? This action cannot be undone.",
+                "transitSuccessMessage": "Shipment marked as in transit!",
+                "deliverySuccessMessage": "Delivery confirmed successfully!",
+                "transitErrorMessage": "Error marking as in transit",
+                "deliveryErrorMessage": "Error confirming delivery"
             }
         },
         "dashboard": {
@@ -362,17 +400,25 @@
                 "reportDescription": "Description",
                 "reportDescriptionPlaceholder": "Please describe the issue in detail",
                 "submitReport": "Submit Report"
-            },
-            "manage": {
+            },            "manage": {
                 "title": "My Shipments",
                 "createButton": "Create New Shipment",
                 "noShipments": "You have no created shipments",
                 "createFirstButton": "Create First Shipment"
+            },
+            "me": {
+                "notFoundMessage": "Shipment not found",
+                "fetchErrorMessage": "Error fetching shipment",
+                "confirmSuccessMessage": "Shipment confirmed! Please wait until a transporter accepts your request.",
+                "updateErrorMessage": "Error updating shipment status",
+                "cancelSuccessMessage": "Shipment canceled!",
+                "cancelErrorMessage": "Error updating shipment status",
+                "reportSuccessMessage": "Report sent successfully"
             }
         },
         "account": {
             "settingsTitle": "Account Settings",
-            "welcomeMessage": "Welcome Here you can change your password, email, or personal information.",
+            "welcomeMessage": ", Welcome! Here you can change your password, email, or personal information.",
             "emailTitle": "Email",
             "emailMessage": "Your email address is ",
             "personalInfoTitle": "Personal Information",
@@ -393,7 +439,18 @@
             "confirmDeleteButton": "Delete",
             "proceedWithCaution": "Proceed with caution",
             "forgotPasswordText": "I forgot my password.",
-            "recoverAccountLink": "Recover account"
+            "recoverAccountLink": "Recover account",
+            "updateSuccessMessage": "Changes have been saved successfully.",
+            "updateErrorMessage": "Changes could not be saved.",
+            "updateDataErrorMessage": "Error updating user data",
+            "passwordChangedSuccessMessage": "Password changed successfully.",
+            "passwordChangeErrorMessage": "Could not change password. Please verify the entered data.",
+            "passwordChangeGeneralErrorMessage": "Error changing password",
+            "deleteConfirmationMessage": "Are you sure you want to delete your account? (Irreversible)",
+            "verifyPasswordErrorMessage": "Error verifying password",
+            "accountDeletedSuccessMessage": "Account deleted successfully.",
+            "accountDeleteErrorMessage": "Could not delete account. Please try again later.",
+            "deleteAccountGeneralErrorMessage": "Error deleting account"
         },
         "reports": {
             "title": "My Reports",

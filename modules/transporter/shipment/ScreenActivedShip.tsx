@@ -29,17 +29,15 @@ export default function ScreenActivedShip() {
             try{
                 startLoading();
                 // Usar la nueva función para obtener los envíos aceptados
-                const response = await getAcceptedShipments();
-
-                if (response.shipments) {
+                const response = await getAcceptedShipments();                if (response.shipments) {
                     setShipments(response.shipments);
                 } else {
-                    setAlertMessage('No se encontraron envíos activos');
+                    setAlertMessage(t('transporter.shipments.active.noActiveShipmentsMessage'));
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage('Error al obtener los envíos activos');
+                setAlertMessage(t('transporter.shipments.active.fetchErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -57,12 +55,10 @@ export default function ScreenActivedShip() {
     const handleViewDetails = (id: string) => {
         router.push(`/transporter/shipments/${id}`)
         console.log("Ver detalles");
-    };
-
-    const handleConfirmTransit = (id: string) => {
+    };    const handleConfirmTransit = (id: string) => {
         setShipmentToConfirm(id);
         setActionType('transit');
-        setAlertMessage("¿Estás seguro que deseas marcar este envío como en tránsito?");
+        setAlertMessage(t('transporter.shipments.active.transitConfirmationMessage'));
         setAlertType('options');
         setShowAlert(true);
     };
@@ -70,7 +66,7 @@ export default function ScreenActivedShip() {
     const handleConfirmDelivery = (id: string) => {
         setShipmentToConfirm(id);
         setActionType('delivery');
-        setAlertMessage("¿Estás seguro que deseas confirmar la entrega de este envío? Esta acción no se puede deshacer.");
+        setAlertMessage(t('transporter.shipments.active.deliveryConfirmationMessage'));
         setAlertType('options');
         setShowAlert(true);
     };
@@ -80,13 +76,12 @@ export default function ScreenActivedShip() {
         
         try {
             startLoading();
-            
-            if (actionType === 'transit') {
+              if (actionType === 'transit') {
                 await confirmShipmentTransit(shipmentToConfirm);
-                setAlertMessage("¡Envío marcado como en tránsito!");
+                setAlertMessage(t('transporter.shipments.active.transitSuccessMessage'));
             } else {
                 await confirmShipmentDelivery(shipmentToConfirm);
-                setAlertMessage("¡Entrega confirmada con éxito!");
+                setAlertMessage(t('transporter.shipments.active.deliverySuccessMessage'));
             }
             
             setAlertType('success');
@@ -99,7 +94,7 @@ export default function ScreenActivedShip() {
             }
             
         } catch (error) {
-            setAlertMessage(`Error al ${actionType === 'transit' ? 'marcar como en tránsito' : 'confirmar entrega'}`);
+            setAlertMessage(actionType === 'transit' ? t('transporter.shipments.active.transitErrorMessage') : t('transporter.shipments.active.deliveryErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {

@@ -30,18 +30,16 @@ export default function ScreenMeAdminShipments(){
 
             try {
                 startLoading();
-                const response = await getShipmentById(idShipment as string);
-
-                if (response.shipment._id) {
+                const response = await getShipmentById(idShipment as string);                if (response.shipment._id) {
                     setShipment(response.shipment);
                     console.log('Shipment:', response.shipment);
                 } else {
-                    setAlertMessage('No se encontró el envío');
+                    setAlertMessage(t('admin.shipments.me.notFoundMessage'));
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage('Error al obtener el envío');
+                setAlertMessage(t('admin.shipments.me.fetchErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -50,20 +48,18 @@ export default function ScreenMeAdminShipments(){
         };
 
         fetchShipment();
-    }, [idShipment, startLoading, stopLoading]);
-
-    const acceptedClick = async () => {
+    }, [idShipment, startLoading, stopLoading]);    const acceptedClick = async () => {
         try{
             startLoading();
             const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.");
+                setAlertMessage(t('admin.shipments.me.confirmSuccessMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('admin.shipments.me.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally{
@@ -76,14 +72,14 @@ export default function ScreenMeAdminShipments(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete cancelado!");
+                setAlertMessage(t('admin.shipments.me.cancelSuccessMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('admin.shipments.me.cancelErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         }
