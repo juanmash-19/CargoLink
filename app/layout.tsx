@@ -33,7 +33,7 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className="">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased  font-sans h-full bg-slate-100 `}
       >
