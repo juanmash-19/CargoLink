@@ -132,7 +132,7 @@ export const getDriverStats = async () => {
   if (!token) throw new Error("No se encontró un token. Por favor, inicia sesión.");
 
   try {
-    const response = await fetch(`${envVariables.API_URL}/shipments/driver/stats`, {
+    const response = await fetch(`${envVariables.API_URL}/transporter/statistics`, {
       method: 'GET',
       headers: {
         "Authorization": `Bearer ${token}`,

@@ -207,20 +207,6 @@ export default function FormRegister() {
                     .
                     </p>
                 </div>
-
-                <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                    <CustomButton
-                        text={t('auth.register.createAccountButton')}
-                        variant='primary'
-                        type='submit'
-                        onClick={() => {}}
-                        />
-
-                    <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-            {t('auth.register.alreadyHaveAccount')}
-                    <Link href="#" className={`underline ${standarTextLink}`}>{t('auth.register.loginLink')}</Link>.
-                    </p>
-                </div>
             </form>
 
             {showAlert && (

@@ -126,7 +126,7 @@ export default function AdminPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
-              <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.usersChart')}</h2>
+              <h2 className="text-lg font-bold mb-4 text-center text-black">{t('admin.dashboard.usersChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
                   data={usersChartData}
@@ -134,7 +134,7 @@ export default function AdminPage() {
                 />
               </div>
             </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.shipmentsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
@@ -143,7 +143,7 @@ export default function AdminPage() {
                 />
               </div>
             </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.reportsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar

@@ -102,7 +102,7 @@ export default function TransportadorDashboard() {
             <span className="text-gray-600 text-lg font-medium">Cargando estadísticas...</span>
           </div>
         ) : (          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('transporter.dashboard.availableShipmentsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
@@ -111,7 +111,7 @@ export default function TransportadorDashboard() {
                 />
               </div>
             </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('transporter.dashboard.activeShipmentsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
