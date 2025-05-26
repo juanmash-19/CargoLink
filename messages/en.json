@@ -33,7 +33,8 @@
             "manageUsers": "manage users",
             "manageShipments": "manage shipments",
             "manageReports": "review and manage reports",
-            "accessFunctions": " and access all administrative features of the system."
+            "accessFunctions": " and access all administrative features of the system.",
+            "url": "/images/admin_english.png"
         },
         "users": {
             "dropdown": {
@@ -325,7 +326,8 @@
             "checkFreights": "check available freights",
             "trackShipments": "track your active shipments",
             "reviewHistory": "review completed delivery history",
-            "accessInfo": "and access all relevant information for your logistics operations."
+            "accessInfo": "and access all relevant information for your logistics operations.",
+            "url": "/images/Colaboradores_English.png"
         },
         "shipments": {
             "available": {

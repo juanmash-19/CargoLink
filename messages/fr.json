@@ -33,7 +33,8 @@
             "manageUsers": "gérer les utilisateurs",
             "manageShipments": "gérer les envois",
             "manageReports": "examiner et gérer les rapports",
-            "accessFunctions": " et accéder à toutes les fonctionnalités administratives du système."
+            "accessFunctions": " et accéder à toutes les fonctionnalités administratives du système.",
+            "url": "/images/Admin_France.png"
         },
         "users": {
             "dropdown": {
@@ -242,7 +243,8 @@
             "checkFreights": "consulter les envois disponibles",
             "trackShipments": "suivre vos envois actifs",
             "reviewHistory": "examiner l'historique des livraisons terminées",
-            "accessInfo": "et accéder à toutes les informations pertinentes pour vos opérations logistiques."
+            "accessInfo": "et accéder à toutes les informations pertinentes pour vos opérations logistiques.",
+            "url": "/images/Colaboradores_France.png"
         },
         "shipments": {
             "available": {

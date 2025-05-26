@@ -13,7 +13,7 @@ export default function HomeTransportador() {
       <div className="mb-8 w-full flex justify-center">
         <div className="w-full max-w-2xl">
           <Image
-            src="/images/colaboradores.png"
+            src={t('transporter.home.url')}
             alt="Transportador"
             width={800}
             height={400}

@@ -12,7 +12,7 @@ export default function HomeAdmin() {
     <div className="flex flex-col items-center justify-center h-full p-8 bg-gradient-to-br from-blue-50 to-white">
       <div className="mb-8">
         <Image
-          src="/images/admin.png"
+          src={t('admin.home.url')}
           alt="Administrador"
           width={280}
           height={280}
