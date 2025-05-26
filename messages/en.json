@@ -24,8 +24,17 @@
             "forgotPassword": "Forgot your password?",
             "continueButton": "Continue"
         }
-    },
-    "admin": {
+    },    "admin": {
+        "home": {
+            "welcome": "Welcome",
+            "loggedInAs": "You are logged in as",
+            "administrator": "Administrator",
+            "description": "From this dashboard you can",
+            "manageUsers": "manage users",
+            "manageShipments": "manage shipments",
+            "manageReports": "review and manage reports",
+            "accessFunctions": " and access all administrative features of the system."
+        },
         "users": {
             "dropdown": {
                 "menu": "Menu",
@@ -102,10 +111,11 @@
         },
         "shipments": {
             "dropdown": {
-                "menu": "Menu",
+                "menu": "Shipments menu",
                 "createShipment": "Create Shipment",
                 "sortByPrice": "Sort by price",
-                "sortByCreationDate": "Sort by creation date"
+                "sortByCreationDate": "Sort by creation date",
+                "organizationMessage": "Shipments organized by "
             },
             "details": {
                 "title": "Shipment Details",
@@ -169,11 +179,19 @@
                 "deleteTooltip": "Delete",
                 "securityDetailsModalTitle": "For security, to view shipment details you must enter your password.",
                 "securityEditModalTitle": "For security, to edit a shipment you must enter your password.",
-                "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",
-                "verifyButton": "Verify",
+                "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",                "verifyButton": "Verify",
                 "cancelButton": "Cancel",
-                "confirmButton": "Confirm",                "deleteSuccessMessage":"Shipment deleted successfully",
-                "deleteErrorMessage": "Error deleting the shipment"
+                "confirmButton": "Confirm",                
+                "deleteSuccessMessage": "Shipment deleted successfully",
+                "deleteErrorMessage": "Error deleting the shipment",
+                "notFoundUserMessage": "No user has been selected.",
+                "notFoundShipmentMessage": "No shipment has been selected.",
+                "deleteConfirmationMessage": "Are you sure you want to delete this user?",
+                "deleteShipmentConfirmationMessage": "Are you sure you want to delete this shipment?",
+                "deleteShipmentSuccessMessage": "Shipment deleted successfully.",
+                "deleteShipmentErrorMessage": "Error deleting the shipment.",
+                "noShipmentsFoundMessage": "No shipments found.",
+                "fetchShipmentsErrorMessage": "Error fetching shipments."
             },
             "me": {
                 "notFoundMessage": "Shipment not found",
@@ -299,6 +317,16 @@
             "seeMoreButton": "See more"
         }
     },    "transporter": {
+        "home": {
+            "welcome": "Welcome",
+            "loggedInAs": "You are logged in as",
+            "transporter": "Transporter",
+            "description": "From this dashboard you can",
+            "checkFreights": "check available freights",
+            "trackShipments": "track your active shipments",
+            "reviewHistory": "review completed delivery history",
+            "accessInfo": "and access all relevant information for your logistics operations."
+        },
         "shipments": {
             "available": {
                 "title": "Available Shipments",

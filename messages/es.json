@@ -24,8 +24,17 @@
             "forgotPassword": "¿Olvidaste tu contraseña?",
             "continueButton": "Continuar"
         }
-    },
-    "admin": {
+    },    "admin": {
+        "home": {
+            "welcome": "Bienvenido",
+            "loggedInAs": "Estás logueado como",
+            "administrator": "Administrador",
+            "description": "Desde este panel puedes",
+            "manageUsers": "gestionar usuarios",
+            "manageShipments": "administrar envíos",
+            "manageReports": "revisar y gestionar reportes",
+            "accessFunctions": " y acceder a todas las funcionalidades administrativas del sistema."
+        },
         "users": {
             "dropdown": {
                 "menu": "Menú",
@@ -102,10 +111,11 @@
         },
         "shipments": {
             "dropdown": {
-                "menu": "Menú",
+                "menu": "Menú de envíos",
                 "createShipment": "Crear Envío",
                 "sortByPrice": "Organizar por precio",
-                "sortByCreationDate": "Organizar por fecha de creación"
+                "sortByCreationDate": "Organizar por fecha de creación",
+                "organizationMessage": "Envíos organizados por "
             },
             "details": {
                 "title": "Detalles del Flete",
@@ -177,13 +187,19 @@
                 "deleteTooltip": "Eliminar",
                 "securityDetailsModalTitle": "Por seguridad, para ver detalles del envío debe ingresar su contraseña.",
                 "securityEditModalTitle": "Por seguridad, para editar un envío debe ingresar su contraseña.",
-                "securityDeleteModalTitle": "Por seguridad, para eliminar un envío debe ingresar su contraseña.",
-                "verifyButton": "Verificar",
+                "securityDeleteModalTitle": "Por seguridad, para eliminar un envío debe ingresar su contraseña.",                "verifyButton": "Verificar",
                 "cancelButton": "Cancelar",
-                "confirmButton": "Confirmar",                "deleteSuccessMessage": "Envío eliminado correctamente.",
+                "confirmButton": "Confirmar",                
+                "deleteSuccessMessage": "Envío eliminado correctamente.",
                 "deleteErrorMessage": "Error al eliminar el envío.",
                 "notFoundUserMessage": "No se ha seleccionado ningún usuario.",
+                "notFoundShipmentMessage": "No se ha seleccionado ningún envío.",
                 "deleteConfirmationMessage": "¿Estás seguro de querer eliminar este usuario?",
+                "deleteShipmentConfirmationMessage": "¿Estás seguro de que quiere eliminar este envío?",
+                "deleteShipmentSuccessMessage": "Envío eliminado correctamente.",
+                "deleteShipmentErrorMessage": "Error al eliminar el envío.",
+                "noShipmentsFoundMessage": "No se encontraron envíos.",
+                "fetchShipmentsErrorMessage": "Error al obtener los envíos.",
                 "fetchErrorMessage": "Error al verificar la contraseña."
             },
             "me": {
@@ -263,6 +279,16 @@
             "seeMoreButton": "Ver más"
         }
     },    "transporter": {
+        "home": {
+            "welcome": "Bienvenido",
+            "loggedInAs": "Estás logueado como",
+            "transporter": "Transportador",
+            "description": "Desde este panel puedes",
+            "checkFreights": "consultar fletes disponibles",
+            "trackShipments": "hacer seguimiento a tus envíos activos",
+            "reviewHistory": "revisar el historial de entregas completadas",
+            "accessInfo": "y acceder a toda la información relevante para tus operaciones logísticas."
+        },
         "shipments": {
             "available": {
                 "title": "Fletes Disponibles",

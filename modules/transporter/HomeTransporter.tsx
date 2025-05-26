@@ -2,9 +2,11 @@
 
 import { useAuth } from '@/utils/AuthContext';
 import Image from 'next/image';
+import { useTranslations } from "next-intl";
 
 export default function HomeTransportador() {
   const { userName, userLastname } = useAuth();
+  const t = useTranslations();
 
   return (
     <div className="flex flex-col items-center justify-center h-full p-8 bg-gradient-to-br from-green-50 to-white">
@@ -19,17 +21,16 @@ export default function HomeTransportador() {
             priority
           />
         </div>
-      </div>
-      <h1 className="text-4xl font-extrabold mb-3 text-green-900 text-center drop-shadow">
-        ¡Bienvenido, {userName} {userLastname}!
+      </div>      <h1 className="text-4xl font-extrabold mb-3 text-green-900 text-center drop-shadow">
+        {t('transporter.home.welcome')}, {userName} {userLastname}!
       </h1>
       <h2 className="text-2xl mb-2 text-green-700 text-center">
-        Estás logueado como <span className="font-semibold text-green-600">Transportador</span>.
+        {t('transporter.home.loggedInAs')} <span className="font-semibold text-green-600">{t('transporter.home.transporter')}</span>.
       </h2>
       <p className="text-gray-700 text-center max-w-xl mt-2 text-lg">
-        Desde este panel puedes <span className="font-semibold text-green-700">consultar fletes disponibles</span>, 
-        <span className="font-semibold text-green-700"> hacer seguimiento a tus envíos activos</span>, 
-        <span className="font-semibold text-green-700"> revisar el historial de entregas completadas</span> y acceder a toda la información relevante para tus operaciones logísticas.
+        {t('transporter.home.description')} <span className="font-semibold text-green-700">{t('transporter.home.checkFreights')}</span>, 
+        <span className="font-semibold text-green-700"> {t('transporter.home.trackShipments')}</span>, 
+        <span className="font-semibold text-green-700"> {t('transporter.home.reviewHistory')}</span> {t('transporter.home.accessInfo')}
       </p>
     </div>
   );

@@ -11,14 +11,10 @@ export default function DropdownShipment() {
     const t = useTranslations();
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
-    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('success');
-
-    const createOption = () => {
-        router.push("/admin/users/create");
-    };
-
-    const handleOrganization = (optionType: string) => {
-        setAlertMessage(`Envios organizados por ${optionType}`);
+    const [alertType, setAlertType] = useState<'success' | 'error' | 'options'>('success');    const createOption = () => {
+        router.push("/admin/user/create");
+    };const handleOrganization = (optionType: string) => {
+        setAlertMessage(t('admin.shipments.dropdown.organizationMessage'));
         setAlertType('success');
         setShowAlert(true);
     };

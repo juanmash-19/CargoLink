@@ -24,8 +24,17 @@
             "forgotPassword": "Mot de passe oublié ?",
             "continueButton": "Continuer"
         }
-    },
-    "admin": {
+    },    "admin": {
+        "home": {
+            "welcome": "Bienvenue",
+            "loggedInAs": "Vous êtes connecté en tant que",
+            "administrator": "Administrateur",
+            "description": "Depuis ce tableau de bord, vous pouvez",
+            "manageUsers": "gérer les utilisateurs",
+            "manageShipments": "gérer les envois",
+            "manageReports": "examiner et gérer les rapports",
+            "accessFunctions": " et accéder à toutes les fonctionnalités administratives du système."
+        },
         "users": {
             "dropdown": {
                 "menu": "Menu",
@@ -99,10 +108,11 @@
         },
         "shipments": {
             "dropdown": {
-                "menu": "Menu",
-                "createShipment": "Créer un envoi",
+                "menu": "Menu d'expéditions",
+                "createShipment": "Créer une expédition",
                 "sortByPrice": "Trier par prix",
-                "sortByCreationDate": "Trier par date de création"
+                "sortByCreationDate": "Trier par date de création",
+                "organizationMessage": "Expéditions organisées par "
             },
             "details": {
                 "title": "Détails de l'envoi",
@@ -166,14 +176,20 @@
                 "deleteTooltip": "Supprimer",
                 "securityDetailsModalTitle": "Pour des raisons de sécurité, pour voir les détails de l'envoi, vous devez entrer votre mot de passe.",
                 "securityEditModalTitle": "Pour des raisons de sécurité, pour modifier un envoi, vous devez entrer votre mot de passe.",
-                "securityDeleteModalTitle": "Pour des raisons de sécurité, pour supprimer un envoi, vous devez entrer votre mot de passe.",
-                "verifyButton": "Vérifier",
+                "securityDeleteModalTitle": "Pour des raisons de sécurité, pour supprimer un envoi, vous devez entrer votre mot de passe.",                "verifyButton": "Vérifier",
                 "cancelButton": "Annuler",
-                "confirmButton": "Confirmer",                "deleteSuccessMessage": "Shipment deleted successfully.",
-                "deleteErrorMessage": "Error deleting the shipment.",
-                "notFoundShipmentMessage": "No shipment has been selected.",
-                "deleteConfirmationMessage": "Are you sure you want to delete this shipment?",
-                "fetchErrorMessage": "Error verifying the password."
+                "confirmButton": "Confirmer",                
+                "deleteSuccessMessage": "Envoi supprimé avec succès.",
+                "deleteErrorMessage": "Erreur lors de la suppression de l'envoi.",
+                "notFoundUserMessage": "Aucun utilisateur n'a été sélectionné.",
+                "notFoundShipmentMessage": "Aucun envoi n'a été sélectionné.",
+                "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer cet utilisateur?",
+                "deleteShipmentConfirmationMessage": "Êtes-vous sûr de vouloir supprimer cet envoi?",
+                "deleteShipmentSuccessMessage": "Envoi supprimé avec succès.",
+                "deleteShipmentErrorMessage": "Erreur lors de la suppression de l'envoi.",
+                "noShipmentsFoundMessage": "Aucun envoi trouvé.",
+                "fetchShipmentsErrorMessage": "Erreur lors de la récupération des envois.",
+                "fetchErrorMessage": "Erreur lors de la vérification du mot de passe."
             },
             "me": {
                 "notFoundMessage": "Envoi non trouvé",
@@ -218,6 +234,16 @@
             "loadReportsError": "Erreur lors du chargement des rapports"
         }
     },    "transporter": {
+        "home": {
+            "welcome": "Bienvenue",
+            "loggedInAs": "Vous êtes connecté en tant que",
+            "transporter": "Transporteur",
+            "description": "Depuis ce tableau de bord, vous pouvez",
+            "checkFreights": "consulter les envois disponibles",
+            "trackShipments": "suivre vos envois actifs",
+            "reviewHistory": "examiner l'historique des livraisons terminées",
+            "accessInfo": "et accéder à toutes les informations pertinentes pour vos opérations logistiques."
+        },
         "shipments": {
             "available": {
                 "title": "Envois disponibles",
