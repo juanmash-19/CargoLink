@@ -1,20 +1,20 @@
+import React from 'react';
+
 interface BasicTextCardProps {
     title: string;
-    subtitles: { label: string; content: string | React.ReactNode }[];
+    subtitles?: { label: string; content: string | React.ReactNode }[];
     bgColor?: string;
     titleColor?: string;
     textColor?: string;
-
 }
 
-export default function BasicTextCardProps({
+export default function BasicTextCard({
     title,
-    subtitles,
-    bgColor = 'bg-gray-50', // Valor por defecto
-    titleColor = 'text-gray-700', // Valor por defecto
-    textColor = 'text-gray-600', // Valor por defecto
+    subtitles = [],
+    bgColor = 'bg-gray-50',
+    titleColor = 'text-gray-700',
+    textColor = 'text-gray-600',
 }: BasicTextCardProps) {
-    
     return (
         <div className={`${bgColor} p-4 rounded-lg py-5`}>
             <h2 className={`text-lg font-semibold ${titleColor} mb-2`}>{title}</h2>
