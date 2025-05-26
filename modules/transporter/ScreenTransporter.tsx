@@ -22,29 +22,23 @@ interface CardType {
 }
 
 export default function TransportadorDashboard() {
-  const t = useTranslations();
-  const [totals, setTotals] = useState({
+  const t = useTranslations();  const [totals, setTotals] = useState({
     disponibles: 0,
     activos: 0,
-    completados: 0,
     disponiblesStats: [0, 0, 0, 0, 0],
     activosStats: [0, 0, 0, 0, 0],
-    completadosStats: [0, 0, 0, 0, 0],
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchStats = async () => {
-      try {
-        const response = await getDriverStats();
+      try {        const response = await getDriverStats();
         setTotals({
           disponibles: response.disponibles,
           activos: response.activos,
-          completados: response.completados,
           disponiblesStats: response.disponiblesStats || [0, 0, 0, 0, 0],
           activosStats: response.activosStats || [0, 0, 0, 0, 0],
-          completadosStats: response.completadosStats || [0, 0, 0, 0, 0],
         });
         setLoading(false);
       } catch (error) {
@@ -75,15 +69,6 @@ export default function TransportadorDashboard() {
     }],
   };
 
-  const completadosChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
-    datasets: [{
-      label: t('transporter.dashboard.completedShipmentsChart'),
-      data: totals.completadosStats,
-      backgroundColor: 'rgba(234,179,8,0.5)',
-    }],
-  };
-
   const cardsData: CardType[] = [
     {
       title: t('transporter.dashboard.availableShipments'),
@@ -98,13 +83,6 @@ export default function TransportadorDashboard() {
       variant: 'secondary',
       icon: '🚚',
       onClick: () => router.push('/transporter/shipments/actives'),
-    },
-    {
-      title: t('transporter.dashboard.completedShipments'),
-      value: totals.completados.toString(),
-      variant: 'ghost',
-      icon: '✅',
-      onClick: () => router.push('/transporter/shipments/completed'),
     },
   ];
 
@@ -123,8 +101,7 @@ export default function TransportadorDashboard() {
           <div className="flex justify-center items-center h-64">
             <span className="text-gray-600 text-lg font-medium">Cargando estadísticas...</span>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        ) : (          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
               <h2 className="text-lg font-bold mb-4 text-center">{t('transporter.dashboard.availableShipmentsChart')}</h2>
               <div className="w-full h-[250px]">
@@ -139,15 +116,6 @@ export default function TransportadorDashboard() {
               <div className="w-full h-[250px]">
                 <Bar
                   data={activosChartData}
-                  options={{ plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }}
-                />
-              </div>
-            </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
-              <h2 className="text-lg font-bold mb-4 text-center">{t('transporter.dashboard.completedShipmentsChart')}</h2>
-              <div className="w-full h-[250px]">
-                <Bar
-                  data={completadosChartData}
                   options={{ plugins: { legend: { display: false } }, responsive: true, maintainAspectRatio: false }}
                 />
               </div>

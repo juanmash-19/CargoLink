@@ -169,12 +169,19 @@
                 "securityDeleteModalTitle": "Pour des raisons de sécurité, pour supprimer un envoi, vous devez entrer votre mot de passe.",
                 "verifyButton": "Vérifier",
                 "cancelButton": "Annuler",
-                "confirmButton": "Confirmer",
-                "deleteSuccessMessage": "Shipment deleted successfully.",
+                "confirmButton": "Confirmer",                "deleteSuccessMessage": "Shipment deleted successfully.",
                 "deleteErrorMessage": "Error deleting the shipment.",
                 "notFoundShipmentMessage": "No shipment has been selected.",
                 "deleteConfirmationMessage": "Are you sure you want to delete this shipment?",
                 "fetchErrorMessage": "Error verifying the password."
+            },
+            "me": {
+                "notFoundMessage": "Envoi non trouvé",
+                "fetchErrorMessage": "Erreur lors de la récupération de l'envoi",
+                "confirmSuccessMessage": "Envoi confirmé ! Veuillez attendre qu'un transporteur accepte votre demande.",
+                "updateErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi",
+                "cancelSuccessMessage": "Envoi annulé !",
+                "cancelErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi"
             }
         },
         "dashboard": {
@@ -185,9 +192,32 @@
             "shipmentsChart": "Graphique des envois",
             "usersChart": "Graphique des utilisateurs",
             "reportsChart": "Graphique des rapports"
+        },
+        "reports": {
+            "title": "Gestion des Rapports",
+            "noReportsMessage": "Aucun rapport disponible",
+            "markAsResolvedButton": "Marquer comme Résolu",
+            "closeReportButton": "Fermer le Rapport",
+            "solutionLabel": "Solution:",
+            "closeJustificationLabel": "Justification de la fermeture:",
+            "resolveReportModalTitle": "Résoudre le Rapport",
+            "closeReportModalTitle": "Fermer le Rapport",
+            "statusLabel": "Statut",
+            "resolvedOption": "Résolu",
+            "closedOption": "Fermé",
+            "solutionExplanationLabel": "Explication de la solution",
+            "closeJustificationInputLabel": "Justification de la fermeture",
+            "solutionPlaceholder": "Décrivez comment le problème a été résolu...",
+            "closePlaceholder": "Expliquez pourquoi le rapport est fermé sans résolution...",
+            "cancelButton": "Annuler",
+            "resolveButton": "Résoudre",
+            "completeFieldsError": "Veuillez compléter tous les champs",
+            "resolvedSuccessMessage": "Rapport résolu avec succès",
+            "closedSuccessMessage": "Rapport fermé avec succès",
+            "updateReportError": "Erreur lors de la mise à jour du rapport",
+            "loadReportsError": "Erreur lors du chargement des rapports"
         }
-    },
-    "transporter": {
+    },    "transporter": {
         "shipments": {
             "available": {
                 "title": "Envois disponibles",
@@ -195,7 +225,15 @@
             },
             "active": {
                 "title": "Envois Actifs",
-                "noShipments": "Vous n'avez pas d'envois actifs..."
+                "noShipments": "Vous n'avez pas d'envois actifs...",
+                "noActiveShipmentsMessage": "Aucun envoi actif trouvé",
+                "fetchErrorMessage": "Erreur lors de la récupération des envois actifs",
+                "transitConfirmationMessage": "Êtes-vous sûr de vouloir marquer cet envoi comme en transit ?",
+                "deliveryConfirmationMessage": "Êtes-vous sûr de vouloir confirmer la livraison de cet envoi ? Cette action ne peut pas être annulée.",
+                "transitSuccessMessage": "Envoi marqué comme en transit !",
+                "deliverySuccessMessage": "Livraison confirmée avec succès !",
+                "transitErrorMessage": "Erreur lors du marquage en transit",
+                "deliveryErrorMessage": "Erreur lors de la confirmation de livraison"
             }
         },
         "dashboard": {
@@ -279,12 +317,20 @@
                 "reportDescription": "Description",
                 "reportDescriptionPlaceholder": "Veuillez décrire le problème en détail",
                 "submitReport": "Soumettre le Rapport"
-            },
-            "manage": {
+            },            "manage": {
                 "title": "Mes envois",
                 "createButton": "Créer un nouvel envoi",
                 "noShipments": "Vous n'avez pas encore créé d'envois",
                 "createFirstButton": "Créer le premier envoi"
+            },
+            "me": {
+                "notFoundMessage": "Envoi non trouvé",
+                "fetchErrorMessage": "Erreur lors de la récupération de l'envoi",
+                "confirmSuccessMessage": "Envoi confirmé ! Veuillez attendre qu'un transporteur accepte votre demande.",
+                "updateErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi",
+                "cancelSuccessMessage": "Envoi annulé !",
+                "cancelErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi",
+                "reportSuccessMessage": "Rapport envoyé avec succès"
             }
         },
         "account": {
@@ -310,7 +356,18 @@
             "confirmDeleteButton": "Supprimer",
             "proceedWithCaution": "Procédez avec prudence",
             "forgotPasswordText": "J'ai oublié mon mot de passe.",
-            "recoverAccountLink": "Récupérer le compte"
+            "recoverAccountLink": "Récupérer le compte",
+            "updateSuccessMessage": "Les modifications ont été enregistrées avec succès.",
+            "updateErrorMessage": "Les modifications n'ont pas pu être enregistrées.",
+            "updateDataErrorMessage": "Erreur lors de la mise à jour des données utilisateur",
+            "passwordChangedSuccessMessage": "Mot de passe modifié avec succès.",
+            "passwordChangeErrorMessage": "Impossible de modifier le mot de passe. Veuillez vérifier les données saisies.",
+            "passwordChangeGeneralErrorMessage": "Erreur lors du changement de mot de passe",
+            "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer votre compte ? (Irréversible)",
+            "verifyPasswordErrorMessage": "Erreur lors de la vérification du mot de passe",
+            "accountDeletedSuccessMessage": "Compte supprimé avec succès.",
+            "accountDeleteErrorMessage": "Impossible de supprimer le compte. Veuillez réessayer plus tard.",
+            "deleteAccountGeneralErrorMessage": "Erreur lors de la suppression du compte"
         },
         "reports": {
             "title": "Mes Rapports",

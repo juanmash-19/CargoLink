@@ -34,7 +34,7 @@ export default function ScreenAdminReports() {
         setReports(fetchedReports);
       } catch (error) {
         console.error("Error fetching reports:", error);
-        setAlertMessage(error instanceof Error ? error.message : 'Error al cargar los reportes');
+        setAlertMessage(error instanceof Error ? error.message : t('admin.reports.loadReportsError'));
         setAlertType('error');
         setShowAlert(true);
       } finally {
@@ -54,9 +54,8 @@ export default function ScreenAdminReports() {
   };
 
   // Submit resolution
-  const handleSubmitResolution = async () => {
-    if (!selectedReportId || !resolutionExplanation) {
-      setAlertMessage('Por favor complete todos los campos');
+  const handleSubmitResolution = async () => {    if (!selectedReportId || !resolutionExplanation) {
+      setAlertMessage(t('admin.reports.completeFieldsError'));
       setAlertType('error');
       setShowAlert(true);
       return;
@@ -71,9 +70,8 @@ export default function ScreenAdminReports() {
       };
       
       const response = await resolveReport(selectedReportId, resolutionData);
-      
-      if (response.report) {
-        setAlertMessage(`Reporte ${resolutionStatus === 'resolved' ? 'resuelto' : 'cerrado'} exitosamente`);
+        if (response.report) {
+        setAlertMessage(resolutionStatus === 'resolved' ? t('admin.reports.resolvedSuccessMessage') : t('admin.reports.closedSuccessMessage'));
         setAlertType('success');
         setShowAlert(true);
         setIsResolutionModalOpen(false);
@@ -86,9 +84,8 @@ export default function ScreenAdminReports() {
               : report
           )
         );
-      }
-    } catch (error) {
-      setAlertMessage('Error al actualizar el reporte');
+      }    } catch (error) {
+      setAlertMessage(t('admin.reports.updateReportError'));
       setAlertType('error');
       setShowAlert(true);
     } finally {
@@ -101,13 +98,12 @@ export default function ScreenAdminReports() {
   const resolvedReports = reports.filter(report => report.status === 'resolved');
   const closedReports = reports.filter(report => report.status === 'closed');
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Gestión de Reportes</h1>
+  return (    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">{t('admin.reports.title')}</h1>
       
       {reports.length === 0 ? (
         <div className="bg-white p-8 rounded-lg shadow text-center">
-          <p className="text-lg text-gray-600 mb-4">No hay reportes disponibles</p>
+          <p className="text-lg text-gray-600 mb-4">{t('admin.reports.noReportsMessage')}</p>
         </div>
       ) : (
         <div className="space-y-8">
@@ -121,15 +117,14 @@ export default function ScreenAdminReports() {
               <div className="space-y-4">
                 {pendingReports.map(report => (
                   <div key={report._id} className="bg-white p-4 rounded-lg shadow">
-                    <ReportCard report={report} t={t} />
-                    <div className="mt-4 flex justify-end space-x-2">
+                    <ReportCard report={report} t={t} />                    <div className="mt-4 flex justify-end space-x-2">
                       <CustomButton
-                        text="Marcar como Resuelto"
+                        text={t('admin.reports.markAsResolvedButton')}
                         variant="primary"
                         onClick={() => handleOpenResolutionModal(report._id)}
                       />
                       <CustomButton
-                        text="Cerrar Reporte"
+                        text={t('admin.reports.closeReportButton')}
                         variant="secondary"
                         onClick={() => {
                           setResolutionStatus('closed');
@@ -153,10 +148,10 @@ export default function ScreenAdminReports() {
               <div className="space-y-4">
                 {resolvedReports.map(report => (
                   <div key={report._id} className="bg-white p-4 rounded-lg shadow">
-                    <ReportCard report={report} t={t} />
+                    <ReportCard report={report} t={t} />                   
                     {report.solutionExplanation && (
                       <div className="mt-4 border-t pt-3">
-                        <h3 className="font-medium text-gray-700">Solución:</h3>
+                        <h3 className="font-medium text-gray-700">{t('admin.reports.solutionLabel')}</h3>
                         <p className="text-gray-600">{report.solutionExplanation}</p>
                       </div>
                     )}
@@ -176,10 +171,10 @@ export default function ScreenAdminReports() {
               <div className="space-y-4">
                 {closedReports.map(report => (
                   <div key={report._id} className="bg-white p-4 rounded-lg shadow">
-                    <ReportCard report={report} t={t} />
+                    <ReportCard report={report} t={t} />                    
                     {report.solutionExplanation && (
                       <div className="mt-4 border-t pt-3">
-                        <h3 className="font-medium text-gray-700">Justificación del cierre:</h3>
+                        <h3 className="font-medium text-gray-700">{t('admin.reports.closeJustificationLabel')}</h3>
                         <p className="text-gray-600">{report.solutionExplanation}</p>
                       </div>
                     )}
@@ -191,16 +186,14 @@ export default function ScreenAdminReports() {
         </div>
       )}
       
-      {/* Resolution Modal */}
-      <CustomModal
+      {/* Resolution Modal */}      <CustomModal
         isOpen={isResolutionModalOpen}
         onClose={() => setIsResolutionModalOpen(false)}
-        title={resolutionStatus === 'resolved' ? "Resolver Reporte" : "Cerrar Reporte"}
+        title={resolutionStatus === 'resolved' ? t('admin.reports.resolveReportModalTitle') : t('admin.reports.closeReportModalTitle')}
       >
-        <div className="space-y-4">
-          <div>
+        <div className="space-y-4">          <div>
             <label htmlFor="resolutionStatus" className="block text-sm font-medium text-gray-800">
-              Estado
+              {t('admin.reports.statusLabel')}
             </label>
             <select
               id="resolutionStatus"
@@ -208,14 +201,13 @@ export default function ScreenAdminReports() {
               onChange={(e) => setResolutionStatus(e.target.value as 'resolved' | 'closed')}
               className="mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-primary-400 focus:ring-primary-400 p-2 text-gray-800"
             >
-              <option value="resolved">Resuelto</option>
-              <option value="closed">Cerrado</option>
+              <option value="resolved">{t('admin.reports.resolvedOption')}</option>
+              <option value="closed">{t('admin.reports.closedOption')}</option>
             </select>
           </div>
-          
-          <div>
+            <div>
             <label htmlFor="resolutionExplanation" className="block text-sm font-medium text-gray-800">
-              {resolutionStatus === 'resolved' ? "Explicación de la solución" : "Justificación del cierre"}
+              {resolutionStatus === 'resolved' ? t('admin.reports.solutionExplanationLabel') : t('admin.reports.closeJustificationInputLabel')}
             </label>
             <textarea
               id="resolutionExplanation"
@@ -224,20 +216,19 @@ export default function ScreenAdminReports() {
               rows={4}
               className="mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-primary-400 focus:ring-primary-400 p-2 text-gray-800"
               placeholder={resolutionStatus === 'resolved' 
-                ? "Describe cómo se resolvió el problema..." 
-                : "Explica por qué se cierra el reporte sin resolver..."
+                ? t('admin.reports.solutionPlaceholder')
+                : t('admin.reports.closePlaceholder')
               }
             />
           </div>
-          
-          <div className="flex justify-end space-x-2">
+            <div className="flex justify-end space-x-2">
             <CustomButton
-              text="Cancelar"
+              text={t('admin.reports.cancelButton')}
               variant="secondary"
               onClick={() => setIsResolutionModalOpen(false)}
             />
             <CustomButton
-              text={resolutionStatus === 'resolved' ? "Resolver" : "Cerrar Reporte"}
+              text={resolutionStatus === 'resolved' ? t('admin.reports.resolveButton') : t('admin.reports.closeReportButton')}
               variant="primary"
               onClick={handleSubmitResolution}
             />

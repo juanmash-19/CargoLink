@@ -22,29 +22,30 @@ interface CardType {
 }
 
 export default function AdminPage() {
-  const t = useTranslations();
+  const t = useTranslations();  
   const [totals, setTotals] = useState({
     totalUsers: 0,
     totalShipments: 0,
     totalReports: 0,
-    usersStats: [],
-    shipmentsStats: [],
-    reportsStats: [],
+    usersStats: [] as number[],
+    shipmentsStats: [] as number[],
+    reportsStats: [] as number[],
+    labels: [] as string[],
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const response = await getGeneralStats();
         setTotals({
-          totalUsers: response.totalUsers,
-          totalShipments: response.totalShipments,
-          totalReports: response.totalReports,
-          usersStats: response.usersStats || [0, 0, 0, 0, 0],
-          shipmentsStats: response.shipmentsStats || [0, 0, 0, 0, 0],
-          reportsStats: response.reportsStats || [0, 0, 0, 0, 0],
+          totalUsers: response.totals.users,
+          totalShipments: response.totals.shipments,
+          totalReports: response.totals.reports,
+          usersStats: response.monthly.users || [0, 0, 0, 0, 0, 0],
+          shipmentsStats: response.monthly.shipments || [0, 0, 0, 0, 0, 0],
+          reportsStats: response.monthly.reports || [0, 0, 0, 0, 0, 0],
+          labels: response.monthly.labels || ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
         });
         setLoading(false);
       } catch (error) {
@@ -56,9 +57,8 @@ export default function AdminPage() {
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
-
   const usersChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.usersChart'),
       data: totals.usersStats,
@@ -67,7 +67,7 @@ export default function AdminPage() {
   };
 
   const shipmentsChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.shipmentsChart'),
       data: totals.shipmentsStats,
@@ -76,7 +76,7 @@ export default function AdminPage() {
   };
 
   const reportsChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.reportsChart'),
       data: totals.reportsStats,

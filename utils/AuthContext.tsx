@@ -114,7 +114,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       router.push('/');
     }
   };
-
   const logout = () => {
     Cookies.remove('token');
     setUserRole(null);
@@ -122,6 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserName(null);
     setUserLastname(null);
     if (tokenExpirationTimeout) clearTimeout(tokenExpirationTimeout);
+    router.push('/'); // Redirect to home page on logout
   };
 
   return (

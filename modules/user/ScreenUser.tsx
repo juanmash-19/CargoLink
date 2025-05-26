@@ -43,25 +43,23 @@ export default function UserPage() {
         try{
             startLoading();
             const response = await updateUser(updatedFields);
-            console.log('Update successful:', response);
-            if(response){
-                setAlertMessage("Los cambios han sido guardados con éxito.");
+            console.log('Update successful:', response);            if(response){
+                setAlertMessage(t('user.account.updateSuccessMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 if (updatedFields.name) setOriginalName(updatedFields.name);
                 if (updatedFields.lastname) setOriginalLastName(updatedFields.lastname);
                 if (updatedFields.phone) setOriginalPhone(updatedFields.phone);
             }else{
-                setAlertMessage("No se han podido guardar los cambios.");
+                setAlertMessage(t('user.account.updateErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
                 
                 if(originalName !== null) setValue("name", originalName);
                 if(originalLastName !== null) setValue("lastname", originalLastName);
                 if(originalPhone !== null) setValue("phone", originalPhone);
-            }
-        } catch (error) {
-            setAlertMessage(`Error al actualizar los datos de usuario: ${error}`);
+            }        } catch (error) {
+            setAlertMessage(t('user.account.updateDataErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -73,9 +71,8 @@ export default function UserPage() {
         try {
             startLoading();
             resetChangePassword();
-            const response = await changePassword(data);
-            if (response.verify) {
-                setAlertMessage("Contraseña cambiada con éxito.");
+            const response = await changePassword(data);            if (response.verify) {
+                setAlertMessage(t('user.account.passwordChangedSuccessMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => {
@@ -84,12 +81,11 @@ export default function UserPage() {
                 logout();
                 router.replace('/login');
             } else {
-                setAlertMessage("No se pudo cambiar la contraseña. Verifique los datos ingresados.");
+                setAlertMessage(t('user.account.passwordChangeErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
-            }
-        } catch (error) {
-            setAlertMessage(`Error al cambiar la contraseña: ${error}`);
+            }        } catch (error) {
+            setAlertMessage(t('user.account.passwordChangeGeneralErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -111,14 +107,13 @@ export default function UserPage() {
                 setAlertMessage(response.message);
                 setAlertType('error');
                 setShowAlert(true);
-            }
-            
-            setAlertMessage("¿Está seguro de que desea eliminar su cuenta? (Irreversible)");
+            }            
+            setAlertMessage(t('user.account.deleteConfirmationMessage'));
             setAlertType('options');
             setShowAlert(true);
 
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al verificar la contraseña');
+            setAlertMessage(error instanceof Error ? error.message : t('user.account.verifyPasswordErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -130,9 +125,8 @@ export default function UserPage() {
         setShowAlert(false);
         try {
             startLoading();
-            const response = await deleteUser();
-            if (response.verify) {
-                setAlertMessage("Cuenta eliminada con éxito.");
+            const response = await deleteUser();        if (response.verify) {
+                setAlertMessage(t('user.account.accountDeletedSuccessMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => {
@@ -141,12 +135,12 @@ export default function UserPage() {
                 logout();
                 router.replace('/');
             } else {
-                setAlertMessage("No se pudo eliminar la cuenta. Intentelo mas tarde.");
+                setAlertMessage(t('user.account.accountDeleteErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             }
         } catch (error) {
-            setAlertMessage(`Error al eliminar la cuenta: ${error}`);
+            setAlertMessage(t('user.account.deleteAccountGeneralErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
@@ -196,8 +190,6 @@ export default function UserPage() {
                     <div className="col-span-2 hidden sm:block text-gray-800">
                         <ul>
                             <li className="mt-5 cursor-pointer border-l-2 border-l-blue-700 px-2 py-2 font-semibold text-blue-700 transition hover:border-l-blue-700 hover:text-blue-700">{t('user.account.settingsTitle')}</li>
-                            <li className="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">Billetera</li>
-                            <li className="mt-5 cursor-pointer border-l-2 border-transparent px-2 py-2 font-semibold transition hover:border-l-blue-700 hover:text-blue-700">Notificaciones</li>
                         </ul>
                     </div>
                     <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
