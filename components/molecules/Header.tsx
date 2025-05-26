@@ -175,13 +175,13 @@ export default function Header() {
                           {t('header.activeShipments')}
                         </Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link 
                           href="/transporter/shipments/all" 
                           className={isLinkActive('/transporter/shipments/all') ? standarNavLinkSelect : standarNavLink}>
                           {t('header.allShipments')}
                         </Link>
-                      </li>
+                      </li> */}
                     </ul>
                   </details>
                 </li>

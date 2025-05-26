@@ -24,8 +24,18 @@
             "forgotPassword": "Forgot your password?",
             "continueButton": "Continue"
         }
-    },
-    "admin": {
+    },    "admin": {
+        "home": {
+            "welcome": "Welcome",
+            "loggedInAs": "You are logged in as",
+            "administrator": "Administrator",
+            "description": "From this dashboard you can",
+            "manageUsers": "manage users",
+            "manageShipments": "manage shipments",
+            "manageReports": "review and manage reports",
+            "accessFunctions": " and access all administrative features of the system.",
+            "url": "/images/admin_english.png"
+        },
         "users": {
             "dropdown": {
                 "menu": "Menu",
@@ -102,10 +112,11 @@
         },
         "shipments": {
             "dropdown": {
-                "menu": "Menu",
+                "menu": "Shipments menu",
                 "createShipment": "Create Shipment",
                 "sortByPrice": "Sort by price",
-                "sortByCreationDate": "Sort by creation date"
+                "sortByCreationDate": "Sort by creation date",
+                "organizationMessage": "Shipments organized by "
             },
             "details": {
                 "title": "Shipment Details",
@@ -169,12 +180,27 @@
                 "deleteTooltip": "Delete",
                 "securityDetailsModalTitle": "For security, to view shipment details you must enter your password.",
                 "securityEditModalTitle": "For security, to edit a shipment you must enter your password.",
-                "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",
-                "verifyButton": "Verify",
+                "securityDeleteModalTitle": "For security, to delete a shipment you must enter your password.",                "verifyButton": "Verify",
                 "cancelButton": "Cancel",
-                "confirmButton": "Confirm",
-                "deleteSuccessMessage":"Shipment deleted successfully",
-                "deleteErrorMessage": "Error deleting the shipment"
+                "confirmButton": "Confirm",                
+                "deleteSuccessMessage": "Shipment deleted successfully",
+                "deleteErrorMessage": "Error deleting the shipment",
+                "notFoundUserMessage": "No user has been selected.",
+                "notFoundShipmentMessage": "No shipment has been selected.",
+                "deleteConfirmationMessage": "Are you sure you want to delete this user?",
+                "deleteShipmentConfirmationMessage": "Are you sure you want to delete this shipment?",
+                "deleteShipmentSuccessMessage": "Shipment deleted successfully.",
+                "deleteShipmentErrorMessage": "Error deleting the shipment.",
+                "noShipmentsFoundMessage": "No shipments found.",
+                "fetchShipmentsErrorMessage": "Error fetching shipments."
+            },
+            "me": {
+                "notFoundMessage": "Shipment not found",
+                "fetchErrorMessage": "Error fetching shipment",
+                "confirmSuccessMessage": "Shipment confirmed! Please wait until a transporter accepts your request.",
+                "updateErrorMessage": "Error updating shipment status",
+                "cancelSuccessMessage": "Shipment canceled!",
+                "cancelErrorMessage": "Error updating shipment status"
             }
         },
         "dashboard": {
@@ -185,6 +211,30 @@
             "shipmentsChart": "Shipments Chart",
             "usersChart": "Users Chart",
             "reportsChart": "Reports Chart"
+        },
+        "reports": {
+            "title": "Reports Management",
+            "noReportsMessage": "No reports available",
+            "markAsResolvedButton": "Mark as Resolved",
+            "closeReportButton": "Close Report",
+            "solutionLabel": "Solution:",
+            "closeJustificationLabel": "Closure justification:",
+            "resolveReportModalTitle": "Resolve Report",
+            "closeReportModalTitle": "Close Report",
+            "statusLabel": "Status",
+            "resolvedOption": "Resolved",
+            "closedOption": "Closed",
+            "solutionExplanationLabel": "Solution explanation",
+            "closeJustificationInputLabel": "Closure justification",
+            "solutionPlaceholder": "Describe how the problem was solved...",
+            "closePlaceholder": "Explain why the report is being closed without resolution...",
+            "cancelButton": "Cancel",
+            "resolveButton": "Resolve",
+            "completeFieldsError": "Please complete all fields",
+            "resolvedSuccessMessage": "Report resolved successfully",
+            "closedSuccessMessage": "Report closed successfully",
+            "updateReportError": "Error updating the report",
+            "loadReportsError": "Error loading reports"
         }
     },
     "schemas": {
@@ -267,8 +317,18 @@
             "startNowButton": "Start now",
             "seeMoreButton": "See more"
         }
-    },
-    "transporter": {
+    },    "transporter": {
+        "home": {
+            "welcome": "Welcome",
+            "loggedInAs": "You are logged in as",
+            "transporter": "Transporter",
+            "description": "From this dashboard you can",
+            "checkFreights": "check available freights",
+            "trackShipments": "track your active shipments",
+            "reviewHistory": "review completed delivery history",
+            "accessInfo": "and access all relevant information for your logistics operations.",
+            "url": "/images/Colaboradores_English.png"
+        },
         "shipments": {
             "available": {
                 "title": "Available Shipments",
@@ -276,7 +336,15 @@
             },
             "active": {
                 "title": "Active Shipments",
-                "noShipments": "You don't have any active shipments..."
+                "noShipments": "You don't have any active shipments...",
+                "noActiveShipmentsMessage": "No active shipments found",
+                "fetchErrorMessage": "Error fetching active shipments",
+                "transitConfirmationMessage": "Are you sure you want to mark this shipment as in transit?",
+                "deliveryConfirmationMessage": "Are you sure you want to confirm the delivery of this shipment? This action cannot be undone.",
+                "transitSuccessMessage": "Shipment marked as in transit!",
+                "deliverySuccessMessage": "Delivery confirmed successfully!",
+                "transitErrorMessage": "Error marking as in transit",
+                "deliveryErrorMessage": "Error confirming delivery"
             }
         },
         "dashboard": {
@@ -361,18 +429,34 @@
                 "categoryOther": "Other Issue",
                 "reportDescription": "Description",
                 "reportDescriptionPlaceholder": "Please describe the issue in detail",
-                "submitReport": "Submit Report"
+                "submitReport": "Submit Report",
+                "loadingMessage": "Loading...",
+                "confirmationMessage": "Shipment confirmed! Please wait until a transporter accepts your order.",
+                "updateErrorMessage": "Error updating the shipment status",
+                "cancelMessage": "Shipment canceled!",
+                "reportMessage": "Please complete all fields in the report",
+                "reportSuccess": "Report submitted successfully",
+                "reportErrorMessage": "Error submitting the report"
             },
             "manage": {
                 "title": "My Shipments",
                 "createButton": "Create New Shipment",
                 "noShipments": "You have no created shipments",
                 "createFirstButton": "Create First Shipment"
+            },
+            "me": {
+                "notFoundMessage": "Shipment not found",
+                "fetchErrorMessage": "Error fetching shipment",
+                "confirmSuccessMessage": "Shipment confirmed! Please wait until a transporter accepts your request.",
+                "updateErrorMessage": "Error updating shipment status",
+                "cancelSuccessMessage": "Shipment canceled!",
+                "cancelErrorMessage": "Error updating shipment status",
+                "reportSuccessMessage": "Report sent successfully"
             }
         },
         "account": {
             "settingsTitle": "Account Settings",
-            "welcomeMessage": "Welcome Here you can change your password, email, or personal information.",
+            "welcomeMessage": ", Welcome! Here you can change your password, email, or personal information.",
             "emailTitle": "Email",
             "emailMessage": "Your email address is ",
             "personalInfoTitle": "Personal Information",
@@ -393,7 +477,18 @@
             "confirmDeleteButton": "Delete",
             "proceedWithCaution": "Proceed with caution",
             "forgotPasswordText": "I forgot my password.",
-            "recoverAccountLink": "Recover account"
+            "recoverAccountLink": "Recover account",
+            "updateSuccessMessage": "Changes have been saved successfully.",
+            "updateErrorMessage": "Changes could not be saved.",
+            "updateDataErrorMessage": "Error updating user data",
+            "passwordChangedSuccessMessage": "Password changed successfully.",
+            "passwordChangeErrorMessage": "Could not change password. Please verify the entered data.",
+            "passwordChangeGeneralErrorMessage": "Error changing password",
+            "deleteConfirmationMessage": "Are you sure you want to delete your account? (Irreversible)",
+            "verifyPasswordErrorMessage": "Error verifying password",
+            "accountDeletedSuccessMessage": "Account deleted successfully.",
+            "accountDeleteErrorMessage": "Could not delete account. Please try again later.",
+            "deleteAccountGeneralErrorMessage": "Error deleting account"
         },
         "reports": {
             "title": "My Reports",
@@ -408,6 +503,7 @@
             "pickup": "Pickup",
             "delivery": "Delivery",
             "solution": "Solution",
+            "errorMessage": "Error loading reports",
             "status": {
                 "pending": "Pending",
                 "resolved": "Resolved",
@@ -611,5 +707,113 @@
         "message": "Something's missing.",
         "defaultMessage": "Path not found.",
         "redirectButton": "Back to menu"
+    },
+    "services": {
+        "title": "What is CargoLink?",
+        "description": "CargoLink is a digital platform designed to facilitate and optimize the management of shipments between customers and carriers. Our goal is to provide a fast, reliable, and transparent experience for all parties involved in a logistics process. We have developed a functional system with key modules and continue to improve it to become a comprehensive solution for any business requiring freight transportation.",
+        "features": {
+            "available": "Available functionalities:",
+            "userManagement": "User management: Registration and administration of accounts for both customers and carriers.",
+            "secureAuthentication": "Secure authentication: Reliable login system and role-based access control.",
+            "bilateralReviews": "Bilateral reviews: Evaluations between customers and carriers after each shipment.",
+            "adminPanel": "Admin panel: Centralized access with statistics and overall control (statistics simulated for now).",
+            "transporterPanel": "Carrier panel: Viewing assigned shipments and basic management tools.",
+            "availableShipments": "Available shipments list: Real-time viewing based on their status.",
+            "detailedView": "Detailed view of each shipment: Inquiry of origin, destination, and key data to confirm availability.",
+            "responsiveInterface": "Responsive interface: Adapted for mobile, tablets, and desktop.",
+            "cloudinaryIntegration": "Cloudinary connection: Optimized and fast image management."
+        },
+        "additionalFeatures": {
+            "profileSettings": "Profile settings: Change password, name, phone, and option to delete the account.",
+            "userManagementPanel": "User management panel: For administrators to easily create, edit, and delete users.",
+            "shipmentManagementPanel": "Shipment management panel: Full control over all shipments on the platform.",
+            "myShipmentsPanel": "My shipments panel: For both customers and carriers to view all their shipments (active, inactive, with filters).",
+            "customHomepage": "Custom homepage: To show each user their statistics and recent activity after logging in.",
+            "transporterHomepage": "Carrier homepage: With balance viewing, statistics, and active shipments.",
+            "mapIntegration": "Map integration: To view current locations, origin, and destination of shipments.",
+            "informativePages": "Informative pages: About roles, benefits, and how to make the most of the platform (customer/carrier).",
+            "smartRedirects": "Smart redirects: To ensure each user accesses what corresponds to their role.",
+            "dynamicCharts": "Dynamic charts: Clear and visual statistics on the panels.",
+            "visualProfilePanel": "Visual profile panel: Where the user's name and email can be clearly seen."
+        },
+        "commitment": "At CargoLink, we work day by day to become the trusted platform for shipment management. Our focus is to provide a useful, easy-to-use technological solution ready to adapt to different business models.",
+        "transporterServices": {
+            "title": "Services for Carriers",
+            "description": "At CargoLink, we provide carriers with all the tools they need to work efficiently, organized, and profitably. Connect with more customers, manage your routes, and grow your logistics operation from one place!",
+            "serviceCards": {
+                "acceptOrders": {
+                    "title": "Easily Accept Orders",
+                    "description": "View available shipments and accept those that best fit your location, schedule, and capacity."
+                },
+                "optimizeRoutes": {
+                    "title": "Optimize Your Routes",
+                    "description": "Use interactive maps to plan your trips and deliver more in less time."
+                },
+                "securePayments": {
+                    "title": "Receive Secure Payments",
+                    "description": "Receive your payments quickly and securely through our integrated platform."
+                },
+                "consultStatistics": {
+                    "title": "Consult Statistics",
+                    "description": "Check your income, number of deliveries, performance, and more from your control panel."
+                },
+                "realTimeLocation": {
+                    "title": "Real-Time Location",
+                    "description": "Track your current route and view the origin and destination of packages on the map."
+                },
+                "receiveRatings": {
+                    "title": "Receive Ratings",
+                    "description": "Build your reputation with each delivery. Customers can leave you reviews that will help you get more orders."
+                },
+                "totalFlexibility": {
+                    "title": "Total Flexibility",
+                    "description": "You decide when to work and which shipments to accept. Manage your time independently."
+                },
+                "profileManagement": {
+                    "title": "Profile Management",
+                    "description": "Set up your profile, check your data, and prepare for future tools like account editing and deletion."
+                }
+            },
+            "maximizingProductivity": "Maximize your productivity and earn more income with CargoLink, the platform designed for transportation professionals. Start today!"
+        },
+        "userServices": {
+            "title": "Services for Clients",
+            "description": "At CargoLink, we provide you with all the tools you need to manage your shipments quickly, securely, and hassle-free. Our platform is designed for you to have complete control over your deliveries from one place.",
+            "serviceCards": {
+                "requestShipments": {
+                    "title": "Request Shipments in Seconds",
+                    "description": "Complete an easy and intuitive form to generate your shipment request in just a few steps."
+                },
+                "trackPackages": {
+                    "title": "Track Your Packages",
+                    "description": "View the status and location of your shipments in real-time from your personal dashboard."
+                },
+                "chooseCarrier": {
+                    "title": "Choose Your Carrier",
+                    "description": "Compare available carriers and select the one that best fits your needs."
+                },
+                "rateExperience": {
+                    "title": "Rate Your Experience",
+                    "description": "Leave a review about the carrier and improve the quality of service for the entire community."
+                },
+                "manageProfile": {
+                    "title": "Manage Your Profile",
+                    "description": "You can edit your personal information, change your password, and soon manage everything from your settings."
+                },
+                "shipmentHistory": {
+                    "title": "Shipment History",
+                    "description": "Check all the shipments you have made, filtering by status, date, or carrier."
+                },
+                "smartLocations": {
+                    "title": "Smart Locations",
+                    "description": "View the origin and destination of your shipments on the map, along with your current location."
+                },
+                "personalizedSupport": {
+                    "title": "Personalized Support",
+                    "description": "Receive support and follow-up from your account if any questions or issues arise."
+                }
+            },
+            "maximizingProductivity": "All of this from a platform that is easy to use, secure, and tailored to your daily needs. Start today with CargoLink!"
+        }
     }
 }

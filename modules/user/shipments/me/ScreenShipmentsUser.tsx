@@ -21,10 +21,7 @@ export default function UserShipmentsPage() {
                 const response = await getUserShipments();
 
                 setShipments(response.shipments || []);
-
-                console.log("Shipments:", response.shipments);
             } catch (error) {
-                console.error('Error:', error);
                 setShipments([]);
             } finally {
                 stopLoading();

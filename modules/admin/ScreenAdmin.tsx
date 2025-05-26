@@ -22,29 +22,30 @@ interface CardType {
 }
 
 export default function AdminPage() {
-  const t = useTranslations();
+  const t = useTranslations();  
   const [totals, setTotals] = useState({
     totalUsers: 0,
     totalShipments: 0,
     totalReports: 0,
-    usersStats: [],
-    shipmentsStats: [],
-    reportsStats: [],
+    usersStats: [] as number[],
+    shipmentsStats: [] as number[],
+    reportsStats: [] as number[],
+    labels: [] as string[],
   });
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const response = await getGeneralStats();
         setTotals({
-          totalUsers: response.totalUsers,
-          totalShipments: response.totalShipments,
-          totalReports: response.totalReports,
-          usersStats: response.usersStats || [0, 0, 0, 0, 0],
-          shipmentsStats: response.shipmentsStats || [0, 0, 0, 0, 0],
-          reportsStats: response.reportsStats || [0, 0, 0, 0, 0],
+          totalUsers: response.totals.users,
+          totalShipments: response.totals.shipments,
+          totalReports: response.totals.reports,
+          usersStats: response.monthly.users || [0, 0, 0, 0, 0, 0],
+          shipmentsStats: response.monthly.shipments || [0, 0, 0, 0, 0, 0],
+          reportsStats: response.monthly.reports || [0, 0, 0, 0, 0, 0],
+          labels: response.monthly.labels || ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
         });
         setLoading(false);
       } catch (error) {
@@ -56,9 +57,8 @@ export default function AdminPage() {
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
-
   const usersChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.usersChart'),
       data: totals.usersStats,
@@ -67,7 +67,7 @@ export default function AdminPage() {
   };
 
   const shipmentsChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.shipmentsChart'),
       data: totals.shipmentsStats,
@@ -76,7 +76,7 @@ export default function AdminPage() {
   };
 
   const reportsChartData = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'],
+    labels: totals.labels,
     datasets: [{
       label: t('admin.dashboard.reportsChart'),
       data: totals.reportsStats,
@@ -126,7 +126,7 @@ export default function AdminPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
-              <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.usersChart')}</h2>
+              <h2 className="text-lg font-bold mb-4 text-center text-black">{t('admin.dashboard.usersChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
                   data={usersChartData}
@@ -134,7 +134,7 @@ export default function AdminPage() {
                 />
               </div>
             </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.shipmentsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar
@@ -143,7 +143,7 @@ export default function AdminPage() {
                 />
               </div>
             </div>
-            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center">
+            <div className="p-6 bg-white shadow-lg rounded-lg flex flex-col items-center text-black">
               <h2 className="text-lg font-bold mb-4 text-center">{t('admin.dashboard.reportsChart')}</h2>
               <div className="w-full h-[250px]">
                 <Bar

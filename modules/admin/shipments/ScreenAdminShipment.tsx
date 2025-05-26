@@ -40,13 +40,11 @@ export default function ScreenAdminShipments(){
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<PasswordDTO>();
-
-    const onSubmitInfo: SubmitHandler<PasswordDTO> = async (data) => {
+    } = useForm<PasswordDTO>();    const onSubmitInfo: SubmitHandler<PasswordDTO> = async (data) => {
         reset();
         setIsInfoModalOpen(false);
         if (!shipmentIdAction) {
-            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertMessage(t('admin.shipments.manage.notFoundShipmentMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -62,9 +60,8 @@ export default function ScreenAdminShipments(){
 
     const onSubmitEdit: SubmitHandler<PasswordDTO> = async (data) => {
         reset();
-        setIsDeleteModalOpen(false);
-        if (!shipmentIdAction) {
-            setAlertMessage(t('admin.users.manage.notFoundMessage'));
+        setIsDeleteModalOpen(false);        if (!shipmentIdAction) {
+            setAlertMessage(t('admin.shipments.manage.notFoundShipmentMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -75,13 +72,11 @@ export default function ScreenAdminShipments(){
             setIsEditModalOpen(false);
             router.push(`/admin/shipments/edit/${shipmentIdAction}`)
         }
-    };
-
-    const onSubmitDelete: SubmitHandler<PasswordDTO>  = async (data) => {
+    };    const onSubmitDelete: SubmitHandler<PasswordDTO>  = async (data) => {
         reset();
         setIsDeleteModalOpen(false);
         if (!shipmentIdAction) {
-            setAlertMessage('No se ha seleccionado ningún envio');
+            setAlertMessage(t('admin.shipments.manage.notFoundShipmentMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -89,23 +84,21 @@ export default function ScreenAdminShipments(){
     
         const correctPassword = await fetchVerifyUser(data);
         if (correctPassword) {
-            setAlertMessage('¿Esta seguro de que quiere eliminar el envio?');
+            setAlertMessage(t('admin.shipments.manage.deleteShipmentConfirmationMessage'));
             setAlertType('options');
             setShowAlert(true);
         }
-    };
-
-    const handleDeleteShipment = async () => {
+    };    const handleDeleteShipment = async () => {
         try{
             startLoading();
             const response = await deleteShipmentById(shipmentIdAction as string);
 
-            setAlertMessage('Envio eliminado correctamente');
+            setAlertMessage(t('admin.shipments.manage.deleteShipmentSuccessMessage'));
             setAlertType('success');
             setShowAlert(true);
             fetchShipment();
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al eliminar');
+            setAlertMessage(error instanceof Error ? error.message : t('admin.shipments.manage.deleteShipmentErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
             return false;
@@ -125,8 +118,7 @@ export default function ScreenAdminShipments(){
                 setShowAlert(true);
             }
             return true;
-        } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al verificar la contraseña');
+        } catch (error) {            setAlertMessage(error instanceof Error ? error.message : t('admin.shipments.manage.fetchErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
             return false;
@@ -147,12 +139,12 @@ export default function ScreenAdminShipments(){
                 if (response.shipments) {
                     setShipemts(response.shipments);
                 } else {
-                    setAlertMessage('No se encontró envios');
+                    setAlertMessage(t('admin.shipments.manage.noShipmentsFoundMessage'));
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los envios');
+                setAlertMessage(error instanceof Error ? error.message : t('admin.shipments.manage.fetchShipmentsErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -173,12 +165,12 @@ export default function ScreenAdminShipments(){
             if (response.shipments) {
                 setShipemts(response.shipments);
             } else {
-                setAlertMessage('No se encontró envios');
+                setAlertMessage(t('admin.shipments.manage.noShipmentsFoundMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             }
         } catch (error) {
-            setAlertMessage(error instanceof Error ? error.message : 'Error al obtener los envios');
+            setAlertMessage(error instanceof Error ? error.message : t('admin.shipments.manage.fetchShipmentsErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {

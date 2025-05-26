@@ -341,7 +341,7 @@ export const getGeneralStats = async (): Promise<GeneralStatsDAO> => {
     const token = Cookies.get('token');
     if(token){
         try{
-            const response = await fetch(`${envVariables.API_URL}/admin/stats`,{
+            const response = await fetch(`${envVariables.API_URL}/admin/statistics`,{
                 method: 'GET',
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -352,6 +352,7 @@ export const getGeneralStats = async (): Promise<GeneralStatsDAO> => {
             if(!response.ok) {
                 const errorData = await response.json();
                 console.error("Este es el error:", errorData);
+                throw new Error(errorData.message || "Error al obtener estadísticas");
             }
 
             return await response.json() as GeneralStatsDAO;

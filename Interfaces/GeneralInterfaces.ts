@@ -3,8 +3,16 @@ export interface MessageDAO{
 }
 
 export interface GeneralStatsDAO {
-    totalUsers: number;
-    totalShipments: number;
-    totalReports: number;
+    totals: {
+        users: number;
+        shipments: number;
+        reports: number;
+    };
+    monthly: {
+        labels: string[];
+        users: number[];
+        shipments: number[];
+        reports: number[];
+    };
 }
 

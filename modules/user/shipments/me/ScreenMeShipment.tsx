@@ -37,17 +37,15 @@ export default function ShipmentDetailPage(){
 
             try {
                 startLoading();
-                const response = await getShipment(idShipment as string);
-
-                if (response.shipment._id) {
+                const response = await getShipment(idShipment as string);                if (response.shipment._id) {
                     setShipment(response.shipment);
                 } else {
-                    setAlertMessage('No se encontró el envío');
+                    setAlertMessage(t('user.shipments.me.notFoundMessage'));
                     setAlertType('error');
                     setShowAlert(true);
                 }
             } catch (error) {
-                setAlertMessage('Error al obtener el envío');
+                setAlertMessage(t('user.shipments.me.fetchErrorMessage'));
                 setAlertType('error');
                 setShowAlert(true);
             } finally {
@@ -64,16 +62,15 @@ export default function ShipmentDetailPage(){
 
     const acceptedClick = async () => {
         try{
-            startLoading();
-            const response = await setActivatedShipment(idShipment as string);
+            startLoading();            const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete confirmado! Aguarde hasta que un transportista acepte su pedido.");
+                setAlertMessage(t('user.shipments.details.confirmationMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally{
@@ -86,14 +83,14 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                setAlertMessage("¡Flete cancelado!");
+                setAlertMessage(t('user.shipments.details.cancelMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            setAlertMessage('Error al actualizar el estado el envío');
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         }
@@ -102,9 +99,10 @@ export default function ShipmentDetailPage(){
         }
     }
 
+
     const handleSubmitReport = async () => {
         if (!reportTitle || !reportDescription || !reportCategory) {
-            setAlertMessage('Por favor complete todos los campos del reporte');
+            setAlertMessage(t('user.shipments.details.reportMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -126,7 +124,7 @@ export default function ShipmentDetailPage(){
             const response = await createReport(reportData);
             
             if (response.report) {
-                setAlertMessage('Reporte enviado con éxito');
+                setAlertMessage(t('user.shipments.details.reportSuccess'));
                 setAlertType('success');
                 setShowAlert(true);
                 setIsReportModalOpen(false);
@@ -136,7 +134,7 @@ export default function ShipmentDetailPage(){
                 setReportCategory('');
             }
         } catch (error) {
-            setAlertMessage('Error al enviar el reporte');
+            setAlertMessage(t('user.shipments.details.reportErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {
