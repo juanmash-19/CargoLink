@@ -11,7 +11,7 @@ export default function HomeTransportador() {
       <div className="mb-8 w-full flex justify-center">
         <div className="w-full max-w-2xl">
           <Image
-            src="/images/colaboradores_English.png"
+            src="/images/colaboradores.png"
             alt="Transportador"
             width={800}
             height={400}
