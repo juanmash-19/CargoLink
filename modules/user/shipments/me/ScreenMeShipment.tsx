@@ -64,13 +64,13 @@ export default function ShipmentDetailPage(){
         try{
             startLoading();            const response = await setActivatedShipment(idShipment as string);
             if (response.message){
-                setAlertMessage(t('user.shipments.me.confirmSuccessMessage'));
+                setAlertMessage(t('user.shipments.details.confirmationMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         } catch (error) {
-            setAlertMessage(t('user.shipments.me.updateErrorMessage'));
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally{
@@ -83,14 +83,14 @@ export default function ShipmentDetailPage(){
             startLoading();
             const response = await setCancelledShipment(idShipment as string);
             if (response.message){
-                setAlertMessage(t('user.shipments.me.cancelSuccessMessage'));
+                setAlertMessage(t('user.shipments.details.cancelMessage'));
                 setAlertType('success');
                 setShowAlert(true);
                 setTimeout(() => router.push('/'), 2000);
             }
         }
         catch (error) {
-            setAlertMessage(t('user.shipments.me.cancelErrorMessage'));
+            setAlertMessage(t('user.shipments.details.updateErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         }
@@ -99,9 +99,10 @@ export default function ShipmentDetailPage(){
         }
     }
 
+
     const handleSubmitReport = async () => {
         if (!reportTitle || !reportDescription || !reportCategory) {
-            setAlertMessage('Por favor complete todos los campos del reporte');
+            setAlertMessage(t('user.shipments.details.reportMessage'));
             setAlertType('error');
             setShowAlert(true);
             return;
@@ -121,8 +122,9 @@ export default function ShipmentDetailPage(){
             };
             
             const response = await createReport(reportData);
-              if (response.report) {
-                setAlertMessage(t('user.shipments.me.reportSuccessMessage'));
+            
+            if (response.report) {
+                setAlertMessage(t('user.shipments.details.reportSuccess'));
                 setAlertType('success');
                 setShowAlert(true);
                 setIsReportModalOpen(false);
@@ -132,7 +134,7 @@ export default function ShipmentDetailPage(){
                 setReportCategory('');
             }
         } catch (error) {
-            setAlertMessage('Error al enviar el reporte');
+            setAlertMessage(t('user.shipments.details.reportErrorMessage'));
             setAlertType('error');
             setShowAlert(true);
         } finally {

@@ -316,8 +316,16 @@
                 "categoryOther": "Autre Problème",
                 "reportDescription": "Description",
                 "reportDescriptionPlaceholder": "Veuillez décrire le problème en détail",
-                "submitReport": "Soumettre le Rapport"
-            },            "manage": {
+                "submitReport": "Soumettre le Rapport",
+                "loadingMessage": "Chargement...",
+                "confirmationMessage": "Expédition confirmée ! Veuillez attendre qu'un transporteur accepte votre commande.",
+                "updateErrorMessage": "Erreur lors de la mise à jour du statut de l'envoi",
+                "cancelMessage": "Expédition annulée !",
+                "reportMessage": "Veuillez remplir tous les champs du rapport",
+                "reportSuccess": "Rapport soumis avec succès",
+                "reportErrorMessage": "Erreur lors de l'envoi du rapport"
+            },
+            "manage": {
                 "title": "Mes envois",
                 "createButton": "Créer un nouvel envoi",
                 "noShipments": "Vous n'avez pas encore créé d'envois",
@@ -382,6 +390,7 @@
             "pickup": "Collecte",
             "delivery": "Livraison",
             "solution": "Solution",
+            "errorMessage": "Erreur lors du chargement des rapports",
             "status": {
                 "pending": "En attente",
                 "resolved": "Résolu",
@@ -622,8 +631,116 @@
                 "content": "Si vous avez des questions concernant ces Conditions, veuillez nous contacter :",
                 "email": "E-mail"
             },
-        "copyright": "CargoLink. Tous droits réservés.",
-        "lastUpdated": "Dernière mise à jour:"
+            "copyright": "CargoLink. Tous droits réservés.",
+            "lastUpdated": "Dernière mise à jour:"
+        }
+    },
+    "services": {
+        "title": "Qu'est-ce que CargoLink ?",
+        "description": "CargoLink est une plateforme numérique conçue pour faciliter et optimiser la gestion des envois entre clients et transporteurs. Notre objectif est d'offrir une expérience rapide, fiable et transparente pour toutes les parties impliquées dans un processus logistique. Nous avons développé un système fonctionnel avec des modules clés et continuons à l'améliorer pour en faire une solution complète pour toute entreprise nécessitant le transport de marchandises.",
+        "features": {
+            "available": "Fonctionnalités déjà disponibles :",
+            "userManagement": "Gestion des utilisateurs : Enregistrement et administration des comptes pour les clients et les transporteurs.",
+            "secureAuthentication": "Authentification sécurisée : Système de connexion fiable et contrôle d'accès par rôles.",
+            "bilateralReviews": "Avis bilatéraux : Évaluations entre clients et transporteurs après chaque envoi.",
+            "adminPanel": "Panneau d'administration : Accès centralisé avec statistiques et contrôle général (statistiques simulées pour l'instant).",
+            "transporterPanel": "Panneau de transporteur : Visualisation des envois assignés et outils de gestion de base.",
+            "availableShipments": "Liste des envois disponibles : Visualisation en temps réel selon leur état.",
+            "detailedView": "Vue détaillée de chaque envoi : Consultation de l'origine, de la destination et des données clés pour confirmer la disponibilité.",
+            "responsiveInterface": "Interface responsive : Adaptée aux mobiles, tablettes et ordinateurs de bureau.",
+            "cloudinaryIntegration": "Connexion avec Cloudinary : Gestion des images optimisée et rapide."
+        },
+        "additionalFeatures": {
+            "profileSettings": "Paramètres de profil : Changement de mot de passe, nom, téléphone et option pour supprimer le compte.",
+            "userManagementPanel": "Panneau de gestion des utilisateurs : Pour que les administrateurs puissent créer, éditer et supprimer facilement des utilisateurs.",
+            "shipmentManagementPanel": "Panneau de gestion des envois : Contrôle total sur tous les envois de la plateforme.",
+            "myShipmentsPanel": "Panneau « Mes envois » : Pour que les clients et les transporteurs voient tous leurs envois (actifs, inactifs, avec filtres).",
+            "customHomepage": "Page d'accueil personnalisée : Pour montrer à chaque utilisateur ses statistiques et son activité récente après connexion.",
+            "transporterHomepage": "Page d'accueil du transporteur : Avec visualisation du solde, des statistiques et des envois actifs.",
+            "mapIntegration": "Intégration avec des cartes : Pour voir les emplacements actuels, l'origine et la destination des envois.",
+            "informativePages": "Pages informatives : Sur les rôles, les avantages et comment tirer le meilleur parti de la plateforme (client/transporteur).",
+            "smartRedirects": "Redirections intelligentes : Pour s'assurer que chaque utilisateur accède à ce qui lui correspond selon son rôle.",
+            "dynamicCharts": "Graphiques dynamiques : Statistiques claires et visuelles sur les panneaux.",
+            "visualProfilePanel": "Panneau de profil visuel : Où l'on peut voir clairement le nom et l'email de l'utilisateur."
+        },
+        "commitment": "Chez CargoLink, nous travaillons jour après jour pour devenir la plateforme de confiance pour la gestion des envois. Notre objectif est de fournir une solution technologique utile, facile à utiliser et prête à s'adapter à différents modèles commerciaux.",
+        "transporterServices": {
+            "title": "Services pour Transporteurs",
+            "description": "Chez CargoLink, nous fournissons aux transporteurs tous les outils dont ils ont besoin pour travailler de manière efficace, organisée et rentable. Connectez-vous avec plus de clients, gérez vos itinéraires et développez votre opération logistique depuis un seul endroit !",
+            "serviceCards": {
+                "acceptOrders": {
+                    "title": "Acceptez facilement les commandes",
+                    "description": "Visualisez les envois disponibles et acceptez ceux qui correspondent le mieux à votre emplacement, votre emploi du temps et votre capacité."
+                },
+                "optimizeRoutes": {
+                    "title": "Optimisez vos itinéraires",
+                    "description": "Utilisez des cartes interactives pour planifier vos trajets et livrer plus en moins de temps."
+                },
+                "securePayments": {
+                    "title": "Recevez des paiements sécurisés",
+                    "description": "Recevez vos paiements rapidement et en toute sécurité via notre plateforme intégrée."
+                },
+                "consultStatistics": {
+                    "title": "Consultez les statistiques",
+                    "description": "Vérifiez vos revenus, le nombre de livraisons, les performances et plus encore depuis votre tableau de bord."
+                },
+                "realTimeLocation": {
+                    "title": "Emplacement en temps réel",
+                    "description": "Suivez votre itinéraire actuel et visualisez l'origine et la destination des colis sur la carte."
+                },
+                "receiveRatings": {
+                    "title": "Recevez des évaluations",
+                    "description": "Gagnez en réputation à chaque livraison. Les clients peuvent vous laisser des avis qui vous aideront à obtenir plus de commandes."
+                },
+                "totalFlexibility": {
+                    "title": "Flexibilité totale",
+                    "description": "Vous décidez quand travailler et quelles livraisons accepter. Gérez votre temps de manière indépendante."
+                },
+                "profileManagement": {
+                    "title": "Gestion de profil",
+                    "description": "Configurez votre profil, consultez vos données et préparez-vous à de futurs outils comme l'édition et la suppression de compte."
+                }
+            },
+            "maximizingProductivity": "Maximisez votre productivité et obtenez plus de revenus avec CargoLink, la plateforme conçue pour les professionnels du transport. Commencez dès aujourd'hui !"
+        },
+        "userServices": {
+            "title": "Services pour Clients",
+            "description": "Chez CargoLink, nous vous offrons tous les outils dont vous avez besoin pour gérer vos envois rapidement, en toute sécurité et sans complications. Notre plateforme est conçue pour que vous ayez un contrôle total sur vos livraisons depuis un seul endroit.",
+            "serviceCards": {
+                "requestShipments": {
+                    "title": "Demandez des envois en quelques secondes",
+                    "description": "Remplissez un formulaire facile et intuitif pour générer votre demande d'envoi en quelques étapes."
+                },
+                "trackPackages": {
+                    "title": "Suivez vos colis",
+                    "description": "Visualisez en temps réel l'état et la localisation de vos envois depuis votre tableau de bord personnel."
+                },
+                "chooseCarrier": {
+                    "title": "Choisissez votre transporteur",
+                    "description": "Comparez les transporteurs disponibles et sélectionnez celui qui correspond le mieux à vos besoins."
+                },
+                "rateExperience": {
+                    "title": "Évaluez votre expérience",
+                    "description": "Laissez un avis sur le transporteur et améliorez la qualité du service pour toute la communauté."
+                },
+                "manageProfile": {
+                    "title": "Gérez votre profil",
+                    "description": "Vous pourrez modifier vos informations personnelles, changer de mot de passe et, prochainement, gérer tout depuis vos paramètres."
+                },
+                "shipmentHistory": {
+                    "title": "Historique des envois",
+                    "description": "Consultez tous les envois que vous avez réalisés, en filtrant par état, date ou transporteur."
+                },
+                "smartLocations": {
+                    "title": "Emplacements intelligents",
+                    "description": "Visualisez l'origine et la destination de vos envois sur la carte, ainsi que votre position actuelle."
+                },
+                "personalizedSupport": {
+                    "title": "Support personnalisé",
+                    "description": "Recevez un support et un suivi depuis votre compte si des questions ou des problèmes surviennent."
+                }
+            },
+            "maximizingProductivity": "Tout cela depuis une plateforme facile à utiliser, sécurisée et adaptée à votre quotidien. Commencez dès aujourd'hui avec CargoLink !"
         }
     },
     "home": {

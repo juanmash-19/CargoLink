@@ -28,7 +28,7 @@ export default function ScreenUserReports() {
         setReports(fetchedReports);
       } catch (error) {
         console.error("Error fetching reports:", error);
-        setAlertMessage(error instanceof Error ? error.message : 'Error al cargar los reportes');
+        setAlertMessage(error instanceof Error ? error.message : t('user.reports.errorMessage'));
         setAlertType('error');
         setShowAlert(true);
       } finally {
